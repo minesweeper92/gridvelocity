@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / tooling
+.claude/
+.impeccable/
+*.code-workspace
+
+# Misc
+Thumbs.db
+*.log
