@@ -1126,13 +1126,14 @@ setTimeout(scaleToFit, 150);
   wrap.appendChild(dot);
   document.body.appendChild(wrap);
 
-  /* Spring physics — matches serious.business (lerp 0.2, bounce 0.65) */
+  /* Spring physics — frame-rate independent so feel is consistent at any fps */
   var LERP   = 0.2;
   var BOUNCE = 0.65;
   var tx = 0, ty = 0;   /* target: raw mouse */
   var cx = 0, cy = 0;   /* current: spring-lerped */
   var vx = 0, vy = 0;   /* velocity */
   var started = false;
+  var lastTs  = 0;
 
   document.addEventListener('mousemove', function(e) {
     tx = e.clientX;
@@ -1140,21 +1141,35 @@ setTimeout(scaleToFit, 150);
     if (!started) {
       /* Snap on first move — no slide-in from 0,0 */
       cx = tx; cy = ty; vx = 0; vy = 0;
-      wrap.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
+      wrap.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
       wrap.classList.add('gv-show');
       started = true;
     }
   }, { passive: true });
 
-  /* Spring RAF loop */
-  (function loop() {
-    vx = vx * BOUNCE + (tx - cx) * LERP;
-    vy = vy * BOUNCE + (ty - cy) * LERP;
-    cx += vx;
-    cy += vy;
-    wrap.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
+  /* Spring RAF loop — delta-time normalised to 60 fps so physics feel
+     identical whether the display runs at 30, 60, or 120 fps.          */
+  (function loop(ts) {
     requestAnimationFrame(loop);
-  })();
+    if (!started) { lastTs = ts; return; }
+
+    /* dt = frames elapsed since last tick; cap at 3 to ignore tab-switch gaps */
+    var dt = lastTs ? Math.min((ts - lastTs) / 16.667, 3) : 1;
+    lastTs = ts;
+
+    var b = Math.pow(BOUNCE, dt);
+    var l = 1 - Math.pow(1 - LERP, dt);
+    vx = vx * b + (tx - cx) * l;
+    vy = vy * b + (ty - cy) * l;
+    cx += vx * dt;
+    cy += vy * dt;
+
+    /* Skip DOM write when cursor is essentially stationary */
+    if (Math.abs(vx) > 0.05 || Math.abs(vy) > 0.05 ||
+        Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) {
+      wrap.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
+    }
+  })(0);
 
   /* Elements where the circle grows on hover */
   var SEL = 'a, button, [role="button"], label, ' +
@@ -1189,8 +1204,13 @@ setTimeout(scaleToFit, 150);
   document.addEventListener('mouseleave', function() {
     wrap.classList.remove('gv-show');
   });
-  document.addEventListener('mouseenter', function() {
-    if (started) wrap.classList.add('gv-show');
+  document.addEventListener('mouseenter', function(e) {
+    if (!started) return;
+    /* Snap to re-entry position so circle doesn't slide in from old spot */
+    tx = e.clientX; ty = e.clientY;
+    cx = tx; cy = ty; vx = 0; vy = 0;
+    wrap.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
+    wrap.classList.add('gv-show');
   });
 })();
 
