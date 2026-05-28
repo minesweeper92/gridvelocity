@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Accessibility — Grid Velocity</title>
+  <meta name="description" content="Grid Velocity's accessibility commitment, in-page controls, and how to reach us with feedback.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://gridvelocity.com/accessibility">
+  <meta name="theme-color" content="#EF4823">
+
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <link rel="preload" href="fonts/Boldonse-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Archivo-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin>
+
+  <link rel="stylesheet" href="css/main.css?v=70">
+</head>
+
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav class="gv-nav" id="nav" aria-label="Main navigation">
+  <div class="gv-nav-inner">
+    <a href="/" class="nav-logo" aria-label="Grid Velocity — home">
+      <img src="assets/logo-long-white.png" alt="Grid Velocity" width="168" height="42">
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="work/index.html">Work</a></li>
+      <li class="has-sub">
+        <a class="nav-svc-label" aria-haspopup="true" tabindex="-1">Services</a>
+        <ul class="nav-sub" role="list">
+          <li><a href="services/branding.html">Branding</a></li>
+          <li><a href="services/video.html">Video</a></li>
+          <li><a href="services/websites.html">Websites</a></li>
+          <li><a href="services/paid-ads.html">Paid Ads</a></li>
+        </ul>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="accessibility.html" class="nav-a11y" aria-label="Accessibility options" title="Accessibility">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4" r="2"></circle><path d="M4 8.5 8.5 10v8L6 22M20 8.5 15.5 10v8L18 22M9 14h6"></path></svg>
+      </a>
+      <a href="contact.html" class="nav-cta">Let's Talk</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-drawer" id="navDrawer" aria-hidden="true" role="dialog" aria-label="Site navigation">
+  <ul class="drawer-links" role="list">
+    <li><a href="work/index.html">Work</a></li>
+    <li class="drawer-svc"><button class="drawer-svc-toggle" aria-expanded="false">Services <span class="drawer-svc-chevron" aria-hidden="true">↓</span></button>
+      <ul class="drawer-sub" role="list">
+        <li><a href="services/branding.html">Branding</a></li>
+        <li><a href="services/video.html">Video</a></li>
+        <li><a href="services/websites.html">Websites</a></li>
+        <li><a href="services/paid-ads.html">Paid Ads</a></li>
+      </ul></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog/index.html">Blog</a></li>
+    <li><a href="careers.html">Careers</a></li>
+  </ul>
+  <a href="contact.html" class="drawer-cta-pill">Let's Talk <span aria-hidden="true">→</span></a>
+  <div class="drawer-contact">
+    <span class="drawer-contact-label">Say Hello</span>
+    <a href="mailto:hello@gridvelocity.com">hello@gridvelocity.com</a>
+  </div>
+</div>
+
+<div id="scaler">
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <section class="a11y-hero" id="main-content" aria-label="Accessibility">
+    <div class="a11y-hero-inner">
+      <div class="a11y-eyebrow"><span class="a11y-eyebrow-star" aria-hidden="true"></span>Accessibility</div>
+      <h1 class="a11y-h1">Built For<br><span class="ab-orange">Everyone.</span></h1>
+      <p class="a11y-lead">A great brand should reach every person, every time. Below are the controls and commitments we use to make Grid Velocity work for the widest possible audience.</p>
+    </div>
+  </section>
+
+  <!-- ─── CONTROLS ─────────────────────────────────────────────────── -->
+  <section class="a11y-controls" aria-labelledby="a11y-controls-h">
+    <div class="a11y-controls-head">
+      <div class="a11y-kicker">Quick Controls</div>
+      <h2 id="a11y-controls-h" class="a11y-h2">Adjust the site to suit you.</h2>
+      <p class="a11y-sub">Your choices are remembered on this device.</p>
+    </div>
+
+    <div class="a11y-grid" role="group" aria-label="Display preferences">
+
+      <div class="a11y-tile">
+        <div class="a11y-tile-icon" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h6m6 0h6M12 3v6m0 6v6"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </div>
+        <div class="a11y-tile-title">Larger Text</div>
+        <p class="a11y-tile-desc">Bump every body and heading by 12% across the site.</p>
+        <button type="button" class="a11y-toggle" data-pref="large-text" aria-pressed="false">
+          <span class="a11y-toggle-track"><span class="a11y-toggle-knob"></span></span>
+          <span class="a11y-toggle-label">Off</span>
+        </button>
+      </div>
+
+      <div class="a11y-tile">
+        <div class="a11y-tile-icon" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v18"></path></svg>
+        </div>
+        <div class="a11y-tile-title">High Contrast</div>
+        <p class="a11y-tile-desc">Force a black-on-white palette for tougher viewing conditions.</p>
+        <button type="button" class="a11y-toggle" data-pref="high-contrast" aria-pressed="false">
+          <span class="a11y-toggle-track"><span class="a11y-toggle-knob"></span></span>
+          <span class="a11y-toggle-label">Off</span>
+        </button>
+      </div>
+
+      <div class="a11y-tile">
+        <div class="a11y-tile-icon" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a7 7 0 0 1 14 0M5 12v3a4 4 0 0 0 8 0m6-3v3a4 4 0 0 1-4 4"></path></svg>
+        </div>
+        <div class="a11y-tile-title">Reduce Motion</div>
+        <p class="a11y-tile-desc">Pause ambient animation, Lotties and slow scroll effects.</p>
+        <button type="button" class="a11y-toggle" data-pref="reduce-motion" aria-pressed="false">
+          <span class="a11y-toggle-track"><span class="a11y-toggle-knob"></span></span>
+          <span class="a11y-toggle-label">Off</span>
+        </button>
+      </div>
+
+      <div class="a11y-tile">
+        <div class="a11y-tile-icon" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h16M8 12h12M14 6h6M8 18v-3M14 12V9M18 6v-1"></path></svg>
+        </div>
+        <div class="a11y-tile-title">Link Underlines</div>
+        <p class="a11y-tile-desc">Underline every link in the page body to make them obvious.</p>
+        <button type="button" class="a11y-toggle" data-pref="underline-links" aria-pressed="false">
+          <span class="a11y-toggle-track"><span class="a11y-toggle-knob"></span></span>
+          <span class="a11y-toggle-label">Off</span>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="a11y-reset-row">
+      <button type="button" id="a11yReset" class="btn-outline-dark">Reset preferences</button>
+    </div>
+    <p class="a11y-stmt-ref">Read our full <a href="legal/accessibility-statement.html">Accessibility Statement <span aria-hidden="true">→</span></a></p>
+  </section>
+
+  <!-- ─── CONTACT ─────────────────────────────────────────────────── -->
+  <section class="a11y-contact" aria-labelledby="a11y-contact-h">
+    <div class="a11y-contact-inner">
+      <div>
+        <div class="a11y-kicker light">Need Help?</div>
+        <h2 id="a11y-contact-h" class="a11y-h2 a11y-h2-light">Tell Us What's<br><span style="color:#fff">Broken.</span></h2>
+      </div>
+      <div class="a11y-contact-right">
+        <p>Drop us a note describing what you ran into. Include the page, your browser, and any assistive tech you're using if you can.</p>
+        <a href="mailto:hello@gridvelocity.com?subject=Accessibility%20feedback" class="btn-outline-white">Email us <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <div class="footer-art" aria-hidden="true">
+      <div class="footer-wordmark">
+        <div class="footer-wm-g" data-text="grid."><span>g</span><span>r</span><span>i</span><span>d</span><span>.</span></div>
+        <div class="footer-wm-v">Velocity</div>
+      </div>
+    </div>
+    <nav class="footer-cols" aria-label="Footer navigation">
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul role="list">
+          <li><a href="/">Home</a></li>
+          <li><a href="work/index.html">Work</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="careers.html">Careers <span class="badge-hiring">HIRING</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <ul role="list">
+          <li><a href="https://www.instagram.com/gridvelocity" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/@gridvelocity" target="_blank" rel="noopener noreferrer">YouTube<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://dribbble.com/gridvelocity" target="_blank" rel="noopener noreferrer">Dribbble<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.facebook.com/gridvelocity" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.linkedin.com/company/gridvelocity" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="footer-cta">
+      <div class="footer-cta-inner">
+        <p class="footer-cta-h"><span class="orange">Let's Start</span> Something<br>New Together</p>
+        <div class="footer-cta-right">
+          <p class="footer-cta-desc">Not client and supplier: partners. Collaborative, smooth, and actually enjoyable. The kind of work that leads to better outcomes.</p>
+          <a href="contact.html" class="btn-dark">Let's Work <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Grid Velocity. All rights reserved.</span>
+      <span>
+        <a href="legal/privacy.html">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/cookies.html">Cookie Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/terms.html">Terms of Service</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/accessibility-statement.html">Accessibility Statement</a>
+      </span>
+    </div>
+  </footer>
+
+</div><!-- /#scaler -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie_light.min.js" defer></script>
+<script src="js/main.js?v=26" defer></script>
+<!-- A11y panel controls are now handled globally by main.js -->
+
+</body>
+</html>

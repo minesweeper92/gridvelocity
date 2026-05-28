@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ─────────────────────────────────────────────── -->
+  <title>About — Grid Velocity</title>
+  <meta name="description" content="Independent by nature. Future-ready by design. Learn who we are, how we work, and the people behind Grid Velocity — a production, design and web studio based in Pakistan.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://gridvelocity.com/about">
+  <meta name="theme-color" content="#EF4823">
+
+  <!-- ── Open Graph ──────────────────────────────────────────────── -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="About — Grid Velocity">
+  <meta property="og:description" content="Independent by nature. Future-ready by design. Learn who we are, how we work, and the people behind Grid Velocity.">
+  <meta property="og:url"         content="https://gridvelocity.com/about">
+  <meta property="og:image"       content="https://gridvelocity.com/assets/og-image.png">
+  <meta property="og:site_name"   content="Grid Velocity">
+  <meta property="og:locale"      content="en_US">
+
+  <!-- ── Twitter / X Card ────────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="About — Grid Velocity">
+  <meta name="twitter:description" content="Independent by nature. Future-ready by design.">
+  <meta name="twitter:image"       content="https://gridvelocity.com/assets/og-image.png">
+
+  <!-- ── Favicon ─────────────────────────────────────────────────── -->
+  <link rel="icon"             href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <!-- ── Font preloads ───────────────────────────────────────────── -->
+  <link rel="preload" href="fonts/Boldonse-Regular.ttf"               as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Archivo-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin>
+
+  <!-- ── Stylesheet ──────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="css/main.css?v=70">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <!-- ── Structured Data ─────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": "https://gridvelocity.com/about",
+    "url": "https://gridvelocity.com/about",
+    "name": "About Grid Velocity",
+    "description": "Grid Velocity is an independent production, design and web studio based in Pakistan, founded by Zohaib Burki and Shaina Noor.",
+    "publisher": { "@id": "https://gridvelocity.com/#organization" }
+  }
+  </script>
+</head>
+
+<body>
+
+<!-- Skip to main content -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAV — outside #scaler so position:fixed works correctly -->
+<nav class="gv-nav" id="nav" aria-label="Main navigation">
+  <div class="gv-nav-inner">
+    <a href="/" class="nav-logo" aria-label="Grid Velocity — home">
+      <img src="assets/logo-long-white.png" alt="Grid Velocity" width="168" height="42">
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="work/index.html">Work</a></li>
+      <li class="has-sub">
+        <a class="nav-svc-label" aria-haspopup="true" tabindex="-1">Services</a>
+        <ul class="nav-sub" role="list">
+          <li><a href="services/branding.html">Branding</a></li>
+          <li><a href="services/video.html">Video</a></li>
+          <li><a href="services/websites.html">Websites</a></li>
+          <li><a href="services/paid-ads.html">Paid Ads</a></li>
+        </ul>
+      </li>
+      <li class="current"><a href="about.html">About</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="accessibility.html" class="nav-a11y" aria-label="Accessibility options">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4" r="2"></circle><path d="M4 8.5 8.5 10v8L6 22M20 8.5 15.5 10v8L18 22M9 14h6"></path></svg>
+      </a>
+      <a href="#contact" class="nav-cta">Let's Talk</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile fullscreen drawer -->
+<div class="nav-drawer" id="navDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <ul class="drawer-links" role="list">
+    <li><a href="work/index.html">Work</a></li>
+    <li class="drawer-svc"><button class="drawer-svc-toggle" aria-expanded="false">Services <span class="drawer-svc-chevron" aria-hidden="true">↓</span></button>
+      <ul class="drawer-sub" role="list">
+        <li><a href="services/branding.html">Branding</a></li>
+        <li><a href="services/video.html">Video</a></li>
+        <li><a href="services/websites.html">Websites</a></li>
+        <li><a href="services/paid-ads.html">Paid Ads</a></li>
+      </ul></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog/index.html">Blog</a></li>
+    <li><a href="careers.html">Careers</a></li>
+  </ul>
+  <a href="contact.html" class="drawer-cta-pill">Let's Talk <span aria-hidden="true">→</span></a>
+  <div class="drawer-contact">
+    <span class="drawer-contact-label">Say Hello</span>
+    <a href="mailto:hello@gridvelocity.com">hello@gridvelocity.com</a>
+  </div>
+</div>
+
+<div id="scaler">
+<main id="site-main">
+
+  <!-- ─── ABOUT HERO ─────────────────────────────────────────────────── -->
+  <section class="ab-hero" id="ab-hero" aria-label="About Grid Velocity">
+
+    <!-- Ambient scrolling type — same language as homepage -->
+    <div class="ab-ambient" aria-hidden="true">
+      <div class="ab-amb-row ar1"><div class="ab-amb-scroll">
+        <span>Independent · Creative · Fearless · </span>
+        <span>Independent · Creative · Fearless · </span>
+        <span>Independent · Creative · Fearless · </span>
+      </div></div>
+      <div class="ab-amb-row ar2"><div class="ab-amb-scroll">
+        <span>Branding · Video · Web · Production · Design · </span>
+        <span>Branding · Video · Web · Production · Design · </span>
+        <span>Branding · Video · Web · Production · Design · </span>
+      </div></div>
+    </div>
+
+    <!-- Mouse-follow spotlight -->
+    <div class="ab-spot" aria-hidden="true"></div>
+
+    <!-- Painted galaxy — the dark space the astronaut sprays into -->
+    <div class="ab-galaxy" aria-hidden="true">
+
+      <!-- Coloured floating dots (scattered right half) -->
+      <div class="ab-dot" style="width:10px;height:10px;top:14%;left:66%;background:#E05A52;--dur:5.2s;--del:0s"></div>
+      <div class="ab-dot" style="width:7px;height:7px;top:10%;left:75%;background:#3EA0C8;--dur:4.1s;--del:0.8s"></div>
+      <div class="ab-dot" style="width:5px;height:5px;top:23%;left:70%;background:#E8C42A;--dur:6.3s;--del:0.3s"></div>
+      <div class="ab-dot" style="width:14px;height:14px;top:40%;left:58%;background:#8BAB28;--dur:4.8s;--del:1.5s"></div>
+      <div class="ab-dot" style="width:8px;height:8px;top:36%;left:79%;background:#E05A52;--dur:5.6s;--del:0.6s"></div>
+      <div class="ab-dot" style="width:6px;height:6px;top:20%;left:88%;background:#4ABFB2;--dur:3.9s;--del:1.9s"></div>
+      <div class="ab-dot" style="width:11px;height:11px;top:55%;left:64%;background:#E8C42A;--dur:5.1s;--del:0.4s"></div>
+      <div class="ab-dot" style="width:5px;height:5px;top:47%;left:85%;background:#E05A52;--dur:7.2s;--del:2.1s"></div>
+      <div class="ab-dot" style="width:16px;height:16px;top:63%;left:74%;background:#3EA0C8;--dur:4.4s;--del:1.0s"></div>
+      <div class="ab-dot" style="width:9px;height:9px;top:72%;left:60%;background:#8BAB28;--dur:6.0s;--del:1.3s"></div>
+      <div class="ab-dot" style="width:7px;height:7px;top:79%;left:82%;background:#E05A52;--dur:4.7s;--del:0.2s"></div>
+      <div class="ab-dot" style="width:12px;height:12px;top:83%;left:68%;background:#4ABFB2;--dur:5.3s;--del:1.7s"></div>
+      <div class="ab-dot" style="width:6px;height:6px;top:28%;left:92%;background:#E8C42A;--dur:4.2s;--del:0.9s"></div>
+      <div class="ab-dot" style="width:10px;height:10px;top:88%;left:76%;background:#3EA0C8;--dur:5.8s;--del:2.4s"></div>
+      <div class="ab-dot" style="width:4px;height:4px;top:53%;left:91%;background:#8BAB28;--dur:3.7s;--del:1.1s"></div>
+      <div class="ab-dot" style="width:8px;height:8px;top:68%;left:88%;background:#E05A52;--dur:6.5s;--del:0.7s"></div>
+
+      <!-- 4-pointed sparkle stars -->
+      <div class="ab-sparkle" style="width:34px;height:34px;top:8%;left:62%;--del:0s"></div>
+      <div class="ab-sparkle" style="width:22px;height:22px;top:46%;left:55%;--del:1.4s"></div>
+      <div class="ab-sparkle" style="width:44px;height:44px;top:64%;left:70%;--del:0.7s"></div>
+      <div class="ab-sparkle" style="width:20px;height:20px;top:81%;left:87%;--del:2.0s"></div>
+      <div class="ab-sparkle" style="width:28px;height:28px;top:31%;left:83%;--del:1.1s"></div>
+
+      <!-- Saturn-like planet (top-right) -->
+      <div class="ab-saturn">
+        <div class="ab-saturn-ring-back"></div>
+        <div class="ab-saturn-body"></div>
+        <div class="ab-saturn-ring-front"></div>
+      </div>
+
+      <!-- Motion streaks -->
+      <div class="ab-streak" style="width:200px;top:34%;left:54%;transform:rotate(14deg)"   aria-hidden="true"></div>
+      <div class="ab-streak" style="width:140px;top:57%;left:67%;transform:rotate(-24deg)"  aria-hidden="true"></div>
+      <div class="ab-streak" style="width:260px;top:71%;left:51%;transform:rotate(7deg)"    aria-hidden="true"></div>
+      <div class="ab-streak" style="width:100px;top:20%;left:80%;transform:rotate(-18deg)"  aria-hidden="true"></div>
+
+      <!-- Nebula depth glow -->
+      <div class="ab-nebula"></div>
+    </div><!-- /.ab-galaxy -->
+
+    <!-- Astronaut — floats up & down spray-painting the galaxy -->
+    <div class="ab-painter" id="abPainter" aria-hidden="true">
+      <div class="ab-astro-glow"></div>
+      <div class="ab-astro-inner">
+        <div class="ab-spray" aria-hidden="true">
+          <span style="--sx:130px;--sy:-55px;animation-delay:0s"></span>
+          <span style="--sx:100px;--sy:-105px;animation-delay:.4s"></span>
+          <span style="--sx:165px;--sy:-30px;animation-delay:.8s"></span>
+          <span style="--sx:90px;--sy:-85px;animation-delay:1.2s"></span>
+          <span style="--sx:145px;--sy:-130px;animation-delay:1.6s"></span>
+          <span style="--sx:180px;--sy:-70px;animation-delay:2s"></span>
+        </div>
+        <img src="assets/image 7.webp" alt="" aria-hidden="true" class="ab-astro-img" draggable="false">
+      </div>
+    </div>
+
+    <!-- Headline column -->
+    <div class="ab-hero-inner" id="main-content">
+      <h1 class="ab-h1">
+        <span class="ab-glyph-line" data-text="We Paint">We Paint</span>
+        <span class="ab-glyph-line" data-text="Outside">Outside</span>
+        <span class="ab-glyph-line" data-text="The Lines.">The Lines.</span>
+      </h1>
+      <p class="ab-sub">We treat every brand like a blank canvas: an independent studio painting branding, video, and websites built to stand out.</p>
+      <nav class="ab-cta-row" aria-label="About page actions">
+        <a href="#ab-team" class="hero-pill solid">Meet the Team <span aria-hidden="true">↓</span></a>
+        <a href="/#contact" class="hero-pill">Start a Project</a>
+      </nav>
+    </div>
+
+  </section>
+
+  <!-- ─── BY THE NUMBERS ──────────────────────────────────────────────── -->
+  <section class="ab-numbers" aria-label="Grid Velocity by the numbers">
+    <div class="ab-numbers-inner">
+
+      <div class="ab-stat ab-stat-count reveal">
+        <div class="ab-stat-num"><span class="ab-stat-val" data-count="18">18</span></div>
+        <div class="ab-stat-rule" aria-hidden="true"></div>
+        <div class="ab-stat-label">Projects<br>Delivered</div>
+      </div>
+
+      <div class="ab-stat ab-stat-count reveal d1">
+        <div class="ab-stat-num"><span class="ab-stat-val" data-count="3">3</span></div>
+        <div class="ab-stat-rule" aria-hidden="true"></div>
+        <div class="ab-stat-label">Countries</div>
+      </div>
+
+      <div class="ab-stat ab-stat-count reveal d2">
+        <div class="ab-stat-num"><span class="ab-stat-val" data-count="18">18</span></div>
+        <div class="ab-stat-rule" aria-hidden="true"></div>
+        <div class="ab-stat-label">Clients<br>Served</div>
+      </div>
+
+      <div class="ab-stat ab-stat-indep reveal d3">
+        <div class="ab-stat-num"><span class="ab-stat-val" data-count="100">100</span><span class="ab-stat-sup">%</span></div>
+        <div class="ab-stat-rule" aria-hidden="true"></div>
+        <div class="ab-stat-label">Independent</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── THE REALITY ─────────────────────────────────────────────────── -->
+  <section class="ab-reality" aria-labelledby="reality-heading">
+    <div class="ab-reality-left reveal">
+      <h2 id="reality-heading">The<br><span class="ab-orange">Reality.</span></h2>
+    </div>
+    <div class="ab-reality-right">
+      <p class="reveal d1">The agency world has changed. Brands are waking up to a new reality: one where bloated retainers, siloed departments, and legacy overhead are no longer the answer. The future belongs to lean, connected, expert-driven studios.</p>
+      <p class="reveal d2">We built Grid Velocity on exactly that model. A small core with deep expertise, working with a handpicked network of elite independents across design, production, development, and strategy. No filler. No middlemen. Just focused minds and fast execution.</p>
+      <p class="reveal d3">It's not the traditional way. It's a better one.</p>
+    </div>
+  </section>
+
+  <!-- ─── THE NETWORK — heading + role words ─────────────────────────── -->
+  <section class="ab-net-roles" id="ab-network" aria-labelledby="network-heading">
+
+    <!-- Left: visible heading -->
+    <div class="anr-left">
+      <h2 id="network-heading">OUR NETWORK<br>IS OUR<br><span class="ab-orange">SUPERPOWER.</span></h2>
+    </div>
+
+    <!-- Right: role words + body copy -->
+    <div class="anr-right">
+
+      <div class="anr-words" aria-hidden="true">
+
+        <div class="anr-line">
+          <span class="anr-word" data-img="assets/network%20section%20images/2.png">Directors.</span>
+          <span class="anr-word" data-img="assets/network%20section%20images/6.png">Designers.</span>
+          <span class="anr-word" data-img="assets/network%20section%20images/3.png">Engineers.</span>
+        </div>
+
+        <div class="anr-line">
+          <span class="anr-word" data-img="assets/network%20section%20images/1.png">Animators.</span>
+          <span class="anr-word" data-img="assets/network%20section%20images/5.png">Devs.</span>
+          <span class="anr-word" data-img="assets/network%20section%20images/4.png">Producers.</span>
+        </div>
+
+        <div class="anr-line">
+          <span class="anr-word">Growthsmiths.</span>
+        </div>
+
+      </div>
+
+      <!-- Body copy -->
+      <p class="anr-body">From A-tier agency creatives and award-winning film directors to international strategists and engineers: we've spent nearly a decade handpicking the world's best independents. No middlemen. No compromise.</p>
+
+      <!-- Accessible role list (screen readers only) -->
+      <ul class="ab-signal-sronly" aria-label="Types of specialists in our network">
+        <li>Directors</li><li>Designers</li><li>Engineers</li>
+        <li>Animators</li><li>Devs</li><li>Producers</li><li>Growthsmiths</li>
+      </ul>
+
+    </div>
+
+  </section>
+
+  <!-- ─── TEAM ──────────────────────────────────────────────────────────── -->
+  <section class="ab-team" id="ab-team" aria-labelledby="team-heading">
+    <div class="ab-team-top">
+      <div class="ab-team-top-left reveal">
+        <h2 id="team-heading">The <span class="ab-orange">Team</span><br>That Ships.</h2>
+      </div>
+      <div class="ab-team-top-right reveal d2">
+        <p>A handpicked core, backed by elite independents. Each person chosen for obsessive craft, a bias for action, and the kind of trust that makes great work possible.</p>
+      </div>
+    </div>
+    <!-- TEAM MEMBERS — replace placeholder photos by adding real images to assets/team/
+         Filenames match the src paths below. If a photo is missing the initials badge shows instead. -->
+    <div class="ab-team-swiper-wrap">
+    <div class="swiper ab-team-swiper">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">ZB</div>
+          <img src="assets/team/zohaib-burki.jpg" alt="Zohaib Burki" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Zohaib Burki</div>
+            <div class="ab-member-role">Partner</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">SN</div>
+          <img src="assets/team/shaina-noor.jpg" alt="Shaina Noor" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Shaina Noor</div>
+            <div class="ab-member-role">Creative Group Head</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">HK</div>
+          <img src="assets/team/habiba-khan.jpg" alt="Habiba Khan" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Habiba Khan</div>
+            <div class="ab-member-role">Creative Manager</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">AZ</div>
+          <img src="assets/team/ahmed-zafar.jpg" alt="Ahmed Zafar" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Ahmed Zafar</div>
+            <div class="ab-member-role">Head of Design</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">AS</div>
+          <img src="assets/team/ashraf-saqi.jpg" alt="Ashraf Saqi" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Ashraf Saqi</div>
+            <div class="ab-member-role">Senior Art Director</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">MA</div>
+          <img src="assets/team/mohsin-ali.jpg" alt="Mohsin Ali" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Mohsin Ali</div>
+            <div class="ab-member-role">New Business Director</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">MK</div>
+          <img src="assets/team/mohsin-kamran.jpg" alt="Mohsin Kamran" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Mohsin Kamran</div>
+            <div class="ab-member-role">Business Director, North America</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">HZ</div>
+          <img src="assets/team/haseeb-zia.jpg" alt="Haseeb Zia" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Haseeb Zia</div>
+            <div class="ab-member-role">CTO</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">IJ</div>
+          <img src="assets/team/imran-javed.jpg" alt="Imran Javed" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Imran Javed</div>
+            <div class="ab-member-role">Senior Videographer</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">MR</div>
+          <img src="assets/team/miinhaj-rafi.jpg" alt="Miinhaj Ahmad Rafi" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Miinhaj Ahmad Rafi</div>
+            <div class="ab-member-role">Senior Design Consultant</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">MM</div>
+          <img src="assets/team/maham-mujeeb.jpg" alt="Maham Mujeeb" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Maham Mujeeb</div>
+            <div class="ab-member-role">Senior UX/UI Designer</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">HH</div>
+          <img src="assets/team/hashim-hameed.jpg" alt="Hashim Hameed" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Hashim Hameed</div>
+            <div class="ab-member-role">Senior WordPress &amp; Shopify Developer</div>
+          </div>
+        </div>
+      </article></div>
+
+      <div class="swiper-slide"><article class="ab-member">
+        <div class="ab-member-photo">
+          <div class="ab-member-init">AD</div>
+          <img src="assets/team/asif-din.jpg" alt="Asif Din" loading="lazy" onerror="this.style.opacity=0">
+          <div class="ab-member-info">
+            <div class="ab-member-name">Asif Din</div>
+            <div class="ab-member-role">Webflow Developer</div>
+          </div>
+        </div>
+      </article></div>
+
+    </div><!-- /.swiper-wrapper -->
+    </div><!-- /.swiper.ab-team-swiper -->
+
+    <!-- Navigation — outside swiper so arrows sit on the sides, not clipped -->
+    <button class="ab-swiper-prev" aria-label="Previous team member">←</button>
+    <button class="ab-swiper-next" aria-label="Next team member">→</button>
+
+    </div><!-- /.ab-team-swiper-wrap -->
+  </section>
+
+  <!-- ─── PARTNERS ──────────────────────────────────────────────────────── -->
+  <section class="ab-partners" aria-labelledby="partners-heading">
+    <div class="ab-partners-head reveal">
+      <h2 id="partners-heading"><span class="ab-orange">Trusted</span> Tools.<br><span class="ab-orange">Proven</span> Platforms.</h2>
+      <p class="ab-partners-sub">We're officially partnered with the platforms we recommend, and fluent in the tools that ship great work. The right tool for the right job, every time.</p>
+    </div>
+
+    <!-- Official partner seals -->
+    <div class="ab-seal-row">
+      <div class="ab-seal reveal" role="img" aria-label="Official Webflow Partner">
+        <span class="ab-seal-check" aria-hidden="true">✓</span>
+        <span class="ab-seal-text">
+          <span class="ab-seal-name">Webflow</span>
+          <span class="ab-seal-tag">Official Partner</span>
+        </span>
+      </div>
+      <div class="ab-seal reveal d1" role="img" aria-label="Official Shopify Partner">
+        <span class="ab-seal-check" aria-hidden="true">✓</span>
+        <span class="ab-seal-text">
+          <span class="ab-seal-name">Shopify</span>
+          <span class="ab-seal-tag">Official Partner</span>
+        </span>
+      </div>
+      <div class="ab-seal reveal d2" role="img" aria-label="Official Member — Pakistan Software Export Board">
+        <span class="ab-seal-check" aria-hidden="true">✓</span>
+        <span class="ab-seal-text">
+          <span class="ab-seal-name">PSEB</span>
+          <span class="ab-seal-tag">Official Member</span>
+        </span>
+      </div>
+      <div class="ab-seal reveal d3" role="img" aria-label="Official Member — Association of Advertising Producers of Pakistan">
+        <span class="ab-seal-check" aria-hidden="true">✓</span>
+        <span class="ab-seal-text">
+          <span class="ab-seal-name">ASAPP</span>
+          <span class="ab-seal-tag">Official Member</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Tools we build with — outline wordmark marquee -->
+    <div class="ab-tools-label reveal">The tools we build with</div>
+    <div class="ab-tools-marquee" aria-label="Tools we use">
+      <div class="ab-tools-track">
+        <span>Webflow</span><span>WordPress</span><span>Figma</span><span>Adobe Creative Suite</span><span>Microsoft 365</span><span>Claude</span><span>Higgsfield</span><span>Remotion</span><span>DaVinci Resolve</span><span>After Effects</span><span>Framer</span><span>Shopify</span>
+        <span>Webflow</span><span>WordPress</span><span>Figma</span><span>Adobe Creative Suite</span><span>Microsoft 365</span><span>Claude</span><span>Higgsfield</span><span>Remotion</span><span>DaVinci Resolve</span><span>After Effects</span><span>Framer</span><span>Shopify</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA / CONTACT ────────────────────────────────────────────────── -->
+  <section class="cta-section" id="contact" aria-labelledby="cta-heading">
+    <div class="cta-head reveal">
+      <h2 id="cta-heading">Built different.<br>By design.</h2>
+      <p>One team. Two ways in. No compromises.</p>
+    </div>
+    <div class="cta-cards">
+      <div class="cta-card cta-card-white reveal d1">
+        <div class="cta-lottie" id="ctaLaptop" aria-hidden="true"></div>
+        <div class="cta-inner">
+          <div class="cta-label">Custom Package</div>
+          <div class="cta-title">Defined scope.<br>Decisive results.</div>
+        </div>
+        <div class="cta-divider" aria-hidden="true"></div>
+        <p class="cta-desc">Scoped precisely. Executed completely. One engagement, built to last.</p>
+        <div class="cta-btn">
+          <a href="contact.html" class="btn-dark">Get started <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="cta-card cta-card-black reveal d2">
+        <div class="cta-lottie" id="ctaLevitate" aria-hidden="true"></div>
+        <div class="cta-inner">
+          <div class="cta-label">Subscription</div>
+          <div class="cta-title">Ongoing momentum.<br>On your terms.</div>
+        </div>
+        <div class="cta-divider" aria-hidden="true"></div>
+        <p class="cta-desc">Flexible by nature. Scale up, slow down, or pivot: we move with you.</p>
+        <div class="cta-btn">
+          <a href="contact.html" class="btn-outline-white">Get started <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main><!-- /#site-main -->
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <div class="footer-art" aria-hidden="true">
+      <div class="footer-wordmark">
+        <div class="footer-wm-g" data-text="grid."><span>g</span><span>r</span><span>i</span><span>d</span><span>.</span></div>
+        <div class="footer-wm-v">Velocity</div>
+      </div>
+    </div>
+
+    <nav class="footer-cols" aria-label="Footer navigation">
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul role="list">
+          <li><a href="/">Home</a></li>
+          <li><a href="work/index.html">Work</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="careers.html">Careers <span class="badge-hiring">HIRING</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <ul role="list">
+          <li><a href="https://www.instagram.com/gridvelocity" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/@gridvelocity" target="_blank" rel="noopener noreferrer">YouTube<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://dribbble.com/gridvelocity"     target="_blank" rel="noopener noreferrer">Dribbble<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.facebook.com/gridvelocity" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.linkedin.com/company/gridvelocity" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="footer-cta">
+      <div class="footer-cta-inner">
+        <p class="footer-cta-h"><span class="orange">Let's Start</span> Something<br>New Together</p>
+        <div class="footer-cta-right">
+          <p class="footer-cta-desc">Not client and supplier: partners. Collaborative, smooth, and actually enjoyable. The kind of work that leads to better outcomes.</p>
+          <a href="contact.html" class="btn-dark">Let's Work <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Grid Velocity. All rights reserved.</span>
+      <span>
+        <a href="legal/privacy.html">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/cookies.html">Cookie Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/terms.html">Terms of Service</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/accessibility-statement.html">Accessibility Statement</a>
+      </span>
+    </div>
+  </footer>
+
+</div><!-- /#scaler -->
+
+<!-- ── Scripts ─────────────────────────────────────────────────────── -->
+<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie_light.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<script src="js/main.js?v=26" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ─────────────────────────────────────────────── -->
+  <title>Grid Velocity — Production, Design &amp; Web Studio</title>
+  <meta name="description" content="Grid Velocity is a production, design and web studio based in Pakistan. We create brands, films, websites and paid ad campaigns for forward-thinking businesses and agencies.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://gridvelocity.com/">
+  <meta name="theme-color" content="#EF4823">
+
+  <!-- ── Open Graph ──────────────────────────────────────────────── -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Grid Velocity — Production, Design &amp; Web Studio">
+  <meta property="og:description" content="We create brands, films, websites and paid ad campaigns for forward-thinking businesses. Based in Pakistan, working globally.">
+  <meta property="og:url"         content="https://gridvelocity.com/">
+  <meta property="og:image"       content="https://gridvelocity.com/assets/og-image.png">
+  <meta property="og:site_name"   content="Grid Velocity">
+  <meta property="og:locale"      content="en_US">
+
+  <!-- ── Twitter / X Card ────────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Grid Velocity — Production, Design &amp; Web Studio">
+  <meta name="twitter:description" content="We create brands, films, websites and paid ad campaigns for forward-thinking businesses. Based in Pakistan, working globally.">
+  <meta name="twitter:image"       content="https://gridvelocity.com/assets/og-image.png">
+
+  <!-- ── Favicon ─────────────────────────────────────────────────── -->
+  <link rel="icon"             href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <!-- ── Font preloads (above-fold fonts, avoids layout shift) ──── -->
+  <link rel="preload" href="fonts/Boldonse-Regular.ttf"               as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Archivo-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin>
+
+  <!-- ── Stylesheet ──────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="css/main.css?v=70">
+
+  <!-- ── Structured Data — Organisation ─────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://gridvelocity.com/#organization",
+    "name": "Grid Velocity",
+    "alternateName": "Grid Velocity AOP",
+    "description": "Grid Velocity is a production, design and web studio based in Pakistan, serving brands and agencies across Pakistan and internationally. Founded by Zohaib Burki and Shaina Noor.",
+    "url": "https://gridvelocity.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://gridvelocity.com/assets/logo-long-orange.png",
+      "width": 300,
+      "height": 60
+    },
+    "image": "https://gridvelocity.com/assets/og-image.png",
+    "email": "hello@gridvelocity.com",
+    "foundingDate": "2024",
+    "founders": [
+      { "@type": "Person", "name": "Zohaib Burki" },
+      { "@type": "Person", "name": "Shaina Noor" }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "PK"
+    },
+    "areaServed": [
+      { "@type": "Country", "name": "Pakistan" },
+      { "@type": "Country", "name": "United Arab Emirates" },
+      { "@type": "Country", "name": "Canada" }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Studio Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Branding", "description": "Visual identity, logo design and brand systems." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Video Production", "description": "DVCs, brand films, factory and event coverage, animation and AI-powered video." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Design & Development", "description": "Webflow, Shopify and custom builds — designed to convert." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Paid Advertising", "description": "Meta, Google and TikTok ad campaigns." } }
+      ]
+    },
+    "sameAs": [
+      "https://www.instagram.com/gridvelocity",
+      "https://www.linkedin.com/company/gridvelocity",
+      "https://www.facebook.com/gridvelocity"
+    ]
+  }
+  </script>
+
+  <!-- ── Structured Data — WebSite (enables sitelinks search box) ─ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://gridvelocity.com/#website",
+    "url": "https://gridvelocity.com",
+    "name": "Grid Velocity",
+    "publisher": { "@id": "https://gridvelocity.com/#organization" }
+  }
+  </script>
+</head>
+
+<body>
+
+<!-- Skip to main content (keyboard / screen-reader accessibility) -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAV lives outside #scaler so position:fixed resolves to the viewport,
+     not the CSS-transformed ancestor. -->
+<nav class="gv-nav" id="nav" aria-label="Main navigation">
+  <div class="gv-nav-inner">
+    <a href="/" class="nav-logo" aria-label="Grid Velocity — home">
+      <img src="assets/logo-long-white.png" alt="Grid Velocity" width="168" height="42">
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="work/index.html">Work</a></li>
+      <li class="has-sub">
+        <a class="nav-svc-label" aria-haspopup="true" tabindex="-1">Services</a>
+        <ul class="nav-sub" role="list">
+          <li><a href="services/branding.html">Branding</a></li>
+          <li><a href="services/video.html">Video</a></li>
+          <li><a href="services/websites.html">Websites</a></li>
+          <li><a href="services/paid-ads.html">Paid Ads</a></li>
+        </ul>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="accessibility.html" class="nav-a11y" aria-label="Accessibility options">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4" r="2"></circle><path d="M4 8.5 8.5 10v8L6 22M20 8.5 15.5 10v8L18 22M9 14h6"></path></svg>
+      </a>
+      <a href="#contact" class="nav-cta">Let's Talk</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile fullscreen drawer -->
+<div class="nav-drawer" id="navDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <ul class="drawer-links" role="list">
+    <li><a href="work/index.html">Work</a></li>
+    <li class="drawer-svc"><button class="drawer-svc-toggle" aria-expanded="false">Services <span class="drawer-svc-chevron" aria-hidden="true">↓</span></button>
+      <ul class="drawer-sub" role="list">
+        <li><a href="services/branding.html">Branding</a></li>
+        <li><a href="services/video.html">Video</a></li>
+        <li><a href="services/websites.html">Websites</a></li>
+        <li><a href="services/paid-ads.html">Paid Ads</a></li>
+      </ul></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog/index.html">Blog</a></li>
+    <li><a href="careers.html">Careers</a></li>
+  </ul>
+  <a href="contact.html" class="drawer-cta-pill">Let's Talk <span aria-hidden="true">→</span></a>
+  <div class="drawer-contact">
+    <span class="drawer-contact-label">Say Hello</span>
+    <a href="mailto:hello@gridvelocity.com">hello@gridvelocity.com</a>
+  </div>
+</div>
+
+<div id="scaler">
+<main id="site-main">
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <section class="hero" id="hero" aria-label="Hero">
+    <!-- Scrolling ambient typography rows -->
+    <div class="hero-ambient" aria-hidden="true">
+      <div class="amb-row r1"><div class="amb-scroll">
+        <span>Brands · Agencies · Startups · Founders · Innovators ·</span>
+        <span>Brands · Agencies · Startups · Founders · Innovators ·</span>
+        <span>Brands · Agencies · Startups · Founders · Innovators ·</span>
+      </div></div>
+      <div class="amb-row r2"><div class="amb-scroll">
+        <span>Production · Design · Web · Branding · Video · Paid Ads ·</span>
+        <span>Production · Design · Web · Branding · Video · Paid Ads ·</span>
+        <span>Production · Design · Web · Branding · Video · Paid Ads ·</span>
+      </div></div>
+      <div class="amb-row r3"><div class="amb-scroll">
+        <span>Karachi · Lahore · Dubai · Toronto · Est 2024 ·</span>
+        <span>Karachi · Lahore · Dubai · Toronto · Est 2024 ·</span>
+        <span>Karachi · Lahore · Dubai · Toronto · Est 2024 ·</span>
+      </div></div>
+    </div>
+
+    <div class="hero-spot" aria-hidden="true"></div>
+    <div class="hero-halo"  aria-hidden="true"></div>
+
+    <div class="hero-corner tl" aria-hidden="true"><span class="star"></span>Grid&nbsp;Velocity</div>
+    <div class="hero-corner tr" aria-hidden="true">Est 2024<span class="star"></span></div>
+
+    <div class="hero-inner" id="main-content">
+      <h1 class="hero-h1">
+        <div class="m-hero-pills" aria-hidden="true">
+          <span class="m-hero-pill">&#10033; Grid Velocity</span>
+          <span class="m-hero-pill">EST 2024 &#10033;</span>
+        </div>
+        <span class="glyph-word gw1" data-text="Production,">Production,</span>
+        <span class="glyph-word gw2" data-text="Design">Design</span>
+        <span class="glyph-word gw3" data-text="&amp; Web Studio">&amp; Web Studio</span>
+        <span class="glyph-cap" aria-hidden="true">A Production,<br>Design &amp; Web Studio<br>for Brands &amp; Agencies</span>
+      </h1>
+
+      <!-- Astronaut Lottie animation -->
+      <div class="astro-slot" aria-hidden="true">
+        <div class="astro-lottie" id="astroLottie"></div>
+      </div>
+      <div class="dust" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <nav class="hero-cta-row" aria-label="Primary actions">
+        <a href="#work"    class="hero-pill solid">See Our Work <span aria-hidden="true">→</span></a>
+        <a href="#contact" class="hero-pill">Start a Project</a>
+      </nav>
+    </div>
+
+    <div class="scroll-ind" aria-hidden="true">
+      <div class="bar"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ─── CLIENT LOGO TICKER ───────────────────────────────────────── -->
+  <div class="logo-strip" aria-label="Selected clients">
+    <div class="logo-strip-inner" id="logoStrip"></div>
+  </div>
+
+  <!-- ─── SPECIALISTS ──────────────────────────────────────────────── -->
+  <section class="specialists" id="about" aria-labelledby="spec-heading">
+    <div class="spec-left reveal">
+      <h2 id="spec-heading"><span class="accent">Specialists</span> in<br>First Impressions</h2>
+    </div>
+    <div class="spec-right reveal d2">
+      <p>You're the experts in your product. We're the experts in presenting it to the world. We're a small core team, intertwined with a network of elite independents.</p>
+      <p>We produce outstanding work for innovative businesses: open-minded partners who embrace the opportunities that change offers.</p>
+      <a href="#contact" class="btn-dark">Let's Work <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- ─── SHOWREEL ────────────────────────────────────────────────── -->
+  <section class="showreel" id="showreel" aria-label="Grid Velocity Showreel">
+    <div class="showreel-wrap">
+      <!-- Replace src with the actual showreel file before launch -->
+      <video
+        class="showreel-vid"
+        src="assets/showreel-2026.mp4"
+        preload="none"
+        playsinline
+        aria-label="Grid Velocity Showreel 2026"
+      ></video>
+      <div class="showreel-overlay" id="showreelOverlay">
+        <button class="showreel-play-btn" id="showreelPlay" aria-label="Play showreel">
+          <span class="play-triangle" aria-hidden="true"></span>
+          <span class="pause-icon" aria-hidden="true">
+            <span class="pause-bar"></span>
+            <span class="pause-bar"></span>
+          </span>
+        </button>
+        <div class="showreel-label">
+          <span class="showreel-eyebrow">Grid Velocity</span>
+          <span class="showreel-title">Showreel 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ─────────────────────────────────────────────────── -->
+  <section class="services" id="services" aria-labelledby="svc-heading">
+    <div class="services-head reveal">
+      <h2 id="svc-heading">We're not defined<br>by disciplines</h2>
+      <p>However, here are some of the things we do.</p>
+    </div>
+    <div class="services-cards">
+      <article class="svc-card reveal d1">
+        <div class="svc-orbg"   aria-hidden="true"></div>
+        <div class="svc-whitebg" aria-hidden="true"></div>
+        <span class="svc-num"   aria-hidden="true">01</span>
+        <img class="svc-astro" src="assets/astro-creative-2.webp" alt="" loading="lazy" aria-hidden="true">
+        <h3 class="svc-name">Branding</h3>
+        <p class="svc-desc">Visual identity, brand systems and packaging built to last.</p>
+        <a href="services/branding.html" class="svc-btn">Explore Branding <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="svc-card reveal d2">
+        <div class="svc-orbg"   aria-hidden="true"></div>
+        <div class="svc-whitebg" aria-hidden="true"></div>
+        <span class="svc-num"   aria-hidden="true">02</span>
+        <img class="svc-astro" src="assets/astro-artist.webp" alt="" loading="lazy" aria-hidden="true">
+        <h3 class="svc-name">Video</h3>
+        <p class="svc-desc">2D/3D animation, broadcast TVCs, social and AI-powered video.</p>
+        <a href="services/video.html" class="svc-btn">Explore Video <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="svc-card reveal d3">
+        <div class="svc-orbg"   aria-hidden="true"></div>
+        <div class="svc-whitebg" aria-hidden="true"></div>
+        <span class="svc-num"   aria-hidden="true">03</span>
+        <img class="svc-astro" src="assets/astro-dev.webp" alt="" loading="lazy" aria-hidden="true">
+        <h3 class="svc-name">Websites</h3>
+        <p class="svc-desc">Webflow, Shopify and custom builds. Designed to convert.</p>
+        <a href="services/websites.html" class="svc-btn">Explore Websites <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="svc-card reveal d4">
+        <div class="svc-orbg"   aria-hidden="true"></div>
+        <div class="svc-whitebg" aria-hidden="true"></div>
+        <span class="svc-num"   aria-hidden="true">04</span>
+        <img class="svc-astro" src="assets/astro-dev-2.webp" alt="" loading="lazy" aria-hidden="true">
+        <h3 class="svc-name">Paid Ads</h3>
+        <p class="svc-desc">Google, Meta, TikTok. Spend smart, scale faster.</p>
+        <a href="services/paid-ads.html" class="svc-btn">Explore Paid Ads <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─── FEATURED WORK ────────────────────────────────────────────── -->
+  <!--
+    FEATURED PROJECTS — edit the list below to change what appears on the homepage.
+    Max 6 projects (3 rows × 2). To swap a project: change the href, src, alt, work-title and work-cat.
+    The order here is the order they appear on the page.
+  -->
+  <section class="featured" id="work" aria-labelledby="work-heading">
+    <div class="featured-head">
+      <h2 class="reveal" id="work-heading"><span class="accent">Featured</span><br>Case Studies</h2>
+      <p class="reveal d1">See how we've partnered with cutting-edge brands to create real, measurable, lasting impact on their businesses.</p>
+    </div>
+
+    <div class="work-grid">
+      <!-- Row 1 -->
+      <div class="work-row reveal">
+        <a class="work-card" href="work/food-monsters.html">
+          <div class="work-thumb">
+            <img class="work-thumb-img" src="assets/projects/food-monsters.avif" alt="Food Monsters — packaging and branding project" loading="lazy">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Food Monsters</div>
+            <div class="work-cat">Packaging &amp; Branding</div>
+          </div>
+        </a>
+        <a class="work-card" href="work/onic.html">
+          <div class="work-thumb">
+            <img class="work-thumb-img" src="assets/projects/onic.webp" alt="ONIC Pakistan — branding and campaign" loading="lazy">
+          </div>
+          <div class="work-info">
+            <div class="work-title">ONIC Pakistan</div>
+            <div class="work-cat">Branding &amp; Campaign</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="work-row reveal d1">
+        <a class="work-card" href="work/halal-boys.html">
+          <div class="work-thumb">
+            <img class="work-thumb-img" src="assets/projects/halal-boys.avif" alt="Halal Boys — brand identity" loading="lazy">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Halal Boys</div>
+            <div class="work-cat">Brand Identity</div>
+          </div>
+        </a>
+        <a class="work-card" href="work/enkay.html">
+          <div class="work-thumb">
+            <img class="work-thumb-img" src="assets/projects/enkay-consulting.avif" alt="Enkay Consulting — branding and web" loading="lazy">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Enkay Consulting</div>
+            <div class="work-cat">Branding &amp; Web</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="work-row reveal d2">
+        <a class="work-card" href="work/brew-box.html">
+          <div class="work-thumb">
+            <img class="work-thumb-img" src="assets/projects/brew-box.avif" alt="Brew Box — brand identity and packaging" loading="lazy">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Brew Box</div>
+            <div class="work-cat">Brand Identity &amp; Packaging</div>
+          </div>
+        </a>
+        <a class="work-card" href="work/kati-baba.html">
+          <div class="work-thumb">
+            <img class="work-thumb-img" src="assets/projects/kati-baba.avif" alt="Kati Baba — branding" loading="lazy">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Kati Baba</div>
+            <div class="work-cat">Branding</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="work-cta reveal">
+      <a href="work/index.html">View all work <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- ─── CTA / CONTACT ────────────────────────────────────────────── -->
+  <section class="cta-section" id="contact" aria-labelledby="cta-heading">
+    <div class="cta-head reveal">
+      <h2 id="cta-heading">Built different.<br>By design.</h2>
+      <p>One team. Two ways in. No compromises.</p>
+    </div>
+    <div class="cta-cards">
+      <div class="cta-card cta-card-white reveal d1">
+        <div class="cta-lottie" id="ctaLaptop" aria-hidden="true"></div>
+        <div class="cta-inner">
+          <div class="cta-label">Custom Package</div>
+          <div class="cta-title">Defined scope.<br>Decisive results.</div>
+        </div>
+        <div class="cta-divider" aria-hidden="true"></div>
+        <p class="cta-desc">Scoped precisely. Executed completely. One engagement, built to last.</p>
+        <div class="cta-btn">
+          <a href="contact.html" class="btn-dark">Get started <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="cta-card cta-card-black reveal d2">
+        <div class="cta-lottie" id="ctaLevitate" aria-hidden="true"></div>
+        <div class="cta-inner">
+          <div class="cta-label">Subscription</div>
+          <div class="cta-title">Ongoing momentum.<br>On your terms.</div>
+        </div>
+        <div class="cta-divider" aria-hidden="true"></div>
+        <p class="cta-desc">Flexible by nature. Scale up, slow down, or pivot: we move with you.</p>
+        <div class="cta-btn">
+          <a href="contact.html" class="btn-outline-white">Get started <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main><!-- /#site-main -->
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <div class="footer-art" aria-hidden="true">
+      <div class="footer-wordmark">
+        <div class="footer-wm-g" data-text="grid."><span>g</span><span>r</span><span>i</span><span>d</span><span>.</span></div>
+        <div class="footer-wm-v">Velocity</div>
+      </div>
+    </div>
+
+    <nav class="footer-cols" aria-label="Footer navigation">
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul role="list">
+          <li><a href="/">Home</a></li>
+          <li><a href="work/index.html">Work</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="careers.html">Careers <span class="badge-hiring">HIRING</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <ul role="list">
+          <li><a href="https://www.instagram.com/gridvelocity" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/@gridvelocity" target="_blank" rel="noopener noreferrer">YouTube<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://dribbble.com/gridvelocity"     target="_blank" rel="noopener noreferrer">Dribbble<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.facebook.com/gridvelocity" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.linkedin.com/company/gridvelocity" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="footer-cta">
+      <div class="footer-cta-inner">
+        <p class="footer-cta-h"><span class="orange">Let's Start</span> Something<br>New Together</p>
+        <div class="footer-cta-right">
+          <p class="footer-cta-desc">Not client and supplier: partners. Collaborative, smooth, and actually enjoyable. The kind of work that leads to better outcomes.</p>
+          <a href="contact.html" class="btn-dark">Let's Work <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Grid Velocity. All rights reserved.</span>
+      <span>
+        <a href="legal/privacy.html">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/cookies.html">Cookie Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/terms.html">Terms of Service</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/accessibility-statement.html">Accessibility Statement</a>
+      </span>
+    </div>
+  </footer>
+
+</div><!-- /#scaler -->
+
+<!-- ── Scripts ─────────────────────────────────────────────────────── -->
+<!-- Lottie Web — loaded before main.js so lottie global is available  -->
+<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie_light.min.js" defer></script>
+<script src="js/main.js?v=26" defer></script>
+
+</body>
+</html>
