@@ -709,7 +709,7 @@ body {
 .featured {
   width: 1440px;
   background: var(--white);
-  padding: 140px 88px;
+  padding: 100px 88px 120px;
 }
 .featured-head {
   display: grid;
@@ -733,8 +733,9 @@ body {
 }
 
 /* ── HOMEPAGE FEATURED WORK — litebox-style scroll reveal + hover ─── */
-.work-grid { display: flex; flex-direction: column; gap: 88px; }
-.work-row  { display: flex; gap: 24px; }
+/* litebox exact: 16px column gap, 131px row gap */
+.work-grid { display: flex; flex-direction: column; gap: 131px; }
+.work-row  { display: flex; gap: 16px; }
 .work-card { flex: 1; cursor: pointer; text-decoration: none; }
 
 .work-thumb {
@@ -3090,10 +3091,11 @@ footer {
 .wk-filter.active { background: var(--orange); border-color: var(--orange); color: #fff; }
 
 /* Grid — work page, litebox-style */
+/* litebox exact: 16px column gap, 131px row gap */
 .wk-grid {
-  width: 1440px; background: #0D0D0D; padding: 0 88px 140px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-  row-gap: 88px;
+  width: 1440px; background: #0D0D0D; padding: 0 88px 120px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  column-gap: 16px; row-gap: 131px;
 }
 .wk-card {
   position: relative; display: block; text-decoration: none;
@@ -3512,12 +3514,12 @@ footer {
   .featured-head { grid-template-columns: 1fr; gap: 14px; margin-bottom: 36px; }
   .featured-head h2 { font-size: clamp(28px, 8.5vw, 38px); }
   .featured-head p { font-size: 15px; padding-top: 0; }
-  .work-row { flex-direction: column; gap: 40px; }
+  .work-row { flex-direction: column; gap: 16px; }
   .work-card { width: 100%; flex: none; }
   .work-thumb { width: 100%; height: auto; aspect-ratio: 1.12 / 1; }
   .work-title { font-size: 18px; }
   .work-cat { font-size: 13px; }
-  .work-grid { gap: 40px; }
+  .work-grid { gap: 55px; }
   .work-row + .work-row { margin-top: 0; }
   /* Show 3 rows (6 projects) max on mobile — keeps scroll length sane */
   .work-row:nth-child(n+4) { display: none; }
@@ -3795,7 +3797,7 @@ footer {
   .wk-hero-sub { font-size: 16px; }
   .wk-filters { padding: 12px 22px 32px; gap: 8px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
   .wk-filter { padding: 11px 20px; font-size: 12px; white-space: nowrap; }
-  .wk-grid { grid-template-columns: 1fr; gap: 40px; row-gap: 40px; padding: 0 22px 90px; }
+  .wk-grid { grid-template-columns: 1fr; column-gap: 16px; row-gap: 55px; padding: 0 22px 90px; }
   .wk-card-title { font-size: 24px; }
   .wk-card-overlay { padding: 24px; }
 
@@ -3914,11 +3916,11 @@ footer {
   /* ── Featured Work ── */
   .featured { padding: 72px 48px; }
   .featured-head h2 { font-size: clamp(32px, 5vw, 44px); }
-  .work-row { flex-direction: row; gap: 24px; }
+  .work-row { flex-direction: row; gap: 16px; }
   .work-card { flex: 1; flex-shrink: 0; }
   .work-thumb { width: 100%; height: auto; aspect-ratio: 1.12 / 1; }
   .work-row:nth-child(n+4) { display: flex; }
-  .work-grid { gap: 60px; }
+  .work-grid { gap: 72px; }
 
   /* ── CTA Section ── */
   .cta-section { padding: 80px 48px; }
@@ -3991,7 +3993,7 @@ footer {
   .wk-hero    { padding: 140px 48px 40px; }
   .wk-hero h1 { font-size: clamp(52px, 8.5vw, 80px); }
   .wk-filters { padding: 12px 48px 36px; }
-  .wk-grid    { grid-template-columns: 1fr 1fr; gap: 24px; row-gap: 60px; padding: 0 48px 100px; }
+  .wk-grid    { grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: 72px; padding: 0 48px 100px; }
 
   /* ── Case study ── */
   .cs-hero    { padding: 140px 48px 0; }
