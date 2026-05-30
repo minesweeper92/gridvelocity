@@ -370,20 +370,20 @@ setTimeout(scaleToFit, 150);
   const strip = document.getElementById('logoStrip');
   if (!strip) return;
   const logos = [
-    { src: 'assets/logos/colour/1.png',  alt: 'ONIC' },
-    { src: 'assets/logos/colour/2.png',  alt: 'Ibento Bureau' },
-    { src: 'assets/logos/colour/16.png', alt: 'hydr8' },
-    { src: 'assets/logos/colour/9.png',  alt: 'Bunyad' },
-    { src: 'assets/logos/colour/13.png', alt: 'HBL' },
-    { src: 'assets/logos/colour/15.png', alt: 'Halal Boys' },
-    { src: 'assets/logos/colour/6.png',  alt: 'Isbei' },
-    { src: 'assets/logos/colour/5.png',  alt: 'Enkay' },
-    { src: 'assets/logos/colour/12.png', alt: 'Sublime by Sara' },
-    { src: 'assets/logos/colour/11.png', alt: 'Space Lft' },
+    { src: 'assets/logos/Colour/1.png',  alt: 'ONIC' },
+    { src: 'assets/logos/Colour/2.png',  alt: 'Ibento Bureau' },
+    { src: 'assets/logos/Colour/16.png', alt: 'hydr8' },
+    { src: 'assets/logos/Colour/9.png',  alt: 'Bunyad' },
+    { src: 'assets/logos/Colour/13.png', alt: 'HBL' },
+    { src: 'assets/logos/Colour/15.png', alt: 'Halal Boys' },
+    { src: 'assets/logos/Colour/6.png',  alt: 'Isbei' },
+    { src: 'assets/logos/Colour/5.png',  alt: 'Enkay' },
+    { src: 'assets/logos/Colour/12.png', alt: 'Sublime by Sara' },
+    { src: 'assets/logos/Colour/11.png', alt: 'Space Lft' },
     { src: 'assets/logos/Issac.png',     alt: 'Issac' },
-    { src: 'assets/logos/colour/7.png',  alt: 'KKOP' },
-    { src: 'assets/logos/colour/8.png',  alt: 'Mosaic' },
-    { src: 'assets/logos/colour/3.png',  alt: 'Claudia Monroy' }
+    { src: 'assets/logos/Colour/7.png',  alt: 'KKOP' },
+    { src: 'assets/logos/Colour/8.png',  alt: 'Mosaic' },
+    { src: 'assets/logos/Colour/3.png',  alt: 'Claudia Monroy' }
   ];
   const row = logos
     .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
