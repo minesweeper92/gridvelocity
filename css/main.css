@@ -557,10 +557,12 @@ body {
 .logo-item img {
   max-height: 64px; max-width: 200px;
   object-fit: contain;
-  /* Invert dark logos to white on the black strip — keeps coloured marks readable */
   filter: brightness(0) invert(1);
   opacity: .88;
   transition: opacity 220ms, transform 220ms;
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  image-rendering: crisp-edges;
 }
 .logo-item img:hover { opacity: 1; transform: scale(1.06); }
 

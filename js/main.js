@@ -488,7 +488,6 @@ setTimeout(scaleToFit, 150);
     { src: 'assets/logos/Colour/2.png',  alt: 'Client logo' },
     { src: 'assets/logos/Colour/3.png',  alt: 'Client logo' },
     { src: 'assets/logos/Colour/4.png',  alt: 'Client logo' },
-    { src: 'assets/logos/Colour/6.png',  alt: 'Client logo' },
     { src: 'assets/logos/Colour/10.png', alt: 'Client logo' },
     { src: 'assets/logos/Colour/11.png', alt: 'Client logo' },
     { src: 'assets/logos/Colour/13.png', alt: 'Client logo' },
