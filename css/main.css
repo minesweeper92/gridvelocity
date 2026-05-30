@@ -3371,7 +3371,7 @@ footer {
   .hero-h1 {
     position: absolute !important;
     inset: 0 !important;
-    padding: clamp(70px, 15.4svh, 128px) 20px 0;
+    padding: clamp(49px, 10.8svh, 90px) 20px 0;
     box-sizing: border-box; overflow: visible;
     display: flex; flex-direction: column; justify-content: flex-start;
   }
@@ -3385,7 +3385,7 @@ footer {
   /* Pill badges — mobile only, hidden on desktop */
   .m-hero-pills {
     display: flex; justify-content: space-between; align-items: center;
-    gap: 8px; margin-bottom: 20.5svh;
+    gap: 8px; margin-bottom: 10.6svh;
     width: 100vw; margin-left: -20px; padding: 0 20px; box-sizing: border-box;
     opacity: 0; transform: translateY(-12px);
     transition: opacity 500ms ease 0ms, transform 500ms ease 0ms;
