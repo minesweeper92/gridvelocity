@@ -1514,4 +1514,33 @@ setTimeout(scaleToFit, 150);
   }, { passive: true });
 
   update();
-})()
+})();
+
+/* ── WORK CARD G ANIMATION — Scroll-triggered on mobile/tablet ────── */
+(function initWorkCardGAnimation() {
+  /* Only trigger scroll animation on mobile/tablet (< 1024px) */
+  if (window.innerWidth >= 1024) return;
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        /* Handle homepage work cards (.work-card with .work-thumb-img) */
+        const workThumbImg = e.target.querySelector('.work-thumb-img');
+        if (workThumbImg) {
+          workThumbImg.classList.add('scroll-reveal');
+        }
+        /* Handle work page cards (.wk-card with .wk-card-img) */
+        const wkCardImg = e.target.querySelector('.wk-card-img');
+        if (wkCardImg) {
+          wkCardImg.classList.add('scroll-reveal');
+        }
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  /* Observe both homepage work cards and work page cards */
+  document.querySelectorAll('.work-card, .wk-card').forEach(card => {
+    obs.observe(card);
+  });
+})();

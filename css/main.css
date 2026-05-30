@@ -737,7 +737,7 @@ body {
 .work-card   { width: 616px; cursor: pointer; text-decoration: none; }
 
 .work-thumb {
-  width: 100%; aspect-ratio: 16 / 11;
+  width: 100%; aspect-ratio: 1 / 1.15;
   position: relative; overflow: hidden;
   border-radius: 18px;
   background: var(--offwhite);
@@ -750,21 +750,31 @@ body {
     transform 600ms cubic-bezier(.76,0,.24,1),
     -webkit-mask-size 600ms cubic-bezier(.76,0,.24,1),
     mask-size 600ms cubic-bezier(.76,0,.24,1),
-    filter 500ms ease;
+    filter 500ms ease,
+    opacity 600ms cubic-bezier(.76,0,.24,1);
   -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'><rect width='100' height='100' fill='black'/></svg>");
   mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'><rect width='100' height='100' fill='black'/></svg>");
-  -webkit-mask-size: 200% 200%;
-  mask-size:         200% 200%;
+  -webkit-mask-size: 100% 100%;
+  mask-size:         100% 100%;
   -webkit-mask-position: center;
   mask-position:         center;
   -webkit-mask-repeat: no-repeat;
   mask-repeat:         no-repeat;
 }
+/* Scroll-triggered animation for g mask */
+.work-thumb-img.scroll-reveal {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
+  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
+  -webkit-mask-size: 110% 110%;
+  mask-size:         110% 110%;
+  transform: scale(.98);
+  filter: saturate(1.12) contrast(1.04);
+}
 .work-card:hover .work-thumb-img {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 110'><text x='50' y='100' text-anchor='middle' font-family='Archivo Black, Archivo, sans-serif' font-size='130' font-weight='900' fill='black'>g</text></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 110'><text x='50' y='100' text-anchor='middle' font-family='Archivo Black, Archivo, sans-serif' font-size='130' font-weight='900' fill='black'>g</text></svg>");
-  -webkit-mask-size: 108% 108%;
-  mask-size:         108% 108%;
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
+  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
+  -webkit-mask-size: 110% 110%;
+  mask-size:         110% 110%;
   transform: scale(.98);
   filter: saturate(1.12) contrast(1.04);
 }
@@ -3121,7 +3131,7 @@ footer {
 }
 .wk-card {
   position: relative; display: block; text-decoration: none;
-  border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 11;
+  border-radius: 18px; overflow: hidden; aspect-ratio: 1 / 1.15;
   background: #1a1a1a;
   transition: opacity 400ms ease, transform 400ms ease;
 }
@@ -3131,10 +3141,28 @@ footer {
 .wk-card-img {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  transition: transform 750ms cubic-bezier(.22,1,.36,1), filter 500ms;
+  transition: transform 750ms cubic-bezier(.22,1,.36,1), filter 500ms,
+              -webkit-mask-size 600ms cubic-bezier(.76,0,.24,1),
+              mask-size 600ms cubic-bezier(.76,0,.24,1);
   filter: saturate(1.05);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'><rect width='100' height='100' fill='black'/></svg>");
+  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'><rect width='100' height='100' fill='black'/></svg>");
+  -webkit-mask-size: 100% 100%;
+  mask-size:         100% 100%;
+  -webkit-mask-position: center;
+  mask-position:         center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat:         no-repeat;
 }
 .wk-card:hover .wk-card-img { transform: scale(1.07); }
+/* Scroll-triggered animation for g mask */
+.wk-card-img.scroll-reveal {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
+  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
+  -webkit-mask-size: 110% 110%;
+  mask-size:         110% 110%;
+  filter: saturate(1.12) contrast(1.04);
+}
 .wk-card-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, rgba(13,13,13,0) 40%, rgba(13,13,13,0.55) 70%, rgba(13,13,13,0.92) 100%);
@@ -3540,7 +3568,7 @@ footer {
   .featured-head p { font-size: 15px; padding-top: 0; }
   .work-row { flex-direction: column; gap: 28px; }
   .work-card { width: 100%; }
-  .work-thumb { width: 100%; height: auto; aspect-ratio: 16 / 11; }
+  .work-thumb { width: 100%; height: auto; aspect-ratio: 1 / 1.15; }
   .work-title { font-size: 18px; }
   .work-cat { font-size: 13px; }
   .work-grid { gap: 0; }
@@ -3942,7 +3970,7 @@ footer {
   .featured-head h2 { font-size: clamp(32px, 5vw, 44px); }
   .work-row { flex-direction: row; gap: 24px; align-items: stretch; }
   .work-card { width: calc(50% - 12px); flex-shrink: 0; }
-  .work-thumb { width: 100%; height: auto; aspect-ratio: 16 / 11; }
+  .work-thumb { width: 100%; height: auto; aspect-ratio: 1 / 1.15; }
   .work-row:nth-child(n+4) { display: flex; }
 
   /* ── CTA Section ── */
