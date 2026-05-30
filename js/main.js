@@ -117,28 +117,30 @@ setTimeout(scaleToFit, 150);
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 
-/* ── LITEBOX-STYLE CARD SCROLL + HOVER ────────────────────────────── */
-/* Replicates litebox.ai exactly:
-   STRUCTURE — each card image is split into a TOP half and BOTTOM half.
-               On hover BOTH halves round all four corners independently,
-               so where they meet the rounded inner corners create the two
-               concave "notches" → the signature pinched peanut/blob shape.
-   SCROLL    — card scales 0.93→1 as it enters the viewport (continuous).
-   HOVER     — card shrinks to 0.985 + both halves round to 4.73vmax. */
+/* ── LITEBOX-STYLE CARD BLOB ───────────────────────────────────────
+   Exact replication of litebox.ai (values measured from their live DOM).
+
+   STRUCTURE — each card image is split into a TOP half and a BOTTOM half.
+   When BOTH halves round all four corners, the rounded inner corners meet
+   at the waist and create two concave notches → the pinched peanut/blob.
+
+   DESKTOP (hover-capable) — blob appears on HOVER:
+       both halves round to max radius + card scales to 0.985. No scroll effect.
+   TOUCH (mobile/tablet, no hover) — blob is SCROLL-DRIVEN:
+       radius = clamp01((vh - cardCenter) / (vh*0.6)) * maxR, live on scroll.
+       (Measured on litebox: card centred at 58% vh → 0.70·max; at top → max;
+        below viewport → 0.) No scale on touch. */
 (function initLbCards() {
-  const MIN_SC = 0.93;   /* scale when fully off-screen */
-  const HOV_SC = 0.985;  /* card scale on hover (litebox: 0.9855) */
-  const HOV_R  = 4.73;   /* vmax radius on each half (litebox: 4.73899vmax) */
-  const EASE   = 'cubic-bezier(.22,1,.36,1)';
-  const TR     = `520ms ${EASE}`;
+  const HOV_SC   = 0.985;  /* card scale on hover (litebox: 0.9855) */
+  const EASE     = 'cubic-bezier(.22,1,.36,1)';
+  const TR       = `520ms ${EASE}`;
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  const hovered = new Set();
-  const cards   = [];
+  /* Max corner radius for a card — caps at 70px (litebox), scales down on
+     very small screens so the notch stays proportional. */
+  function maxR(card) { return Math.min(70, card.offsetWidth * 0.16); }
 
-  /* Build the two-half structure for one image container.
-     `box` = the element that clips & holds the halves (aspect-ratio set in CSS).
-     `url` = image url to paint into both halves. */
-  function buildHalves(box, url) {
+  function buildHalves(url) {
     const top = document.createElement('div');
     const bot = document.createElement('div');
     top.className = 'lb-half lb-top';
@@ -148,88 +150,85 @@ setTimeout(scaleToFit, 150);
     return { top, bot };
   }
 
-  function setRadius(item, r) {
-    const v = r > 0.01 ? r + 'vmax' : '0';
-    item.top.style.borderRadius = v;
-    item.bot.style.borderRadius = v;
-  }
+  const items = [];
 
-  /* ── Homepage featured cards (.work-thumb with <img>) ── */
+  /* Homepage featured cards (<img>) */
   document.querySelectorAll('.work-card').forEach(card => {
     const thumb = card.querySelector('.work-thumb');
     const img   = card.querySelector('.work-thumb-img');
     if (!thumb || !img) return;
     const url = img.currentSrc || img.src;
-    const { top, bot } = buildHalves(thumb, url);
+    const { top, bot } = buildHalves(url);
     thumb.appendChild(top); thumb.appendChild(bot);
     thumb.classList.add('lb-ready');
-    cards.push({ card, scaleEl: thumb, top, bot });
+    items.push({ card, scaleEl: thumb, top, bot });
   });
 
-  /* ── Work page cards (.wk-card-img background) ── */
+  /* Work page cards (background-image) */
   document.querySelectorAll('.wk-card').forEach(card => {
-    const imgEl = card.querySelector('.wk-card-img');
+    const imgEl   = card.querySelector('.wk-card-img');
     const overlay = card.querySelector('.wk-card-overlay');
     if (!imgEl) return;
-    const bg = imgEl.style.backgroundImage || getComputedStyle(imgEl).backgroundImage;
+    const bg  = imgEl.style.backgroundImage || getComputedStyle(imgEl).backgroundImage;
     const url = (bg.match(/url\(["']?(.*?)["']?\)/) || [])[1];
     if (!url) return;
-    const { top, bot } = buildHalves(card, url);
+    const { top, bot } = buildHalves(url);
     imgEl.style.display = 'none';
-    /* halves go behind the overlay/text */
     card.insertBefore(bot, card.firstChild);
     card.insertBefore(top, card.firstChild);
-    cards.push({ card, scaleEl: card, top, bot, overlay });
+    items.push({ card, scaleEl: card, top, bot, overlay });
   });
 
-  if (!cards.length) return;
+  if (!items.length) return;
 
-  cards.forEach(item => {
-    item.card.addEventListener('mouseenter', () => {
-      hovered.add(item.card);
-      item.scaleEl.style.transition = `transform ${TR}`;
-      item.scaleEl.style.transform  = `scale(${HOV_SC})`;
-      item.top.style.transition = `border-radius ${TR}`;
-      item.bot.style.transition = `border-radius ${TR}`;
-      setRadius(item, HOV_R);
-      if (item.overlay) {
-        item.overlay.style.transition  = `border-radius ${TR}`;
-        item.overlay.style.borderRadius = HOV_R + 'vmax';
-      }
-    });
-    item.card.addEventListener('mouseleave', () => {
-      hovered.delete(item.card);
-      item.top.style.transition = `border-radius ${TR}`;
-      item.bot.style.transition = `border-radius ${TR}`;
-      setRadius(item, 0);
-      if (item.overlay) {
-        item.overlay.style.transition  = `border-radius ${TR}`;
-        item.overlay.style.borderRadius = '0';
-      }
-      setTimeout(() => {
-        if (!hovered.has(item.card)) { item.scaleEl.style.transition = 'none'; scrollUpdate(); }
-      }, 530);
-    });
-  });
-
-  /* ── Continuous scroll-progress scale ── */
-  function scrollUpdate() {
-    const vh = window.innerHeight;
-    cards.forEach(item => {
-      if (hovered.has(item.card)) return;
-      const rect = item.card.getBoundingClientRect();
-      const prog = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.55)));
-      const sc   = MIN_SC + (1 - MIN_SC) * prog;
-      item.scaleEl.style.transform = sc < 0.9999 ? `scale(${sc.toFixed(4)})` : '';
-    });
+  /* Apply blob amount (0..1) to one card. */
+  function applyBlob(item, amt, withScale) {
+    const r = amt * maxR(item.card);
+    const v = r > 0.3 ? r.toFixed(1) + 'px' : '0';
+    item.top.style.borderRadius = v;
+    item.bot.style.borderRadius = v;
+    if (item.overlay) item.overlay.style.borderRadius = v;
+    if (withScale) {
+      const sc = 1 - amt * (1 - HOV_SC);
+      item.scaleEl.style.transform = amt > 0.001 ? `scale(${sc.toFixed(4)})` : '';
+    }
   }
 
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(() => { scrollUpdate(); ticking = false; }); ticking = true; }
-  }, { passive: true });
-  window.addEventListener('resize', scrollUpdate);
-  scrollUpdate();
+  if (canHover) {
+    /* ── Desktop: hover → blob + scale ── */
+    items.forEach(item => {
+      item.card.addEventListener('mouseenter', () => {
+        item.top.style.transition = `border-radius ${TR}`;
+        item.bot.style.transition = `border-radius ${TR}`;
+        item.scaleEl.style.transition = `transform ${TR}`;
+        if (item.overlay) item.overlay.style.transition = `border-radius ${TR}`;
+        applyBlob(item, 1, true);
+      });
+      item.card.addEventListener('mouseleave', () => {
+        applyBlob(item, 0, true);
+      });
+    });
+  } else {
+    /* ── Touch: scroll-driven blob (live, no transition, no scale) ── */
+    function update() {
+      const vh = window.innerHeight;
+      items.forEach(item => {
+        item.top.style.transition = 'none';
+        item.bot.style.transition = 'none';
+        if (item.overlay) item.overlay.style.transition = 'none';
+        const rect   = item.card.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const amt    = Math.max(0, Math.min(1, (vh - center) / (vh * 0.6)));
+        applyBlob(item, amt, false);
+      });
+    }
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
 })();
 
 /* ── HERO (homepage only) ──────────────────────────────────────────── */
