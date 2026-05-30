@@ -740,49 +740,15 @@ body {
 .work-thumb {
   width: 100%; aspect-ratio: 1.12 / 1;
   position: relative; overflow: hidden;
-  /* Starts rounded — animates to sharp on scroll entry */
-  border-radius: 4.5vmax;
   background: var(--offwhite);
-  transition: border-radius 700ms cubic-bezier(.22,1,.36,1),
-              transform 700ms cubic-bezier(.22,1,.36,1);
-  transform-origin: center;
+  will-change: border-radius, transform;
+  /* border-radius & transform set entirely by JS — do NOT set here */
 }
 .work-thumb-img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-}
-
-/* "Learn more" pill — hidden until hover */
-.work-thumb-pill {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  background: rgba(101, 218, 124, 0.92);
-  color: #1D3208;
-  padding: 12px 28px;
-  border-radius: 100px;
-  font-family: 'Archivo', sans-serif;
-  font-size: 14px; font-weight: 700;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 300ms ease, transform 300ms cubic-bezier(.22,1,.36,1);
-  z-index: 5;
-}
-
-/* ── Scroll reveal: card in view → sharp corners ── */
-.work-card.lb-in-view .work-thumb {
-  border-radius: 0;
-}
-/* ── Hover: round back up + slight scale down + pill appears ── */
-.work-card.lb-in-view:hover .work-thumb {
-  border-radius: 4.5vmax;
-  transform: scale(0.985);
-}
-.work-card.lb-in-view:hover .work-thumb-pill {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  will-change: transform;
+  /* transform set by JS on hover */
 }
 
 .work-info  { padding-top: 20px; }
@@ -3126,62 +3092,31 @@ footer {
 /* Grid — work page, litebox-style */
 .wk-grid {
   width: 1440px; background: #0D0D0D; padding: 0 88px 140px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
   row-gap: 88px;
 }
 .wk-card {
   position: relative; display: block; text-decoration: none;
-  /* Starts rounded — animates to sharp on scroll entry */
-  border-radius: 4.5vmax; overflow: hidden; aspect-ratio: 1.12 / 1;
+  overflow: hidden; aspect-ratio: 1.12 / 1;
   background: #1a1a1a;
-  transition: border-radius 700ms cubic-bezier(.22,1,.36,1),
-              transform 700ms cubic-bezier(.22,1,.36,1);
-  transform-origin: center;
+  will-change: border-radius, transform;
+  /* border-radius & transform set entirely by JS */
 }
 .wk-card.hide { display: none; }
 .wk-card.enter { animation: wk-in 500ms cubic-bezier(.22,1,.36,1) both; }
 @keyframes wk-in { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
-/* Scroll reveal: sharp */
-.wk-card.lb-in-view { border-radius: 0; }
-/* Hover: round back + scale down + pill */
-.wk-card.lb-in-view:hover {
-  border-radius: 4.5vmax;
-  transform: scale(0.985);
-}
-.wk-card.lb-in-view:hover .wk-card-pill {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
 .wk-card-img {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  transition: none;
-}
-/* "Learn more" pill */
-.wk-card-pill {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  background: rgba(101, 218, 124, 0.92);
-  color: #1D3208;
-  padding: 12px 28px;
-  border-radius: 100px;
-  font-family: 'Archivo', sans-serif;
-  font-size: 14px; font-weight: 700;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 300ms ease, transform 300ms cubic-bezier(.22,1,.36,1);
-  z-index: 5;
+  will-change: transform;
+  /* transform set by JS on hover */
 }
 .wk-card-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, rgba(13,13,13,0) 40%, rgba(13,13,13,0.55) 70%, rgba(13,13,13,0.92) 100%);
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 36px;
-  transition: background 400ms;
 }
-.wk-card.lb-in-view:hover .wk-card-overlay { background: linear-gradient(180deg, rgba(13,13,13,0.15) 0%, rgba(13,13,13,0.55) 55%, rgba(13,13,13,0.95) 100%); }
 .wk-card-cat {
   font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;
   letter-spacing: .16em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
