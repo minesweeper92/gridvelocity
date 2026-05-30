@@ -370,20 +370,20 @@ setTimeout(scaleToFit, 150);
   const strip = document.getElementById('logoStrip');
   if (!strip) return;
   const logos = [
-    { src: 'assets/logos/ONIC.png',                 alt: 'ONIC' },
-    { src: 'assets/logos/Ibento.png',               alt: 'Ibento Bureau' },
-    { src: 'assets/logos/Hydr8.png',                alt: 'hydr8' },
-    { src: 'assets/logos/Bunyad.png',               alt: 'Bunyad' },
-    { src: 'assets/logos/HBL.png',                  alt: 'HBL' },
-    { src: 'assets/logos/Halal%20Boys.png',         alt: 'Halal Boys' },
-    { src: 'assets/logos/Isbei.png',                alt: 'Isbei' },
-    { src: 'assets/logos/Enkay.png',                alt: 'Enkay' },
-    { src: 'assets/logos/Submlime%20by%20Sara.png', alt: 'Sublime by Sara' },
-    { src: 'assets/logos/SpaceLft.png',             alt: 'Space Lft' },
-    { src: 'assets/logos/Issac.png',                alt: 'Issac' },
-    { src: 'assets/logos/KKOP.png',                 alt: 'KKOP' },
-    { src: 'assets/logos/Mosaic.png',               alt: 'Mosaic' },
-    { src: 'assets/logos/Cluadia%20Monroy.png',     alt: 'Claudia Monroy' }
+    { src: 'assets/logos/colour/1.png',  alt: 'ONIC' },
+    { src: 'assets/logos/colour/2.png',  alt: 'Ibento Bureau' },
+    { src: 'assets/logos/colour/16.png', alt: 'hydr8' },
+    { src: 'assets/logos/colour/9.png',  alt: 'Bunyad' },
+    { src: 'assets/logos/colour/13.png', alt: 'HBL' },
+    { src: 'assets/logos/colour/15.png', alt: 'Halal Boys' },
+    { src: 'assets/logos/colour/6.png',  alt: 'Isbei' },
+    { src: 'assets/logos/colour/5.png',  alt: 'Enkay' },
+    { src: 'assets/logos/colour/12.png', alt: 'Sublime by Sara' },
+    { src: 'assets/logos/colour/11.png', alt: 'Space Lft' },
+    { src: 'assets/logos/Issac.png',     alt: 'Issac' },
+    { src: 'assets/logos/colour/7.png',  alt: 'KKOP' },
+    { src: 'assets/logos/colour/8.png',  alt: 'Mosaic' },
+    { src: 'assets/logos/colour/3.png',  alt: 'Claudia Monroy' }
   ];
   const row = logos
     .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
@@ -1485,7 +1485,9 @@ setTimeout(scaleToFit, 150);
 
     items.forEach(function(item) {
       var rect     = item.el.getBoundingClientRect();
-      var progress = (vh - rect.bottom) / (vh + rect.height);
+      /* litebox offset ["end end","end start"]: 0 when para bottom enters
+         viewport bottom → 1 when para bottom reaches viewport top        */
+      var progress = (vh - rect.bottom) / vh;
       progress     = Math.max(0, Math.min(1, progress));
 
       /* If any earlier paragraph is not yet complete, keep this one at 0 */
