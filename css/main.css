@@ -556,7 +556,7 @@ body {
 .logo-item img {
   max-height: 48px; max-width: 160px;
   object-fit: contain;
-  filter: grayscale(1); opacity: .7;
+  filter: brightness(0); opacity: .65;
   transition: filter 250ms, opacity 250ms;
 }
 .logo-item img:hover { filter: none; opacity: 1; }

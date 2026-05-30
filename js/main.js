@@ -370,14 +370,20 @@ setTimeout(scaleToFit, 150);
   const strip = document.getElementById('logoStrip');
   if (!strip) return;
   const logos = [
-    { src: 'assets/logos/enkay.avif',       alt: 'Enkay' },
-    { src: 'assets/logos/onic.avif',        alt: 'ONIC' },
-    { src: 'assets/logos/briskonsive.avif', alt: 'Briskonsive' },
-    { src: 'assets/logos/spacelft.png',     alt: 'Space Lft' },
-    { src: 'assets/logos/mosaic.png',       alt: 'Mosaic' },
-    { src: 'assets/logos/ibento.avif',      alt: 'Ibento Bureau' },
-    { src: 'assets/logos/shopify.png',      alt: 'Shopify Partner' },
-    { src: 'assets/logos/claudia.svg',      alt: 'Claudia Monroy' }
+    { src: 'assets/logos/ONIC.png',                 alt: 'ONIC' },
+    { src: 'assets/logos/Ibento.png',               alt: 'Ibento Bureau' },
+    { src: 'assets/logos/Hydr8.png',                alt: 'hydr8' },
+    { src: 'assets/logos/Bunyad.png',               alt: 'Bunyad' },
+    { src: 'assets/logos/HBL.png',                  alt: 'HBL' },
+    { src: 'assets/logos/Halal%20Boys.png',         alt: 'Halal Boys' },
+    { src: 'assets/logos/Isbei.png',                alt: 'Isbei' },
+    { src: 'assets/logos/Enkay.png',                alt: 'Enkay' },
+    { src: 'assets/logos/Submlime%20by%20Sara.png', alt: 'Sublime by Sara' },
+    { src: 'assets/logos/SpaceLft.png',             alt: 'Space Lft' },
+    { src: 'assets/logos/Issac.png',                alt: 'Issac' },
+    { src: 'assets/logos/KKOP.png',                 alt: 'KKOP' },
+    { src: 'assets/logos/Mosaic.png',               alt: 'Mosaic' },
+    { src: 'assets/logos/Cluadia%20Monroy.png',     alt: 'Claudia Monroy' }
   ];
   const row = logos
     .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
