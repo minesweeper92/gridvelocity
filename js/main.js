@@ -136,9 +136,9 @@ setTimeout(scaleToFit, 150);
   const TR       = `520ms ${EASE}`;
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* Max corner radius for a card — caps at 70px (litebox), scales down on
-     very small screens so the notch stays proportional. */
-  function maxR(card) { return Math.min(70, card.offsetWidth * 0.16); }
+  /* Max corner radius for a card — +20% rounder than litebox's ~70px.
+     Caps at 84px, scales down on very small screens so the notch stays proportional. */
+  function maxR(card) { return Math.min(84, card.offsetWidth * 0.192); }
 
   function buildHalves(url) {
     const top = document.createElement('div');
