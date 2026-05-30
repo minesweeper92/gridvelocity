@@ -3501,7 +3501,7 @@ footer {
   .spec-right p { font-size: 16px; line-height: 1.6; }
 
   /* ── Showreel — litebox.ai style on mobile ── */
-  .showreel { padding: 0 20px 40px; background: transparent; }
+  .showreel { padding: 20px 20px 48px; background: var(--black); }
   .showreel-wrap {
     border-radius: 12px;
     overflow: hidden;
@@ -6865,8 +6865,8 @@ footer { overflow: visible !important; }
     flex-direction: column;
     gap: 4px;
   }
-  .gv-cta-icon { position: relative; left: 0; top: 0; width: 32px; height: 32px; transition: transform 0.3s ease-out; }
-  .gv-bubble-text { font-size: 12px; height: 12px; }
+  .gv-cta-icon { position: relative; left: 0; top: 0; width: 36px; height: 36px; transition: transform 0.3s ease-out; }
+  .gv-bubble-text { font-size: 16px; height: 16px; }
 }
 
 /* Tablet / Desktop: pixel-accurate match to eyekiller quarter-circle */
