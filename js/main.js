@@ -370,20 +370,20 @@ setTimeout(scaleToFit, 150);
   const strip = document.getElementById('logoStrip');
   if (!strip) return;
   const logos = [
-    { src: 'assets/logos/Colour/1.png',  alt: 'ONIC' },
-    { src: 'assets/logos/Colour/2.png',  alt: 'Ibento Bureau' },
-    { src: 'assets/logos/Colour/16.png', alt: 'hydr8' },
-    { src: 'assets/logos/Colour/9.png',  alt: 'Bunyad' },
-    { src: 'assets/logos/Colour/13.png', alt: 'HBL' },
-    { src: 'assets/logos/Colour/15.png', alt: 'Halal Boys' },
-    { src: 'assets/logos/Colour/6.png',  alt: 'Isbei' },
-    { src: 'assets/logos/Colour/5.png',  alt: 'Enkay' },
-    { src: 'assets/logos/Colour/12.png', alt: 'Sublime by Sara' },
-    { src: 'assets/logos/Colour/11.png', alt: 'Space Lft' },
-    { src: 'assets/logos/Issac.png',     alt: 'Issac' },
-    { src: 'assets/logos/Colour/7.png',  alt: 'KKOP' },
-    { src: 'assets/logos/Colour/8.png',  alt: 'Mosaic' },
-    { src: 'assets/logos/Colour/3.png',  alt: 'Claudia Monroy' }
+    { src: 'assets/logos/Black/ONIC.png',                 alt: 'ONIC' },
+    { src: 'assets/logos/Black/Ibento.png',               alt: 'Ibento Bureau' },
+    { src: 'assets/logos/Black/Hydr8.png',                alt: 'hydr8' },
+    { src: 'assets/logos/Black/Bunyad.png',               alt: 'Bunyad' },
+    { src: 'assets/logos/Black/HBL.png',                  alt: 'HBL' },
+    { src: 'assets/logos/Black/Halal%20Boys.png',         alt: 'Halal Boys' },
+    { src: 'assets/logos/Black/Isbei.png',                alt: 'Isbei' },
+    { src: 'assets/logos/Black/Enkay.png',                alt: 'Enkay' },
+    { src: 'assets/logos/Black/Submlime%20by%20Sara.png', alt: 'Sublime by Sara' },
+    { src: 'assets/logos/Black/SpaceLft.png',             alt: 'Space Lft' },
+    { src: 'assets/logos/Black/Issac.png',                alt: 'Issac' },
+    { src: 'assets/logos/Black/KKOP.png',                 alt: 'KKOP' },
+    { src: 'assets/logos/Black/Mosaic.png',               alt: 'Mosaic' },
+    { src: 'assets/logos/Black/Cluadia%20Monroy.png',     alt: 'Claudia Monroy' }
   ];
   const row = logos
     .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
@@ -1485,9 +1485,10 @@ setTimeout(scaleToFit, 150);
 
     items.forEach(function(item) {
       var rect     = item.el.getBoundingClientRect();
-      /* litebox offset ["end end","end start"]: 0 when para bottom enters
-         viewport bottom → 1 when para bottom reaches viewport top        */
-      var progress = (vh - rect.bottom) / vh;
+      /* Fast reveal: 0 when paragraph bottom enters viewport bottom,
+         1 by the time it reaches 65% up the viewport. Completes well
+         before the paragraph exits view, so no "leftover dim lines".    */
+      var progress = (vh - rect.bottom) / (vh * 0.65);
       progress     = Math.max(0, Math.min(1, progress));
 
       /* If any earlier paragraph is not yet complete, keep this one at 0 */
