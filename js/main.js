@@ -1233,7 +1233,7 @@ setTimeout(scaleToFit, 150);
   /* Speech bubble + smiley SVG — eyekiller icon with GV colours */
   var icon = '<svg class="gv-cta-icon" viewBox="0 0 66 67" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
     + '<path d="M52.3489 49.2379C54.0562 52.009 56.9734 54.2661 60.1475 54.9302C57.3867 55.9216 54.0837 56.4416 51.1835 55.9881C49.7113 55.7567 47.9329 55.634 46.5329 54.5838C42.0421 57.4803 35.5936 60.2168 30.5503 60.0506C25.0495 59.8691 19.1582 57.47 14.8235 54.1358C10.2527 50.6197 6.83779 45.5295 5.61234 39.8827C3.89757 31.9751 6.69075 23.3555 12.3779 17.6463C21.6053 8.37949 40.3828 4.82501 50.8786 18.5618C56.5419 25.9733 58.5811 36.4058 54.7654 45.1006C54.1273 46.5532 53.3116 47.9392 52.3489 49.2379Z" fill="#1c1a1d"/>'
-    + '<path d="M52.7154 48.4492C54.1752 51.3565 56.8847 53.8555 59.9888 54.794C57.1513 55.5403 53.8119 55.7706 50.9611 55.0674C49.5131 54.709 47.75 54.4328 46.448 53.2652C41.7181 55.7574 35.049 57.922 30.0353 57.3186C24.5673 56.6594 18.9062 53.7595 14.8788 50.0633C10.6307 46.1664 7.67421 40.8011 6.9487 35.0727C5.93344 27.051 9.47586 18.7141 15.645 13.5235C25.6566 5.10102 44.6862 3.19499 53.9428 17.7834C58.9365 25.653 60.0529 36.2178 55.4861 44.5419C54.7232 45.9327 53.7875 47.2402 52.7154 48.4492Z" fill="white"/>'
+    + '<path d="M52.7154 48.4492C54.1752 51.3565 56.8847 53.8555 59.9888 54.794C57.1513 55.5403 53.8119 55.7706 50.9611 55.0674C49.5131 54.709 47.75 54.4328 46.448 53.2652C41.7181 55.7574 35.049 57.922 30.0353 57.3186C24.5673 56.6594 18.9062 53.7595 14.8788 50.0633C10.6307 46.1664 7.67421 40.8011 6.9487 35.0727C5.93344 27.051 9.47586 18.7141 15.645 13.5235C25.6566 5.10102 44.6862 3.19499 53.9428 17.7834C58.9365 25.653 60.0529 36.2178 55.4861 44.5419C54.7232 45.9327 53.7875 47.2402 52.7154 48.4492Z" fill="#a2d0ce"/>'
     + '<path d="M6.26206 35.4908C5.51856 30.1516 6.76802 24.6776 9.38162 20.0093C11.6887 15.886 15.0981 12.511 19.1793 10.1697C22.6092 8.20026 26.4687 6.92658 30.3888 6.43704C34.4487 5.9296 38.6127 6.24928 42.4916 7.59389C46.6069 9.01979 50.2155 11.6283 52.9406 15.029C56.2213 19.1242 58.2543 24.2592 58.8894 29.4597C59.552 34.8873 58.6071 40.4863 55.9016 45.2523C55.2461 46.4059 54.4711 47.4859 53.6158 48.4983C55.0928 51.0968 57.4386 53.1667 60.297 54.0416C60.6076 54.1363 60.7623 54.562 60.7061 54.8558C60.6388 55.2056 60.4045 55.4864 60.0559 55.5766C58.1351 56.0789 56.1395 56.3233 54.1547 56.2781C52.3036 56.2365 50.4627 55.8476 48.6917 55.3241C47.8432 55.0734 47.0193 54.7124 46.31 54.1815C43.8868 55.4204 41.3338 56.4212 38.7165 57.1526C36.072 57.8906 33.2726 58.3787 30.5199 58.1704C27.6638 57.9557 24.8186 57.062 22.2252 55.8678C19.5677 54.6467 17.0589 53.0451 14.857 51.1142C10.2963 47.1142 7.10415 41.5316 6.26365 35.4882L6.26206 35.4908Z" fill="#1c1a1d"/>'
     + '<path d="M44.8369 34.4547C43.7622 38.4651 40.7037 41.5069 36.6556 42.5917C32.6074 43.6765 28.4376 42.5714 25.5014 39.6357C25.0376 39.172 25.0375 38.4201 25.5013 37.9564C25.9651 37.4925 26.7169 37.4926 27.1806 37.9562C29.5096 40.2849 32.8219 41.1602 36.0409 40.2976C39.2596 39.4351 41.6903 37.021 42.5429 33.8399C42.7126 33.2064 43.3638 32.8305 43.9973 33.0003C44.6308 33.1701 45.0067 33.8212 44.8369 34.4547ZM22.615 29.5707C22.2759 28.3052 23.0295 26.9998 24.2951 26.6607C25.5606 26.3216 26.866 27.0752 27.2051 28.3408C27.5442 29.6063 26.7905 30.9117 25.525 31.2508C24.2595 31.5899 22.9541 30.8363 22.615 29.5707ZM42.3042 24.295C42.6433 25.5605 41.8896 26.8659 40.6241 27.205C39.3586 27.5441 38.0532 26.7905 37.7141 25.5249C37.375 24.2594 38.1286 22.954 39.3942 22.6149C40.6597 22.2759 41.9651 23.0295 42.3042 24.295Z" fill="#a2d0ce"/>'
     + '</svg>';
@@ -1413,76 +1413,77 @@ setTimeout(scaleToFit, 150);
   });
 })();
 
-/* ── WORD-BY-WORD PARAGRAPH REVEAL (litebox.ai style) ───────────────
-   Splits body-copy <p> elements into word spans. Words light up exactly
-   as the user scrolls — each word becomes visible when it crosses a
-   "reveal line" 72% from the top of the viewport. Bidirectional:
-   scrolling back dims words again. Paced purely by scroll position.
+/* ── CHARACTER-LEVEL PARAGRAPH REVEAL (litebox.ai style) ─────────────
+   Splits paragraphs into individual character spans. Each paragraph maps
+   its scroll progress (0 = bottom enters viewport → 1 = top exits) to
+   how many characters are lit. No CSS transition — purely scroll-driven
+   so the reveal is mechanically coupled to scroll speed, exactly like
+   litebox.ai. Scrolling back dims characters again.
 ─────────────────────────────────────────────────────────────────────── */
-(function initWordReveal() {
+(function initCharReveal() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var excluded = 'nav, footer, form, .nav-drawer, .gv-cookie, .ct-note, ' +
                  '.gv-cta-bubble, [aria-hidden="true"], .skip-link';
 
-  /* Split paragraphs into word spans */
   var paras = Array.from(document.querySelectorAll('p')).filter(function(p) {
     return p.textContent.trim().length >= 60 && !p.closest(excluded);
   });
 
-  paras.forEach(function(p) {
-    var nodes = Array.from(p.childNodes);
+  if (!paras.length) return;
+
+  /* Split each paragraph into individual character spans */
+  var items = paras.map(function(p) {
+    var text  = p.textContent;
     var frag  = document.createDocumentFragment();
-    nodes.forEach(function(node) {
-      if (node.nodeType === 3) {
-        node.textContent.split(/(\s+)/).forEach(function(chunk) {
-          if (!chunk) return;
-          if (/^\s+$/.test(chunk)) {
-            frag.appendChild(document.createTextNode(chunk));
-          } else {
-            var s = document.createElement('span');
-            s.className = 'rw';
-            s.textContent = chunk;
-            frag.appendChild(s);
-          }
-        });
+    var chars = [];
+
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (ch === ' ' || ch === '\n') {
+        frag.appendChild(document.createTextNode(ch));
       } else {
-        frag.appendChild(node.cloneNode(true));
-      }
-    });
-    p.innerHTML = '';
-    p.appendChild(frag);
-  });
-
-  /* Collect all word spans once after splitting */
-  var allWords = document.querySelectorAll('.rw');
-  if (!allWords.length) return;
-
-  /* Reveal line: word top must be above this fraction of viewport height */
-  var REVEAL_FRAC = 0.78;
-  var ticking = false;
-
-  function updateWords() {
-    var vh      = window.innerHeight;
-    var line    = vh * REVEAL_FRAC;
-    for (var i = 0; i < allWords.length; i++) {
-      var top = allWords[i].getBoundingClientRect().top;
-      if (top < line) {
-        allWords[i].classList.add('rw-on');
-      } else {
-        allWords[i].classList.remove('rw-on');
+        var s = document.createElement('span');
+        s.className = 'rc';
+        s.textContent = ch;
+        frag.appendChild(s);
+        chars.push(s);
       }
     }
+
+    p.innerHTML = '';
+    p.appendChild(frag);
+    return { el: p, chars: chars };
+  });
+
+  var ticking = false;
+
+  function update() {
+    var vh = window.innerHeight;
+    items.forEach(function(item) {
+      var rect     = item.el.getBoundingClientRect();
+      /* progress: 0 when paragraph bottom first enters viewport bottom
+                   1 when paragraph top reaches viewport top              */
+      var progress = (vh - rect.bottom) / (vh + rect.height);
+      progress = Math.max(0, Math.min(1, progress));
+      var litCount = Math.round(progress * item.chars.length);
+
+      for (var i = 0; i < item.chars.length; i++) {
+        /* classList.toggle is fast but calling it on every char every frame
+           is still faster than getBoundingClientRect per char             */
+        if (i < litCount) {
+          item.chars[i].classList.add('rc-on');
+        } else {
+          item.chars[i].classList.remove('rc-on');
+        }
+      }
+    });
     ticking = false;
   }
 
   window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(updateWords);
-      ticking = true;
-    }
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
   }, { passive: true });
 
-  /* Initial pass — light up any words already above the line on load */
-  updateWords();
+  update(); /* initial state */
 })()
