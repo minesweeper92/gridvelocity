@@ -1429,8 +1429,19 @@ setTimeout(scaleToFit, 150);
 (function initCharReveal() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var excluded = 'nav, footer, form, .nav-drawer, .gv-cookie, .ct-note, ' +
-                 '.gv-cta-bubble, [aria-hidden="true"], .skip-link';
+  /* Excluded containers — cards, service items, pricing, forms, chrome */
+  var excluded =
+    'nav, footer, form, .nav-drawer, .gv-cookie, .ct-note, ' +
+    '.gv-cta-bubble, [aria-hidden="true"], .skip-link, ' +
+    /* service/work cards and item blocks */
+    '.sv-prow-body, .sv-wyg-item, .sv-deliver-item, ' +
+    '[class*="-card"], [class*="-item"], [class*="-chip"], ' +
+    /* CTA / services / logo zones */
+    '.cta-section, .services, .logo-strip, ' +
+    /* case study / work pages */
+    '.cs-overview, .cs-results, ' +
+    /* legal / accessibility pages */
+    '.legal-body, .a11y-body';
 
   var paras = Array.from(document.querySelectorAll('p')).filter(function(p) {
     return p.textContent.trim().length >= 60 && !p.closest(excluded);
@@ -1466,24 +1477,32 @@ setTimeout(scaleToFit, 150);
 
   function update() {
     var vh = window.innerHeight;
+
+    /* Sequential gate: para N only starts after para N-1 is fully revealed.
+       allPrevComplete tracks whether every preceding paragraph has reached
+       progress = 1. Scrolling back up reverses the chain naturally.        */
+    var allPrevComplete = true;
+
     items.forEach(function(item) {
       var rect     = item.el.getBoundingClientRect();
-      /* progress: 0 when paragraph bottom first enters viewport bottom
-                   1 when paragraph top reaches viewport top              */
       var progress = (vh - rect.bottom) / (vh + rect.height);
-      progress = Math.max(0, Math.min(1, progress));
-      var litCount = Math.round(progress * item.chars.length);
+      progress     = Math.max(0, Math.min(1, progress));
+
+      /* If any earlier paragraph is not yet complete, keep this one at 0 */
+      var litCount = allPrevComplete ? Math.round(progress * item.chars.length) : 0;
 
       for (var i = 0; i < item.chars.length; i++) {
-        /* classList.toggle is fast but calling it on every char every frame
-           is still faster than getBoundingClientRect per char             */
         if (i < litCount) {
           item.chars[i].classList.add('rc-on');
         } else {
           item.chars[i].classList.remove('rc-on');
         }
       }
+
+      /* This para is complete only if previous were complete AND it's done */
+      allPrevComplete = allPrevComplete && (progress >= 1);
     });
+
     ticking = false;
   }
 
@@ -1491,5 +1510,5 @@ setTimeout(scaleToFit, 150);
     if (!ticking) { requestAnimationFrame(update); ticking = true; }
   }, { passive: true });
 
-  update(); /* initial state */
+  update();
 })()
