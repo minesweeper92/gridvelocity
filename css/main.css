@@ -3501,7 +3501,7 @@ footer {
   .spec-right p { font-size: 16px; line-height: 1.6; }
 
   /* ── Showreel — litebox.ai style on mobile ── */
-  .showreel { padding: 20px 20px 48px; background: var(--black); }
+  .showreel { padding: 20px 20px 48px; background: #fff; }
   .showreel-wrap {
     border-radius: 12px;
     overflow: hidden;
