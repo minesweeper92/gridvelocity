@@ -632,8 +632,11 @@ setTimeout(scaleToFit, 150);
     function resize() {
       const scale = getScale();
       const vh    = window.innerHeight / scale; /* 1 viewport height in scaler coords */
+      /* On mobile, shorten the scroll spent per step so a 5-step process
+         doesn't require 5 full-screen swipes. Desktop stays 1 screen/step. */
+      const stepLen = (window.innerWidth < 1024) ? vh * 0.7 : vh;
       stickyEl.style.height = vh + 'px';
-      scrollZone.style.height = (nSteps * vh + vh * 0.4) + 'px';
+      scrollZone.style.height = (nSteps * stepLen + vh * 0.4) + 'px';
     }
 
     function update() {

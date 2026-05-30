@@ -7130,3 +7130,68 @@ footer { overflow: visible !important; }
   .gv-a11y-panel-h { font-size: 48px; }
   .gv-a11y-close { top: 24px; right: 24px; }
 }
+
+/* ═════════════════════════════════════════════════════════════════════
+   MOBILE — RICH SERVICE-PAGE EXPERIENCE  (authoritative, EOF = cascade win)
+   Brings the desktop animations to mobile instead of the simplified
+   fallbacks: the scroll-driven "How We Do It" flower, and the branded
+   "What You Get" preview card. Litebox-grade, optimised for touch.
+═════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1023px) {
+
+  /* ───────── "HOW WE DO IT" — animated flower on mobile ───────── */
+  .sv-proc-flower-scroll { display: block !important; }
+  .sv-proc-mobile-list   { display: none !important; }
+
+  .sv-proc-flower-section { padding: 80px 22px 84px !important; }
+  .sv-proc-flower-header  { padding: 0 0 6px !important; }
+
+  /* Flower sized to the phone; stays centred on-screen while pinned */
+  .sv-proc-flower-shape {
+    width: min(82vw, 420px) !important;
+    height: min(82vw, 420px) !important;
+  }
+  /* Tighten the decorative orbit rings so they don't dominate */
+  .sv-proc-flower-shape::before { inset: -22px !important; }
+  .sv-proc-flower-shape::after  { inset: -52px !important; }
+
+  .sv-proc-flower-step  { padding: 24px !important; gap: 14px !important; }
+  .sv-proc-flower-num {
+    width: 48px !important; height: 48px !important;
+    font-size: 15px !important;
+    box-shadow: 0 0 0 6px rgba(239,72,35,0.06), 0 0 24px rgba(239,72,35,0.30) !important;
+  }
+  .sv-proc-flower-title { font-size: clamp(22px, 6.6vw, 32px) !important; line-height: 1.1 !important; }
+  .sv-proc-flower-desc {
+    font-size: 14px !important; line-height: 1.7 !important;
+    max-width: 270px !important;
+  }
+
+  /* ───────── "WHAT YOU GET" — branded preview card + accordion ───────── */
+  .sv-wyg-layout { flex-direction: column !important; gap: 0 !important; }
+  /* Remove the old fallback orange bar — the real card returns below */
+  .sv-wyg-section::after { display: none !important; }
+
+  .sv-wyg-panel {
+    display: block !important;
+    position: static !important;
+    flex: none !important;
+    width: 100% !important;
+    order: -1 !important;
+    margin: 4px 0 30px !important;
+  }
+  .sv-wyg-panel-inner {
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 18px 40px rgba(239,72,35,0.22) !important;
+  }
+  .sv-wyg-panel-img::after { width: 56px !important; height: 56px !important; }
+
+  /* Accordion rows — comfortable touch targets, animated active state */
+  .sv-wyg-item { padding: 26px 0 26px 40px !important; }
+  .sv-wyg-item::before { top: 28px !important; }
+  .sv-wyg-desc { padding-left: 0 !important; max-width: 100% !important; }
+  .sv-wyg-item.wyg-active .sv-wyg-name { transform: translateX(4px) !important; }
+
+}
+
