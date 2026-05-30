@@ -484,20 +484,19 @@ setTimeout(scaleToFit, 150);
   const strip = document.getElementById('logoStrip');
   if (!strip) return;
   const logos = [
-    { src: 'assets/logos/Black/ONIC.png',                 alt: 'ONIC' },
-    { src: 'assets/logos/Black/Ibento.png',               alt: 'Ibento Bureau' },
-    { src: 'assets/logos/Black/Hydr8.png',                alt: 'hydr8' },
-    { src: 'assets/logos/Black/Bunyad.png',               alt: 'Bunyad' },
-    { src: 'assets/logos/Black/HBL.png',                  alt: 'HBL' },
-    { src: 'assets/logos/Black/Halal%20Boys.png',         alt: 'Halal Boys' },
-    { src: 'assets/logos/Black/Isbei.png',                alt: 'Isbei' },
-    { src: 'assets/logos/Black/Enkay.png',                alt: 'Enkay' },
-    { src: 'assets/logos/Black/Submlime%20by%20Sara.png', alt: 'Sublime by Sara' },
-    { src: 'assets/logos/Black/SpaceLft.png',             alt: 'Space Lft' },
-    { src: 'assets/logos/Black/Issac.png',                alt: 'Issac' },
-    { src: 'assets/logos/Black/KKOP.png',                 alt: 'KKOP' },
-    { src: 'assets/logos/Black/Mosaic.png',               alt: 'Mosaic' },
-    { src: 'assets/logos/Black/Cluadia%20Monroy.png',     alt: 'Claudia Monroy' }
+    { src: 'assets/logos/Colour/1.png',  alt: 'Client logo' },
+    { src: 'assets/logos/Colour/2.png',  alt: 'Client logo' },
+    { src: 'assets/logos/Colour/3.png',  alt: 'Client logo' },
+    { src: 'assets/logos/Colour/4.png',  alt: 'Client logo' },
+    { src: 'assets/logos/Colour/6.png',  alt: 'Client logo' },
+    { src: 'assets/logos/Colour/10.png', alt: 'Client logo' },
+    { src: 'assets/logos/Colour/11.png', alt: 'Client logo' },
+    { src: 'assets/logos/Colour/13.png', alt: 'Client logo' },
+    { src: 'assets/logos/Colour/14.png', alt: 'Client logo' },
+    { src: 'assets/logos/Colour/15.png', alt: 'Client logo' },
+    { src: 'assets/logos/Colour/16.png', alt: 'Client logo' },
+    { src: 'assets/logos/Colour/17.png', alt: 'Client logo' },
+    { src: 'assets/logos/Colour/19.png', alt: 'Client logo' }
   ];
   const row = logos
     .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
