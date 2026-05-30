@@ -3371,7 +3371,7 @@ footer {
   .hero-h1 {
     position: absolute !important;
     inset: 0 !important;
-    padding: clamp(35px, 7.7svh, 64px) 20px 0;
+    padding: clamp(70px, 15.4svh, 128px) 20px 0;
     box-sizing: border-box; overflow: visible;
     display: flex; flex-direction: column; justify-content: flex-start;
   }
