@@ -149,7 +149,7 @@ body {
   position: relative;
 }
 .gv-nav.scrolled .gv-nav-inner {
-  max-width: 1200px;
+  max-width: 1000px;
   height: 60px;
   background: var(--orange-dark);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 0 0 1px rgba(255,255,255,0.06);
@@ -1077,12 +1077,15 @@ footer {
   width: 26px; height: 2px;
   background: #fff;
   border-radius: 2px;
-  transition: transform 320ms cubic-bezier(.4,0,.2,1);
+  transition: transform 320ms cubic-bezier(.4,0,.2,1),
+              opacity 220ms ease,
+              width 220ms ease;
   transform-origin: center;
 }
-/* 2-line hamburger → × on open (span 1 down + rotate, span 2 up + rotate) */
-.gv-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
-.gv-nav.nav-open .nav-toggle span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+/* 3-line hamburger → × on open: top rotates down, middle disappears, bottom rotates up */
+.gv-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.gv-nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; width: 0; }
+.gv-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 .nav-drawer {
   position: fixed; inset: 0;
@@ -3334,7 +3337,7 @@ footer {
   .gv-nav { padding: 0; }
   /* At rest: transparent pill — matches desktop behaviour */
   .gv-nav-inner {
-    margin: 10px 14px;
+    margin: 10px 10px;
     max-width: none;
     padding: 0 6px 0 16px;
     height: 50px;
@@ -3346,7 +3349,7 @@ footer {
   }
   /* Scrolled: swap to brand orange pill */
   .gv-nav.scrolled .gv-nav-inner {
-    margin: 10px 14px;
+    margin: 10px 10px;
     max-width: none;
     height: 50px;
     padding: 0 6px 0 16px;
@@ -3368,7 +3371,7 @@ footer {
   .hero-h1 {
     position: absolute !important;
     inset: 0 !important;
-    padding: clamp(58px, 12.9svh, 107px) 20px 0;
+    padding: clamp(35px, 7.7svh, 64px) 20px 0;
     box-sizing: border-box; overflow: visible;
     display: flex; flex-direction: column; justify-content: flex-start;
   }
@@ -3888,7 +3891,7 @@ footer {
   /* ── Nav ── */
   /* Tablet: wider pill with more breathing room */
   .gv-nav-inner { margin: 12px 20px; padding: 0 10px 0 20px; height: 52px; }
-  .gv-nav.scrolled .gv-nav-inner { margin: 12px 20px; }
+  .gv-nav.scrolled .gv-nav-inner { margin: 12px 20px; max-width: calc(100% - 50px); }
   .nav-logo img { height: 28px; }
 
   /* ── Hero ── */
@@ -6848,7 +6851,22 @@ footer { overflow: visible !important; }
   pointer-events: none;
 }
 
-/* Responsive — pixel-accurate match to eyekiller */
+/* Mobile: full visible compact circle, not quarter-circle from corner */
+@media (max-width: 767px) {
+  .gv-cta-bubble { bottom: 20px; right: 20px; width: 84px; height: 84px; }
+  .gv-cta-bubble > a {
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .gv-cta-icon { position: relative; left: 0; top: 0; width: 28px; height: 28px; }
+  .gv-bubble-text { font-size: 10px; height: 10px; }
+  .gv-bubble-dot { bottom: 14px; right: 14px; }
+}
+
+/* Tablet / Desktop: pixel-accurate match to eyekiller quarter-circle */
 @media (min-width: 768px) {
   .gv-cta-bubble { bottom: -111px; right: -155px; width: 270px; height: 222px; }
   .gv-cta-bubble > a { padding: 40px 45px; }
