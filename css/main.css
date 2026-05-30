@@ -3385,7 +3385,7 @@ footer {
   /* Pill badges — mobile only, hidden on desktop */
   .m-hero-pills {
     display: flex; justify-content: space-between; align-items: center;
-    gap: 8px; margin-bottom: 15.2svh;
+    gap: 8px; margin-bottom: 20.5svh;
     width: 100vw; margin-left: -20px; padding: 0 20px; box-sizing: border-box;
     opacity: 0; transform: translateY(-12px);
     transition: opacity 500ms ease 0ms, transform 500ms ease 0ms;
