@@ -3480,7 +3480,7 @@ footer {
 
   /* ── Logo strip ── */
   /* Airborne-style on mobile: smaller but same bold rhythm */
-  .logo-strip { padding: 20px 0; background: var(--black); }
+  .logo-strip { width: 100% !important; padding: 20px 0; background: var(--black); }
   .logo-item { padding: 0 32px; height: 52px; }
   .logo-item img { max-height: 40px; max-width: 120px; opacity: .92; }
 
