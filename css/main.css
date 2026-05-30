@@ -6866,7 +6866,7 @@ footer { overflow: visible !important; }
     gap: 4px;
   }
   .gv-cta-icon { position: relative; left: 0; top: 0; width: 36px; height: 36px; transition: transform 0.3s ease-out; }
-  .gv-bubble-text { font-size: 16px; height: 16px; }
+  .gv-bubble-text { font-size: 12px; height: 12px; }
 }
 
 /* Tablet / Desktop: pixel-accurate match to eyekiller quarter-circle */
