@@ -737,7 +737,7 @@ body {
 .work-card   { width: 616px; cursor: pointer; text-decoration: none; }
 
 .work-thumb {
-  width: 100%; aspect-ratio: 1 / 1.15;
+  width: 100%; aspect-ratio: 1 / 1.05;
   position: relative; overflow: hidden;
   border-radius: 18px;
   background: var(--offwhite);
@@ -746,37 +746,11 @@ body {
 .work-thumb-img {
   width: 100%; height: 100%;
   object-fit: cover;
-  transition:
-    transform 600ms cubic-bezier(.76,0,.24,1),
-    -webkit-mask-size 600ms cubic-bezier(.76,0,.24,1),
-    mask-size 600ms cubic-bezier(.76,0,.24,1),
-    filter 500ms ease,
-    opacity 600ms cubic-bezier(.76,0,.24,1);
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'><rect width='100' height='100' fill='black'/></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'><rect width='100' height='100' fill='black'/></svg>");
-  -webkit-mask-size: 100% 100%;
-  mask-size:         100% 100%;
-  -webkit-mask-position: center;
-  mask-position:         center;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat:         no-repeat;
-}
-/* Scroll-triggered animation for g mask */
-.work-thumb-img.scroll-reveal {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
-  -webkit-mask-size: 145% 145%;
-  mask-size:         145% 145%;
-  transform: scale(1.06);
-  filter: saturate(1.12) contrast(1.04);
+  transition: transform 500ms cubic-bezier(.22,1,.36,1), filter 400ms ease;
 }
 .work-card:hover .work-thumb-img {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
-  -webkit-mask-size: 145% 145%;
-  mask-size:         145% 145%;
-  transform: scale(1.06);
-  filter: saturate(1.12) contrast(1.04);
+  transform: scale(1.04);
+  filter: brightness(1.05);
 }
 
 .work-info   {
@@ -3141,28 +3115,12 @@ footer {
 .wk-card-img {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  transition: transform 750ms cubic-bezier(.22,1,.36,1), filter 500ms,
-              -webkit-mask-size 600ms cubic-bezier(.76,0,.24,1),
-              mask-size 600ms cubic-bezier(.76,0,.24,1);
-  filter: saturate(1.05);
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'><rect width='100' height='100' fill='black'/></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'><rect width='100' height='100' fill='black'/></svg>");
-  -webkit-mask-size: 100% 100%;
-  mask-size:         100% 100%;
-  -webkit-mask-position: center;
-  mask-position:         center;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat:         no-repeat;
+  transition: transform 500ms cubic-bezier(.22,1,.36,1), filter 400ms ease;
+  filter: brightness(1);
 }
-.wk-card:hover .wk-card-img { transform: scale(1.07); }
-/* Scroll-triggered animation for g mask */
-.wk-card-img.scroll-reveal {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
-  -webkit-mask-size: 145% 145%;
-  mask-size:         145% 145%;
-  transform: scale(1.06);
-  filter: saturate(1.12) contrast(1.04);
+.wk-card:hover .wk-card-img {
+  transform: scale(1.04);
+  filter: brightness(1.05);
 }
 .wk-card-overlay {
   position: absolute; inset: 0; z-index: 1;
