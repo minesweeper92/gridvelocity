@@ -3546,7 +3546,7 @@ footer {
     max-width: 100%;
     height: auto;
     position: relative;
-    padding: 28px 28px 100px 28px;
+    padding: 28px 28px 28px 28px;
     display: flex; flex-direction: column;
   }
   .cta-inner { position: static; margin-bottom: 20px; }
@@ -3554,7 +3554,7 @@ footer {
   .cta-divider { position: static; margin: 20px 0; }
   .cta-desc { position: static; font-size: 15px; margin-bottom: 24px; flex: 1; }
   .cta-btn { position: static; }
-  .cta-lottie { position: absolute; right: 16px; bottom: 16px; width: 80px; height: 80px; }
+  .cta-lottie { display: none; }
 
   /* ── Footer ── */
   footer {
