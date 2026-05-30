@@ -763,19 +763,19 @@ body {
 }
 /* Scroll-triggered animation for g mask */
 .work-thumb-img.scroll-reveal {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
-  -webkit-mask-size: 110% 110%;
-  mask-size:         110% 110%;
-  transform: scale(.98);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
+  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
+  -webkit-mask-size: 145% 145%;
+  mask-size:         145% 145%;
+  transform: scale(1.06);
   filter: saturate(1.12) contrast(1.04);
 }
 .work-card:hover .work-thumb-img {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
-  -webkit-mask-size: 110% 110%;
-  mask-size:         110% 110%;
-  transform: scale(.98);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
+  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
+  -webkit-mask-size: 145% 145%;
+  mask-size:         145% 145%;
+  transform: scale(1.06);
   filter: saturate(1.12) contrast(1.04);
 }
 
@@ -3157,10 +3157,11 @@ footer {
 .wk-card:hover .wk-card-img { transform: scale(1.07); }
 /* Scroll-triggered animation for g mask */
 .wk-card-img.scroll-reveal {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
-  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Archivo, sans-serif' font-size='140' font-weight='900' fill='black'>g</text></svg>");
-  -webkit-mask-size: 110% 110%;
-  mask-size:         110% 110%;
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
+  mask-image:         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120' preserveAspectRatio='xMidYMid meet'><text x='50' y='95' text-anchor='middle' font-family='Boldonse, Archivo Black, Archivo, sans-serif' font-size='160' font-weight='900' fill='black'>g</text></svg>");
+  -webkit-mask-size: 145% 145%;
+  mask-size:         145% 145%;
+  transform: scale(1.06);
   filter: saturate(1.12) contrast(1.04);
 }
 .wk-card-overlay {
@@ -3568,7 +3569,7 @@ footer {
   .featured-head p { font-size: 15px; padding-top: 0; }
   .work-row { flex-direction: column; gap: 28px; }
   .work-card { width: 100%; }
-  .work-thumb { width: 100%; height: auto; aspect-ratio: 1 / 1.15; }
+  .work-thumb { width: 100%; height: auto; aspect-ratio: 1 / 1.05; }
   .work-title { font-size: 18px; }
   .work-cat { font-size: 13px; }
   .work-grid { gap: 0; }
@@ -3970,7 +3971,7 @@ footer {
   .featured-head h2 { font-size: clamp(32px, 5vw, 44px); }
   .work-row { flex-direction: row; gap: 24px; align-items: stretch; }
   .work-card { width: calc(50% - 12px); flex-shrink: 0; }
-  .work-thumb { width: 100%; height: auto; aspect-ratio: 1 / 1.15; }
+  .work-thumb { width: 100%; height: auto; aspect-ratio: 1 / 1.05; }
   .work-row:nth-child(n+4) { display: flex; }
 
   /* ── CTA Section ── */
