@@ -7193,5 +7193,49 @@ footer { overflow: visible !important; }
   .sv-wyg-desc { padding-left: 0 !important; max-width: 100% !important; }
   .sv-wyg-item.wyg-active .sv-wyg-name { transform: translateX(4px) !important; }
 
+  /* ───────── ABOUT — team carousel: swipe-first on mobile ───────── */
+  /* Arrows overlap the larger mobile cards — hide them; swipe is natural.
+     Slide width is driven by Swiper (slidesPerView 1.15→2); just give the
+     card room to breathe. Swiper owns its own peek-clipping. */
+  .ab-swiper-prev, .ab-swiper-next { display: none !important; }
+  .ab-member-photo { width: 100% !important; height: auto !important; aspect-ratio: 3 / 4 !important; }
+  .ab-member-info  { padding: 18px 16px 16px !important; }
+  .ab-member-name  { font-size: 17px !important; }
+  .ab-member-role  { font-size: 11px !important; }
+
+  /* ───────── ABOUT — "Our network is our superpower" roles ───────── */
+  /* Desktop centres fixed-width non-wrapping rows; on a phone those rows
+     overflow both edges and clip. Reflow the words into a tidy, legible
+     wrapped cloud, and make sure the heading clears the side padding. */
+  .ab-net-roles { padding: 72px 22px !important; }
+  /* Container must not stay sticky on the single-column phone layout,
+     or the heading pins over the scrolling word cloud. */
+  .anr-left { position: static !important; top: auto !important; }
+  .anr-left h2 {
+    font-size: clamp(26px, 7.2vw, 40px) !important;
+    line-height: 1.22 !important;
+    position: static !important;
+    margin-bottom: 8px !important;
+  }
+  .anr-right { overflow: visible !important; }
+  .anr-words {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    align-items: baseline !important;
+    gap: 4px 14px !important;
+  }
+  .anr-line { display: contents !important; }
+  .anr-word {
+    font-size: clamp(20px, 5.6vw, 30px) !important;
+    line-height: 1.3 !important;
+    color: rgba(255,255,255,0.5) !important;
+    white-space: nowrap !important;
+  }
+  .anr-word + .anr-word { margin-left: 0 !important; }
+  /* Brighten a couple to keep the brand's playful accent without hover */
+  .anr-line:nth-child(odd) .anr-word:first-child { color: var(--orange) !important; }
+  .anr-body { text-align: left !important; margin: 30px 0 0 !important; max-width: 100% !important; }
+
 }
 

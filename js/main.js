@@ -918,11 +918,18 @@ setTimeout(scaleToFit, 150);
   function initTeamSwiper() {
     if (typeof Swiper === 'undefined' || !document.querySelector('.ab-team-swiper')) return;
     new Swiper('.ab-team-swiper', {
-      slidesPerView: 4,
-      spaceBetween: 24,
+      /* Mobile-first: one full card + a peek of the next to invite swiping.
+         Scales up to the 4-up desktop layout via breakpoints. */
+      slidesPerView: 1.15,
+      spaceBetween: 16,
       loop: true,
       speed: 600,
       navigation: { nextEl: '.ab-swiper-next', prevEl: '.ab-swiper-prev' },
+      breakpoints: {
+        480:  { slidesPerView: 2,    spaceBetween: 16 },
+        768:  { slidesPerView: 3,    spaceBetween: 20 },
+        1024: { slidesPerView: 4,    spaceBetween: 24 },
+      },
     });
   }
   if (typeof Swiper !== 'undefined') {
