@@ -118,88 +118,95 @@ setTimeout(scaleToFit, 150);
 })();
 
 /* ── LITEBOX-STYLE CARD SCROLL + HOVER ────────────────────────────── */
-/* Exact replication of litebox.ai behaviour:
-   SCROLL  — border-radius shrinks from 4.5vmax→0 and scale grows 0.92→1
-             continuously tied to scroll progress (not a one-shot trigger).
-   HOVER   — border-radius returns to 4.5vmax, outer scales to 0.985,
-             inner image zooms to 1.06×. Smooth transition in/out via JS. */
+/* SCROLL — card scales 0.93→1 as it enters viewport (continuous, scroll-tied).
+   HOVER  — card scales to 0.985, image CONTAINER gets large border-radius,
+             image itself zooms to 1.07× inside the rounded container.
+   Three separate targets so they don't conflict. */
 (function initLbCards() {
-  const MAX_R   = 4.5;   /* vmax at full offscreen */
-  const MIN_SC  = 0.92;  /* scale when fully offscreen */
-  const HOV_R   = 4.5;   /* vmax on hover */
-  const HOV_SC  = 0.985; /* container scale on hover */
-  const IMG_SC  = 1.06;  /* image zoom on hover */
-  const TR      = 'border-radius 520ms cubic-bezier(.22,1,.36,1), transform 520ms cubic-bezier(.22,1,.36,1)';
-  const TR_IMG  = 'transform 520ms cubic-bezier(.22,1,.36,1)';
-
-  /* Build item list — homepage .work-card and workpage .wk-card */
-  const items = [];
-  document.querySelectorAll('.work-card').forEach(card => {
-    const thumb = card.querySelector('.work-thumb');
-    const img   = card.querySelector('.work-thumb-img');
-    if (thumb) items.push({ card, thumb, img, isWk: false });
-  });
-  document.querySelectorAll('.wk-card').forEach(card => {
-    const img = card.querySelector('.wk-card-img');
-    items.push({ card, thumb: card, img, isWk: true });
-  });
-  if (!items.length) return;
+  const MIN_SC  = 0.93;   /* card scale when fully off-screen */
+  const HOV_SC  = 0.985;  /* card scale on hover (litebox: 0.9855) */
+  const HOV_R   = 4.73;   /* vmax border-radius on hover (litebox: 4.73899vmax) */
+  const IMG_SC  = 1.07;   /* image zoom on hover */
+  const EASE    = 'cubic-bezier(.22,1,.36,1)';
+  const TR      = `520ms ${EASE}`;
 
   const hovered = new Set();
 
-  items.forEach(({ card, thumb, img }) => {
+  /* ── Homepage featured work cards ── */
+  document.querySelectorAll('.work-card').forEach(card => {
+    const thumb = card.querySelector('.work-thumb'); /* overflow:hidden container */
+    const img   = card.querySelector('.work-thumb-img');
+    if (!thumb) return;
+
     card.addEventListener('mouseenter', () => {
       hovered.add(card);
-      thumb.style.transition = TR;
+      /* Card: slight shrink */
+      card.style.transition  = `transform ${TR}`;
+      card.style.transform   = `scale(${HOV_SC})`;
+      /* Thumb: round corners (overflow:hidden clips image to this shape) */
+      thumb.style.transition   = `border-radius ${TR}`;
       thumb.style.borderRadius = HOV_R + 'vmax';
-      thumb.style.transform    = `scale(${HOV_SC})`;
-      if (img) {
-        img.style.transition = TR_IMG;
-        img.style.transform  = `scale(${IMG_SC})`;
-      }
+      /* Image: zoom inside the rounded container */
+      if (img) { img.style.transition = `transform ${TR}`; img.style.transform = `scale(${IMG_SC})`; }
     });
+
     card.addEventListener('mouseleave', () => {
       hovered.delete(card);
-      /* Keep transition briefly so exit is smooth, then let scroll take over */
-      thumb.style.transition = TR;
-      if (img) {
-        img.style.transition = TR_IMG;
-        img.style.transform  = '';
-      }
+      thumb.style.transition   = `border-radius ${TR}`;
+      thumb.style.borderRadius = '0';
+      if (img) { img.style.transition = `transform ${TR}`; img.style.transform = ''; }
+      /* After transition, hand scale back to scroll */
       setTimeout(() => {
-        if (!hovered.has(card)) {
-          thumb.style.transition = 'none';
-          update();
-        }
-      }, 540);
+        if (!hovered.has(card)) { card.style.transition = 'none'; scrollUpdate(); }
+      }, 530);
     });
   });
 
-  function update() {
+  /* ── Work page cards (background-image, so round the card itself) ── */
+  document.querySelectorAll('.wk-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      hovered.add(card);
+      card.style.transition    = `transform ${TR}, border-radius ${TR}`;
+      card.style.transform     = `scale(${HOV_SC})`;
+      card.style.borderRadius  = HOV_R + 'vmax';
+    });
+    card.addEventListener('mouseleave', () => {
+      hovered.delete(card);
+      card.style.transition   = `transform ${TR}, border-radius ${TR}`;
+      card.style.borderRadius = '0';
+      setTimeout(() => {
+        if (!hovered.has(card)) { card.style.transition = 'none'; scrollUpdate(); }
+      }, 530);
+    });
+  });
+
+  /* ── Scroll-progress animation (scale only, continuous) ── */
+  function scrollUpdate() {
     const vh = window.innerHeight;
-    items.forEach(({ card, thumb }) => {
+
+    document.querySelectorAll('.work-card').forEach(card => {
       if (hovered.has(card)) return;
       const rect = card.getBoundingClientRect();
-      /* progress: 0 = card top at viewport bottom, 1 = card top at 40% from viewport top */
-      const prog = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.6)));
-      const r  = MAX_R  * (1 - prog);
-      const sc = MIN_SC + (1 - MIN_SC) * prog;
-      thumb.style.borderRadius = r > 0.01 ? r + 'vmax' : '0';
-      thumb.style.transform    = sc < 0.9999 ? `scale(${sc.toFixed(4)})` : '';
+      const prog = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.55)));
+      const sc   = MIN_SC + (1 - MIN_SC) * prog;
+      card.style.transform = sc < 0.9999 ? `scale(${sc.toFixed(4)})` : '';
+    });
+
+    document.querySelectorAll('.wk-card').forEach(card => {
+      if (hovered.has(card)) return;
+      const rect = card.getBoundingClientRect();
+      const prog = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.55)));
+      const sc   = MIN_SC + (1 - MIN_SC) * prog;
+      card.style.transform = sc < 0.9999 ? `scale(${sc.toFixed(4)})` : '';
     });
   }
 
   let ticking = false;
   window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => { update(); ticking = false; });
-      ticking = true;
-    }
+    if (!ticking) { requestAnimationFrame(() => { scrollUpdate(); ticking = false; }); ticking = true; }
   }, { passive: true });
-  window.addEventListener('resize', update);
-
-  /* Run on load — also handle mobile where hover doesn't apply */
-  update();
+  window.addEventListener('resize', scrollUpdate);
+  scrollUpdate();
 })();
 
 /* ── HERO (homepage only) ──────────────────────────────────────────── */
