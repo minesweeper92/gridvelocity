@@ -969,6 +969,11 @@ footer {
 .reveal.d3 { transition-delay: 320ms; }
 .reveal.d4 { transition-delay: 420ms; }
 
+/* ── Word-by-word paragraph reveal (litebox.ai style) ─────────────── */
+.rw { opacity: 0.12; transition: opacity 0.4s ease; }
+.rw.rw-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .rw { opacity: 1 !important; transition: none; } }
+
 
 /* ─────────────────────────────────────────────────────────────────────
    SHOWREEL — edge-to-edge video section
@@ -3494,11 +3499,20 @@ footer {
   .spec-left h2 { font-size: clamp(30px, 9vw, 40px); }
   .spec-right p { font-size: 16px; line-height: 1.6; }
 
-  /* ── Showreel ── */
-  .showreel-label { left: 20px; bottom: 20px; }
-  .showreel-title { font-size: 20px; }
-  .showreel-play-btn { width: 64px; height: 64px; }
-  .play-triangle { border-width: 10px 0 10px 18px; }
+  /* ── Showreel — litebox.ai style on mobile ── */
+  .showreel { padding: 0 16px; background: transparent; }
+  .showreel-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+  .showreel-overlay {
+    background: rgba(0,0,0,0.22); /* lighter — not heavy gradient */
+    border-radius: 12px;
+  }
+  .showreel-label { display: none; }  /* hide eyebrow/title — cleaner */
+  .showreel-play-btn { width: 56px; height: 56px; }
+  .play-triangle { border-width: 9px 0 9px 16px; }
 
   /* ── Services ── */
   .services { padding: 60px 16px 72px; }
@@ -6840,7 +6854,21 @@ footer { overflow: visible !important; }
   transform: translateY(100%);
 }
 
-/* Responsive — pixel-accurate match to eyekiller */
+/* Mobile: full visible compact circle (not quarter-circle from corner) */
+@media (max-width: 767px) {
+  .gv-cta-bubble { bottom: 20px; right: 20px; width: 84px; height: 84px; }
+  .gv-cta-bubble > a {
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .gv-cta-icon { position: relative; left: 0; top: 0; width: 26px; height: 26px; transition: transform 0.3s ease-out; }
+  .gv-bubble-text { font-size: 10px; height: 10px; }
+}
+
+/* Tablet / Desktop: pixel-accurate match to eyekiller quarter-circle */
 @media (min-width: 768px) {
   .gv-cta-bubble { bottom: -111px; right: -155px; width: 270px; height: 222px; }
   .gv-cta-bubble > a { padding: 40px 45px; }

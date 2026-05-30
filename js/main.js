@@ -1412,3 +1412,61 @@ setTimeout(scaleToFit, 150);
     if (e.target === panel) closePanel();
   });
 })();
+
+/* ── WORD-BY-WORD PARAGRAPH REVEAL (litebox.ai style) ───────────────
+   Splits body-copy <p> elements into word spans. Each paragraph's words
+   fade from 0.12 → 1 opacity with a 25ms stagger once the paragraph
+   scrolls into view. Skipped for prefers-reduced-motion.
+─────────────────────────────────────────────────────────────────────── */
+(function initWordReveal() {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* Collect paragraphs: at least 60 chars, not inside excluded regions */
+  var excluded = 'nav, footer, form, .nav-drawer, .gv-cookie, .ct-note, ' +
+                 '.gv-cta-bubble, [aria-hidden="true"], .skip-link';
+
+  var paras = Array.from(document.querySelectorAll('p')).filter(function(p) {
+    return p.textContent.trim().length >= 60 && !p.closest(excluded);
+  });
+
+  paras.forEach(function(p) {
+    /* Split child nodes preserving HTML tags (links, <em>, etc.) */
+    var nodes = Array.from(p.childNodes);
+    var frag  = document.createDocumentFragment();
+
+    nodes.forEach(function(node) {
+      if (node.nodeType === 3 /* TEXT_NODE */) {
+        node.textContent.split(/(\s+)/).forEach(function(chunk) {
+          if (!chunk) return;
+          if (/^\s+$/.test(chunk)) {
+            frag.appendChild(document.createTextNode(chunk));
+          } else {
+            var s = document.createElement('span');
+            s.className = 'rw';
+            s.textContent = chunk;
+            frag.appendChild(s);
+          }
+        });
+      } else {
+        /* Inline elements (links, etc.) — keep as-is */
+        frag.appendChild(node.cloneNode(true));
+      }
+    });
+
+    p.innerHTML = '';
+    p.appendChild(frag);
+
+    /* One observer per paragraph — fires once, then disconnects */
+    var words = p.querySelectorAll('.rw');
+    var obs = new IntersectionObserver(function(entries, observer) {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      words.forEach(function(w, i) {
+        setTimeout(function() { w.classList.add('rw-on'); }, i * 22);
+      });
+    }, { threshold: 0.12 });
+
+    obs.observe(p);
+  });
+})()
