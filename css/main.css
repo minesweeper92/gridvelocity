@@ -6855,17 +6855,23 @@ footer { overflow: visible !important; }
   transform: translateY(100%);
 }
 
-/* Mobile: full visible compact circle (not quarter-circle from corner) */
+/* Mobile: full visible compact circle, smiley outside like eyekiller */
 @media (max-width: 767px) {
-  .gv-cta-bubble { bottom: 20px; right: 20px; width: 84px; height: 84px; }
+  .gv-cta-bubble { bottom: 20px; right: 20px; width: 88px; height: 88px; }
   .gv-cta-bubble > a {
-    padding: 0;
-    align-items: center;
-    justify-content: center;
+    padding: 22px 8px 0 30px;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
   }
-  .gv-cta-icon { position: relative; left: 0; top: 0; width: 36px; height: 36px; transition: transform 0.3s ease-out; }
+  /* Icon sits at the left edge, half outside the circle — matches eyekiller */
+  .gv-cta-icon {
+    position: absolute;
+    left: -12px; top: 18px;
+    width: 38px; height: 38px;
+    transition: transform 0.3s ease-out;
+  }
   .gv-bubble-text { font-size: 12px; height: 12px; }
 }
 
