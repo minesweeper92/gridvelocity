@@ -494,9 +494,7 @@ setTimeout(scaleToFit, 150);
     { src: 'assets/logos/Colour/13.png', alt: 'Client logo' },
     { src: 'assets/logos/Colour/14.png', alt: 'Client logo' },
     { src: 'assets/logos/Colour/15.png', alt: 'Client logo' },
-    { src: 'assets/logos/Colour/16.png', alt: 'Client logo' },
-    { src: 'assets/logos/Colour/17.png', alt: 'Client logo' },
-    { src: 'assets/logos/Colour/19.png', alt: 'Client logo' }
+    { src: 'assets/logos/Colour/16.png', alt: 'Client logo' }
   ];
   const row = logos
     .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
