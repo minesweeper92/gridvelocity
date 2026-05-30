@@ -117,6 +117,21 @@ setTimeout(scaleToFit, 150);
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 
+/* ── LITEBOX-STYLE CARD REVEAL ─────────────────────────────────────── */
+/* Cards start rounded. As they scroll into view the border-radius drops
+   to 0 (sharp). On hover it rounds back up + the "Learn more" pill shows. */
+(function initLbReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('lb-in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.work-card, .wk-card').forEach(card => obs.observe(card));
+})();
+
 /* ── HERO (homepage only) ──────────────────────────────────────────── */
 (function initHero() {
   const hero = document.getElementById('hero');
