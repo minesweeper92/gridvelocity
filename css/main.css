@@ -3352,9 +3352,10 @@ footer {
     -webkit-backdrop-filter: none;
     box-shadow: none;
   }
-  /* Scrolled: swap to brand orange pill */
+  /* Scrolled: pill shrinks to match eyekiller (calc(100% - 50px) centred) */
   .gv-nav.scrolled .gv-nav-inner {
-    margin: 10px 10px;
+    width: calc(100% - 70px);
+    margin: 10px auto;
     max-width: none;
     height: 50px;
     padding: 0 6px 0 16px;
@@ -3500,17 +3501,17 @@ footer {
   .spec-right p { font-size: 16px; line-height: 1.6; }
 
   /* ── Showreel — litebox.ai style on mobile ── */
-  .showreel { padding: 0 16px; background: transparent; }
+  .showreel { padding: 0 20px 40px; background: transparent; }
   .showreel-wrap {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   }
   .showreel-overlay {
-    background: rgba(0,0,0,0.22); /* lighter — not heavy gradient */
+    background: rgba(0,0,0,0.22);
     border-radius: 12px;
   }
-  .showreel-label { display: none; }  /* hide eyebrow/title — cleaner */
+  .showreel-label { display: none; }
   .showreel-play-btn { width: 56px; height: 56px; }
   .play-triangle { border-width: 9px 0 9px 16px; }
 
@@ -6864,8 +6865,8 @@ footer { overflow: visible !important; }
     flex-direction: column;
     gap: 4px;
   }
-  .gv-cta-icon { position: relative; left: 0; top: 0; width: 26px; height: 26px; transition: transform 0.3s ease-out; }
-  .gv-bubble-text { font-size: 10px; height: 10px; }
+  .gv-cta-icon { position: relative; left: 0; top: 0; width: 32px; height: 32px; transition: transform 0.3s ease-out; }
+  .gv-bubble-text { font-size: 12px; height: 12px; }
 }
 
 /* Tablet / Desktop: pixel-accurate match to eyekiller quarter-circle */

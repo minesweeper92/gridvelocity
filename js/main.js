@@ -1414,29 +1414,27 @@ setTimeout(scaleToFit, 150);
 })();
 
 /* ── WORD-BY-WORD PARAGRAPH REVEAL (litebox.ai style) ───────────────
-   Splits body-copy <p> elements into word spans. Each paragraph's words
-   fade from 0.12 → 1 opacity with a 25ms stagger once the paragraph
-   scrolls into view. Skipped for prefers-reduced-motion.
+   Splits body-copy <p> elements into word spans. Words light up exactly
+   as the user scrolls — each word becomes visible when it crosses a
+   "reveal line" 72% from the top of the viewport. Bidirectional:
+   scrolling back dims words again. Paced purely by scroll position.
 ─────────────────────────────────────────────────────────────────────── */
 (function initWordReveal() {
-  if (!('IntersectionObserver' in window)) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  /* Collect paragraphs: at least 60 chars, not inside excluded regions */
   var excluded = 'nav, footer, form, .nav-drawer, .gv-cookie, .ct-note, ' +
                  '.gv-cta-bubble, [aria-hidden="true"], .skip-link';
 
+  /* Split paragraphs into word spans */
   var paras = Array.from(document.querySelectorAll('p')).filter(function(p) {
     return p.textContent.trim().length >= 60 && !p.closest(excluded);
   });
 
   paras.forEach(function(p) {
-    /* Split child nodes preserving HTML tags (links, <em>, etc.) */
     var nodes = Array.from(p.childNodes);
     var frag  = document.createDocumentFragment();
-
     nodes.forEach(function(node) {
-      if (node.nodeType === 3 /* TEXT_NODE */) {
+      if (node.nodeType === 3) {
         node.textContent.split(/(\s+)/).forEach(function(chunk) {
           if (!chunk) return;
           if (/^\s+$/.test(chunk)) {
@@ -1449,24 +1447,42 @@ setTimeout(scaleToFit, 150);
           }
         });
       } else {
-        /* Inline elements (links, etc.) — keep as-is */
         frag.appendChild(node.cloneNode(true));
       }
     });
-
     p.innerHTML = '';
     p.appendChild(frag);
-
-    /* One observer per paragraph — fires once, then disconnects */
-    var words = p.querySelectorAll('.rw');
-    var obs = new IntersectionObserver(function(entries, observer) {
-      if (!entries[0].isIntersecting) return;
-      observer.disconnect();
-      words.forEach(function(w, i) {
-        setTimeout(function() { w.classList.add('rw-on'); }, i * 22);
-      });
-    }, { threshold: 0.12 });
-
-    obs.observe(p);
   });
+
+  /* Collect all word spans once after splitting */
+  var allWords = document.querySelectorAll('.rw');
+  if (!allWords.length) return;
+
+  /* Reveal line: word top must be above this fraction of viewport height */
+  var REVEAL_FRAC = 0.78;
+  var ticking = false;
+
+  function updateWords() {
+    var vh      = window.innerHeight;
+    var line    = vh * REVEAL_FRAC;
+    for (var i = 0; i < allWords.length; i++) {
+      var top = allWords[i].getBoundingClientRect().top;
+      if (top < line) {
+        allWords[i].classList.add('rw-on');
+      } else {
+        allWords[i].classList.remove('rw-on');
+      }
+    }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(updateWords);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial pass — light up any words already above the line on load */
+  updateWords();
 })()
