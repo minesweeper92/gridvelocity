@@ -740,17 +740,30 @@ body {
 
 .work-thumb {
   width: 100%; aspect-ratio: 1.12 / 1;
-  position: relative; overflow: hidden;
-  background: var(--offwhite);
-  will-change: border-radius, transform;
-  /* border-radius & transform set entirely by JS — do NOT set here */
+  position: relative; overflow: visible;
+  background: transparent;
+  will-change: transform;
+  /* transform (scroll scale + hover shrink) set by JS */
 }
 .work-thumb-img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-  will-change: transform;
-  /* transform set by JS on hover */
+  /* Hidden once JS builds the two-half structure */
 }
+.work-thumb.lb-ready .work-thumb-img { display: none; }
+
+/* ── Two-half blob structure (litebox) ── */
+.lb-half {
+  position: absolute; left: 0; width: 100%;
+  height: calc(50% + 1px);
+  overflow: hidden;
+  background-size: 100% 200%;
+  background-repeat: no-repeat;
+  will-change: border-radius;
+  /* border-radius set by JS — top:0 corners on top half, bottom:0 on bottom */
+}
+.lb-half.lb-top { top: 0;    background-position: center top; }
+.lb-half.lb-bot { bottom: 0; background-position: center bottom; }
 
 .work-info  { padding-top: 20px; }
 .work-title {
@@ -3099,10 +3112,10 @@ footer {
 }
 .wk-card {
   position: relative; display: block; text-decoration: none;
-  overflow: hidden; aspect-ratio: 1.12 / 1;
-  background: #1a1a1a;
-  will-change: border-radius, transform;
-  /* border-radius & transform set entirely by JS */
+  overflow: visible; aspect-ratio: 1.12 / 1;
+  background: transparent;
+  will-change: transform;
+  /* transform (scroll scale + hover shrink) set by JS */
 }
 .wk-card.hide { display: none; }
 .wk-card.enter { animation: wk-in 500ms cubic-bezier(.22,1,.36,1) both; }
@@ -3110,14 +3123,14 @@ footer {
 .wk-card-img {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  will-change: transform;
-  /* transform set by JS on hover */
+  /* hidden once JS builds the two-half blob structure */
 }
 .wk-card-overlay {
-  position: absolute; inset: 0; z-index: 1;
+  position: absolute; inset: 0; z-index: 2;
   background: linear-gradient(180deg, rgba(13,13,13,0) 40%, rgba(13,13,13,0.55) 70%, rgba(13,13,13,0.92) 100%);
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 36px;
+  overflow: hidden;
 }
 .wk-card-cat {
   font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;

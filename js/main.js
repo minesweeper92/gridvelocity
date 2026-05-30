@@ -118,86 +118,109 @@ setTimeout(scaleToFit, 150);
 })();
 
 /* ── LITEBOX-STYLE CARD SCROLL + HOVER ────────────────────────────── */
-/* SCROLL — card scales 0.93→1 as it enters viewport (continuous, scroll-tied).
-   HOVER  — card scales to 0.985, image CONTAINER gets large border-radius,
-             image itself zooms to 1.07× inside the rounded container.
-   Three separate targets so they don't conflict. */
+/* Replicates litebox.ai exactly:
+   STRUCTURE — each card image is split into a TOP half and BOTTOM half.
+               On hover BOTH halves round all four corners independently,
+               so where they meet the rounded inner corners create the two
+               concave "notches" → the signature pinched peanut/blob shape.
+   SCROLL    — card scales 0.93→1 as it enters the viewport (continuous).
+   HOVER     — card shrinks to 0.985 + both halves round to 4.73vmax. */
 (function initLbCards() {
-  const MIN_SC  = 0.93;   /* card scale when fully off-screen */
-  const HOV_SC  = 0.985;  /* card scale on hover (litebox: 0.9855) */
-  const HOV_R   = 4.73;   /* vmax border-radius on hover (litebox: 4.73899vmax) */
-  const IMG_SC  = 1.07;   /* image zoom on hover */
-  const EASE    = 'cubic-bezier(.22,1,.36,1)';
-  const TR      = `520ms ${EASE}`;
+  const MIN_SC = 0.93;   /* scale when fully off-screen */
+  const HOV_SC = 0.985;  /* card scale on hover (litebox: 0.9855) */
+  const HOV_R  = 4.73;   /* vmax radius on each half (litebox: 4.73899vmax) */
+  const EASE   = 'cubic-bezier(.22,1,.36,1)';
+  const TR     = `520ms ${EASE}`;
 
   const hovered = new Set();
+  const cards   = [];
 
-  /* ── Homepage featured work cards ── */
+  /* Build the two-half structure for one image container.
+     `box` = the element that clips & holds the halves (aspect-ratio set in CSS).
+     `url` = image url to paint into both halves. */
+  function buildHalves(box, url) {
+    const top = document.createElement('div');
+    const bot = document.createElement('div');
+    top.className = 'lb-half lb-top';
+    bot.className = 'lb-half lb-bot';
+    top.style.backgroundImage = `url("${url}")`;
+    bot.style.backgroundImage = `url("${url}")`;
+    return { top, bot };
+  }
+
+  function setRadius(item, r) {
+    const v = r > 0.01 ? r + 'vmax' : '0';
+    item.top.style.borderRadius = v;
+    item.bot.style.borderRadius = v;
+  }
+
+  /* ── Homepage featured cards (.work-thumb with <img>) ── */
   document.querySelectorAll('.work-card').forEach(card => {
-    const thumb = card.querySelector('.work-thumb'); /* overflow:hidden container */
+    const thumb = card.querySelector('.work-thumb');
     const img   = card.querySelector('.work-thumb-img');
-    if (!thumb) return;
-
-    card.addEventListener('mouseenter', () => {
-      hovered.add(card);
-      /* Card: slight shrink */
-      card.style.transition  = `transform ${TR}`;
-      card.style.transform   = `scale(${HOV_SC})`;
-      /* Thumb: round corners (overflow:hidden clips image to this shape) */
-      thumb.style.transition   = `border-radius ${TR}`;
-      thumb.style.borderRadius = HOV_R + 'vmax';
-      /* Image: zoom inside the rounded container */
-      if (img) { img.style.transition = `transform ${TR}`; img.style.transform = `scale(${IMG_SC})`; }
-    });
-
-    card.addEventListener('mouseleave', () => {
-      hovered.delete(card);
-      thumb.style.transition   = `border-radius ${TR}`;
-      thumb.style.borderRadius = '0';
-      if (img) { img.style.transition = `transform ${TR}`; img.style.transform = ''; }
-      /* After transition, hand scale back to scroll */
-      setTimeout(() => {
-        if (!hovered.has(card)) { card.style.transition = 'none'; scrollUpdate(); }
-      }, 530);
-    });
+    if (!thumb || !img) return;
+    const url = img.currentSrc || img.src;
+    const { top, bot } = buildHalves(thumb, url);
+    thumb.appendChild(top); thumb.appendChild(bot);
+    thumb.classList.add('lb-ready');
+    cards.push({ card, scaleEl: thumb, top, bot });
   });
 
-  /* ── Work page cards (background-image, so round the card itself) ── */
+  /* ── Work page cards (.wk-card-img background) ── */
   document.querySelectorAll('.wk-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      hovered.add(card);
-      card.style.transition    = `transform ${TR}, border-radius ${TR}`;
-      card.style.transform     = `scale(${HOV_SC})`;
-      card.style.borderRadius  = HOV_R + 'vmax';
+    const imgEl = card.querySelector('.wk-card-img');
+    const overlay = card.querySelector('.wk-card-overlay');
+    if (!imgEl) return;
+    const bg = imgEl.style.backgroundImage || getComputedStyle(imgEl).backgroundImage;
+    const url = (bg.match(/url\(["']?(.*?)["']?\)/) || [])[1];
+    if (!url) return;
+    const { top, bot } = buildHalves(card, url);
+    imgEl.style.display = 'none';
+    /* halves go behind the overlay/text */
+    card.insertBefore(bot, card.firstChild);
+    card.insertBefore(top, card.firstChild);
+    cards.push({ card, scaleEl: card, top, bot, overlay });
+  });
+
+  if (!cards.length) return;
+
+  cards.forEach(item => {
+    item.card.addEventListener('mouseenter', () => {
+      hovered.add(item.card);
+      item.scaleEl.style.transition = `transform ${TR}`;
+      item.scaleEl.style.transform  = `scale(${HOV_SC})`;
+      item.top.style.transition = `border-radius ${TR}`;
+      item.bot.style.transition = `border-radius ${TR}`;
+      setRadius(item, HOV_R);
+      if (item.overlay) {
+        item.overlay.style.transition  = `border-radius ${TR}`;
+        item.overlay.style.borderRadius = HOV_R + 'vmax';
+      }
     });
-    card.addEventListener('mouseleave', () => {
-      hovered.delete(card);
-      card.style.transition   = `transform ${TR}, border-radius ${TR}`;
-      card.style.borderRadius = '0';
+    item.card.addEventListener('mouseleave', () => {
+      hovered.delete(item.card);
+      item.top.style.transition = `border-radius ${TR}`;
+      item.bot.style.transition = `border-radius ${TR}`;
+      setRadius(item, 0);
+      if (item.overlay) {
+        item.overlay.style.transition  = `border-radius ${TR}`;
+        item.overlay.style.borderRadius = '0';
+      }
       setTimeout(() => {
-        if (!hovered.has(card)) { card.style.transition = 'none'; scrollUpdate(); }
+        if (!hovered.has(item.card)) { item.scaleEl.style.transition = 'none'; scrollUpdate(); }
       }, 530);
     });
   });
 
-  /* ── Scroll-progress animation (scale only, continuous) ── */
+  /* ── Continuous scroll-progress scale ── */
   function scrollUpdate() {
     const vh = window.innerHeight;
-
-    document.querySelectorAll('.work-card').forEach(card => {
-      if (hovered.has(card)) return;
-      const rect = card.getBoundingClientRect();
+    cards.forEach(item => {
+      if (hovered.has(item.card)) return;
+      const rect = item.card.getBoundingClientRect();
       const prog = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.55)));
       const sc   = MIN_SC + (1 - MIN_SC) * prog;
-      card.style.transform = sc < 0.9999 ? `scale(${sc.toFixed(4)})` : '';
-    });
-
-    document.querySelectorAll('.wk-card').forEach(card => {
-      if (hovered.has(card)) return;
-      const rect = card.getBoundingClientRect();
-      const prog = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.55)));
-      const sc   = MIN_SC + (1 - MIN_SC) * prog;
-      card.style.transform = sc < 0.9999 ? `scale(${sc.toFixed(4)})` : '';
+      item.scaleEl.style.transform = sc < 0.9999 ? `scale(${sc.toFixed(4)})` : '';
     });
   }
 
