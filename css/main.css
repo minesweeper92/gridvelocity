@@ -560,9 +560,6 @@ body {
   filter: brightness(0) invert(1);
   opacity: .88;
   transition: opacity 220ms, transform 220ms;
-  image-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  image-rendering: crisp-edges;
 }
 .logo-item img:hover { opacity: 1; transform: scale(1.06); }
 

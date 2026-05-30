@@ -484,16 +484,23 @@ setTimeout(scaleToFit, 150);
   const strip = document.getElementById('logoStrip');
   if (!strip) return;
   const logos = [
-    { src: 'assets/logos/Colour/1.png',  alt: 'Client logo' },
-    { src: 'assets/logos/Colour/2.png',  alt: 'Client logo' },
-    { src: 'assets/logos/Colour/3.png',  alt: 'Client logo' },
-    { src: 'assets/logos/Colour/4.png',  alt: 'Client logo' },
-    { src: 'assets/logos/Colour/10.png', alt: 'Client logo' },
-    { src: 'assets/logos/Colour/11.png', alt: 'Client logo' },
-    { src: 'assets/logos/Colour/13.png', alt: 'Client logo' },
-    { src: 'assets/logos/Colour/14.png', alt: 'Client logo' },
-    { src: 'assets/logos/Colour/15.png', alt: 'Client logo' },
-    { src: 'assets/logos/Colour/16.png', alt: 'Client logo' }
+    { src: 'assets/logos/logo_01_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_02_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_03_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_04_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_05_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_06_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_07_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_08_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_10_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_11_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_12_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_13_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_14_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_15_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_16_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_18_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/logos/logo_19_black_156x99_27.svg', alt: 'Client logo' }
   ];
   const row = logos
     .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
