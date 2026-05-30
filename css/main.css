@@ -6762,6 +6762,7 @@ footer { overflow: visible !important; }
   z-index: 9999;
   pointer-events: none;
   display: block;
+  transition: opacity 0.6s ease-out;
 }
 .gv-cta-bubble.is-visible {
   animation: gv-bubble-in 0.5s ease-in-out forwards;
@@ -6825,10 +6826,10 @@ footer { overflow: visible !important; }
   white-space: nowrap;
 }
 .gv-bubble-text.text-line1 span {
-  transition: transform 0.4s ease-in 0.3s, opacity 0.4s ease-out 0.3s;
+  transition: transform 0.4s ease-in 0.3s, opacity 0.4s ease-out;
 }
 .gv-bubble-text.text-line2 span {
-  transition: transform 0.4s ease-in 0.5s, opacity 0.4s ease-out 0.5s;
+  transition: transform 0.4s ease-in 0.5s, opacity 0.4s ease-out;
 }
 .gv-cta-bubble.is-visible .gv-bubble-text span {
   opacity: 1;
@@ -6839,34 +6840,7 @@ footer { overflow: visible !important; }
   transform: translateY(100%);
 }
 
-/* Entrance dot */
-.gv-bubble-dot {
-  position: fixed;
-  bottom: -10px; right: -10px;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--gv-green);
-  transform: translate(50%, 50%);
-  z-index: 9998;
-  pointer-events: none;
-}
-
-/* Mobile: full visible compact circle, not quarter-circle from corner */
-@media (max-width: 767px) {
-  .gv-cta-bubble { bottom: 20px; right: 20px; width: 84px; height: 84px; }
-  .gv-cta-bubble > a {
-    padding: 0;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .gv-cta-icon { position: relative; left: 0; top: 0; width: 28px; height: 28px; }
-  .gv-bubble-text { font-size: 10px; height: 10px; }
-  .gv-bubble-dot { bottom: 14px; right: 14px; }
-}
-
-/* Tablet / Desktop: pixel-accurate match to eyekiller quarter-circle */
+/* Responsive — pixel-accurate match to eyekiller */
 @media (min-width: 768px) {
   .gv-cta-bubble { bottom: -111px; right: -155px; width: 270px; height: 222px; }
   .gv-cta-bubble > a { padding: 40px 45px; }
