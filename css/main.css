@@ -1684,11 +1684,10 @@ footer {
 .ab-reality-right p {
   font-family: 'Archivo', sans-serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.75;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.75);
 }
-.ab-reality-right p:first-child { color: rgba(255,255,255,0.75); font-weight: 500; }
 
 /* ── Crew ─────────────────────────────────────────────────────────── */
 .ab-crew {
@@ -3207,8 +3206,7 @@ footer {
 /* Overview */
 .cs-overview { width: 1440px; background: #0D0D0D; padding: 120px 88px; display: grid; grid-template-columns: 380px 1fr; gap: 90px; align-items: start; }
 .cs-overview h2 { font-family: 'Boldonse', sans-serif; font-size: 40px; line-height: 1.25; text-transform: uppercase; color: #fff; margin: 0; letter-spacing: -.01em; }
-.cs-overview-body p { font-family: 'Archivo', sans-serif; font-size: 19px; line-height: 1.8; color: rgba(255,255,255,0.66); margin: 0 0 26px; }
-.cs-overview-body p:first-child { color: rgba(255,255,255,0.85); font-weight: 500; }
+.cs-overview-body p { font-family: 'Archivo', sans-serif; font-size: 19px; line-height: 1.8; color: rgba(255,255,255,0.85); font-weight: 500; margin: 0 0 26px; }
 .cs-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
 .cs-tag { font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; border: 1.5px solid rgba(255,255,255,0.2); padding: 9px 18px; border-radius: 9999px; }
 
