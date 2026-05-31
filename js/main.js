@@ -1611,6 +1611,9 @@ setTimeout(scaleToFit, 150);
     '.gv-cta-bubble, [aria-hidden="true"], .skip-link, ' +
     /* service/work cards and item blocks */
     '.sv-prow-body, .sv-wyg-item, .sv-deliver-item, ' +
+    /* "How We Do It" flower section — no char-reveal on its intro/steps
+       (.sv-proc-flower-sticky is portaled to <body> on desktop, so list it too) */
+    '.sv-proc-flower-section, .sv-proc-flower-sticky, ' +
     '[class*="-card"], [class*="-item"], [class*="-chip"], ' +
     /* CTA / services / logo zones */
     '.cta-section, .services, .logo-strip, ' +
