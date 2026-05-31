@@ -1626,8 +1626,23 @@ setTimeout(scaleToFit, 150);
     /* legal / accessibility pages */
     '.legal-body, .a11y-body';
 
-  var paras = Array.from(document.querySelectorAll('p')).filter(function(p) {
+  function eligible(p) {
     return p.textContent.trim().length >= 60 && !p.closest(excluded);
+  }
+  var paras = Array.from(document.querySelectorAll('p')).filter(function(p) {
+    if (p.closest(excluded)) return false;
+    if (p.textContent.trim().length >= 60) return true;
+    /* Include a SHORT paragraph (e.g. a closing line like "It's not the
+       traditional way. It's a better one.") only when it sits in the same
+       block as a longer sibling paragraph that already reveals — so it stays
+       consistent with its group, without making tiny standalone labels split. */
+    if (p.textContent.trim().length >= 20 && p.parentElement) {
+      var sibs = p.parentElement.children;
+      for (var i = 0; i < sibs.length; i++) {
+        if (sibs[i] !== p && sibs[i].tagName === 'P' && eligible(sibs[i])) return true;
+      }
+    }
+    return false;
   });
 
   if (!paras.length) return;
