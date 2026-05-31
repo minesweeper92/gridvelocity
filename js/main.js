@@ -616,22 +616,24 @@ setTimeout(scaleToFit, 150);
 })();
 
 /* ── FLOWER PROCESS scroll animation ──────────────────────────────────
-   Pinning strategy differs by viewport because the site scales #scaler with
-   a CSS transform on desktop, and `position: sticky` is unreliable inside a
-   transformed ancestor (it drifts at (1-scale)·scrollY — verified).
+   The site renders at a fixed 1440 design and stretches to the screen via a
+   CSS `transform: scale()` on #scaler. A transformed ancestor breaks BOTH
+   native `position: sticky` and any compositor-smooth pinning — so the old
+   JS "manual sticky" (writing a transform every frame to chase the scroll)
+   jittered on desktop, worst right as a step flipped.
 
-   • MOBILE (<1024px): #scaler has NO transform, so we use native, compositor-
-     driven `position: sticky` (set in CSS). Buttery smooth — no per-frame JS
-     moves the pinned element. JS only advances the stroke + active step.
-   • DESKTOP (≥1024px): native sticky can't pin under the scale transform, so
-     we keep a manual sticky — but drive it from a continuous rAF loop (only
-     while the section is on-screen) using a GPU translate3d layer, instead of
-     writing transforms straight from the scroll event. This removes the
-     frame-lag jitter the old scroll-handler version had.
+   Fix — pin OUTSIDE the transform:
+   • DESKTOP (≥1024px): portal the flower element out of #scaler into <body>
+     and give it `position: fixed` + its own `scale()` so it looks identical
+     but is pinned by the browser's compositor — zero per-frame JS, zero
+     jitter. The (now-empty) scroll zone stays in #scaler as the scroll runway.
+     JS only toggles the flower's visibility while the zone covers the viewport
+     and advances the stroke/step (neither is position-critical).
+   • MOBILE (<1024px): #scaler has no transform, so native `position: sticky`
+     (set in CSS) already pins smoothly; the element stays in place.
 
-   Either way, the active-step class is only rewritten when the index actually
-   changes (not every frame), which kills the recalc hitch that showed up right
-   as the step flipped from 1→2→3. */
+   The active-step class is only rewritten when the index actually changes, so
+   there's no per-frame style recalc. */
 (function initFlowerProcess() {
   document.querySelectorAll('.sv-proc-flower-scroll').forEach(scrollZone => {
     const stickyEl = scrollZone.querySelector('.sv-proc-flower-sticky');
@@ -640,89 +642,87 @@ setTimeout(scaleToFit, 150);
     const nSteps   = steps.length;
     if (!stickyEl || !stroke || !nSteps) return;
 
-    const isMobile  = () => window.innerWidth < 1024;
-    const getScale  = () => isMobile() ? 1 : Math.max(window.innerWidth, 100) / 1440;
+    const homeParent = stickyEl.parentNode;            /* the scroll zone */
+    const isMobile   = () => window.innerWidth < 1024;
+    const getScale   = () => Math.max(window.innerWidth, 100) / 1440;
 
-    let lastIdx = -1, lastStrokeShown = null;
+    let lastIdx = -1, lastStrokeShown = null, portaled = false, lastPinned = null;
+
+    /* Move the flower to <body> (escaping #scaler's transform) so position:fixed
+       pins it to the viewport. */
+    function portal() {
+      if (portaled) return;
+      document.body.appendChild(stickyEl);
+      stickyEl.classList.add('gv-flower-fixed');
+      portaled = true; lastPinned = null;
+    }
+    /* Put it back inside the scroll zone for the mobile native-sticky path. */
+    function unportal() {
+      if (!portaled) return;
+      homeParent.appendChild(stickyEl);
+      stickyEl.classList.remove('gv-flower-fixed', 'is-pinned');
+      stickyEl.style.width = '';
+      stickyEl.style.height = '';
+      stickyEl.style.transform = '';
+      portaled = false; lastPinned = null;
+    }
 
     function resize() {
       const scale   = getScale();
-      const vh      = window.innerHeight / scale; /* 1 viewport height in scaler coords */
-      /* On mobile, shorten the scroll spent per step so a 5-step process
-         doesn't require 5 full-screen swipes. Desktop stays 1 screen/step. */
-      const stepLen = isMobile() ? vh * 0.7 : vh;
+      const vhDesk  = window.innerHeight / scale;       /* viewport height in scaler coords */
+      const vhMob   = window.innerHeight;
       if (isMobile()) {
-        /* Native sticky (CSS) owns pinning + height — clear any inline values
-           the desktop path may have written. */
-        stickyEl.style.height = '';
-        stickyEl.style.transform = '';
+        unportal();
+        scrollZone.style.height = (nSteps * vhMob * 0.7 + vhMob * 0.4) + 'px';
       } else {
-        stickyEl.style.height = vh + 'px';
+        portal();
+        /* Size the body-level fixed flower to match the scaled 1440 design:
+           width 1440 × scale = viewport width; height = viewport (after scale). */
+        stickyEl.style.width = '1440px';
+        stickyEl.style.height = vhDesk + 'px';
+        stickyEl.style.transform = 'scale(' + scale + ')';
+        scrollZone.style.height = (nSteps * vhDesk + vhDesk * 0.4) + 'px';
       }
-      scrollZone.style.height = (nSteps * stepLen + vh * 0.4) + 'px';
     }
 
-    /* Advance stroke fill + active step from scroll progress (cheap; no layout
-       writes unless something actually changed). */
-    function paintState() {
+    function update() {
       const rect    = scrollZone.getBoundingClientRect();
-      const maxV    = rect.height - window.innerHeight;
+      const viewH   = window.innerHeight;
+      const maxV    = rect.height - viewH;
       const progress = Math.max(0, Math.min(1, (-rect.top) / Math.max(maxV, 1)));
 
+      /* Stroke fill */
       stroke.style.strokeDashoffset = (1 - progress).toFixed(4);
       const shown = progress > 0.015;
       if (shown !== lastStrokeShown) { stroke.style.opacity = shown ? '1' : '0'; lastStrokeShown = shown; }
 
+      /* Active step — only on change */
       const idx = Math.min(nSteps - 1, Math.floor(progress * nSteps + 0.008));
       if (idx !== lastIdx) {
         if (steps[lastIdx]) steps[lastIdx].classList.remove('active');
         steps[idx].classList.add('active');
         lastIdx = idx;
       }
+
+      /* Desktop: reveal the fixed flower only while the zone covers the viewport
+         (i.e. the section's dark backdrop fills the screen behind it). Pure
+         opacity toggle — the pin itself is handled by position:fixed. */
+      if (portaled) {
+        const pinned = rect.top <= 1 && rect.bottom >= viewH - 1;
+        if (pinned !== lastPinned) { stickyEl.classList.toggle('is-pinned', pinned); lastPinned = pinned; }
+      }
     }
 
-    /* Desktop only: keep the pinned element fixed in the viewport by translating
-       it down as the page scrolls (converted out of scaler coords). */
-    function paintStickyDesktop() {
-      const scale   = getScale();
-      const rect    = scrollZone.getBoundingClientRect();
-      const maxV    = rect.height - window.innerHeight;
-      const clamped = Math.max(0, Math.min(maxV, -rect.top));
-      stickyEl.style.transform = 'translate3d(0,' + (clamped / scale) + 'px,0)';
-    }
-
-    /* ── Desktop: continuous rAF while the section is on screen ── */
-    let rafId = null, inView = false;
-    function loop() {
-      paintStickyDesktop();
-      paintState();
-      rafId = inView ? requestAnimationFrame(loop) : null;
-    }
-    const io = new IntersectionObserver(entries => {
-      inView = entries[0].isIntersecting;
-      if (isMobile()) return;            /* mobile uses the scroll listener below */
-      if (inView && rafId === null) { resize(); rafId = requestAnimationFrame(loop); }
-    }, { rootMargin: '120px 0px' });
-    io.observe(scrollZone);
-
-    /* ── Mobile: native sticky pins for free; just advance state on scroll ── */
-    let mobileTicking = false;
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      if (!isMobile()) return;
-      if (mobileTicking) return;
-      mobileTicking = true;
-      requestAnimationFrame(() => { paintState(); mobileTicking = false; });
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { update(); ticking = false; });
     }, { passive: true });
-
-    function refresh() {
-      resize();
-      paintState();
-      if (!isMobile()) paintStickyDesktop();
-    }
-    window.addEventListener('resize', refresh, { passive: true });
-    window.addEventListener('orientationchange', () => setTimeout(refresh, 120), { passive: true });
-    window.addEventListener('load', refresh, { passive: true });
-    requestAnimationFrame(() => { refresh(); requestAnimationFrame(refresh); });
+    window.addEventListener('resize', () => { resize(); update(); }, { passive: true });
+    window.addEventListener('orientationchange', () => setTimeout(() => { resize(); update(); }, 120), { passive: true });
+    window.addEventListener('load', () => { resize(); update(); }, { passive: true });
+    requestAnimationFrame(() => { resize(); update(); requestAnimationFrame(() => { resize(); update(); }); });
   });
 })();
 

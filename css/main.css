@@ -2768,6 +2768,20 @@ footer {
   will-change: transform;
   backface-visibility: hidden;
 }
+/* Desktop: the flower is portaled out of #scaler into <body> by main.js and
+   pinned with position:fixed (escapes the scale transform → compositor-smooth,
+   no JS jitter). JS sets width/height/scale inline to match the scaled design;
+   it's only revealed (opacity) while the scroll zone covers the viewport. */
+.sv-proc-flower-sticky.gv-flower-fixed {
+  position: fixed;
+  top: 0; left: 0;
+  transform-origin: top left;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+.sv-proc-flower-sticky.gv-flower-fixed.is-pinned { opacity: 1; }
 .sv-proc-flower-shape {
   position: relative;
   width: 560px;
