@@ -7275,3 +7275,24 @@ footer { overflow: visible !important; }
 
 }
 
+/* ═════════════════════════════════════════════════════════════════════
+   UNIFORM BODY-INTRO BRIGHTNESS  (overrides earlier muted values)
+   Section intro / body paragraphs across pages used inconsistent muted
+   alphas (0.45–0.58), so some read noticeably greyer than others. Bring them
+   up to a crisp, consistent level matching the home page and the About
+   "Reality" section (~0.75 white on dark; ~rgb(56,56,56) on light). Colour
+   only — font-weights unchanged. Applies on all viewports.
+═════════════════════════════════════════════════════════════════════ */
+.anr-body             { color: rgba(255,255,255,0.75); } /* About · network roles (dark) */
+.ab-team-top-right p  { color: rgba(0,0,0,0.78); }       /* About · team intro (light)   */
+.ab-partners-sub      { color: rgba(0,0,0,0.78); }       /* About · partners (light)     */
+.cr-roles-head p      { color: rgba(13,13,13,0.82); }    /* Careers · roles head (light) */
+.cr-intro-text p      { color: rgba(13,13,13,0.82); }    /* Careers · intro (light)      */
+.bl-coming p          { color: rgba(13,13,13,0.82); }    /* Blog · coming soon (light)   */
+.a11y-commit-right p  { color: rgba(13,13,13,0.82); }    /* Accessibility · commit (light) */
+.a11y-contact-right p { color: rgba(255,255,255,0.78); } /* Accessibility · contact (dark) */
+/* Service pages — about-the-service lead + "What you get" descriptions */
+.sv-section.dark .sv-lead { color: rgba(255,255,255,0.75); }
+.sv-section.light .sv-lead, .sv-section.off .sv-lead { color: rgba(0,0,0,0.78); }
+.sv-wyg-desc { color: rgba(13,13,13,0.82); }
+
