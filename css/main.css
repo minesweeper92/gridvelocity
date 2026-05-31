@@ -6404,11 +6404,9 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   width: 1440px;
   position: relative;
   overflow: hidden;
-  padding: 160px 88px;
-  display: grid;
-  grid-template-columns: 440px 1fr;
-  gap: 80px;
-  align-items: start;
+  padding: 130px 88px 150px;
+  display: block;
+  text-align: center;
 }
 
 /* Grain overlay */
@@ -6422,27 +6420,26 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   z-index: 0;
 }
 
-/* Left column — sticky heading */
+/* Heading — centred above the role words */
 .anr-left {
-  position: sticky;
-  top: 100px;
-  z-index: 2;
+  position: relative;
+  z-index: 3;
+  margin-bottom: 52px;
 }
 
 .anr-left h2 {
   font-family: 'Boldonse', sans-serif;
   font-size: 58px;
-  line-height: 1.4;
+  line-height: 1.32;
   letter-spacing: -0.02em;
   color: #fff;
   text-transform: uppercase;
 }
 
-/* Right column */
+/* Role words — centred below the heading */
 .anr-right {
   position: relative;
-  z-index: 2;
-  overflow: hidden;
+  z-index: 3;
 }
 
 /* Word stack container */
@@ -6492,6 +6489,29 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .anr-hover-img.anr-img-show {
   transform: translateX(-50%) translateY(calc(-100% - 24px)) scale(1);
   opacity: 1;
+}
+
+/* ─── Floating astronaut images (pop in on scroll, fall away on exit) ─── */
+.anr-floaters {
+  position: absolute;
+  inset: 0;
+  z-index: 1;            /* behind the heading + words (z-index 3) */
+  pointer-events: none;
+  overflow: hidden;       /* clip floaters as they fall past the section edge */
+}
+.anr-floater {
+  position: absolute;
+  width: var(--sz, 130px);
+  height: var(--sz, 130px);
+  object-fit: contain;
+  opacity: 0;
+  will-change: transform, opacity;
+  transform: translate3d(0, 40px, 0) scale(0.4);
+  filter: drop-shadow(0 22px 40px rgba(0,0,0,0.45));
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Show them settled, no scroll motion */
+  .anr-floater { opacity: 0.9; transform: none; }
 }
 
 /* Body copy */
@@ -7244,20 +7264,20 @@ footer { overflow: visible !important; }
      overflow both edges and clip. Reflow the words into a tidy, legible
      wrapped cloud, and make sure the heading clears the side padding. */
   .ab-net-roles { padding: 72px 22px !important; }
-  /* Container must not stay sticky on the single-column phone layout,
-     or the heading pins over the scrolling word cloud. */
-  .anr-left { position: static !important; top: auto !important; }
+  /* Relative (not static) so its z-index keeps the heading ABOVE the floaters;
+     not sticky, so it won't pin over the word cloud. */
+  .anr-left { position: relative !important; top: auto !important; z-index: 3 !important; margin-bottom: 28px !important; }
+  .anr-right { z-index: 3 !important; }
   .anr-left h2 {
     font-size: clamp(26px, 7.2vw, 40px) !important;
     line-height: 1.22 !important;
     position: static !important;
-    margin-bottom: 8px !important;
   }
   .anr-right { overflow: visible !important; }
   .anr-words {
     display: flex !important;
     flex-wrap: wrap !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;   /* centred to match the heading */
     align-items: baseline !important;
     gap: 4px 14px !important;
   }
@@ -7271,7 +7291,10 @@ footer { overflow: visible !important; }
   .anr-word + .anr-word { margin-left: 0 !important; }
   /* Brighten a couple to keep the brand's playful accent without hover */
   .anr-line:nth-child(odd) .anr-word:first-child { color: var(--orange) !important; }
-  .anr-body { text-align: left !important; margin: 30px 0 0 !important; max-width: 100% !important; }
+
+  /* Floaters: smaller on phones so they read as accents around the text */
+  .anr-floater { --sz: 84px !important; }
+  .anr-floater:nth-child(n+5) { display: none !important; }  /* keep 4 on mobile */
 
 }
 

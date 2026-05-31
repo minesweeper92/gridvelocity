@@ -961,6 +961,71 @@ setTimeout(scaleToFit, 150);
         hoverImg.classList.remove('anr-img-show');
       });
     });
+
+    /* ── Floating astronaut images: pop in on scroll, fall away on exit ──
+       Scattered around the centred heading/word-cloud. As the section scrolls
+       into view they pop in (scale + fade); as it scrolls toward the next
+       section they fall (translate down + rotate) and fade out — Litebox-style.
+       The floaters sit BEHIND the text (z-index 1) so copy stays readable. */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var FLO = [
+        { img: '1.png', top: 12, left: 6,  sz: 134, rot: -10, fall:  48 },
+        { img: '2.png', top: 16, left: 80, sz: 150, rot:  12, fall: -40 },
+        { img: '3.png', top: 60, left: 4,  sz: 120, rot:   9, fall:  42 },
+        { img: '4.png', top: 66, left: 82, sz: 142, rot:  -8, fall: -46 },
+        { img: '6.png', top: 82, left: 15, sz: 112, rot:  13, fall:  38 },
+        { img: '5.png', top: 80, left: 73, sz: 128, rot: -12, fall: -42 }
+      ];
+      var floWrap = document.createElement('div');
+      floWrap.className = 'anr-floaters';
+      floWrap.setAttribute('aria-hidden', 'true');
+      var floaters = FLO.map(function(f) {
+        var el = document.createElement('img');
+        el.className = 'anr-floater';
+        el.src = 'assets/network-section-images/' + f.img;
+        el.alt = '';
+        el.loading = 'lazy';
+        el.style.top  = f.top + '%';
+        el.style.left = f.left + '%';
+        el.style.setProperty('--sz', f.sz + 'px');
+        floWrap.appendChild(el);
+        return { el: el, cfg: f };
+      });
+      netRoles.appendChild(floWrap);
+
+      var floN = floaters.length;
+      var clamp01 = function(v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+      var backOut = function(t) { var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+
+      function floUpdate() {
+        var rect = netRoles.getBoundingClientRect();
+        var vh = window.innerHeight;
+        /* monotonic with scroll: 0 = section just below viewport, 1 = just above */
+        var p = (vh - rect.top) / (vh + rect.height);
+        for (var i = 0; i < floN; i++) {
+          var f = floaters[i].cfg, el = floaters[i].el;
+          var st = i * 0.035;
+          var enter = backOut(clamp01((p - (0.08 + st)) / 0.32));      /* pop in  */
+          var ex    = clamp01((p - (0.58 + st * 0.6)) / 0.34);          /* exit    */
+          ex = ex * ex;                                                  /* gravity */
+          var sc = (0.4 + 0.6 * enter) * (1 - 0.25 * ex);
+          var ty = (1 - enter) * 40 + ex * (vh * 0.85);
+          var rot = f.rot * enter + ex * f.fall;
+          el.style.opacity = (enter * (1 - ex)).toFixed(3);
+          el.style.transform = 'translate3d(0,' + ty.toFixed(1) + 'px,0) rotate(' + rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
+        }
+      }
+
+      var floTick = false;
+      window.addEventListener('scroll', function() {
+        if (floTick) return;
+        floTick = true;
+        requestAnimationFrame(function() { floUpdate(); floTick = false; });
+      }, { passive: true });
+      window.addEventListener('resize', floUpdate, { passive: true });
+      floaters.forEach(function(it) { it.el.addEventListener('load', floUpdate, { once: true }); });
+      floUpdate();
+    }
   }
 
   /* Team Swiper init */
