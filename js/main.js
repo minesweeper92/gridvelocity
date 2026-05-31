@@ -1614,6 +1614,10 @@ setTimeout(scaleToFit, 150);
     /* "How We Do It" flower section — no char-reveal on its intro/steps
        (.sv-proc-flower-sticky is portaled to <body> on desktop, so list it too) */
     '.sv-proc-flower-section, .sv-proc-flower-sticky, ' +
+    /* Hero subtitles are above the fold — they'd start half-dim on load. The
+       home hero has no subtitle <p>, so heroes stay solid there; match that on
+       every page by excluding the hero lead paragraphs. */
+    '.ab-sub, .ct-lead, .a11y-lead, .wk-hero-sub, ' +
     '[class*="-card"], [class*="-item"], [class*="-chip"], ' +
     /* CTA / services / logo zones */
     '.cta-section, .services, .logo-strip, ' +
