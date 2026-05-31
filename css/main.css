@@ -2755,13 +2755,18 @@ footer {
 .sv-proc-flower-scroll {
   position: relative;
 }
-/* manually-positioned sticky container — translateY driven by JS */
+/* Desktop: manually-positioned sticky container — translate3d driven by a
+   rAF loop in main.js (native sticky can't pin inside the scaled #scaler).
+   will-change promotes it to its own GPU layer so per-frame transforms only
+   recomposite rather than repaint. */
 .sv-proc-flower-sticky {
   position: absolute;
   top: 0; left: 0; width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .sv-proc-flower-shape {
   position: relative;
@@ -7142,6 +7147,25 @@ footer { overflow: visible !important; }
   /* ───────── "HOW WE DO IT" — animated flower on mobile ───────── */
   .sv-proc-flower-scroll { display: block !important; }
   .sv-proc-mobile-list   { display: none !important; }
+
+  /* Mobile has no #scaler transform, so use native compositor-driven sticky
+     for perfectly smooth pinning (no per-frame JS transform). JS only advances
+     the stroke + active step here. */
+  .sv-proc-flower-sticky {
+    position: sticky !important;
+    top: 0 !important;
+    height: 100svh !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+  /* The section uses overflow:hidden to clip the orbit-ring decorations, but
+     `hidden` makes it a scroll container and that BREAKS native sticky. `clip`
+     clips identically WITHOUT becoming a scroll container, so sticky still pins
+     to the viewport. (Verified: pins at top:0, no horizontal scroll.) */
+  .sv-proc-flower-section { overflow: clip !important; }
+  /* Keep the outer orbit ring from bleeding past the viewport now that the
+     section no longer hard-clips a scroll box. */
+  .sv-proc-flower-shape::after { inset: -30px !important; }
 
   .sv-proc-flower-section { padding: 80px 22px 84px !important; }
   .sv-proc-flower-header  { padding: 0 0 6px !important; }
