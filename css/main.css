@@ -653,10 +653,10 @@ body {
 .svc-orbg   { position: absolute; inset: 0; background: rgba(255,255,255,0.08); z-index: 0; }
 .svc-whitebg {
   position: absolute; inset: 0; background: #fff; z-index: 1;
-  transform: translateY(100%);
-  transition: transform 500ms cubic-bezier(.76,0,.24,1);
+  transform: translateX(-100%);
+  transition: transform 480ms ease-in;
 }
-.svc-card:hover .svc-whitebg { transform: translateY(0); }
+.svc-card:hover .svc-whitebg { transform: translateX(0); }
 
 .svc-num {
   position: absolute; left: 22px; top: 6px; z-index: 2;
@@ -668,13 +668,13 @@ body {
 
 .svc-astro {
   position: absolute;
-  left: 50%; top: 115px; transform: translate(-50%, 12px);
-  width: 170px; height: 170px; object-fit: contain;
+  left: 50%; top: 80px; transform: translate(-50%, 0) scale(0);
+  width: 240px; height: 240px; object-fit: contain;
   z-index: 2;
-  opacity: 0;
-  transition: opacity 400ms 80ms, transform 400ms 80ms;
+  opacity: 1;
+  transition: transform 580ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.svc-card:hover .svc-astro { opacity: 1; transform: translate(-50%, 0); }
+.svc-card:hover .svc-astro { transform: translate(-50%, 0) scale(1); }
 
 .svc-name {
   position: absolute; left: 22px; bottom: 78px; z-index: 2;
@@ -699,10 +699,10 @@ body {
   letter-spacing: .1em; text-transform: uppercase;
   color: #fff; background: var(--black);
   padding: 11px 18px; text-decoration: none;
-  opacity: 0; transform: translateY(8px);
-  transition: opacity 280ms 150ms, transform 280ms 150ms, background 180ms;
+  opacity: 0; transform: translateX(-18px);
+  transition: opacity 260ms 160ms, transform 300ms 160ms cubic-bezier(.23,1,.32,1), background 180ms;
 }
-.svc-card:hover .svc-btn { opacity: 1; transform: translateY(0); }
+.svc-card:hover .svc-btn { opacity: 1; transform: translateX(0); }
 .svc-btn:hover { background: var(--orange); }
 .svc-card:hover .svc-desc { bottom: 78px; }
 
