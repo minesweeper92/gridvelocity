@@ -2004,3 +2004,51 @@ setTimeout(scaleToFit, 150);
   update();
 })();
 
+/* ═══════════════════════════════════════════════════════════════════════
+   SITE-WIDE ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Smooth scroll ──────────────────────────────────────────────────────
+   Change SMOOTH_SCROLL_MS to adjust how fast anchor links animate.      */
+var SMOOTH_SCROLL_MS = 800;
+
+(function () {
+  function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href');
+    if (!id || id === '#') return;
+    var target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    var start = window.scrollY;
+    var end   = target.getBoundingClientRect().top + window.scrollY;
+    var diff  = end - start;
+    var t0    = null;
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / SMOOTH_SCROLL_MS, 1);
+      window.scrollTo(0, start + diff * easeOutQuart(p));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+})();
+
+/* ── Viewport height (--vp-h) ───────────────────────────────────────────
+   Desktop sections inside #scaler can't use 100vh directly because the
+   scaler transform changes the visual size. This sets --vp-h to the
+   equivalent of 100vh in scaler-pixel space so CSS min-height works.    */
+(function () {
+  function setVpH() {
+    if (window.innerWidth < 1024) return; /* mobile uses svh natively */
+    var scale = window.innerWidth / 1440;
+    var vpH   = Math.round(window.innerHeight / scale);
+    document.documentElement.style.setProperty('--vp-h', vpH + 'px');
+  }
+  setVpH();
+  window.addEventListener('resize', setVpH, { passive: true });
+})();
+
