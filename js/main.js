@@ -1975,13 +1975,12 @@ setTimeout(scaleToFit, 150);
     var vh = window.innerHeight;
 
     /* Each paragraph reveals independently — no sequential gate so fast scrolling
-       never blocks downstream paragraphs. Reveal window = vh × 0.28: the highlight
-       completes when the paragraph bottom reaches 72% up the viewport (from the
-       moment its bottom crosses the bottom edge of the viewport). This keeps pace
-       with natural reading speed and matches the Litebox scroll-reveal feel.    */
+       never blocks downstream paragraphs. Reveal starts when the paragraph bottom
+       reaches the 60% line of the viewport (60% from top = well into view) and
+       completes over the next vh×0.28 of scroll. Keeps pace with reading speed.  */
     items.forEach(function(item) {
       var rect     = item.el.getBoundingClientRect();
-      var progress = (vh - rect.bottom) / (vh * 0.28);
+      var progress = (vh * 0.6 - rect.bottom) / (vh * 0.28);
       progress     = Math.max(0, Math.min(1, progress));
       var litCount = Math.round(progress * item.chars.length);
 

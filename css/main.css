@@ -550,8 +550,9 @@ body {
   display: flex;
   width: max-content;
   align-items: center;
-  animation: scroll-logos 38s linear infinite;
+  animation: scroll-logos 70s linear infinite;
 }
+.logo-strip:hover .logo-strip-inner { animation-play-state: paused; }
 @keyframes scroll-logos { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .logo-item {
   flex-shrink: 0;
@@ -563,10 +564,10 @@ body {
   max-height: 64px; max-width: 200px;
   object-fit: contain;
   filter: brightness(0) invert(1);
-  opacity: .88;
-  transition: opacity 220ms, transform 220ms;
+  opacity: .38;
+  transition: opacity 260ms;
 }
-.logo-item img:hover { opacity: 1; transform: scale(1.06); }
+.logo-item img:hover { opacity: 1; }
 
 
 /* ─────────────────────────────────────────────────────────────────────
