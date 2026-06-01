@@ -1739,6 +1739,17 @@ setTimeout(scaleToFit, 150);
   window.addEventListener('scroll', onScroll, { passive: true });
   /* Handle case where page loads already scrolled (anchor, back-nav) */
   if ((window.scrollY || window.pageYOffset) > THRESHOLD) onScroll();
+
+  /* Hide bubble when footer enters the viewport */
+  var footer = document.querySelector('footer');
+  if (footer && 'IntersectionObserver' in window) {
+    var footerObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        el.classList.toggle('footer-in-view', entry.isIntersecting);
+      });
+    }, { threshold: 0.05 });
+    footerObs.observe(footer);
+  }
 })();
 
 /* ── ACCESSIBILITY PANEL OVERLAY ────────────────────────────────────

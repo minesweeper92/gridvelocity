@@ -5084,7 +5084,7 @@ footer::before {
 .footer-wm-g {
   font-family: 'Archivo', sans-serif;
   font-weight: 900;
-  font-size: 196px;
+  font-size: 240px;
   line-height: 1;
   letter-spacing: -0.04em;
   text-transform: lowercase;
@@ -5147,13 +5147,25 @@ footer::before {
 .footer-cta-h {
   font-family: 'Boldonse', sans-serif;
   font-size: 39.6px;
-  line-height: 1.28;
+  line-height: 1.55;
   letter-spacing: -0.005em;
   text-transform: uppercase;
 }
 .footer-cta-h .orange { color: var(--orange); }
 .footer-cta-right { width: 540px; align-self: flex-end; padding-bottom: 4px; }
 .footer-cta-desc { font-size: 16px; line-height: 1.6; }
+
+/* footer-cta-inner vertical centering */
+.footer-cta-inner { align-items: center; }
+/* Let's Work → secondary (white outline on dark footer) */
+.footer-cta .btn-dark {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  color: #fff;
+}
+.footer-cta .btn-dark:hover { background: #fff; color: var(--black); border-color: #fff; }
+/* Footer bottom links underline */
+.footer-bottom a { text-decoration: underline; }
 
 .footer-bottom { top: 740px; padding: 22px 80px; }
 .footer-bottom span, .footer-bottom a { font-size: 12px; letter-spacing: 0.01em; }
@@ -7443,6 +7455,11 @@ footer { overflow: visible !important; }
 .gv-cta-bubble.is-visible {
   animation: gv-bubble-in 0.5s ease-in-out forwards;
   pointer-events: auto;
+}
+/* Hide bubble when footer is visible */
+.gv-cta-bubble.footer-in-view {
+  animation: gv-bubble-out 0.4s ease-in-out forwards;
+  pointer-events: none;
 }
 .gv-cta-bubble.is-hidden {
   animation: gv-bubble-out 0.5s ease-in-out forwards;
