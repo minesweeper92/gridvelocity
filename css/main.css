@@ -3523,7 +3523,7 @@ footer {
   /* gw1 "Production," — top, left-aligned */
   .glyph-word.gw1 {
     top: auto; left: auto; right: auto; bottom: auto;
-    font-size: clamp(27.9px, 7.425vw, 37.8px); line-height: 1.65;
+    font-size: clamp(31px, 8.25vw, 42px); line-height: 1.65;
     margin-left: 0; text-align: left; padding: 0;
     transform: translateX(-110%) rotate(-4deg); opacity: 0;
     transition: transform 750ms cubic-bezier(.34,1.15,.64,1) 80ms,
@@ -3533,7 +3533,7 @@ footer {
   /* gw2 "Design" — dominant word, viewport-width block so text-align:center works */
   .glyph-word.gw2 {
     top: auto; left: auto; right: auto; bottom: auto;
-    font-size: clamp(57.6px, 15.75vw, 73.8px); line-height: 1.55;
+    font-size: clamp(64px, 17.5vw, 82px); line-height: 1.55;
     width: 100vw; margin-left: -20px; text-align: center; padding: 0;
     transform: translateX(100px) skewX(-8deg); opacity: 0;
     transition: transform 800ms cubic-bezier(.34,1.08,.64,1) 300ms,
@@ -3543,7 +3543,7 @@ footer {
   /* gw3 "& Web Studio" — bottom, left-aligned */
   .glyph-word.gw3 {
     top: auto; left: auto; right: auto; bottom: auto;
-    font-size: clamp(29.7px, 7.92vw, 41.4px); line-height: 1.65;
+    font-size: clamp(33px, 8.8vw, 46px); line-height: 1.65;
     margin-left: 0; text-align: left; padding: 0;
     transform: translateY(60px); opacity: 0;
     transition: transform 700ms cubic-bezier(.34,1.2,.64,1) 540ms,
@@ -3603,7 +3603,7 @@ footer {
     grid-template-columns: 1fr;
     gap: 28px;
   }
-  .spec-left h2 { font-size: clamp(27px, 8.1vw, 36px); }
+  .spec-left h2 { font-size: clamp(30px, 9vw, 40px); }
   .spec-right p { font-size: 16px; line-height: 1.6; }
 
   /* ── Showreel — litebox.ai style on mobile ── */
@@ -3624,12 +3624,12 @@ footer {
   /* ── Services ── */
   .services { padding: 60px 16px 72px; }
   .services-head { margin-bottom: 40px; }
-  .services-head h2 { font-size: clamp(25.2px, 7.65vw, 34.2px); }
+  .services-head h2 { font-size: clamp(28px, 8.5vw, 38px); }
   .services-head p { font-size: 15px; }
   .services-cards { grid-template-columns: 1fr 1fr; gap: 8px; padding: 0; }
   .svc-card { height: 280px; }
   .svc-num { font-size: 64px; top: 4px; }
-  .svc-name { font-size: 16.2px; bottom: 62px; left: 16px; }
+  .svc-name { font-size: 18px; bottom: 62px; left: 16px; }
   .svc-desc { font-size: 11px; left: 16px; right: 16px; bottom: 44px; }
   .svc-btn { font-size: 10px; padding: 8px 14px; left: 16px; bottom: 16px; }
   .svc-astro { width: 90px; height: 90px; top: 70px; }
@@ -3637,12 +3637,12 @@ footer {
   /* ── Featured Work ── */
   .featured { padding: 60px 20px 72px; }
   .featured-head { grid-template-columns: 1fr; gap: 14px; margin-bottom: 36px; }
-  .featured-head h2 { font-size: clamp(25.2px, 7.65vw, 34.2px); }
+  .featured-head h2 { font-size: clamp(28px, 8.5vw, 38px); }
   .featured-head p { font-size: 15px; padding-top: 0; }
   .work-row { flex-direction: column; gap: 16px; }
   .work-card { width: 100%; flex: none; }
   .work-thumb { width: 100%; height: auto; aspect-ratio: 1.12 / 1; }
-  .work-title { font-size: 16.2px; }
+  .work-title { font-size: 18px; }
   .work-cat { font-size: 13px; }
   .work-grid { gap: 55px; }
   .work-row + .work-row { margin-top: 0; }
@@ -3652,7 +3652,7 @@ footer {
   /* ── CTA Section ── */
   .cta-section { padding: 60px 20px 72px; }
   .cta-head { margin-bottom: 40px; }
-  .cta-head h2 { font-size: clamp(25.2px, 7.65vw, 34.2px); }
+  .cta-head h2 { font-size: clamp(28px, 8.5vw, 38px); }
   .cta-head p { font-size: 16px; }
   .cta-cards { flex-direction: column; align-items: stretch; gap: 0 !important; }
   .card-spacer { display: block !important; height: 30vh !important; }
@@ -3699,7 +3699,7 @@ footer {
     padding: 40px 0 0;
   }
   .footer-cta-inner { flex-direction: column; gap: 20px; }
-  .footer-cta-h { font-size: clamp(19.8px, 5.85vw, 27px); }
+  .footer-cta-h { font-size: clamp(22px, 6.5vw, 30px); }
   .footer-cta-right { width: 100%; }
   .footer-bottom {
     position: static;
@@ -3734,7 +3734,7 @@ footer {
     display: block;
   }
   .ab-eyebrow { margin-bottom: 20px; opacity: 1; transform: none; }
-  .ab-h1 { font-size: clamp(28.8px, 8.1vw, 45px); line-height: 1.44; margin-bottom: 22px; }
+  .ab-h1 { font-size: clamp(32px, 9vw, 50px); line-height: 1.44; margin-bottom: 22px; }
   .ab-glyph { transform: none !important; opacity: 1 !important; transition: none; }
   .ab-sub { font-size: 15px; margin: 0 0 28px; max-width: 100%; opacity: 1; transform: none; }
   .ab-cta-row { flex-direction: column; gap: 12px; opacity: 1; transform: none; }
@@ -3776,12 +3776,12 @@ footer {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .ab-reality-left h2 { font-size: clamp(37.8px, 10.8vw, 50.4px); position: static; }
+  .ab-reality-left h2 { font-size: clamp(42px, 12vw, 56px); position: static; }
   .ab-reality-right p { font-size: 15px; }
 
   /* ── Crew — mobile ── */
   .ab-crew { padding: 72px 20px 88px; }
-  .ab-crew-head h2 { font-size: clamp(27px, 8.1vw, 37.8px); }
+  .ab-crew-head h2 { font-size: clamp(30px, 9vw, 42px); }
   .ab-crew-head { margin-bottom: 52px; }
   .ab-pill-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 100%; }
   .ab-pill { font-size: 13px; padding: 8px 18px 8px 8px; gap: 9px; }
@@ -3792,7 +3792,7 @@ footer {
   /* ── Team — mobile (info shown statically; no hover on touch) ── */
   .ab-team { padding: 72px 20px 88px; }
   .ab-team-top { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
-  .ab-team-top-left h2 { font-size: clamp(27px, 8.1vw, 37.8px); }
+  .ab-team-top-left h2 { font-size: clamp(30px, 9vw, 42px); }
   .ab-team-top-right p { font-size: 15px; }
   .ab-team-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .ab-member { display: block; transform: none !important; }
@@ -3806,7 +3806,7 @@ footer {
 
   /* ── Partners — mobile ── */
   .ab-partners { padding: 72px 20px 88px; }
-  .ab-partners-head h2 { font-size: clamp(25.2px, 7.65vw, 36px); }
+  .ab-partners-head h2 { font-size: clamp(28px, 8.5vw, 40px); }
   .ab-seal-row { flex-direction: column; align-items: center; gap: 14px; margin-bottom: 56px; }
   .ab-seal { width: 100%; max-width: 320px; padding: 20px 28px; }
   .ab-seal-name { font-size: 22px; }
@@ -3815,7 +3815,7 @@ footer {
   .ab-tools-track span { font-size: 30px; }
 
   /* ── Network roles — mobile ── */
-  .anr-left h2 { font-size: clamp(28.8px, 7.2vw, 43.2px) !important; position: static !important; }
+  .anr-left h2 { font-size: clamp(32px, 8vw, 48px) !important; position: static !important; }
   .anr-word { font-size: clamp(24px, 6vw, 38px) !important; }
   .anr-body { font-size: 15px !important; margin-top: 40px !important; }
   .anr-hover-img { display: none !important; }
@@ -3824,7 +3824,7 @@ footer {
   .ab-swiper-prev { left: -16px; width: 42px; height: 42px; font-size: 16px; }
   .ab-swiper-next { right: -16px; width: 42px; height: 42px; font-size: 16px; }
   .ab-net-eyebrow { margin-bottom: 18px; }
-  .ab-net-h2 { font-size: clamp(27px, 7.65vw, 41.4px); line-height: 1.2; margin-bottom: 22px; }
+  .ab-net-h2 { font-size: clamp(30px, 8.5vw, 46px); line-height: 1.2; margin-bottom: 22px; }
   .ab-net-line { white-space: normal; overflow: visible; }
   .ab-net-line > span { transform: none; }
   .ab-net-sub { font-size: 15px; margin-bottom: 30px; opacity: 1; transform: none; }
@@ -3833,18 +3833,18 @@ footer {
   /* ── Service pages — mobile ── */
   .sv-hero { height: auto; min-height: 580px; padding: 110px 0 70px; }
   .sv-hero-inner { padding: 0 24px; }
-  .sv-hero h1 { font-size: clamp(32.4px, 9.9vw, 50.4px); line-height: 1.16; }
+  .sv-hero h1 { font-size: clamp(36px, 11vw, 56px); line-height: 1.16; }
   .sv-hero-sub { font-size: 16px; }
   .sv-swatch, .sv-play, .sv-ring, .sv-window, .sv-bars { display: none; }
   .sv-section { padding: 72px 22px; }
-  .sv-h2 { font-size: clamp(27px, 8.1vw, 37.8px); line-height: 1.25; }
+  .sv-h2 { font-size: clamp(30px, 9vw, 42px); line-height: 1.25; }
   .sv-lead { font-size: 16px; }
   .sv-about-grid { grid-template-columns: 1fr; gap: 40px; }
   .sv-about-grid--wide { grid-template-columns: 1fr; gap: 36px; }
   .sv-caps { grid-template-columns: 1fr; }
   .sv-step { grid-template-columns: 1fr; gap: 14px; padding: 32px 0; }
   .sv-step-num { font-size: 56px; }
-  .sv-step-title { font-size: 19.8px; }
+  .sv-step-title { font-size: 22px; }
   .sv-deliver-grid { grid-template-columns: 1fr; }
   .sv-quote { padding: 80px 24px; }
   .sv-quote-text { font-size: 24px; line-height: 1.5; }
@@ -3863,19 +3863,19 @@ footer {
   .sv-proc-node { left: -44px; top: 40px; width: 20px; height: 20px; }
   .sv-proc-step { padding: 36px 0; }
   .sv-proc-num { font-size: 72px; margin-bottom: -10px; }
-  .sv-proc-title { font-size: clamp(19.8px, 5.85vw, 27px); }
+  .sv-proc-title { font-size: clamp(22px, 6.5vw, 30px); }
   .sv-proc-desc { font-size: 15px; }
 
   /* ── Process redesign mobile ── */
   .sv-prow-head { margin-bottom: 60px; }
   .sv-prow { padding: 40px 0; }
-  .sv-prow-title { font-size: clamp(25.2px, 8.1vw, 39.6px); margin-bottom: 16px; }
+  .sv-prow-title { font-size: clamp(28px, 9vw, 44px); margin-bottom: 16px; }
   .sv-prow-desc { font-size: 15px; max-width: 100%; }
 
   /* ── Flower process — mobile: hide SVG, show plain step list ── */
   .sv-proc-flower-section { padding: 72px 22px 80px; }
   .sv-proc-flower-header { padding: 0 0 40px; }
-  .sv-proc-kicker { font-size: clamp(28.8px, 7.2vw, 39.6px); line-height: 1.1; margin-bottom: 24px; }
+  .sv-proc-kicker { font-size: clamp(32px, 8vw, 44px); line-height: 1.1; margin-bottom: 24px; }
   .sv-proc-sub-row { flex-direction: column; gap: 12px; padding-bottom: 32px; }
   .sv-proc-flower-title { line-height: 1.1; }
   .sv-proc-intro { text-align: left; max-width: 100%; }
@@ -3895,7 +3895,7 @@ footer {
   }
   .sv-proc-mobile-body { flex: 1; }
   .sv-proc-mobile-title {
-    font-family: 'Archivo', sans-serif; font-size: clamp(19.8px, 5.4vw, 28.8px); font-weight: 700;
+    font-family: 'Archivo', sans-serif; font-size: clamp(22px, 6vw, 32px); font-weight: 700;
     color: var(--black); margin-bottom: 10px;
   }
   .sv-proc-mobile-desc {
@@ -3904,7 +3904,7 @@ footer {
 
   /* ── What You Get — mobile (Litebox-style tab layout) ── */
   .sv-wyg-section { padding: 72px 22px 80px; }
-  .sv-wyg-heading { font-size: clamp(36px, 10.8vw, 57.6px) !important; margin-bottom: 28px; }
+  .sv-wyg-heading { font-size: clamp(40px, 12vw, 64px) !important; margin-bottom: 28px; }
   .sv-wyg-header-row { flex-direction: column; gap: 12px; padding-bottom: 32px; }
   .sv-wyg-intro { text-align: left; max-width: 100%; }
   .sv-wyg-layout { flex-direction: column; gap: 0; }
@@ -3920,7 +3920,7 @@ footer {
   .sv-wyg-item:first-child { border: none !important; }
   .sv-wyg-item:not(.wyg-active) { opacity: 1 !important; } /* override desktop dim */
   .sv-wyg-name {
-    font-size: clamp(16.2px, 4.95vw, 21.6px) !important;
+    font-size: clamp(18px, 5.5vw, 24px) !important;
     font-weight: 600 !important;
     color: rgba(0,0,0,0.25) !important; /* grey for inactive */
     transition: color 260ms ease !important;
@@ -3974,21 +3974,21 @@ footer {
 
   /* ── Work page — mobile ── */
   .wk-hero { padding: 130px 22px 36px; }
-  .wk-hero h1 { font-size: clamp(39.6px, 13.5vw, 64.8px); line-height: 1.36; }
+  .wk-hero h1 { font-size: clamp(44px, 15vw, 72px); line-height: 1.36; }
   .wk-hero-sub { font-size: 16px; }
   .wk-filters { padding: 12px 22px 32px; gap: 8px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
   .wk-filter { padding: 11px 20px; font-size: 12px; white-space: nowrap; }
   .wk-grid { grid-template-columns: 1fr; column-gap: 16px; row-gap: 55px; padding: 0 22px 90px; }
-  .wk-card-title { font-size: 21.6px; }
+  .wk-card-title { font-size: 24px; }
   .wk-card-overlay { padding: 24px; }
 
   /* ── Case study — mobile ── */
   .cs-hero { padding: 120px 22px 0; }
-  .cs-title { font-size: clamp(30.6px, 9.9vw, 50.4px); margin-bottom: 32px; }
+  .cs-title { font-size: clamp(34px, 11vw, 56px); margin-bottom: 32px; }
   .cs-meta { gap: 28px 40px; padding-bottom: 36px; }
   .cs-hero-img { width: 100%; height: 280px; }
   .cs-overview { grid-template-columns: 1fr; gap: 28px; padding: 64px 22px; }
-  .cs-overview h2 { font-size: 27px; }
+  .cs-overview h2 { font-size: 30px; }
   .cs-overview-body p { font-size: 16px; }
   .cs-gallery { padding: 0 22px 24px; gap: 16px; }
   .cs-shot.tall { height: 340px; }
@@ -3999,21 +3999,21 @@ footer {
   .cs-results-grid { grid-template-columns: 1fr; gap: 32px; }
   .cs-result-num { font-size: 56px; }
   .cs-next { padding: 72px 22px; }
-  .cs-next-link { font-size: clamp(28.8px, 9vw, 43.2px); gap: 16px; }
+  .cs-next-link { font-size: clamp(32px, 10vw, 48px); gap: 16px; }
 
   /* ── Contact — mobile ── */
   .ct-main { padding: 120px 22px 90px; }
   .ct-grid { grid-template-columns: 1fr; gap: 48px; }
-  .ct-title { font-size: clamp(36px, 11.7vw, 54px); }
+  .ct-title { font-size: clamp(40px, 13vw, 60px); }
   .ct-lead { font-size: 16px; }
   .ct-form { padding: 28px 22px; }
   .ct-field-row { grid-template-columns: 1fr; gap: 0; }
 
   /* ── Legal — mobile ── */
   .lg-hero { padding: 120px 22px 48px; }
-  .lg-hero h1 { font-size: clamp(30.6px, 9.9vw, 46.8px); }
+  .lg-hero h1 { font-size: clamp(34px, 11vw, 52px); }
   .lg-body { padding: 56px 22px 90px; }
-  .lg-prose h2 { font-size: 18px; }
+  .lg-prose h2 { font-size: 20px; }
   .lg-prose p { font-size: 15px; }
 
   /* ── Cookie banner — mobile ── */
@@ -4023,31 +4023,31 @@ footer {
 
   /* ── Careers — mobile ── */
   .cr-hero { padding: 110px 22px 64px; }
-  .cr-hero h1 { font-size: clamp(30.6px, 9.9vw, 46.8px); }
+  .cr-hero h1 { font-size: clamp(34px, 11vw, 52px); }
   .cr-roles { padding: 64px 22px 80px; }
   .cr-role { padding: 28px 0; }
-  .cr-role-title { font-size: 18px; }
+  .cr-role-title { font-size: 20px; }
   .cr-role-meta { flex-direction: column; gap: 6px; }
   .cr-intro-block { flex-direction: column; align-items: flex-start; gap: 32px; }
   .cr-intro-text p { font-size: 15px; }
 
   /* ── Blog — mobile ── */
   .bl-hero { padding: 120px 22px 64px; }
-  .bl-hero h1 { font-size: clamp(30.6px, 9.9vw, 46.8px); }
+  .bl-hero h1 { font-size: clamp(34px, 11vw, 52px); }
   .bl-body { padding: 64px 22px 80px; }
 
   /* ── Accessibility — mobile ── */
   .a11y-hero { padding: 128px 22px 64px; }
-  .a11y-h1 { font-size: clamp(41.4px, 13.5vw, 64.8px); line-height: 1.12; }
+  .a11y-h1 { font-size: clamp(46px, 15vw, 72px); line-height: 1.12; }
   .a11y-lead { font-size: 16px; line-height: 1.85; max-width: none; }
   .a11y-controls { padding: 70px 22px 80px; }
   .a11y-controls-head { margin-bottom: 36px; }
-  .a11y-h2 { font-size: clamp(28.8px, 8.1vw, 41.4px); line-height: 1.15; }
+  .a11y-h2 { font-size: clamp(32px, 9vw, 46px); line-height: 1.15; }
   .a11y-sub { font-size: 15px; }
   .a11y-grid { grid-template-columns: 1fr; gap: 16px; }
   .a11y-tile { padding: 28px 24px; }
   .a11y-tile-icon { width: 52px; height: 52px; margin-bottom: 18px; }
-  .a11y-tile-title { font-size: 17.1px; }
+  .a11y-tile-title { font-size: 19px; }
   .a11y-tile-desc { font-size: 14px; line-height: 1.8; margin-bottom: 20px; }
   .a11y-reset-row { margin-top: 28px; text-align: left; }
   .a11y-stmt-ref { text-align: left; }
@@ -4074,29 +4074,29 @@ footer {
   /* ── Hero ── */
   /* Tablet: hero-h1 uses wider padding, words still flow as a block */
   .hero-h1 { padding: 80px 48px 0; }
-  .glyph-word.gw1 { top: auto; left: auto; right: auto; bottom: auto; font-size: clamp(43.2px, 5.85vw, 59.4px); text-align: left; }
-  .glyph-word.gw2 { top: auto; left: auto; right: auto; bottom: auto; font-size: clamp(81px, 12.6vw, 108px); width: 100vw; margin-left: -48px; text-align: center; }
-  .glyph-word.gw3 { top: auto; left: auto; right: auto; bottom: auto; font-size: clamp(45px, 6.3vw, 63px); text-align: left; }
+  .glyph-word.gw1 { top: auto; left: auto; right: auto; bottom: auto; font-size: clamp(48px, 6.5vw, 66px); text-align: left; }
+  .glyph-word.gw2 { top: auto; left: auto; right: auto; bottom: auto; font-size: clamp(90px, 14vw, 120px); width: 100vw; margin-left: -48px; text-align: center; }
+  .glyph-word.gw3 { top: auto; left: auto; right: auto; bottom: auto; font-size: clamp(50px, 7vw, 70px); text-align: left; }
   .hero-cta-row   { left: 48px; right: 48px; }
   .astro-slot     { width: 300px; height: 300px; right: -8px; bottom: 13%; }
   .dust           { right: 18px; bottom: 13%; }
 
   /* ── Specialists ── */
   .specialists { padding: 80px 48px; }
-  .spec-left h2 { font-size: clamp(30.6px, 4.5vw, 41.4px); }
+  .spec-left h2 { font-size: clamp(34px, 5vw, 46px); }
 
   /* ── Showreel ── */
   .showreel-label { left: 32px; bottom: 28px; }
 
   /* ── Services ── */
   .services { padding: 72px 48px; }
-  .services-head h2 { font-size: clamp(28.8px, 4.5vw, 39.6px); }
+  .services-head h2 { font-size: clamp(32px, 5vw, 44px); }
   .services-cards { grid-template-columns: 1fr 1fr; gap: 12px; padding: 0; }
   .svc-card { height: 300px; }
 
   /* ── Featured Work ── */
   .featured { padding: 72px 48px; }
-  .featured-head h2 { font-size: clamp(28.8px, 4.5vw, 39.6px); }
+  .featured-head h2 { font-size: clamp(32px, 5vw, 44px); }
   .work-row { flex-direction: row; gap: 16px; }
   .work-card { flex: 1; flex-shrink: 0; }
   .work-thumb { width: 100%; height: auto; aspect-ratio: 1.12 / 1; }
@@ -4112,14 +4112,14 @@ footer {
   .cta-desc    { left: 28px; right: 28px; top: 264px; font-size: 15px; }
   .cta-btn     { left: 28px; bottom: 28px; }
   .cta-lottie  { width: 160px; height: 160px; right: 14px; top: 14px; }
-  .cta-head h2 { font-size: clamp(30.6px, 4.5vw, 41.4px); }
+  .cta-head h2 { font-size: clamp(34px, 5vw, 46px); }
 
   /* ── Footer ── */
   footer { padding: 64px 48px 40px; }
 
   /* ── About ── */
   .ab-hero-inner { padding: 116px 48px 0; }
-  .ab-h1 { font-size: clamp(41.4px, 7.65vw, 64.8px); }
+  .ab-h1 { font-size: clamp(46px, 8.5vw, 72px); }
   /* Tablet: restore flex row, show separators, shrink numbers slightly */
   .ab-numbers-inner {
     display: flex;
@@ -4135,36 +4135,36 @@ footer {
   .ab-stat-num { font-size: 88px; }
   .ab-stat-sup { font-size: 48px; }
   .ab-reality { padding: 80px 48px; }
-  .ab-reality-left h2 { font-size: clamp(41.4px, 6.75vw, 55.8px); }
+  .ab-reality-left h2 { font-size: clamp(46px, 7.5vw, 62px); }
   .ab-crew { padding: 80px 48px 96px; }
-  .ab-crew-head h2 { font-size: clamp(30.6px, 4.95vw, 45px); }
+  .ab-crew-head h2 { font-size: clamp(34px, 5.5vw, 50px); }
   .ab-team { padding: 80px 48px 96px; }
-  .ab-team-top-left h2 { font-size: clamp(30.6px, 4.95vw, 45px); }
+  .ab-team-top-left h2 { font-size: clamp(34px, 5.5vw, 50px); }
   .ab-partners { padding: 80px 48px 96px; }
-  .ab-partners-head h2 { font-size: clamp(28.8px, 4.5vw, 41.4px); }
+  .ab-partners-head h2 { font-size: clamp(32px, 5vw, 46px); }
   .ab-network  { min-height: 560px; }
   .ab-net-inner { padding: 0 48px; }
-  .ab-net-h2  { font-size: clamp(32.4px, 6.3vw, 50.4px); }
+  .ab-net-h2  { font-size: clamp(36px, 7vw, 56px); }
 
   /* ── Service pages ── */
   .sv-hero-inner { padding: 0 48px; }
-  .sv-hero h1    { font-size: clamp(37.8px, 6.75vw, 59.4px); }
+  .sv-hero h1    { font-size: clamp(42px, 7.5vw, 66px); }
   .sv-section    { padding: 80px 48px; }
-  .sv-h2         { font-size: clamp(30.6px, 4.95vw, 43.2px); }
+  .sv-h2         { font-size: clamp(34px, 5.5vw, 48px); }
 
   /* ── Process rows ── */
-  .sv-prow-title { font-size: clamp(32.4px, 5.85vw, 50.4px); }
-  .sv-proc-title { font-size: clamp(23.4px, 4.05vw, 34.2px); }
+  .sv-prow-title { font-size: clamp(36px, 6.5vw, 56px); }
+  .sv-proc-title { font-size: clamp(26px, 4.5vw, 38px); }
 
   /* ── Flower process — tablet ── */
   .sv-proc-flower-section { padding: 0; }
   .sv-proc-flower-header { padding: 80px 48px 48px; }
-  .sv-proc-mobile-title { font-size: clamp(25.2px, 4.05vw, 36px); }
+  .sv-proc-mobile-title { font-size: clamp(28px, 4.5vw, 40px); }
 
   /* ── WYG — tablet ── */
   .sv-wyg-section { padding: 80px 48px 100px; }
-  .sv-wyg-heading { font-size: clamp(46.8px, 7.2vw, 64.8px); }
-  .sv-wyg-name { font-size: clamp(28.8px, 4.5vw, 39.6px); }
+  .sv-wyg-heading { font-size: clamp(52px, 8vw, 72px); }
+  .sv-wyg-name { font-size: clamp(32px, 5vw, 44px); }
   .sv-wyg-panel { flex: 0 0 380px; }
 
   /* ── Client list ── */
@@ -4172,29 +4172,29 @@ footer {
 
   /* ── Work page ── */
   .wk-hero    { padding: 140px 48px 40px; }
-  .wk-hero h1 { font-size: clamp(46.8px, 7.65vw, 72px); }
+  .wk-hero h1 { font-size: clamp(52px, 8.5vw, 80px); }
   .wk-filters { padding: 12px 48px 36px; }
   .wk-grid    { grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: 72px; padding: 0 48px 100px; }
 
   /* ── Case study ── */
   .cs-hero    { padding: 140px 48px 0; }
-  .cs-title   { font-size: clamp(37.8px, 6.3vw, 57.6px); }
+  .cs-title   { font-size: clamp(42px, 7vw, 64px); }
   .cs-overview { padding: 80px 48px; }
   .cs-gallery  { padding: 0 48px 32px; }
   .cs-results  { padding: 80px 48px; }
   .cs-results-grid { grid-template-columns: repeat(3, 1fr); }
   .cs-result-num { font-size: 64px; }
   .cs-next     { padding: 80px 48px; }
-  .cs-next-link { font-size: clamp(34.2px, 5.4vw, 48.6px); }
+  .cs-next-link { font-size: clamp(38px, 6vw, 54px); }
 
   /* ── Contact ── */
   .ct-main    { padding: 130px 48px 100px; }
-  .ct-title   { font-size: clamp(41.4px, 6.3vw, 61.2px); }
+  .ct-title   { font-size: clamp(46px, 7vw, 68px); }
   .ct-grid    { grid-template-columns: 1fr; gap: 52px; }
 
   /* ── Legal ── */
   .lg-hero    { padding: 130px 48px 56px; }
-  .lg-hero h1 { font-size: clamp(36px, 5.4vw, 50.4px); }
+  .lg-hero h1 { font-size: clamp(40px, 6vw, 56px); }
   .lg-body    { padding: 64px 48px 100px; }
 
   /* ── Careers ── */
@@ -4207,10 +4207,10 @@ footer {
 
   /* ── Accessibility — tablet ── */
   .a11y-hero    { padding: 150px 48px 80px; }
-  .a11y-h1      { font-size: clamp(57.6px, 9vw, 79.2px); }
+  .a11y-h1      { font-size: clamp(64px, 10vw, 88px); }
   .a11y-lead    { font-size: 18px; }
   .a11y-controls { padding: 90px 48px 100px; }
-  .a11y-h2      { font-size: clamp(39.6px, 6.3vw, 50.4px); }
+  .a11y-h2      { font-size: clamp(44px, 7vw, 56px); }
   .a11y-grid    { grid-template-columns: 1fr 1fr; gap: 20px; }
   .a11y-commit  { padding: 90px 48px; gap: 48px; }
   .a11y-contact { padding: 90px 48px; }
@@ -4234,9 +4234,9 @@ footer {
   .dust       { width: 140px; }
 
   /* Tighten hero word positions for landscape */
-  .glyph-word.gw1 { top: 56px; font-size: clamp(23.4px, 4.95vw, 32.4px); }
-  .glyph-word.gw2 { top: 30%; font-size: clamp(48.6px, 11.7vw, 64.8px); }
-  .glyph-word.gw3 { bottom: 72px; font-size: clamp(19.8px, 4.05vw, 27px); }
+  .glyph-word.gw1 { top: 56px; font-size: clamp(26px, 5.5vw, 36px); }
+  .glyph-word.gw2 { top: 30%; font-size: clamp(54px, 13vw, 72px); }
+  .glyph-word.gw3 { bottom: 72px; font-size: clamp(22px, 4.5vw, 30px); }
   .hero-cta-row   { bottom: 18px; }
 
   /* Service hero: collapse min-height */
@@ -4244,7 +4244,7 @@ footer {
 
   /* About hero: already auto-height on mobile, just reduce padding */
   .ab-hero-inner { padding-top: 48px; }
-  .ab-h1 { font-size: clamp(28.8px, 7.2vw, 45px); }
+  .ab-h1 { font-size: clamp(32px, 8vw, 50px); }
 
   /* Nav drawer: scrollable in landscape */
   .nav-drawer { max-height: 80svh; overflow-y: auto; }
@@ -5021,7 +5021,7 @@ footer {
   .sv-wyg-item::before { display: none !important; } /* hide 01 02 03 counters */
   .sv-wyg-item::after  { display: none !important; } /* hide underline accent */
   .sv-wyg-name {
-    font-size: clamp(15.3px, 4.5vw, 19.8px) !important;
+    font-size: clamp(17px, 5vw, 22px) !important;
     font-weight: 600 !important;
     line-height: 1.3 !important;
     color: rgba(0,0,0,0.25) !important;
@@ -5169,7 +5169,7 @@ footer::before {
   .footer-wm-v { font-size: clamp(20px, 5vw, 28px); bottom: 12px; right: 4px; }
   .footer-cols { position: static; flex-wrap: wrap; gap: 36px; margin-bottom: 36px; }
   .footer-cta { position: static; padding: 32px 0 0; }
-  .footer-cta-h { font-size: clamp(25.2px, 7.2vw, 36px); }
+  .footer-cta-h { font-size: clamp(28px, 8vw, 40px); }
   .footer-cta-inner { flex-direction: column; gap: 24px; }
   .footer-cta-right { width: 100%; }
   .footer-bottom { position: static; padding: 24px 0 0; flex-direction: column; gap: 12px; align-items: flex-start; }
@@ -5559,8 +5559,8 @@ footer::before {
 @media (max-width: 768px) {
   .a11y-hero, .a11y-controls, .a11y-commit, .a11y-contact { width: 100%; padding-left: 22px; padding-right: 22px; }
   .a11y-hero { padding-top: 130px; padding-bottom: 70px; }
-  .a11y-h1 { font-size: clamp(37.8px, 10.8vw, 57.6px); }
-  .a11y-h2 { font-size: clamp(30.6px, 8.1vw, 43.2px); }
+  .a11y-h1 { font-size: clamp(42px, 12vw, 64px); }
+  .a11y-h2 { font-size: clamp(34px, 9vw, 48px); }
   .a11y-grid { grid-template-columns: 1fr; }
   .a11y-commit { grid-template-columns: 1fr; gap: 30px; padding: 70px 22px; }
   .a11y-contact-inner { grid-template-columns: 1fr; gap: 30px; }
@@ -7106,7 +7106,7 @@ footer { overflow: visible !important; }
     grid-template-columns: 1fr !important;
     gap: 40px !important;
   }
-  .ab-sup-left h2 { font-size: clamp(28.8px, 7.2vw, 43.2px) !important; line-height: 1.38 !important; } /* 1.2 × 1.15 */
+  .ab-sup-left h2 { font-size: clamp(32px, 8vw, 48px) !important; line-height: 1.38 !important; } /* 1.2 × 1.15 */
   .ab-sup-right p { font-size: 15px !important; }
   .ab-sup-fl-1 { width: 88px !important; height: 88px !important; top: -4% !important; right: 3% !important; }
   .ab-sup-fl-2, .ab-sup-fl-3 { display: none !important; }
@@ -7114,7 +7114,7 @@ footer { overflow: visible !important; }
   /* ── About — Culture / Grid Code section ── */
   .ab-culture { padding: 80px 22px 100px !important; }
   .ab-culture-head-wrap { margin-bottom: 56px !important; }
-  .ab-culture-head-wrap h2 { font-size: clamp(32.4px, 8.1vw, 48.6px) !important; line-height: 1.32 !important; } /* 1.15 × 1.15 */
+  .ab-culture-head-wrap h2 { font-size: clamp(36px, 9vw, 54px) !important; line-height: 1.32 !important; } /* 1.15 × 1.15 */
   .ab-culture-pillars { grid-template-columns: 1fr !important; gap: 44px !important; }
   .ab-pillar-title { font-size: 20px !important; line-height: 1.40 !important; }
   /* Tablet heading line-heights — +15% on all Boldonse h2s in About */
@@ -7152,7 +7152,7 @@ footer { overflow: visible !important; }
     padding: 36px 0 0 !important;
     top: auto !important;
   }
-  .footer-cta-h { font-size: clamp(21.6px, 6.3vw, 34.2px) !important; }
+  .footer-cta-h { font-size: clamp(24px, 7vw, 38px) !important; }
   .footer-cta-inner { flex-direction: column; gap: 20px; }
   .footer-cta-right { width: 100% !important; }
   .footer-bottom {
@@ -7166,7 +7166,7 @@ footer { overflow: visible !important; }
 
   /* ── Network Roles section — mobile ── */
   .ab-net-roles { padding: 80px 22px 64px !important; grid-template-columns: 1fr !important; gap: 40px !important; }
-  .anr-left h2 { font-size: clamp(28.8px, 7.2vw, 43.2px) !important; position: static !important; }
+  .anr-left h2 { font-size: clamp(32px, 8vw, 48px) !important; position: static !important; }
   .anr-word { font-size: clamp(26px, 6.5vw, 40px) !important; }
   .anr-body { font-size: 15px !important; margin-top: 36px !important; max-width: 100% !important; }
 
@@ -7291,8 +7291,8 @@ footer { overflow: visible !important; }
     padding-right: 22px !important;
   }
   .a11y-hero { padding-top: 130px !important; padding-bottom: 70px !important; }
-  .a11y-h1 { font-size: clamp(37.8px, 10.8vw, 57.6px) !important; }
-  .a11y-h2 { font-size: clamp(30.6px, 8.1vw, 43.2px) !important; }
+  .a11y-h1 { font-size: clamp(42px, 12vw, 64px) !important; }
+  .a11y-h2 { font-size: clamp(34px, 9vw, 48px) !important; }
   .a11y-grid { grid-template-columns: 1fr !important; }
   .a11y-commit {
     grid-template-columns: 1fr !important;
@@ -7317,9 +7317,9 @@ footer { overflow: visible !important; }
   .sv-proc-mobile-desc { color: rgba(255,255,255,0.6) !important; }
 
   /* ── WYG section mobile adjustments ── */
-  .sv-wyg-heading { font-size: clamp(36px, 10.8vw, 57.6px) !important; letter-spacing: -0.01em; }
+  .sv-wyg-heading { font-size: clamp(40px, 12vw, 64px) !important; letter-spacing: -0.01em; }
   .sv-wyg-item { padding-left: 36px; }
-  .sv-wyg-name { font-size: clamp(25.2px, 7.2vw, 36px) !important; }
+  .sv-wyg-name { font-size: clamp(28px, 8vw, 40px) !important; }
 
   /* ── Blog body + Careers roles + Flower header ──
      All have unconditional large side paddings that override the
@@ -7354,7 +7354,7 @@ footer { overflow: visible !important; }
   /* Scale heading down; keep each design-line intact (glyphs are inline-block,
      so 'normal' would break mid-word between letters) */
   .ab-hero.gv-hero-svc .ab-h1 {
-    font-size: clamp(19.8px, 6.48vw, 45px) !important;
+    font-size: clamp(22px, 7.2vw, 50px) !important;
     line-height: 1.3 !important;
   }
   .ab-hero.gv-hero-svc .ab-glyph-line { white-space: nowrap !important; }
@@ -7847,7 +7847,7 @@ footer { overflow: visible !important; }
     font-size: 15px !important;
     box-shadow: 0 0 0 6px rgba(239,72,35,0.06), 0 0 24px rgba(239,72,35,0.30) !important;
   }
-  .sv-proc-flower-title { font-size: clamp(19.8px, 5.94vw, 28.8px) !important; line-height: 1.1 !important; }
+  .sv-proc-flower-title { font-size: clamp(22px, 6.6vw, 32px) !important; line-height: 1.1 !important; }
   .sv-proc-flower-desc {
     font-size: 14px !important; line-height: 1.7 !important;
     max-width: 270px !important;
@@ -7884,7 +7884,7 @@ footer { overflow: visible !important; }
   .sv-wyg-item:not(.wyg-active) { opacity: 1 !important; }
   .sv-wyg-name {
     font-family: 'Archivo', sans-serif !important;
-    font-size: 16.2px !important;
+    font-size: 18px !important;
     font-weight: 600 !important;
     text-transform: none !important;
     line-height: 1.3 !important;
@@ -8016,7 +8016,7 @@ footer { overflow: visible !important; }
   .anr-left { position: relative !important; top: auto !important; z-index: 3 !important; margin-bottom: 28px !important; }
   .anr-right { z-index: 3 !important; }
   .anr-left h2 {
-    font-size: clamp(23.4px, 6.48vw, 36px) !important;
+    font-size: clamp(26px, 7.2vw, 40px) !important;
     line-height: 1.22 !important;
     position: static !important;
   }
@@ -8333,9 +8333,9 @@ footer { overflow: visible !important; }
 @media (max-width: 1023px) {
   .bl-grid { grid-template-columns: 1fr; padding: 48px 24px 80px; gap: 20px; }
   .bl-article { padding: 80px 24px 80px; }
-  .bl-art-h1 { font-size: 32.4px; }
+  .bl-art-h1 { font-size: 36px; }
   .bl-art-lead { font-size: 17px; }
   .bl-art-body { font-size: 16px; }
-  .bl-art-body h2 { font-size: 21.6px; }
+  .bl-art-body h2 { font-size: 24px; }
   .bl-art-cta { padding: 32px 24px; }
 }
