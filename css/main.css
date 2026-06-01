@@ -239,7 +239,9 @@ body {
   border-radius: 8px;
 }
 .nav-sub li a:hover { color: #fff; background: rgba(255,255,255,0.1); opacity: 1; }
-.nav-sub li.current > a { color: var(--orange); background: rgba(239,72,35,0.12); }
+/* Current item: white on orange-dark bg — orange text was nearly invisible */
+.nav-sub li.current > a { color: #fff; background: rgba(255,255,255,0.18); }
+.nav-sub li.current > a:hover { background: rgba(255,255,255,0.26); }
 
 .nav-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
 
@@ -7201,6 +7203,7 @@ footer { overflow: visible !important; }
     aspect-ratio: 1 / 1 !important;
     perspective: none !important;
     max-width: 480px !important;
+    margin-top: 64px !important; /* extra room so hint at top:-40px clears CTA buttons */
   }
 
   /* ── VIDEO — director's viewfinder (tablet size) ── */
