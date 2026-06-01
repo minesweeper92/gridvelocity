@@ -46,30 +46,6 @@
   --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  /* ── GV Design System — Typography ─────────────────────────────────
-     Source of truth: colors_and_type.css (Claude Design System project)
-     Fonts: Boldonse (display) + Archivo variable 100–900 (body/UI)    */
-  --font-display: 'Boldonse', sans-serif;
-  --font-body:    'Archivo', 'Helvetica Neue', sans-serif;
-  --font-narrow:  'Archivo Narrow', 'Archivo', sans-serif;
-  /* Type scale — rem-based (1rem = 16px) */
-  --text-xs:   0.75rem;    /* 12px  */
-  --text-sm:   0.875rem;   /* 14px  */
-  --text-base: 1rem;       /* 16px  */
-  --text-md:   1.125rem;   /* 18px  */
-  --text-lg:   1.25rem;    /* 20px  */
-  --text-xl:   1.5rem;     /* 24px  */
-  --text-2xl:  2rem;       /* 32px  */
-  --text-3xl:  2.5rem;     /* 40px  */
-  --text-4xl:  3.5rem;     /* 56px  */
-  --text-5xl:  5rem;       /* 80px  */
-  --text-6xl:  7rem;       /* 112px */
-  /* Semantic heading tokens */
-  --h1-font:   var(--font-display); --h1-weight: 400; --h1-lh: 1.05; --h1-ls: -0.02em;
-  --h2-font:   var(--font-body);    --h2-weight: 900; --h2-lh: 1.05; --h2-ls: -0.02em;
-  --h3-font:   var(--font-body);    --h3-weight: 700; --h3-lh: 1.1;  --h3-ls: -0.01em;
-  --h4-font:   var(--font-body);    --h4-weight: 700; --h4-lh: 1.2;
-  --h5-font:   var(--font-body);    --h5-weight: 600; --h5-lh: 1.3;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -81,16 +57,6 @@ body {
   -webkit-font-smoothing: antialiased;
   font-family: 'Archivo', sans-serif;
 }
-
-/* ── BASE HEADING RULES (GV Design System) ──────────────────────────
-   Sets font-family, weight, line-height, and letter-spacing from the
-   design system tokens. Component classes override font-size (and any
-   intentional exceptions). Keeps all headings consistent site-wide.  */
-h1 { font-family: var(--h1-font); font-weight: var(--h1-weight); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
-h2 { font-family: var(--h2-font); font-weight: var(--h2-weight); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
-h3 { font-family: var(--h3-font); font-weight: var(--h3-weight); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
-h4 { font-family: var(--h4-font); font-weight: var(--h4-weight); line-height: var(--h4-lh); }
-h5 { font-family: var(--h5-font); font-weight: var(--h5-weight); line-height: var(--h5-lh); }
 
 /* Scale wrapper — JS sets transform: scale(vw/1440) on this */
 #scaler { width: 1440px; transform-origin: top left; }
@@ -966,8 +932,8 @@ footer {
 }
 .footer-cta-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
 .footer-cta-h {
-  font-family: 'Boldonse', sans-serif; font-size: 28.8px; line-height: 1.15; color: #fff;
-  letter-spacing: -0.02em; text-transform: uppercase;
+  font-family: 'Boldonse', sans-serif; font-size: 28.8px; line-height: 1.55; color: #fff;
+  letter-spacing: -.01em; text-transform: uppercase;
 }
 .footer-cta-right { width: 520px; }
 .footer-cta-desc {
@@ -1545,8 +1511,8 @@ footer {
 .ab-h1 {
   font-family: 'Boldonse', sans-serif;
   font-size: 82.8px;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.36;
+  letter-spacing: -1.2px;
   color: #fff;
   text-transform: uppercase;
   margin: 0 0 36px;
@@ -2191,8 +2157,8 @@ footer {
 .ab-net-h2 {
   font-family: 'Boldonse', sans-serif;
   font-size: 64.8px;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.22;
+  letter-spacing: -1px;
   text-transform: uppercase;
   color: #fff;
   margin: 0 0 28px;
@@ -2386,7 +2352,7 @@ footer {
 }
 .sv-h2 {
   font-family: 'Archivo', sans-serif; font-weight: 900;
-  font-size: 54px; line-height: 1.05; letter-spacing: -0.02em;
+  font-size: 54px; line-height: 1.3; letter-spacing: -.02em;
   text-transform: uppercase; margin: 0 0 28px;
 }
 .sv-section.dark .sv-h2 { color: #fff; }
@@ -2452,8 +2418,8 @@ footer {
 }
 .sv-step:hover .sv-step-num { color: var(--orange); }
 .sv-step-title {
-  font-family: 'Boldonse', sans-serif; font-size: 25.2px; line-height: 1.15;
-  text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 16px;
+  font-family: 'Boldonse', sans-serif; font-size: 25.2px; line-height: 1.25;
+  text-transform: uppercase; letter-spacing: -.01em; margin: 0 0 16px;
 }
 .sv-section.dark .sv-step-title { color: #fff; }
 .sv-section.light .sv-step-title, .sv-section.off .sv-step-title { color: var(--black); }
@@ -2549,9 +2515,9 @@ footer {
 .sv-proc-title {
   font-family: 'Boldonse', sans-serif;
   font-size: 39.6px;
-  line-height: 1.1;
+  line-height: 1.15;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: -.01em;
   color: #fff;
   display: block;
   margin: 0 0 18px;
@@ -2768,8 +2734,8 @@ footer {
 .sv-proc-kicker {
   font-family: 'Boldonse', sans-serif;
   font-size: 72px;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.155;
+  letter-spacing: -0.03em;
   color: var(--black);
   text-transform: uppercase;
   margin-bottom: 40px;
@@ -2909,10 +2875,10 @@ footer {
 .sv-wyg-heading {
   font-family: 'Archivo', sans-serif;
   font-size: 72px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--black);
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: -0.03em;
+  line-height: 1;
   margin-bottom: 40px;
 }
 .sv-wyg-header-row {
@@ -3220,8 +3186,8 @@ footer {
   margin-bottom: 22px;
 }
 .wk-hero h1 {
-  font-family: 'Boldonse', sans-serif; font-size: 104.4px; line-height: 1.05;
-  letter-spacing: -0.02em; text-transform: uppercase; color: #fff; margin: 0 0 26px;
+  font-family: 'Boldonse', sans-serif; font-size: 104.4px; line-height: 1.36;
+  letter-spacing: -2px; text-transform: uppercase; color: #fff; margin: 0 0 26px;
 }
 .wk-hero h1 .ab-orange { color: var(--orange); }
 .wk-hero-sub {
@@ -3321,8 +3287,8 @@ footer {
   letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px;
 }
 .cs-title {
-  font-family: 'Boldonse', sans-serif; font-size: 82.8px; line-height: 1.05;
-  letter-spacing: -0.02em; text-transform: uppercase; color: #fff; margin: 0 0 44px; max-width: 16ch;
+  font-family: 'Boldonse', sans-serif; font-size: 82.8px; line-height: 1.36;
+  letter-spacing: -1.5px; text-transform: uppercase; color: #fff; margin: 0 0 44px; max-width: 16ch;
 }
 .cs-meta { display: flex; flex-wrap: wrap; gap: 60px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.12); }
 .cs-meta-item { display: flex; flex-direction: column; gap: 8px; }
@@ -3357,7 +3323,7 @@ footer {
 /* Next project */
 .cs-next { width: 1440px; background: #0D0D0D; padding: 120px 88px; text-align: center; position: relative; overflow: hidden; }
 .cs-next-label { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 22px; }
-.cs-next-link { font-family: 'Boldonse', sans-serif; font-size: 68.4px; line-height: 1.05; text-transform: uppercase; color: #fff; text-decoration: none; letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 28px; transition: color 240ms; }
+.cs-next-link { font-family: 'Boldonse', sans-serif; font-size: 68.4px; line-height: 1.1; text-transform: uppercase; color: #fff; text-decoration: none; letter-spacing: -1px; display: inline-flex; align-items: center; gap: 28px; transition: color 240ms; }
 .cs-next-link:hover { color: var(--orange); }
 .cs-next-link .cs-arrow { transition: transform 280ms; }
 .cs-next-link:hover .cs-arrow { transform: translateX(16px); }
@@ -3371,7 +3337,7 @@ footer {
   background: radial-gradient(circle, rgba(239,72,35,0.30) 0%, rgba(239,72,35,0.08) 44%, transparent 68%); filter: blur(20px); pointer-events: none; }
 .ct-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; }
 .ct-eyebrow { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--orange); margin-bottom: 24px; }
-.ct-title { font-family: 'Boldonse', sans-serif; font-size: 72px; line-height: 1.05; letter-spacing: -0.02em; text-transform: uppercase; color: #fff; margin: 0 0 30px; }
+.ct-title { font-family: 'Boldonse', sans-serif; font-size: 72px; line-height: 1.36; letter-spacing: -1.4px; text-transform: uppercase; color: #fff; margin: 0 0 30px; }
 .ct-title .ab-orange { color: var(--orange); }
 .ct-lead { font-family: 'Archivo', sans-serif; font-size: 19px; line-height: 1.75; color: rgba(255,255,255,0.66); max-width: 440px; margin: 0 0 48px; }
 .ct-detail { margin-bottom: 26px; }
@@ -3439,7 +3405,7 @@ footer {
    LEGAL PAGES  (.lg-*)
 ═══════════════════════════════════════════════════════════════════════ */
 .lg-hero { width: 1440px; background: #0D0D0D; padding: 180px 88px 76px; }
-.lg-hero h1 { font-family: 'Boldonse', sans-serif; font-size: 61.2px; line-height: 1.05; letter-spacing: -0.02em; text-transform: uppercase; color: #fff; margin: 0 0 18px; }
+.lg-hero h1 { font-family: 'Boldonse', sans-serif; font-size: 61.2px; line-height: 1.36; letter-spacing: -1px; text-transform: uppercase; color: #fff; margin: 0 0 18px; }
 .lg-hero p { font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin: 0; }
 .lg-body { width: 1440px; background: #fff; padding: 90px 88px 140px; }
 .lg-prose { max-width: 760px; }
@@ -8265,8 +8231,7 @@ footer { overflow: visible !important; }
 .bl-art-h1 {
   font-family: 'Boldonse', sans-serif;
   font-size: clamp(32.4px, 4.5vw, 54px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
   color: #fff;
   margin: 0 0 28px;
 }
