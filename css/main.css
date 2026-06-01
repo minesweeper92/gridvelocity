@@ -5880,9 +5880,17 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 }
 
 /* ─── BLOG — cream editorial spread with dark type ─────────────────── */
-/* Blog page — light cream hero, nav links orange at rest */
+/* Blog page — light cream hero, nav links + logo orange at rest */
 .page-blog .gv-nav:not(.scrolled) .nav-links a        { color: var(--orange); }
 .page-blog .gv-nav:not(.scrolled) .nav-links a:hover  { color: var(--orange-dark); }
+.page-blog .gv-nav:not(.scrolled) .nav-logo img {
+  /* Convert white logo → GV Orange for cream background */
+  filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(900%) hue-rotate(335deg);
+}
+
+/* Pages with orange hero (homepage, branding) — button must be black to contrast */
+.page-hero-orange .gv-nav:not(.scrolled) .nav-cta        { background: var(--black); color: #fff; }
+.page-hero-orange .gv-nav:not(.scrolled) .nav-cta:hover  { background: #fff; color: var(--black); }
 
 .ab-hero[data-svc="blog"] {
   background: #F2EEE3;
