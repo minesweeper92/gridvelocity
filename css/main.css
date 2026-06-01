@@ -247,15 +247,18 @@ body {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;
-  color: #fff; background: var(--black);
+  color: #fff; background: var(--orange);
   border: none; cursor: pointer;
   border-radius: 0;
   padding: 14px 26px;
   text-decoration: none;
   transition: background 200ms, color 200ms;
 }
-.nav-cta:hover  { background: #fff; color: var(--black); }
+.nav-cta:hover  { background: var(--orange-dark); color: #fff; }
 .nav-cta:active { transform: scale(0.97); }
+/* On scrolled nav (orange-dark bg) the button flips to black for contrast */
+.gv-nav.scrolled .nav-cta              { background: var(--black); color: #fff; }
+.gv-nav.scrolled .nav-cta:hover        { background: #fff; color: var(--black); }
 
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -5877,6 +5880,10 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 }
 
 /* ─── BLOG — cream editorial spread with dark type ─────────────────── */
+/* Blog page — light cream hero, nav links orange at rest */
+.page-blog .gv-nav:not(.scrolled) .nav-links a        { color: var(--orange); }
+.page-blog .gv-nav:not(.scrolled) .nav-links a:hover  { color: var(--orange-dark); }
+
 .ab-hero[data-svc="blog"] {
   background: #F2EEE3;
 }
@@ -6544,6 +6551,8 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   font-size: 28px;
   color: #fff;
   display: flex; align-items: baseline; gap: 2px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .gv-kpi-val em {
   font-style: normal;
@@ -6665,6 +6674,10 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 
 /* Branding tile game — enable pointer events + interactivity */
 .ab-hero[data-svc="branding"] .gv-color-wall { pointer-events: all; }
+/* Hero-inner overlaps the first column of the tile wall; passthrough clicks */
+.ab-hero[data-svc="branding"] .ab-hero-inner         { pointer-events: none; }
+.ab-hero[data-svc="branding"] .ab-hero-inner a,
+.ab-hero[data-svc="branding"] .ab-hero-inner button  { pointer-events: all; }
 .ab-hero[data-svc="branding"] .gv-cw-tile {
   cursor: pointer;
   transition: box-shadow 0.2s ease-out;
@@ -6676,7 +6689,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-cw-tile.brd-match {
   box-shadow: 0 0 0 3px #fff, 0 0 24px rgba(255,255,255,0.55);
 }
-/* Hint label — sits below the grid */
+/* Hint label — desktop: sits below the grid; mobile: sits above */
 .brd-hint {
   position: absolute;
   bottom: -36px;
@@ -6694,6 +6707,9 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   transition: opacity 0.8s ease;
 }
 .brd-hint.brd-hint-hide { opacity: 0; }
+@media (max-width: 1023px) {
+  .brd-hint { bottom: auto !important; top: -40px !important; }
+}
 
 @media (max-width: 768px) {
   .gv-cinebar { display: none; }

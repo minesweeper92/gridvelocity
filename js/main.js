@@ -1310,10 +1310,10 @@ setTimeout(scaleToFit, 150);
       // Subtle idle pulse — killed on first interaction
       const idleTween = gsap.to(tiles, { scale: 0.96, duration: 2, repeat: -1, yoyo: true, stagger: { each: 0.15, from: 'random' }, ease: 'sine.inOut', delay: 1.2 });
 
-      // Hint — auto-hide after 4s or on first tap
+      // Hint — on mobile auto-hides after 4s; on desktop stays visible
       const hint = wall.querySelector('.brd-hint');
       const hideHint = () => hint && hint.classList.add('brd-hint-hide');
-      if (hint) setTimeout(hideHint, 4000);
+      if (hint && window.innerWidth < 1024) setTimeout(hideHint, 4000);
 
       // --- Swap game ---
       let selected = null;
@@ -1324,7 +1324,7 @@ setTimeout(scaleToFit, 150);
         const ai = getIdx(a), bi = getIdx(b);
         const dr = Math.abs(Math.floor(ai / 3) - Math.floor(bi / 3));
         const dc = Math.abs((ai % 3) - (bi % 3));
-        return (dr + dc) === 1;
+        return dr <= 1 && dc <= 1 && (dr + dc) !== 0; // orthogonal + diagonal
       }
 
       function getTileData(tile) {
@@ -1391,12 +1391,12 @@ setTimeout(scaleToFit, 150);
 
       tiles.forEach(tile => {
         tile.addEventListener('click', () => {
-          // First interaction — stop idle animations, hide hint
+          // First interaction — stop idle animations; hide hint on mobile only
           if (!flipPaused) {
             flipPaused = true;
             idleTween.kill();
             gsap.to(tiles, { scale: 1, duration: 0.3, ease: 'power2.out', overwrite: true });
-            hideHint();
+            if (window.innerWidth < 1024) hideHint();
           }
 
           if (!selected) {
