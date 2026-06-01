@@ -733,25 +733,65 @@ setTimeout(scaleToFit, 150);
     const imgs  = Array.from(section.querySelectorAll('.sv-wyg-panel-img'));
     if (!items.length) return;
 
-    function activate(idx) {
+    /* ── Mobile: create description container + progress bar ── */
+    const layout = section.querySelector('.sv-wyg-layout');
+    const mobileDesc = document.createElement('div');
+    mobileDesc.className = 'sv-wyg-mobile-desc';
+    layout.appendChild(mobileDesc);
+
+    /* Progress bar — desktop: vertical alongside panel; mobile: horizontal between panel & desc */
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'wyg-progress-wrap';
+    const progressBar = document.createElement('div');
+    progressBar.className = 'wyg-progress-bar';
+    progressWrap.appendChild(progressBar);
+    const panel = section.querySelector('.sv-wyg-panel');
+    if (panel) {
+      panel.style.position = 'relative';
+      panel.appendChild(progressWrap);
+    }
+
+    const isMobile = () => window.innerWidth < 1024;
+    let activeIdx = 0;
+    let autoTimer = null;
+    const AUTO_DURATION = 4000; /* ms per tab */
+
+    function activate(idx, userTapped) {
+      activeIdx = idx;
       items.forEach((it, i) => it.classList.toggle('wyg-active', i === idx));
       imgs.forEach((img, i)  => img.classList.toggle('wyg-img-active', i === idx));
+      /* Mobile description */
+      const descInner = items[idx]?.querySelector('.sv-wyg-desc-inner');
+      if (descInner) mobileDesc.textContent = descInner.textContent;
+      /* Restart progress bar animation — vertical on desktop, horizontal on mobile */
+      progressBar.style.animation = 'none';
+      progressBar.offsetHeight; /* force reflow */
+      var anim = isMobile() ? 'wygFillH' : 'wygFillV';
+      progressBar.style.animation = anim + ' ' + AUTO_DURATION + 'ms linear forwards';
+      /* Restart auto-advance timer */
+      clearTimeout(autoTimer);
+      autoTimer = setTimeout(advance, AUTO_DURATION);
+    }
+
+    function advance() {
+      const next = (activeIdx + 1) % items.length;
+      activate(next, false);
     }
 
     activate(0); /* first item active by default */
 
     items.forEach((item, i) => {
-      item.addEventListener('mouseenter', () => activate(i));
-      item.addEventListener('click',      () => activate(i));
-      item.addEventListener('focus',      () => activate(i));
+      item.addEventListener('mouseenter', () => { if (!isMobile()) activate(i, true); });
+      item.addEventListener('click',      () => activate(i, true));
+      item.addEventListener('focus',      () => activate(i, true));
     });
 
-    /* Reset to first on list mouse-leave */
+    /* Reset to first on list mouse-leave (desktop only) */
     const list = section.querySelector('.sv-wyg-list');
     if (list) {
-      list.addEventListener('mouseleave', () => activate(0));
+      list.addEventListener('mouseleave', () => { if (!isMobile()) activate(0, false); });
       list.addEventListener('focusout', e => {
-        if (!list.contains(e.relatedTarget)) activate(0);
+        if (!isMobile() && !list.contains(e.relatedTarget)) activate(0, false);
       });
     }
   });
@@ -895,136 +935,317 @@ setTimeout(scaleToFit, 150);
     });
   }
 
-  /* 3) Network Roles — litebox-style stacked type scroll entrance */
-  const netRoles = document.querySelector('.ab-net-roles');
-  if (netRoles) {
-    const anrLines = netRoles.querySelectorAll('.anr-line');
-    const anrLeft  = netRoles.querySelector('.anr-left');
-    const anrBody  = netRoles.querySelector('.anr-body');
+  /* 3) Network Roles — three-phase animation
+     Phase 1 (section in view): word pulses white → astronaut bursts OUT from word.
+     Phase 2 (section exiting): astronauts fly staggered toward SUPERPOWER heading.
+     Phase 3 (arrival):         SUPERPOWER word pulses and scales as it "absorbs" them. */
+  var netRoles   = document.querySelector('.ab-net-roles');
+  var supSection = document.querySelector('.ab-superpower');
 
+  if (netRoles) {
+    var anrLines  = netRoles.querySelectorAll('.anr-line');
+    var anrLeft   = netRoles.querySelector('.anr-left');
+    var wordEls   = Array.from(netRoles.querySelectorAll('.anr-word[data-img]'));
+    var supWordEl = supSection ? supSection.querySelector('.ab-sup-word') : null;
+
+    /* ── Floater setup ──────────────────────────────────────────────────
+       Settled % positions: row-1 words → upper zone, row-2 → lower zone.
+       data-img already contains the FULL src path — use directly.        */
+    var floWrap = document.createElement('div');
+    floWrap.className = 'anr-floaters';
+    floWrap.setAttribute('aria-hidden', 'true');
+
+    /* isMobile declared here so it can drive SZ, PCT and travel TRIG */
+    var isMobile = window.innerWidth < 768;
+    var SZ  = isMobile ? 72 : 116;
+
+    /* Mobile: four-corner layout keeps astronauts clear of the centred
+       heading and word-cloud.  Desktop: scattered across both zones.   */
+    var PCT = isMobile ? [
+      { left:  2, top:  2, rot: -12 }, /* Directors  — top-left  corner */
+      { left: 72, top:  2, rot:  10 }, /* Designers  — top-right corner */
+      { left:  2, top: 76, rot:  15 }, /* Engineers  — bot-left  corner */
+      { left: 72, top: 76, rot:  -7 }, /* Animators  — bot-right corner */
+      { left: 37, top:  2, rot: -13 }, /* Devs       — hidden via CSS   */
+      { left: 37, top: 76, rot:   8 }, /* Producers  — hidden via CSS   */
+    ] : [
+      { left:  6, top: 13, rot: -12 }, /* Directors  — upper-left   */
+      { left: 42, top:  4, rot:  10 }, /* Designers  — upper-centre */
+      { left: 76, top: 11, rot:  -7 }, /* Engineers  — upper-right  */
+      { left:  4, top: 65, rot:  15 }, /* Animators  — lower-left   */
+      { left: 42, top: 77, rot: -13 }, /* Devs       — lower-centre */
+      { left: 76, top: 63, rot:   8 }, /* Producers  — lower-right  */
+    ];
+
+    var floaters = [];
+    wordEls.forEach(function(word, i) {
+      if (i >= PCT.length) return;
+      var p = PCT[i];
+      var el = document.createElement('img');
+      el.className = 'anr-floater';
+      el.src = word.dataset.img;
+      el.alt = ''; el.loading = 'lazy';
+      el.style.left   = p.left + '%';
+      el.style.top    = p.top  + '%';
+      el.style.width  = SZ + 'px';
+      el.style.height = SZ + 'px';
+      floWrap.appendChild(el);
+      floaters.push({ el: el, word: word, cfg: p, phase: 'hidden' });
+    });
+    netRoles.appendChild(floWrap);
+
+    /* ── Phase 1: pop-in (fires via IntersectionObserver) ──────────────
+       For each word: word flashes white and briefly scales; its astronaut
+       bursts out from the word's centre and flies to its settled position.
+       GSAP has set anrLines to y:44 before this fires; we compensate by
+       subtracting 44 CSS px from measured word-y so the burst starts at
+       the word's natural (un-translated) centre.                          */
     function anrAnimate() {
-      /* Left heading slides in from left */
-      if (anrLeft) gsap.from(anrLeft, { opacity: 0, x: -28, duration: 0.65, ease: 'power3.out' });
-      /* Lines stagger up */
-      gsap.to(anrLines, { opacity: 1, y: 0, duration: 0.85, stagger: 0.13, ease: 'power3.out', delay: 0.1 });
-      /* Body copy follows */
-      if (anrBody) gsap.to(anrBody, { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', delay: 0.68 });
+      if (anrLeft) gsap.from(anrLeft, { opacity: 0, y: 28, duration: 0.65, ease: 'power3.out' });
+
+      if (isMobile) {
+        /* display:contents lines have no box — animate word elements directly */
+        var allAnrWords = netRoles.querySelectorAll('.anr-word');
+        gsap.to(allAnrWords, { opacity: 1, duration: 0.5, stagger: 0.07, ease: 'power3.out', delay: 0.1 });
+      } else {
+        gsap.to(anrLines, { opacity: 1, y: 0, duration: 0.85, stagger: 0.13, ease: 'power3.out', delay: 0.1 });
+      }
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        floaters.forEach(function(it) {
+          gsap.set(it.el, { opacity: 1, scale: 1, rotate: it.cfg.rot });
+          it.phase = 'settled';
+        });
+        return;
+      }
+
+      var sRect = netRoles.getBoundingClientRect();
+      var scl   = window.innerWidth >= 1024 ? window.innerWidth / 1440 : 1;
+      var sw    = sRect.width  / scl;
+      var sh    = sRect.height / scl;
+
+      floaters.forEach(function(it, i) {
+        var base = 0.28 + i * 0.14;
+
+        /* Word pulses white and gives a little "launch" bounce */
+        gsap.to(it.word, { color: '#ffffff', duration: 0.28, delay: base, ease: 'power2.out' });
+        gsap.to(it.word, { scale: 1.08, duration: 0.15, delay: base + 0.08,
+                           ease: 'power2.out', yoyo: true, repeat: 1 });
+
+        /* Word centre in CSS space.
+           On desktop, GSAP y:44 on anrLines shifts word positions — subtract 44 to compensate.
+           On mobile, .anr-line has display:contents so no GSAP offset applies. */
+        var wRect = it.word.getBoundingClientRect();
+        var wx = (wRect.left - sRect.left + wRect.width  * 0.5) / scl;
+        var wy = (wRect.top  - sRect.top  + wRect.height * 0.5) / scl - (isMobile ? 0 : 44);
+
+        /* Floater settled centre in CSS space */
+        var fx = it.cfg.left / 100 * sw + SZ / 2;
+        var fy = it.cfg.top  / 100 * sh + SZ / 2;
+
+        /* Burst FROM word centre TO settled position */
+        gsap.fromTo(it.el,
+          { opacity: 0, scale: 0.12, x: wx - fx, y: wy - fy, rotate: it.cfg.rot * 2 },
+          { opacity: 1, scale: 1,    x: 0, y: 0, rotate: it.cfg.rot,
+            duration: 0.72, delay: base + 0.1, ease: 'back.out(1.8)',
+            onStart:    function() { it.phase = 'animating'; },
+            onComplete: function() { it.phase = 'settled';   }
+          }
+        );
+      });
     }
 
-    /* Set initial hidden state */
-    gsap.set(anrLines, { opacity: 0, y: 44 });
-    if (anrBody) gsap.set(anrBody, { opacity: 0, y: 24 });
+    /* On mobile, .anr-line has display:contents — GSAP transforms don't
+       apply on the wrapper; animate .anr-word elements directly instead. */
+    if (isMobile) {
+      gsap.set(wordEls, { opacity: 0 });
+    } else {
+      gsap.set(anrLines, { opacity: 0, y: 44 });
+    }
 
-    /* IntersectionObserver fires reliably on load (already in view) AND on scroll.
-       Unlike ScrollTrigger, it correctly handles anchor-navigation page loads. */
     if ('IntersectionObserver' in window) {
       var anrObs = new IntersectionObserver(function(entries, obs) {
-        if (entries[0].isIntersecting) {
-          obs.disconnect();
-          anrAnimate();
-        }
+        if (entries[0].isIntersecting) { obs.disconnect(); anrAnimate(); }
       }, { threshold: 0.05 });
       anrObs.observe(netRoles);
     } else {
-      /* Fallback: show immediately */
       gsap.set(anrLines, { opacity: 1, y: 0 });
-      if (anrBody) gsap.set(anrBody, { opacity: 1, y: 0 });
+      floaters.forEach(function(it) {
+        gsap.set(it.el, { opacity: 1, scale: 1, rotate: it.cfg.rot });
+        it.phase = 'settled';
+      });
     }
 
-    /* Hover: floating astronaut image */
-    const hoverImg = document.createElement('img');
-    hoverImg.className = 'anr-hover-img';
-    hoverImg.alt = '';
-    hoverImg.setAttribute('aria-hidden', 'true');
-    /* Append to body — NOT to netRoles — so it escapes #scaler's CSS transform
-       (a transformed ancestor would make position:fixed act like position:absolute) */
-    document.body.appendChild(hoverImg);
+    /* ── Phase 2 & 3: scroll-driven travel → SUPERPOWER absorption ──────
+       Repeatable: scrolling back up past the trigger resets everything so the
+       full sequence plays again on the next scroll-down pass.
 
-    netRoles.querySelectorAll('.anr-word').forEach(function(word) {
-      var imgSrc = word.dataset.img;
-      /* Growthsmiths has no data-img — skip hover entirely */
-      if (!imgSrc) return;
+       p = 0  →  crew section bottom first crosses 65 % vh
+       p = 1  →  crew section bottom reaches 0 (SUPERPOWER fills viewport)
 
-      word.addEventListener('mouseenter', function() {
-        var rect = word.getBoundingClientRect();
-        hoverImg.src = imgSrc;
-        /* position: fixed — coords are viewport-relative */
-        hoverImg.style.left = (rect.left + rect.width * 0.5) + 'px';
-        hoverImg.style.top  = rect.top + 'px';
-        /* Restart transition cleanly when switching words quickly */
-        hoverImg.classList.remove('anr-img-show');
-        void hoverImg.offsetWidth;
-        hoverImg.classList.add('anr-img-show');
-      });
+       Each floater has a staggered departure offset (0–60 % of overall p)
+       so they leave one by one but all converge at p = 1.  The rAF loop
+       re-evaluates the live SUPERPOWER position every frame, keeping the
+       flight locked to the actual text no matter how fast the user scrolls.
 
-      word.addEventListener('mouseleave', function() {
-        hoverImg.classList.remove('anr-img-show');
-      });
-    });
-
-    /* ── Floating astronaut images: pop in on scroll, fall away on exit ──
-       Scattered around the centred heading/word-cloud. As the section scrolls
-       into view they pop in (scale + fade); as it scrolls toward the next
-       section they fall (translate down + rotate) and fade out — Litebox-style.
-       The floaters sit BEHIND the text (z-index 1) so copy stays readable. */
+       If the user scrolls back up (p < −0.15) the loop tears down the clones,
+       restores the originals, and resets all flags so the next scroll-down
+       plays the sequence fresh.                                              */
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      var FLO = [
-        { img: '1.png', top: 12, left: 6,  sz: 134, rot: -10, fall:  48 },
-        { img: '2.png', top: 16, left: 80, sz: 150, rot:  12, fall: -40 },
-        { img: '3.png', top: 60, left: 4,  sz: 120, rot:   9, fall:  42 },
-        { img: '4.png', top: 66, left: 82, sz: 142, rot:  -8, fall: -46 },
-        { img: '6.png', top: 82, left: 15, sz: 112, rot:  13, fall:  38 },
-        { img: '5.png', top: 80, left: 73, sz: 128, rot: -12, fall: -42 }
-      ];
-      var floWrap = document.createElement('div');
-      floWrap.className = 'anr-floaters';
-      floWrap.setAttribute('aria-hidden', 'true');
-      var floaters = FLO.map(function(f) {
-        var el = document.createElement('img');
-        el.className = 'anr-floater';
-        el.src = 'assets/network-section-images/' + f.img;
-        el.alt = '';
-        el.loading = 'lazy';
-        el.style.top  = f.top + '%';
-        el.style.left = f.left + '%';
-        el.style.setProperty('--sz', f.sz + 'px');
-        floWrap.appendChild(el);
-        return { el: el, cfg: f };
-      });
-      netRoles.appendChild(floWrap);
+      var travelStarted = false;
+      var travelClones  = [];
+      var absorbFired   = false;
+      var travelRafId   = null;
 
-      var floN = floaters.length;
-      var clamp01 = function(v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
-      var backOut = function(t) { var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+      /* Travel trigger threshold.
+         Mobile: 1.0 × vh → starts when section bottom == viewport bottom,
+         giving a full viewport's worth of scroll range so even fast fingers
+         see the astronauts fly.  Desktop: 0.65 × vh (original behaviour). */
+      var TRIG = isMobile ? 1.0 : 0.65;
 
-      function floUpdate() {
-        var rect = netRoles.getBoundingClientRect();
-        var vh = window.innerHeight;
-        /* monotonic with scroll: 0 = section just below viewport, 1 = just above */
-        var p = (vh - rect.top) / (vh + rect.height);
-        for (var i = 0; i < floN; i++) {
-          var f = floaters[i].cfg, el = floaters[i].el;
-          var st = i * 0.035;
-          var enter = backOut(clamp01((p - (0.08 + st)) / 0.32));      /* pop in  */
-          var ex    = clamp01((p - (0.58 + st * 0.6)) / 0.34);          /* exit    */
-          ex = ex * ex;                                                  /* gravity */
-          var sc = (0.4 + 0.6 * enter) * (1 - 0.25 * ex);
-          var ty = (1 - enter) * 40 + ex * (vh * 0.85);
-          var rot = f.rot * enter + ex * f.fall;
-          el.style.opacity = (enter * (1 - ex)).toFixed(3);
-          el.style.transform = 'translate3d(0,' + ty.toFixed(1) + 'px,0) rotate(' + rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
-        }
+      /* Dedicated portal — position:fixed child of body, no overflow clipping.
+         Clones live here so body{overflow-x:hidden} can't mask them on iOS. */
+      var travPortal = document.createElement('div');
+      travPortal.setAttribute('aria-hidden', 'true');
+      travPortal.style.cssText =
+        'position:fixed;top:0;left:0;width:0;height:0;overflow:visible;' +
+        'z-index:9980;pointer-events:none;';
+      document.body.insertBefore(travPortal, document.body.firstChild);
+
+      function lv(a, b, t)  { return a + (b - a) * t; }  /* lerp        */
+      function ei3(t)        { return t * t * t; }         /* easeInCubic */
+
+      /* Tear-down: remove clones, restore originals, reset all flags */
+      function resetTravel() {
+        if (travelRafId) { cancelAnimationFrame(travelRafId); travelRafId = null; }
+        travelClones.forEach(function(tc) {
+          if (tc && tc.el && tc.el.parentNode) tc.el.parentNode.removeChild(tc.el);
+        });
+        travelClones  = [];
+        absorbFired   = false;
+        travelStarted = false;
+        floaters.forEach(function(it) {
+          if (it.phase !== 'hidden') it.el.style.opacity = '1';
+        });
+        if (supWordEl) supWordEl.classList.remove('sup-absorbing');
       }
 
-      var floTick = false;
+      function startScrollTravel() {
+        if (travelStarted) return;
+        travelStarted = true;
+
+        /* Cache vh at the moment travel starts — prevents iOS address-bar
+           height jitter from corrupting rawP mid-animation.               */
+        var cachedVH = window.innerHeight;
+
+        /* Snapshot every settled floater's screen centre */
+        floaters.forEach(function(it) {
+          if (it.phase === 'hidden') { travelClones.push(null); return; }
+          /* Skip floaters hidden by CSS (mobile hides nth-child(n+5)) */
+          if (window.getComputedStyle(it.el).display === 'none') { travelClones.push(null); return; }
+          var fr = it.el.getBoundingClientRect();
+          var sx = fr.left + fr.width  * 0.5;
+          var sy = fr.top  + fr.height * 0.5;
+
+          var clone = document.createElement('img');
+          clone.src = it.el.src;
+          clone.setAttribute('aria-hidden', 'true');
+          clone.style.cssText =
+            'position:fixed;' +
+            'left:' + (sx - SZ * 0.5) + 'px;' +
+            'top:'  + (sy - SZ * 0.5) + 'px;' +
+            'width:' + SZ + 'px;height:' + SZ + 'px;' +
+            'pointer-events:none;opacity:1;' +
+            'transform-origin:center;';
+          travPortal.appendChild(clone);
+          it.el.style.opacity = '0';
+
+          travelClones.push({ el: clone, sx: sx, sy: sy, rot: it.cfg.rot, absorbed: false });
+        });
+
+        function travelFrame() {
+          var crewRect = netRoles.getBoundingClientRect();
+          var vh = cachedVH;
+          var rawP = (vh * TRIG - crewRect.bottom) / (vh * TRIG);
+
+          /* User scrolled back up past start point → reset so next pass replays */
+          if (rawP < -0.15) { resetTravel(); return; }
+
+          var p = Math.max(0, Math.min(1, rawP));
+
+          /* Live SUPERPOWER target — recomputed every frame */
+          var targetX = window.innerWidth  * 0.5;
+          var targetY = window.innerHeight * 0.5;
+          if (supWordEl) {
+            var sr = supWordEl.getBoundingClientRect();
+            targetX = sr.left + sr.width  * 0.5;
+            targetY = sr.top  + sr.height * 0.5;
+          }
+
+          var nActive = travelClones.filter(function(tc) { return tc !== null; }).length;
+          var allDone = true;
+
+          travelClones.forEach(function(tc, i) {
+            if (!tc) return;
+
+            /* Staggered departure: floater-i starts moving at sOffset of p.
+               All arrive together at p = 1.                                 */
+            var sOffset = (nActive > 1) ? (i / (nActive - 1)) * 0.60 : 0;
+            var fp = (sOffset >= 1) ? 0
+                   : Math.max(0, Math.min(1, (p - sOffset) / (1 - sOffset)));
+            var ep = ei3(fp);
+
+            if (fp < 1) allDone = false;
+
+            var cx  = lv(tc.sx, targetX, ep) - SZ * 0.5;
+            var cy  = lv(tc.sy, targetY, ep) - SZ * 0.5;
+            var sc  = lv(1.0, 0.04, ep);
+            var op  = fp > 0.80 ? lv(1, 0, (fp - 0.80) / 0.20) : 1;
+            var rot = tc.rot + ep * (i % 2 === 0 ? 320 : -320);
+
+            tc.el.style.left      = cx.toFixed(1) + 'px';
+            tc.el.style.top       = cy.toFixed(1) + 'px';
+            tc.el.style.transform = 'rotate(' + rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
+            tc.el.style.opacity   = op.toFixed(3);
+
+            if (fp >= 0.92 && !tc.absorbed) {
+              tc.absorbed = true;
+              if (!absorbFired && supWordEl) {
+                absorbFired = true;
+                supWordEl.classList.add('sup-absorbing');
+                setTimeout(function() { supWordEl.classList.remove('sup-absorbing'); }, 1300);
+              }
+            }
+          });
+
+          if (allDone) {
+            /* All absorbed — clean up clones */
+            travelClones.forEach(function(tc) {
+              if (tc && tc.el && tc.el.parentNode) tc.el.parentNode.removeChild(tc.el);
+            });
+            travelClones = [];
+            travelRafId  = null;
+            /* Reset so the sequence replays when user scrolls back down */
+            travelStarted = false;
+            floaters.forEach(function(it) {
+              if (it.phase !== 'hidden') it.el.style.opacity = '1';
+            });
+            return;
+          }
+
+          travelRafId = requestAnimationFrame(travelFrame);
+        }
+
+        travelRafId = requestAnimationFrame(travelFrame);
+      }
+
+      /* Persistent listener — re-arms after resetTravel() clears travelStarted */
       window.addEventListener('scroll', function() {
-        if (floTick) return;
-        floTick = true;
-        requestAnimationFrame(function() { floUpdate(); floTick = false; });
+        if (!travelStarted &&
+            netRoles.getBoundingClientRect().bottom <= window.innerHeight * TRIG) {
+          startScrollTravel();
+        }
       }, { passive: true });
-      window.addEventListener('resize', floUpdate, { passive: true });
-      floaters.forEach(function(it) { it.el.addEventListener('load', floUpdate, { once: true }); });
-      floUpdate();
     }
   }
 
@@ -1741,21 +1962,16 @@ setTimeout(scaleToFit, 150);
   function update() {
     var vh = window.innerHeight;
 
-    /* Sequential gate: para N only starts after para N-1 is fully revealed.
-       allPrevComplete tracks whether every preceding paragraph has reached
-       progress = 1. Scrolling back up reverses the chain naturally.        */
-    var allPrevComplete = true;
-
+    /* Each paragraph reveals independently — no sequential gate so fast scrolling
+       never blocks downstream paragraphs. Reveal window = vh × 0.28: the highlight
+       completes when the paragraph bottom reaches 72% up the viewport (from the
+       moment its bottom crosses the bottom edge of the viewport). This keeps pace
+       with natural reading speed and matches the Litebox scroll-reveal feel.    */
     items.forEach(function(item) {
       var rect     = item.el.getBoundingClientRect();
-      /* Fast reveal: 0 when paragraph bottom enters viewport bottom,
-         1 by the time it reaches 65% up the viewport. Completes well
-         before the paragraph exits view, so no "leftover dim lines".    */
-      var progress = (vh - rect.bottom) / (vh * 0.65);
+      var progress = (vh - rect.bottom) / (vh * 0.28);
       progress     = Math.max(0, Math.min(1, progress));
-
-      /* If any earlier paragraph is not yet complete, keep this one at 0 */
-      var litCount = allPrevComplete ? Math.round(progress * item.chars.length) : 0;
+      var litCount = Math.round(progress * item.chars.length);
 
       for (var i = 0; i < item.chars.length; i++) {
         if (i < litCount) {
@@ -1764,9 +1980,6 @@ setTimeout(scaleToFit, 150);
           item.chars[i].classList.remove('rc-on');
         }
       }
-
-      /* This para is complete only if previous were complete AND it's done */
-      allPrevComplete = allPrevComplete && (progress >= 1);
     });
 
     ticking = false;

@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Websites — Grid Velocity</title>
-  <meta name="description" content="Make your first impressions count. Grid Velocity designs, builds and refines high-performing websites — Webflow, Shopify and custom development.">
+  <title>Webflow Agency &amp; Web Design Studio — Grid Velocity</title>
+  <meta name="description" content="Grid Velocity is a Webflow Official Partner and Shopify Partner web design studio. We design and build fast, conversion-focused websites for brands worldwide. Get a quote.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://gridvelocity.com/services/websites">
   <meta name="theme-color" content="#EF4823">
@@ -29,19 +29,68 @@
   <link rel="preload" href="../fonts/Boldonse-Regular.ttf"               as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../fonts/Archivo-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin>
 
-  <link rel="stylesheet" href="../css/main.css?v=105">
+  <link rel="stylesheet" href="../css/main.css?v=140">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": "Web Design & Development",
-    "provider": { "@type": "Organization", "name": "Grid Velocity" },
-    "name": "Websites That Work",
-    "description": "Web design and development — Webflow, Shopify custom stores, custom web development, integrations and UX research."
+    "provider": { "@type": "Organization", "@id": "https://gridvelocity.com/#organization", "name": "Grid Velocity" },
+    "name": "Webflow Agency & Web Design Studio",
+    "description": "Webflow design and development, Shopify custom stores, custom web development and UX design — for businesses in Pakistan and worldwide. Official Webflow Partner.",
+    "areaServed": "Worldwide",
+    "url": "https://gridvelocity.com/services/websites"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What platforms does Grid Velocity build websites on?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Grid Velocity is an Official Webflow Partner and Official Shopify Partner. We build on Webflow, Shopify and custom code stacks depending on what your project needs." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Webflow and why use it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Webflow is a professional web design and CMS platform that produces clean, fast, responsive websites without the bloat of WordPress. Grid Velocity is an Official Webflow Partner, meaning our team is certified and experienced at the highest level." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a website build take?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A typical Webflow website takes 4–8 weeks from kick-off to launch, depending on scope. Shopify stores and custom builds vary. We'll give you a clear timeline in your proposal." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Grid Velocity redesign our existing website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We handle full redesigns, CRO-focused refreshes and platform migrations. We meet you at whatever stage makes sense — design only, build only, or end-to-end." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gridvelocity.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://gridvelocity.com/#services" },
+      { "@type": "ListItem", "position": 3, "name": "Websites", "item": "https://gridvelocity.com/services/websites" }
+    ]
   }
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PX6EFBB6R3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PX6EFBB6R3');
+  </script>
 </head>
 
 <body>
@@ -146,36 +195,65 @@
       <div class="ab-nebula"></div>
     </div>
 
-
-    <!-- Websites hero visual: stacked browsers with live scroll -->
+    <!-- Websites hero: premium browser showcase with ambient glow -->
     <div class="gv-web-stage" id="gvWebStage" aria-hidden="true">
-      <div class="gv-w-card gv-w-card-3"></div>
-      <div class="gv-w-card gv-w-card-2"></div>
+
+      <!-- Ambient glow beneath the stack -->
+      <div class="gv-web-glow"></div>
+
+      <!-- Card 3 — farthest back (JS animates entrance) -->
+      <div class="gv-w-card gv-w-card-3">
+        <div class="gv-w-bar">
+          <span class="gv-w-dot" style="--c:#E05A52"></span>
+          <span class="gv-w-dot" style="--c:#E8C42A"></span>
+          <span class="gv-w-dot" style="--c:#8BAB28"></span>
+          <span class="gv-w-url">case.study</span>
+        </div>
+      </div>
+
+      <!-- Card 2 — middle layer (JS animates entrance) -->
+      <div class="gv-w-card gv-w-card-2">
+        <div class="gv-w-bar">
+          <span class="gv-w-dot" style="--c:#E05A52"></span>
+          <span class="gv-w-dot" style="--c:#E8C42A"></span>
+          <span class="gv-w-dot" style="--c:#8BAB28"></span>
+          <span class="gv-w-url">portfolio.grid</span>
+        </div>
+      </div>
+
+      <!-- Card 1 — foreground (JS infinite scroll + breath) -->
       <div class="gv-w-card gv-w-card-1">
         <div class="gv-w-bar">
           <span class="gv-w-dot" style="--c:#E05A52"></span>
           <span class="gv-w-dot" style="--c:#E8C42A"></span>
           <span class="gv-w-dot" style="--c:#8BAB28"></span>
-          <span class="gv-w-url">grid.velocity</span>
+          <span class="gv-w-url">gridvelocity.com</span>
         </div>
         <div class="gv-w-scroll">
           <div class="gv-w-row gv-w-hero"></div>
           <div class="gv-w-row gv-w-body"></div>
-          <div class="gv-w-row gv-w-body"></div>
-          <div class="gv-w-row gv-w-grid">
-            <span></span><span></span><span></span>
-          </div>
-          <div class="gv-w-row gv-w-body"></div>
+          <div class="gv-w-row gv-w-body gv-w-body-s"></div>
           <div class="gv-w-row gv-w-cta"></div>
           <div class="gv-w-row gv-w-grid">
             <span></span><span></span><span></span>
           </div>
           <div class="gv-w-row gv-w-body"></div>
-          <div class="gv-w-row gv-w-hero"></div>
+          <div class="gv-w-row gv-w-hero gv-w-hero-alt"></div>
           <div class="gv-w-row gv-w-body"></div>
+          <div class="gv-w-row gv-w-body gv-w-body-s"></div>
+          <div class="gv-w-row gv-w-cta"></div>
         </div>
       </div>
+
+      <!-- Floating domain chip -->
+      <div class="gv-web-url-chip">
+        <span class="gv-web-url-dot"></span>
+        gridvelocity.com
+      </div>
+
     </div>
+
+    <!-- Astronaut painter -->
 
     <!-- Headline column -->
     <div class="ab-hero-inner" id="main-content">
@@ -185,7 +263,7 @@
         <span class="ab-glyph-line" data-text="Impressions">Impressions</span>
         <span class="ab-glyph-line" data-text="Count.">Count.</span>
       </h1>
-      <p class="ab-sub">We design, build and refine your site through feedback and real-world insight. No guesswork. And yes, it looks good too.</p>
+      <p class="ab-sub">We design, build and refine your site through real feedback and real-world insight. Fast, accessible, on-brand — and built to convert.</p>
       <nav class="ab-cta-row" aria-label="Websites actions">
         <a href="../contact.html" class="hero-pill solid">Start a Project <span aria-hidden="true">→</span></a>
         <a href="#sv-process" class="hero-pill">See the Process</a>
@@ -196,19 +274,14 @@
 
   <!-- ─── ABOUT THE SERVICE ─────────────────────────────────────────── -->
   <section class="sv-section light" aria-labelledby="sv-about-h">
-    <div class="sv-about-grid">
+    <div class="sv-about-grid sv-about-grid--wide">
       <div class="sv-about-left reveal">
-        <div class="sv-kicker">The Service</div>
+        <div class="sv-kicker">Webflow Agency &amp; Web Design Studio</div>
         <h2 class="sv-h2" id="sv-about-h">Websites<br>That Work.</h2>
-        <p class="sv-lead">A standout, polished marketing site is the key to capturing visitors' attention and converting them, building trust while giving a glimpse of what you're capable of.</p>
       </div>
-      <div class="sv-caps reveal d1" role="list" aria-label="Web capabilities">
-        <div class="sv-cap" role="listitem"><span class="sv-cap-num">01</span> Web Design</div>
-        <div class="sv-cap" role="listitem"><span class="sv-cap-num">02</span> Webflow Development</div>
-        <div class="sv-cap" role="listitem"><span class="sv-cap-num">03</span> Shopify Custom Stores</div>
-        <div class="sv-cap" role="listitem"><span class="sv-cap-num">04</span> Custom Web Development</div>
-        <div class="sv-cap" role="listitem"><span class="sv-cap-num">05</span> Integrations</div>
-        <div class="sv-cap" role="listitem"><span class="sv-cap-num">06</span> UX Research / Audit</div>
+      <div class="sv-about-right reveal d1">
+        <p class="sv-lead">Your website is the only salesperson who never sleeps. It needs to load fast, communicate clearly and guide visitors toward a decision — without ever looking like it's trying too hard. We design and build sites that do all of this: strategic in structure, exceptional in design, solid in code.</p>
+        <p class="sv-lead-2">Whether you're starting from zero, redesigning an existing site, or optimising for conversion — we come in at the right stage and build toward the same result: a site you're proud of that keeps working for you long after launch.</p>
       </div>
     </div>
   </section>
@@ -219,7 +292,7 @@
       <div class="sv-proc-kicker">How We Do It</div>
       <div class="sv-proc-sub-row">
         <div class="sv-proc-eyebrow">· Our Process</div>
-        <p class="sv-proc-intro">No guesswork: just thoughtful execution. We design, build and refine your site through real feedback and insight.</p>
+        <p class="sv-proc-intro">Whether you're starting from scratch or improving an existing site, here's how we approach it — and we come in at whatever stage makes sense.</p>
       </div>
     </div>
 
@@ -267,8 +340,8 @@
             </div>
             <div class="sv-proc-flower-step" data-step="4">
               <div class="sv-proc-flower-num" aria-hidden="true">5</div>
-              <h3 class="sv-proc-flower-title">Continued Growth</h3>
-              <p class="sv-proc-flower-desc">Continuous experiments and improvements, seeing how we can keep capturing more leads and compounding results over time.</p>
+              <h3 class="sv-proc-flower-title">Optimise</h3>
+              <p class="sv-proc-flower-desc">Continuous experiments and improvements — CRO, SEO, A/B testing — compounding results so the site keeps earning long after launch.</p>
             </div>
           </div>
         </div>
@@ -307,8 +380,8 @@
       <div class="sv-proc-mobile-item">
         <div class="sv-proc-mobile-num" aria-hidden="true">5</div>
         <div class="sv-proc-mobile-body">
-          <div class="sv-proc-mobile-title">Continued Growth</div>
-          <p class="sv-proc-mobile-desc">Continuous experiments and improvements to keep capturing more leads over time.</p>
+          <div class="sv-proc-mobile-title">Optimise</div>
+          <p class="sv-proc-mobile-desc">Continuous CRO, SEO and A/B testing to keep compounding results long after launch.</p>
         </div>
       </div>
     </div>
@@ -319,7 +392,7 @@
     <h2 class="sv-wyg-heading" id="sv-deliver-h">What you get.</h2>
     <div class="sv-wyg-header-row">
       <div class="sv-wyg-kicker">• What We Deliver</div>
-      <p class="sv-wyg-intro">Something you're proud to show the world. A site that truly represents your brand and keeps working for you long after launch.</p>
+      <p class="sv-wyg-intro">Every build is different. Here's what's in our toolkit — you get what your project actually calls for.</p>
     </div>
     <div class="sv-wyg-layout">
       <div class="sv-wyg-list" role="list">
@@ -333,9 +406,9 @@
         <div class="sv-wyg-item" role="listitem" tabindex="0">
           <div class="sv-wyg-row">
             <span class="sv-wyg-bullet" aria-hidden="true"></span>
-            <span class="sv-wyg-name">Website</span>
+            <span class="sv-wyg-name">The Build</span>
           </div>
-          <div class="sv-wyg-desc"><div class="sv-wyg-desc-inner">A fast, accessible, on-brand site. Designed, built and ready to perform from day one.</div></div>
+          <div class="sv-wyg-desc"><div class="sv-wyg-desc-inner">A fast, accessible, on-brand site built on the right platform for your needs — Webflow, Shopify, or custom development. Designed and shipped to perform from day one.</div></div>
         </div>
         <div class="sv-wyg-item" role="listitem" tabindex="0">
           <div class="sv-wyg-row">
@@ -363,13 +436,13 @@
         <div class="sv-kicker">In Good Company</div>
         <h2 class="sv-h2" id="sv-clients-h">Sites We've<br>Shipped.</h2>
         <ul class="sv-cl-list" role="list">
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">SpaceLft</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Mosaic</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Briskonsive</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Ibento Bureau</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Red Publicis</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Claudia Monroy</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">DLC</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/ibento-bureau.html">Ibento Bureau</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/publicis.html">Publicis</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/claudia-monroy.html">Claudia Monroy</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/dlc.html">DLC</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/enkay.html">Enkay Consulting</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/halal-boys.html">The Halal Boys</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/nestle.html">Nestlé Pakistan</a></li>
         </ul>
         <a href="../work/index.html" class="sv-cl-see-all">See all work <span aria-hidden="true">→</span></a>
       </div>
@@ -387,12 +460,23 @@
     </div>
   </section>
 
-  <!-- ─── TESTIMONIAL ───────────────────────────────────────────────── -->
-  <section class="sv-quote" aria-label="Client testimonial">
-    <blockquote class="sv-quote-text reveal">Conversions doubled in the first month and the site still feels effortless to manage. They didn't just redesign a website — they rebuilt how we sell.</blockquote>
-    <div class="sv-quote-by reveal d1">
-      <div class="sv-quote-name">Marta Reyes</div>
-      <div class="sv-quote-role">CEO, Mosaic Commerce</div>
+  <!-- ─── TESTIMONIALS ─────────────────────────────────────────────── -->
+  <section class="sv-quote" aria-label="Client testimonials">
+    <div class="sv-quote-pair">
+      <div class="sv-quote-cell reveal">
+        <blockquote class="sv-quote-text">I decided to work with Zohaib because of his ability to listen and understand my requests — and it paid off. He is very easy to work with, adaptable, incredibly responsive and very patient as I was undecided on some of the interactions I wanted to implement. Very knowledgeable with Webflow, plus quick to offer suggestions and improvements.</blockquote>
+        <div class="sv-quote-by">
+          <div class="sv-quote-name">Claudia Monroy</div>
+          <div class="sv-quote-role">Founder, Claudia Monroy</div>
+        </div>
+      </div>
+      <div class="sv-quote-cell reveal d1">
+        <blockquote class="sv-quote-text">Zohaib was great in supporting our website development. Extremely accommodating and always responsive — even accepting last-minute urgent requests with professionalism and efficiency. Very proactive in suggesting ideas and solutions.</blockquote>
+        <div class="sv-quote-by">
+          <div class="sv-quote-name">Isabella Monroe</div>
+          <div class="sv-quote-role">Ibento Bureau</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -404,6 +488,7 @@
     </div>
     <div class="cta-cards">
       <div class="cta-card cta-card-white reveal d1">
+        <div class="cta-lottie" id="ctaLaptop" aria-hidden="true"></div>
         <div class="cta-inner">
           <div class="cta-label">Custom Package</div>
           <div class="cta-title">Fixed price.<br>Defined scope.</div>
@@ -413,6 +498,7 @@
         <div class="cta-btn"><a href="../contact.html" class="btn-dark">Get started <span aria-hidden="true">→</span></a></div>
       </div>
       <div class="cta-card cta-card-black reveal d2">
+        <div class="cta-lottie" id="ctaLevitate" aria-hidden="true"></div>
         <div class="cta-inner">
           <div class="cta-label">Subscription</div>
           <div class="cta-title">As-you-go.<br>On your terms.</div>
@@ -478,10 +564,10 @@
 
 </div><!-- /#scaler -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie_light.min.js" defer></script>
-<script src="../js/main.js?v=46" defer></script>
+<script src="../js/vendor/gsap.min.js" defer></script>
+<script src="../js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../js/vendor/lottie-light.min.js" defer></script>
+<script src="../js/main.js?v=58" defer></script>
 
 </body>
 </html>

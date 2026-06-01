@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ── Primary SEO ─────────────────────────────────────────────── -->
-  <title>Video Production — Grid Velocity</title>
-  <meta name="description" content="DVCs, brand films, factory and event coverage, photography, 2D/3D animation and AI-powered video — Grid Velocity makes your brand move.">
+  <title>Video Production &amp; Animation Studio — Grid Velocity</title>
+  <meta name="description" content="Grid Velocity is a video production and animation studio based in Pakistan, working globally. DVCs, brand films, 2D/3D animation, AI video and social content. Get a quote today.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://gridvelocity.com/services/video">
   <meta name="theme-color" content="#EF4823">
@@ -35,7 +35,7 @@
   <link rel="preload" href="../fonts/Archivo-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin>
 
   <!-- ── Stylesheet ──────────────────────────────────────────────── -->
-  <link rel="stylesheet" href="../css/main.css?v=105">
+  <link rel="stylesheet" href="../css/main.css?v=140">
 
   <!-- ── Structured Data ─────────────────────────────────────────── -->
   <script type="application/ld+json">
@@ -43,12 +43,61 @@
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": "Video Production",
-    "provider": { "@type": "Organization", "name": "Grid Velocity" },
-    "name": "Video That Moves People",
-    "description": "DVCs, brand films, factory and event coverage, photography, 2D/3D animation and AI-powered video content."
+    "provider": { "@type": "Organization", "@id": "https://gridvelocity.com/#organization", "name": "Grid Velocity" },
+    "name": "Video Production & Animation Studio",
+    "description": "DVCs, brand films, 2D/3D animation, CGI, AI-powered video, social content and broadcast ads — for brands in Pakistan and worldwide.",
+    "areaServed": "Worldwide",
+    "url": "https://gridvelocity.com/services/video"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What types of video does Grid Velocity produce?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Grid Velocity produces DVCs (direct video commercials), brand films, 2D and 3D animation, CGI and product renders, AI-powered video, social media content, broadcast and TV ads, character animation and out-of-home video content." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Grid Velocity do AI video production?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Grid Velocity offers AI-powered video production including video-to-video AI restyle, AI-generated motion content and AI-enhanced post-production using tools including Higgsfield and Remotion." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Grid Velocity deliver after a video project?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Deliverables include a Master Film (full resolution, broadcast-ready), Social Cuts (Reels, TikTok, story and square formats), and Photography from the shoot. Every format needed for every channel." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Grid Velocity work with international video production clients?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Grid Velocity works with video clients worldwide including the USA, UK and Europe, as well as across Pakistan." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gridvelocity.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://gridvelocity.com/#services" },
+      { "@type": "ListItem", "position": 3, "name": "Video Production", "item": "https://gridvelocity.com/services/video" }
+    ]
   }
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PX6EFBB6R3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PX6EFBB6R3');
+  </script>
 </head>
 
 <body>
@@ -146,34 +195,27 @@
       <div class="ab-nebula"></div>
     </div>
 
-    <!-- Cinema stage: three-depth filmstrip + projector play emblem -->
+    <!-- Director's Viewfinder — camera monitor aesthetic -->
     <div class="gv-film-stage" id="gvFilmStage" aria-hidden="true">
 
-      <!-- Projector-beam cone from top of stage -->
-      <div class="gv-proj-beam"></div>
-
-      <!-- Ghost strip LEFT — slow, atmospheric background layer -->
-      <div class="gv-film-strip gv-fs-ghost gv-fs-a" id="gvStripA"></div>
-
-      <!-- Main strip — numbered frames, active state, sprocket holes -->
-      <div class="gv-film-strip gv-fs-main" id="gvStripMain">
-        <div class="gv-frame"><span>01</span></div>
-        <div class="gv-frame"><span>02</span></div>
-        <div class="gv-frame is-active"><span>03</span></div>
-        <div class="gv-frame"><span>04</span></div>
-        <div class="gv-frame"><span>05</span></div>
-        <div class="gv-frame"><span>06</span></div>
-        <div class="gv-frame"><span>07</span></div>
-        <div class="gv-frame"><span>08</span></div>
+      <!-- Film perforations — left edge keeps the DNA -->
+      <div class="gv-perf-strip">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span>
       </div>
 
-      <!-- Ghost strip RIGHT — faster, foreground depth layer -->
-      <div class="gv-film-strip gv-fs-ghost gv-fs-b" id="gvStripB"></div>
+      <!-- Viewfinder corner brackets -->
+      <div class="gv-vf-corner gv-vf-tl"></div>
+      <div class="gv-vf-corner gv-vf-tr"></div>
+      <div class="gv-vf-corner gv-vf-bl"></div>
+      <div class="gv-vf-corner gv-vf-br"></div>
 
-      <!-- Fine scanline overlay -->
-      <div class="gv-scan-lines"></div>
+      <!-- Centre crosshair -->
+      <div class="gv-vf-cross"></div>
 
-      <!-- Giant projector-play emblem -->
+      <!-- Play emblem (JS-compatible — glow animation preserved) -->
       <div class="gv-play-emblem">
         <div class="gv-play-ring" style="--ri:0"></div>
         <div class="gv-play-ring" style="--ri:1"></div>
@@ -184,16 +226,38 @@
         </div>
       </div>
 
-      <!-- Now Playing indicator -->
-      <div class="gv-np-bar">
+      <!-- LIVE badge -->
+      <div class="gv-live-badge">
         <span class="gv-rec-dot" aria-hidden="true"></span>
+        LIVE
+      </div>
+
+      <!-- Now Playing (JS-compatible gvNpType) -->
+      <div class="gv-np-bar">
         <span class="gv-np-label">Now Playing</span>
         <span class="gv-np-sep" aria-hidden="true">·</span>
         <span class="gv-np-type" id="gvNpType">Brand Film</span>
       </div>
 
-      <!-- Reel counter -->
+      <!-- Reel counter (JS-compatible gvReelNum) -->
       <div class="gv-reel-id">REEL <span id="gvReelNum">03</span></div>
+
+      <!-- Timecode display -->
+      <div class="gv-timecode">00:02:34:12</div>
+
+      <!-- Audio waveform -->
+      <div class="gv-audio-wave" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <!-- Scanlines overlay -->
+      <div class="gv-scan-lines"></div>
+
+      <!-- Cinematic letterbox bars -->
+      <div class="gv-cinebar gv-cinebar-t"></div>
+      <div class="gv-cinebar gv-cinebar-b"></div>
 
     </div>
 
@@ -213,13 +277,27 @@
 
   </section>
 
+  <!-- ─── ABOUT THE SERVICE ─────────────────────────────────────────── -->
+  <section class="sv-section light" aria-labelledby="sv-about-h">
+    <div class="sv-about-grid sv-about-grid--wide">
+      <div class="sv-about-left reveal">
+        <div class="sv-kicker">Video Production &amp; Animation Studio</div>
+        <h2 class="sv-h2" id="sv-about-h">Motion That<br>Moves You.</h2>
+      </div>
+      <div class="sv-about-right reveal d1">
+        <p class="sv-lead">People don't remember press releases. They remember how something made them feel. Video is the most direct line between your brand and that feeling — and it's also the hardest to get right. We bring together directors, animators, editors and motion specialists who care as much about every frame as you care about your brand.</p>
+        <p class="sv-lead-2">Whether it's a DVC, a social campaign, a product animation or an event film — what we make is built to perform, not just to look good in a showreel.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── PROCESS ───────────────────────────────────────────────────── -->
   <section class="sv-proc-flower-section" aria-labelledby="sv-process-h" id="sv-process">
     <div class="sv-proc-flower-header">
       <div class="sv-proc-kicker">How We Do It</div>
       <div class="sv-proc-sub-row">
         <div class="sv-proc-eyebrow">· Our Process</div>
-        <p class="sv-proc-intro">A tight five-step process, from the first call to the final delivered file, keeping production clean, creative and on time.</p>
+        <p class="sv-proc-intro">For a full shoot-to-delivery production, here's how we work. Coming in mid-project, or just need post? We start wherever makes sense.</p>
       </div>
     </div>
 
@@ -319,7 +397,7 @@
     <h2 class="sv-wyg-heading" id="sv-deliver-h">What you get.</h2>
     <div class="sv-wyg-header-row">
       <div class="sv-wyg-kicker">• What We Deliver</div>
-      <p class="sv-wyg-intro">One project. Multiple outputs. Every deliverable sized and optimised for where your audience actually lives.</p>
+      <p class="sv-wyg-intro">Every project is different. Here's what's in our toolkit — you get what your production actually needs.</p>
     </div>
     <div class="sv-wyg-layout">
       <div class="sv-wyg-list" role="list">
@@ -363,11 +441,11 @@
         <div class="sv-kicker">In Good Company</div>
         <h2 class="sv-h2" id="sv-clients-h">Brands We've<br>Shot.</h2>
         <ul class="sv-cl-list" role="list">
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">ONIC Pakistan</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Food Monsters</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Ibento Bureau</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Brew Box</a></li>
-          <li class="sv-cl-item" role="listitem"><a href="../work/index.html">Kati Baba</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/onic.html">ONIC Pakistan</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/food-monsters.html">Food Monsters</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/ibento-bureau.html">Ibento Bureau</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/brew-box.html">Brew Box</a></li>
+          <li class="sv-cl-item" role="listitem"><a href="../work/kati-baba.html">Kati Baba</a></li>
         </ul>
         <a href="../work/index.html" class="sv-cl-see-all">See all work <span aria-hidden="true">→</span></a>
       </div>
@@ -385,10 +463,10 @@
 
   <!-- ─── TESTIMONIAL ───────────────────────────────────────────────── -->
   <section class="sv-quote" aria-label="Client testimonial">
-    <blockquote class="sv-quote-text reveal">The film they created for our launch generated more engagement in 48 hours than our entire previous year of content. It just hits different.</blockquote>
+    <blockquote class="sv-quote-text reveal">Grid worked diligently with a tight timeline to deliver an incredible video-to-video AI restyle of a very detailed video — in just 2 days. Very responsive, drove clarity along the way, and the final product was exactly what we were looking for. Looking forward to future collaboration.</blockquote>
     <div class="sv-quote-by reveal d1">
-      <div class="sv-quote-name">Tariq Hassan</div>
-      <div class="sv-quote-role">Head of Marketing, ONIC Pakistan</div>
+      <div class="sv-quote-name">Alex Brackett</div>
+      <div class="sv-quote-role">Client</div>
     </div>
   </section>
 
@@ -400,6 +478,7 @@
     </div>
     <div class="cta-cards">
       <div class="cta-card cta-card-white reveal d1">
+        <div class="cta-lottie" id="ctaLaptop" aria-hidden="true"></div>
         <div class="cta-inner">
           <div class="cta-label">Custom Package</div>
           <div class="cta-title">Fixed price.<br>Defined scope.</div>
@@ -411,6 +490,7 @@
         </div>
       </div>
       <div class="cta-card cta-card-black reveal d2">
+        <div class="cta-lottie" id="ctaLevitate" aria-hidden="true"></div>
         <div class="cta-inner">
           <div class="cta-label">Subscription</div>
           <div class="cta-title">As-you-go.<br>On your terms.</div>
@@ -482,10 +562,10 @@
 </div><!-- /#scaler -->
 
 <!-- ── Scripts ─────────────────────────────────────────────────────── -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie_light.min.js" defer></script>
-<script src="../js/main.js?v=46" defer></script>
+<script src="../js/vendor/gsap.min.js" defer></script>
+<script src="../js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../js/vendor/lottie-light.min.js" defer></script>
+<script src="../js/main.js?v=58" defer></script>
 
 </body>
 </html>

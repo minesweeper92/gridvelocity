@@ -8,7 +8,14 @@
 .impeccable/
 *.code-workspace
 
+# Dependencies
+node_modules/
+package-lock.json
+
 # Misc
 Thumbs.db
 *.log
 .vercel
+
+# Data / exports (don't commit raw CSVs)
+*.csv

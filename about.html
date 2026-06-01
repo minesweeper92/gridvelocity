@@ -35,8 +35,8 @@
   <link rel="preload" href="fonts/Archivo-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin>
 
   <!-- ── Stylesheet ──────────────────────────────────────────────── -->
-  <link rel="stylesheet" href="css/main.css?v=105">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="css/main.css?v=140">
+  <link rel="stylesheet" href="css/swiper-bundle.min.css">
 
   <!-- ── Structured Data ─────────────────────────────────────────── -->
   <script type="application/ld+json">
@@ -46,11 +46,19 @@
     "@id": "https://gridvelocity.com/about",
     "url": "https://gridvelocity.com/about",
     "name": "About Grid Velocity",
-    "description": "Grid Velocity is an independent production, design and web studio based in Pakistan, founded by Zohaib Burki and Shaina Noor.",
+    "description": "Grid Velocity is an independent production, design and web studio based in Pakistan.",
     "publisher": { "@id": "https://gridvelocity.com/#organization" }
   }
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PX6EFBB6R3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PX6EFBB6R3');
+  </script>
 </head>
 
 <body>
@@ -204,7 +212,7 @@
         <span class="ab-glyph-line" data-text="Outside">Outside</span>
         <span class="ab-glyph-line" data-text="The Lines.">The Lines.</span>
       </h1>
-      <p class="ab-sub">We treat every brand like a blank canvas: an independent studio painting branding, video, and websites built to stand out.</p>
+      <p class="ab-sub">An independent studio built on craft and velocity — branding, video and web work that doesn't just look good, it works.</p>
       <nav class="ab-cta-row" aria-label="About page actions">
         <a href="#ab-team" class="hero-pill solid">Meet the Team <span aria-hidden="true">↓</span></a>
         <a href="/#contact" class="hero-pill">Start a Project</a>
@@ -230,9 +238,9 @@
       </div>
 
       <div class="ab-stat ab-stat-count reveal d2">
-        <div class="ab-stat-num"><span class="ab-stat-val" data-count="18">18</span></div>
+        <div class="ab-stat-num"><span class="ab-stat-val" data-count="6">6</span></div>
         <div class="ab-stat-rule" aria-hidden="true"></div>
-        <div class="ab-stat-label">Clients<br>Served</div>
+        <div class="ab-stat-label">Industries<br>Served</div>
       </div>
 
       <div class="ab-stat ab-stat-indep reveal d3">
@@ -292,6 +300,58 @@
         <li>Directors</li><li>Designers</li><li>Engineers</li>
         <li>Animators</li><li>Devs</li><li>Producers</li><li>Growthsmiths</li>
       </ul>
+
+    </div>
+
+  </section>
+
+  <!-- ─── OUR NETWORK IS OUR SUPERPOWER ───────────────────────────────── -->
+  <section class="ab-superpower" aria-labelledby="superpower-heading">
+
+    <div class="ab-sup-left reveal">
+      <h2 id="superpower-heading">Our Network<br>Is Our<br><span class="ab-orange ab-sup-word">Superpower.</span></h2>
+    </div>
+
+    <div class="ab-sup-right">
+      <p class="reveal d1">Most agencies carry overhead you end up paying for — departments, layers of approval, account managers who've never touched your project. We're structured differently: a tight core of specialists, backed by a handpicked network of elite independents who come in exactly when and where they're needed.</p>
+      <p class="reveal d2">Need a DOP for your brand film? A performance marketer for your campaign launch? A motion designer for your brand guidelines? The right expert, for your exact brief, every time. The network flexes around your project — not the other way around.</p>
+    </div>
+
+  </section>
+
+  <!-- ─── THE GRID CODE — Culture / Values ─────────────────────────────── -->
+  <section class="ab-culture" aria-labelledby="culture-heading">
+
+    <div class="ab-culture-head-wrap reveal">
+      <div class="ab-culture-eyebrow">The Grid Code</div>
+      <h2 id="culture-heading">What makes<br>us, us.</h2>
+    </div>
+
+    <div class="ab-culture-pillars">
+
+      <div class="ab-pillar reveal d1">
+        <div class="ab-pillar-num">01</div>
+        <div class="ab-pillar-title">No middlemen.</div>
+        <p class="ab-pillar-desc">You talk to the makers. Always. No account manager playing telephone between you and the people doing the actual work.</p>
+      </div>
+
+      <div class="ab-pillar reveal d2">
+        <div class="ab-pillar-num">02</div>
+        <div class="ab-pillar-title">The network moves with you.</div>
+        <p class="ab-pillar-desc">Need a DOP? A React dev? A growth strategist? Our network scales up or down around your exact needs — no bloat, no gaps.</p>
+      </div>
+
+      <div class="ab-pillar reveal d3">
+        <div class="ab-pillar-num">03</div>
+        <div class="ab-pillar-title">You own everything.</div>
+        <p class="ab-pillar-desc">Files, source code, master assets. All yours from day one. No vendor lock-in. No holding your work hostage when the project ends.</p>
+      </div>
+
+      <div class="ab-pillar reveal d4">
+        <div class="ab-pillar-num">04</div>
+        <div class="ab-pillar-title">We're in it for the work.</div>
+        <p class="ab-pillar-desc">Not the trophy cabinet. Not the PR cycle. Great work that actually performs — that's the only thing we care about.</p>
+      </div>
 
     </div>
 
@@ -503,6 +563,7 @@
           <span class="ab-seal-tag">Official Member</span>
         </span>
       </div>
+      <div class="seal-spacer" aria-hidden="true"></div>
     </div>
 
     <!-- Tools we build with — outline wordmark marquee -->
@@ -546,6 +607,7 @@
           <a href="contact.html" class="btn-outline-white">Get started <span aria-hidden="true">→</span></a>
         </div>
       </div>
+      <div class="card-spacer" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -609,11 +671,11 @@
 </div><!-- /#scaler -->
 
 <!-- ── Scripts ─────────────────────────────────────────────────────── -->
-<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie_light.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
-<script src="js/main.js?v=46" defer></script>
+<script src="js/vendor/lottie-light.min.js" defer></script>
+<script src="js/vendor/gsap.min.js" defer></script>
+<script src="js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/vendor/swiper-bundle.min.js" defer></script>
+<script src="js/main.js?v=58" defer></script>
 
 </body>
 </html>

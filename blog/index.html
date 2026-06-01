@@ -26,8 +26,16 @@
   <link rel="preload" href="../fonts/Boldonse-Regular.ttf"               as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../fonts/Archivo-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin>
 
-  <link rel="stylesheet" href="../css/main.css?v=105">
+  <link rel="stylesheet" href="../css/main.css?v=140">
   <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PX6EFBB6R3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PX6EFBB6R3');
+  </script>
 </head>
 
 <body>
@@ -129,7 +137,6 @@
       <div class="ab-nebula"></div>
     </div>
 
-
     <!-- Blog hero visual: typewriter headlines + magazine cards -->
     <div class="gv-blog-stage" id="gvBlogStage" aria-hidden="true">
       <div class="gv-blog-card gv-blog-card-1">
@@ -165,13 +172,37 @@
 
       </section>
 
-  <!-- ─── COMING SOON BODY ──────────────────────────────────────────────── -->
-  <section class="bl-body" id="bl-body" aria-labelledby="bl-soon-h">
-    <div class="bl-coming reveal">
-      <div class="bl-coming-label">Coming Soon</div>
-      <h2 id="bl-soon-h">Articles Are On Their Way.</h2>
-      <p>We're putting the finishing touches on our first posts. In the meantime, follow us on social or drop us a line. We're always happy to talk craft.</p>
-      <a href="../contact.html" class="btn-dark">Get in touch <span aria-hidden="true">→</span></a>
+  <!-- ─── ARTICLES ─────────────────────────────────────────────────────── -->
+  <section class="bl-body" id="bl-body" aria-label="Blog articles">
+    <div class="bl-grid">
+
+      <article class="bl-card reveal">
+        <a href="how-much-does-branding-cost.html" class="bl-card-link" aria-label="Read: How Much Does Branding Cost?">
+          <div class="bl-card-meta">Branding · 5 min read</div>
+          <h2 class="bl-card-h">How Much Does Branding Cost?</h2>
+          <p class="bl-card-desc">It's the question everyone asks — and most studios dodge. An honest breakdown of what drives branding costs and what good value actually looks like.</p>
+          <div class="bl-card-read">Read <span aria-hidden="true">→</span></div>
+        </a>
+      </article>
+
+      <article class="bl-card reveal d1">
+        <a href="ai-video-production.html" class="bl-card-link" aria-label="Read: AI Video Production — What It Is and Who's Doing It">
+          <div class="bl-card-meta">Video · 6 min read</div>
+          <h2 class="bl-card-h">AI Video Production: What It Is and Who's Doing It</h2>
+          <p class="bl-card-desc">AI video is not a gimmick. Here's what's genuinely useful right now, what it can't do, and how we're using it for real client work.</p>
+          <div class="bl-card-read">Read <span aria-hidden="true">→</span></div>
+        </a>
+      </article>
+
+      <article class="bl-card reveal d2">
+        <a href="what-is-a-brand-playbook.html" class="bl-card-link" aria-label="Read: What Is a Brand Playbook?">
+          <div class="bl-card-meta">Branding · 4 min read</div>
+          <h2 class="bl-card-h">What Is a Brand Playbook?</h2>
+          <p class="bl-card-desc">The single document your whole team works from. What's in it, why it matters, and how it's different from a brand book or style guide.</p>
+          <div class="bl-card-read">Read <span aria-hidden="true">→</span></div>
+        </a>
+      </article>
+
     </div>
   </section>
 
@@ -229,9 +260,9 @@
 
 </div><!-- /#scaler -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie_light.min.js" defer></script>
-<script src="../js/main.js?v=46" defer></script>
+<script src="../js/vendor/gsap.min.js" defer></script>
+<script src="../js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../js/vendor/lottie-light.min.js" defer></script>
+<script src="../js/main.js?v=58" defer></script>
 </body>
 </html>
