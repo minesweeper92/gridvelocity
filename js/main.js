@@ -462,21 +462,44 @@ setTimeout(scaleToFit, 150);
 })();
 
 /* ── CTA Card Lotties (any page with ctaLaptop / ctaLevitate slots) ─── */
+/* Lazy-loaded via IntersectionObserver — JSON only fetches when the CTA  */
+/* section scrolls into view (saves ~200KB on initial page load).         */
 (function initCtaLotties() {
   if (typeof lottie === 'undefined') return;
-  // Resolve path prefix from <link href="css/main.css"> vs "../css/main.css"
   const cssLink = document.querySelector('link[href*="css/main.css"]');
   const prefix = cssLink && cssLink.getAttribute('href').startsWith('../') ? '../' : '';
-  ['ctaLaptop', 'ctaLevitate'].forEach(id => {
-    const url = prefix + (id === 'ctaLaptop' ? 'assets/astro-laptop.json' : 'assets/astro-levitate.json');
-    const el = document.getElementById(id);
-    if (!el || el.dataset.loaded) return;
+
+  function loadLottie(el, id) {
+    if (el.dataset.loaded) return;
     el.dataset.loaded = '1';
+    const url = prefix + (id === 'ctaLaptop' ? 'assets/astro-laptop.json' : 'assets/astro-levitate.json');
     fetch(url)
       .then(r => r.json())
       .then(data => lottie.loadAnimation({ container: el, renderer: 'svg', loop: true, autoplay: true, animationData: data }))
       .catch(() => {});
-  });
+  }
+
+  const ids = ['ctaLaptop', 'ctaLevitate'];
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          loadLottie(entry.target, entry.target.id);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px' }); /* start fetching 200px before entering viewport */
+    ids.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+  } else {
+    /* Fallback for browsers without IO support */
+    ids.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) loadLottie(el, id);
+    });
+  }
 })();
 
 /* ── LOGO TICKER (homepage only) ───────────────────────────────────── */
