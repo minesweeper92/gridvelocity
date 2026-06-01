@@ -959,22 +959,23 @@ setTimeout(scaleToFit, 150);
     var isMobile = window.innerWidth < 768;
     var SZ  = isMobile ? 72 : 116;
 
-    /* Mobile: four-corner layout keeps astronauts clear of the centred
-       heading and word-cloud.  Desktop: scattered across both zones.   */
+    /* Mobile: upper images pushed below the 2-line heading; lower corners
+       unchanged.  Desktop: upper images moved to far edges so the centred
+       heading text (which spans ~24–76% of width) is never obscured.    */
     var PCT = isMobile ? [
-      { left:  2, top:  2, rot: -12 }, /* Directors  — top-left  corner */
-      { left: 72, top:  2, rot:  10 }, /* Designers  — top-right corner */
-      { left:  2, top: 76, rot:  15 }, /* Engineers  — bot-left  corner */
-      { left: 72, top: 76, rot:  -7 }, /* Animators  — bot-right corner */
-      { left: 37, top:  2, rot: -13 }, /* Devs       — hidden via CSS   */
-      { left: 37, top: 76, rot:   8 }, /* Producers  — hidden via CSS   */
+      { left:  2, top: 38, rot: -12 }, /* Directors  — left,  below heading  */
+      { left: 72, top: 36, rot:  10 }, /* Designers  — right, below heading  */
+      { left:  2, top: 76, rot:  15 }, /* Engineers  — bot-left  corner      */
+      { left: 72, top: 76, rot:  -7 }, /* Animators  — bot-right corner      */
+      { left: 37, top: 36, rot: -13 }, /* Devs       — hidden via CSS        */
+      { left: 37, top: 76, rot:   8 }, /* Producers  — hidden via CSS        */
     ] : [
-      { left:  6, top: 13, rot: -12 }, /* Directors  — upper-left   */
-      { left: 42, top:  4, rot:  10 }, /* Designers  — upper-centre */
-      { left: 76, top: 11, rot:  -7 }, /* Engineers  — upper-right  */
-      { left:  4, top: 65, rot:  15 }, /* Animators  — lower-left   */
-      { left: 42, top: 77, rot: -13 }, /* Devs       — lower-centre */
-      { left: 76, top: 63, rot:   8 }, /* Producers  — lower-right  */
+      { left:  2, top: 14, rot: -12 }, /* Directors  — far-left  edge, upper */
+      { left: 84, top: 10, rot:  10 }, /* Designers  — far-right edge, upper */
+      { left: 44, top: 43, rot:  -7 }, /* Engineers  — centre-mid, below heading */
+      { left:  3, top: 66, rot:  15 }, /* Animators  — lower-left            */
+      { left: 44, top: 77, rot: -13 }, /* Devs       — lower-centre          */
+      { left: 82, top: 64, rot:   8 }, /* Producers  — lower-right           */
     ];
 
     var floaters = [];
