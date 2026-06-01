@@ -132,7 +132,7 @@ npx vercel deploy --prod
 
 | Folder | Convention | Example |
 |--------|-----------|---------|
-| `assets/work/` | `{project-slug}-hero.ext` or `{project-slug}-gallery-NN.ext` | `onic-hero.avif`, `nestle-gallery-03.avif` |
+| `assets/projects/{project}/hero.ext, gallery-01.ext ...
 | `assets/projects/` | `{project-slug}.ext` | `enkay-consulting.avif` |
 | `assets/team/` | `{firstname-lastname}.ext` | `hashim-hameed.png` |
 | `assets/network-section-images/` | `{role}.png` | `directors.png`, `designers.png` |
