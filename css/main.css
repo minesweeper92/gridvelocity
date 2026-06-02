@@ -1117,7 +1117,7 @@ footer {
 }
 .drawer-links li a {
   font-family: 'Boldonse', sans-serif;
-  font-size: clamp(36px, 11.5vw, 48px);
+  font-size: clamp(32px, 10.4vw, 43px);
   line-height: 1.3;
   color: rgba(255,255,255,0.88);
   text-decoration: none;
@@ -1133,7 +1133,7 @@ footer {
   display: flex; align-items: center; justify-content: space-between;
   width: 100%; background: none; border: none; padding: 0; cursor: pointer;
   font-family: 'Boldonse', sans-serif;
-  font-size: clamp(36px, 11.5vw, 48px);
+  font-size: clamp(32px, 10.4vw, 43px);
   line-height: 1.3;
   color: rgba(255,255,255,0.88);
   text-transform: uppercase; letter-spacing: -.02em;
@@ -1167,7 +1167,7 @@ footer {
 
 .drawer-sub li a {
   font-family: 'Boldonse', sans-serif;
-  font-size: clamp(22px, 6vw, 30px);
+  font-size: clamp(20px, 5.4vw, 27px);
   line-height: 1.3;
   color: rgba(255,255,255,0.75);
   text-decoration: none;
@@ -3436,7 +3436,8 @@ footer {
   .cs-hero, .cs-hero-img, .cs-overview, .cs-gallery, .cs-results, .cs-next,
   .ct-main,
   .a11y-hero, .a11y-controls, .a11y-commit, .a11y-contact,
-  .lg-hero, .lg-body {
+  .lg-hero, .lg-body,
+  .bl-article, .bl-body {
     width: 100% !important;
   }
 
@@ -5902,6 +5903,8 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   /* Convert white logo → GV Orange for cream background */
   filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(900%) hue-rotate(335deg);
 }
+/* Mobile: hamburger spans are white by default — invisible on cream hero */
+.page-blog .gv-nav:not(.scrolled):not(.nav-open) .nav-toggle span { background: var(--black); }
 
 /* Pages with orange hero (homepage, branding) — button must be black to contrast */
 .page-hero-orange .gv-nav:not(.scrolled) .nav-cta        { background: var(--black); color: #fff; }
@@ -8386,16 +8389,26 @@ footer { overflow: visible !important; }
 .bl-card:hover .bl-card-read { background: var(--orange-dark); }
 
 @media (max-width: 1023px) {
+  /* Blog index cards */
   .bl-grid { grid-template-columns: 1fr; padding: 48px 20px 80px; gap: 16px; }
   .bl-card-link { padding: 32px 28px 28px; }
   .bl-card-h { font-size: 20px; }
   .bl-card-read { padding: 10px 16px; font-size: 11px; }
-  .bl-article { padding: 80px 24px 80px; }
-  .bl-art-h1 { font-size: 36px; }
-  .bl-art-lead { font-size: 17px; }
-  .bl-art-body { font-size: 16px; }
-  .bl-art-body h2 { font-size: 24px; }
-  .bl-art-cta { padding: 32px 24px; }
+
+  /* Blog article pages */
+  .bl-article { padding: 56px 20px 72px; }
+  .bl-art-header { max-width: 100%; margin-bottom: 32px; text-align: left; }
+  .bl-art-h1 { font-size: clamp(26px, 7.5vw, 38px); line-height: 1.25; margin-bottom: 20px; }
+  .bl-art-lead { font-size: 16px; line-height: 1.7; margin-bottom: 16px; }
+  .bl-art-byline { font-size: 12px; }
+  .bl-art-body { font-size: 16px; line-height: 1.8; max-width: 100%; margin: 0; }
+  .bl-art-body h2 { font-size: 22px; line-height: 1.25; margin: 44px 0 16px; }
+  .bl-art-body h3 { font-size: 17px; margin: 28px 0 12px; }
+  .bl-art-body ul, .bl-art-body ol { padding-left: 22px; }
+  .bl-art-cta { padding: 28px 20px; margin-top: 44px; border-radius: 8px; }
+  .bl-art-cta p { font-size: 17px; margin-bottom: 20px; }
+  .bl-art-related { max-width: 100%; margin-top: 36px; padding-top: 24px; }
+  .bl-art-related-link { font-size: 15px; }
 }
 
 /* ═══ VIEWPORT-HEIGHT SECTIONS (desktop only — --vp-h set by JS) ═══ */
@@ -8404,4 +8417,6 @@ footer { overflow: visible !important; }
 /* Mobile uses its own sizing (svh/padding-based), untouched by these rules.   */
 @media (min-width: 1024px) {
   .specialists, .showreel, .services, .featured, .cta-section { min-height: var(--vp-h, auto); }
+  /* Service and careers heroes also fill the viewport like the homepage hero */
+  .ab-hero.gv-hero-svc { height: var(--vp-h, 760px); min-height: 0; }
 }
