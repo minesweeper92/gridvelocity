@@ -1008,7 +1008,7 @@ setTimeout(scaleToFit, 150);
       var el = document.createElement('img');
       el.className = 'anr-floater';
       el.src = word.dataset.img;
-      el.alt = ''; el.loading = 'lazy';
+      el.alt = ''; el.loading = 'eager'; el.decoding = 'async';
       el.style.left   = p.left + '%';
       el.style.top    = p.top  + '%';
       el.style.width  = SZ + 'px';
@@ -1564,41 +1564,36 @@ setTimeout(scaleToFit, 150);
       });
     }
 
-    /* ── BLOG — cards float in + drift ─────────────────────────── */
+    /* ── BLOG — cards drift (CSS keyframes handle the entrance) ─── */
     const blogStage = document.getElementById('gvBlogStage');
     if (blogStage) {
       const cards = gsap.utils.toArray('#gvBlogStage .gv-blog-card');
       cards.forEach((card, i) => {
-        const initialRot = parseFloat(getComputedStyle(card).transform.match(/matrix.*?\(([^)]+)\)/)?.[1].split(',')[1] || '0') * 180 / Math.PI;
-        // Slide in
-        gsap.to(card, { opacity: 1, y: 0, duration: 1, delay: 0.3 + i * 0.18, ease: 'power3.out' });
-        // Then drift
+        // Drift starts after CSS entrance animation completes (~1.6s)
         gsap.to(card, {
-          y: -10, duration: 3 + i * 0.4, delay: 1.5 + i * 0.3,
+          y: -10, duration: 3 + i * 0.4, delay: 1.8 + i * 0.3,
           repeat: -1, yoyo: true, ease: 'sine.inOut'
         });
       });
     }
 
-    /* ── CAREERS — role pills float in + bob ───────────────────── */
+    /* ── CAREERS — pills bob (CSS keyframes handle the entrance) ── */
     const roleCloud = document.getElementById('gvRoleCloud');
     if (roleCloud) {
       const roles = gsap.utils.toArray('#gvRoleCloud .gv-role');
       roles.forEach((role, i) => {
-        gsap.to(role, { opacity: 1, duration: 0.6, delay: 0.3 + i * 0.12, ease: 'power2.out' });
-        gsap.from(role, { y: 28, scale: 0.85, duration: 0.7, delay: 0.3 + i * 0.12, ease: 'back.out(1.4)' });
-        // Continuous floating
+        // Continuous floating starts after CSS entrance (~1.2s)
         gsap.to(role, {
           y: '+=' + (8 + Math.random() * 6),
           duration: 2.4 + Math.random() * 1.2,
-          delay: 1.4 + i * 0.1,
+          delay: 1.6 + i * 0.1,
           repeat: -1, yoyo: true, ease: 'sine.inOut'
         });
       });
       // Orange pulse
       const orange = roleCloud.querySelector('.gv-role.is-orange');
       if (orange) {
-        gsap.to(orange, { scale: 1.06, duration: 1.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1.6 });
+        gsap.to(orange, { scale: 1.06, duration: 1.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1.8 });
       }
     }
   });
