@@ -115,6 +115,14 @@ setTimeout(scaleToFit, 150);
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* Late-reveal: fires only after 60% of the viewport has scrolled past */
+  const obsLate = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('on'); obsLate.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40% 0px' });
+  document.querySelectorAll('.reveal-late').forEach(el => obsLate.observe(el));
 })();
 
 /* ── LITEBOX-STYLE CARD BLOB ───────────────────────────────────────
