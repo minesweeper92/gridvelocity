@@ -342,12 +342,17 @@
   <!-- ─── SHOWREEL ────────────────────────────────────────────────── -->
   <section class="showreel" id="showreel" aria-label="Grid Velocity Showreel">
     <div class="showreel-wrap">
-      <!-- Replace src with the actual showreel file before launch -->
+      <!-- Preview loop (muted autoplay). Click to watch full showreel with sound.
+           Swap src for a dedicated ≥6s teaser clip if you have one. -->
       <video
         class="showreel-vid"
+        id="showreelVid"
         src="assets/showreel-2026.mp4"
-        preload="none"
+        preload="auto"
         playsinline
+        autoplay
+        muted
+        loop
         aria-label="Grid Velocity Showreel 2026"
       ></video>
       <div class="showreel-overlay" id="showreelOverlay">

@@ -388,26 +388,48 @@ setTimeout(scaleToFit, 150);
 (function initShowreel() {
   const overlay = document.getElementById('showreelOverlay');
   const playBtn = document.getElementById('showreelPlay');
-  const vid     = document.querySelector('.showreel-vid');
-  if (!overlay || !playBtn || !vid) return;
+  const wrap    = document.querySelector('.showreel-wrap');
+  const vid     = document.getElementById('showreelVid') || document.querySelector('.showreel-vid');
+  if (!overlay || !playBtn || !vid || !wrap) return;
 
-  function setPlaying(playing) {
-    overlay.classList.toggle('playing', playing);
-    playBtn.setAttribute('aria-label', playing ? 'Pause showreel' : 'Play showreel');
+  /* preview = true  → muted, looped ambient preview (default on load)
+     preview = false → unmuted, full showreel playback                 */
+  let preview = true;
+
+  function goPreview() {
+    preview        = true;
+    vid.muted      = true;
+    vid.loop       = true;
+    overlay.classList.remove('playing');
+    wrap.classList.remove('is-playing');
+    playBtn.setAttribute('aria-label', 'Play showreel');
+    vid.play().catch(() => {});
   }
 
-  function toggle() {
-    if (vid.paused || vid.ended) {
-      vid.play().catch(() => {});
+  function goPlay() {
+    preview         = false;
+    vid.muted       = false;
+    vid.loop        = false;
+    vid.currentTime = 0;
+    vid.play().catch(() => {});
+    overlay.classList.add('playing');
+    wrap.classList.add('is-playing');
+    playBtn.setAttribute('aria-label', 'Pause showreel');
+  }
+
+  /* Click anywhere on the wrap (including through the transparent overlay) */
+  wrap.addEventListener('click', function() {
+    if (preview || vid.paused || vid.ended) {
+      goPlay();
     } else {
-      vid.pause();
+      goPreview();
     }
-  }
+  });
 
-  overlay.addEventListener('click', toggle);
-  vid.addEventListener('play',  () => setPlaying(true));
-  vid.addEventListener('pause', () => setPlaying(false));
-  vid.addEventListener('ended', () => setPlaying(false));
+  /* When full playback ends, fall back to preview loop */
+  vid.addEventListener('ended', function() {
+    if (!preview) goPreview();
+  });
 })();
 
 /* ── RICH HERO PATTERN (about + service + blog + careers) ─────────── */
