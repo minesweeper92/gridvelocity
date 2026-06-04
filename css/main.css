@@ -3697,7 +3697,7 @@ footer {
   /* Button: prevent text wrapping, tighter padding */
   .cta-btn .btn-dark,
   .cta-btn .btn-outline-white { white-space: nowrap; padding: 10px 18px; font-size: 12px; }
-  /* Lottie: absolute top-right, pulled up 20% (110px × 0.2 = 22px above natural position) */
+  /* Lottie: absolute top-right. Custom Package pulled up (top:0), Subscription stays original */
   .cta-lottie {
     position: absolute !important;
     top: 0; right: 8px;
@@ -3705,6 +3705,7 @@ footer {
     margin: 0;
     overflow: hidden;
   }
+  .cta-card-black .cta-lottie { top: 20px; }
 
   /* ── Footer ── */
   footer {
