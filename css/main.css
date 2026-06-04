@@ -3676,26 +3676,27 @@ footer {
     max-width: 100%;
     height: auto;
     position: sticky !important;
-    /* Column layout — lottie absolutely positioned, no side column */
-    display: flex; flex-direction: column !important; align-items: stretch;
-    overflow: hidden; /* clips lottie SVG pattern that bleeds beyond its bounds */
+    /* Row layout — text left, lottie right as flex child */
+    display: flex; flex-direction: row !important; align-items: center;
+    overflow: hidden; /* clips lottie SVG that bleeds beyond its bounds */
     margin-bottom: 28px !important;
     box-shadow: 0 6px 22px rgba(0,0,0,0.14) !important;
   }
   .cta-card:nth-child(1) { top: 72px !important; z-index: 1; }
   .cta-card:nth-child(2) { top: 84px !important; z-index: 2; }
   .cta-card:last-child { margin-bottom: 0 !important; }
-  /* Content: full-width, bottom padding leaves room for bottom-right lottie */
-  .cta-content { padding: 24px 24px 110px 24px; width: 100%; box-sizing: border-box; }
+  /* Content: takes remaining space, normal padding */
+  .cta-content { padding: 24px 0 24px 24px; flex: 1; min-width: 0; width: auto; box-sizing: border-box; }
   .cta-title { font-size: 20px; line-height: 1.15; }
   .cta-divider { margin-top: 18px; }
   .cta-desc { font-size: 14px; }
-  /* Lottie: bottom-right corner, absolutely pinned, SVG clipped */
+  /* Lottie: right column, flex child, SVG clipped */
   .cta-lottie {
-    position: absolute;
-    bottom: 12px; right: 8px;
-    width: 120px; height: 120px;
-    margin: 0; overflow: hidden;
+    position: relative !important;
+    flex-shrink: 0;
+    width: 140px; height: 140px;
+    margin: 0 12px 0 8px;
+    overflow: hidden;
   }
 
   /* ── Footer ── */
