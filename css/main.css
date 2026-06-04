@@ -967,6 +967,12 @@ footer {
 ───────────────────────────────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 700ms ease, transform 700ms ease; }
 .reveal.on { opacity: 1; transform: translateY(0); }
+/* Utility/secondary pages: no reveal animation — content always visible */
+.page-util .reveal,
+.page-util .reveal.d1, .page-util .reveal.d2,
+.page-util .reveal.d3, .page-util .reveal.d4 {
+  opacity: 1 !important; transform: none !important; transition: none !important;
+}
 .reveal.d1 { transition-delay: 120ms; }
 .reveal.d2 { transition-delay: 220ms; }
 .reveal.d3 { transition-delay: 320ms; }
