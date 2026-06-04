@@ -5214,6 +5214,9 @@ footer::before {
     position: static;
     margin-bottom: 30px;
   }
+  /* fit-content so .footer-wordmark hugs the grid. text width —
+     without this it stretches full-width and right:Xem measures from screen edge */
+  .footer-wordmark { width: fit-content; }
   .footer-wm-g { font-size: clamp(96px, 28vw, 160px); }
   /* right: 0.12 × 28vw ÷ 5vw = 0.67em — period-edge compensation for this breakpoint */
   .footer-wm-v { font-size: clamp(20px, 5vw, 28px); right: 0.67em; }
@@ -7198,6 +7201,8 @@ footer { overflow: visible !important; }
     height: auto !important;
     margin-bottom: 36px;
   }
+  /* fit-content so right:Xem measures from grid.'s text edge, not screen edge */
+  .footer-wordmark { width: fit-content !important; }
   .footer-wm-g { font-size: clamp(100px, 26vw, 180px) !important; }
   .footer-wm-v {
     font-size: clamp(20px, 5vw, 32px) !important;
