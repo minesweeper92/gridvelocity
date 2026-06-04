@@ -852,6 +852,8 @@ body {
 }
 @media (min-width: 1024px) {
   .cta-lottie { width: 220px; height: 220px; margin-top: 32px; margin-right: 18px; }
+  /* Custom Package card only — astronaut pulled up 30% */
+  .cta-card-white .cta-lottie { transform: translateY(-30%); }
 }
 
 .btn-outline-white {
@@ -3687,7 +3689,7 @@ footer {
   .cta-card:last-child { margin-bottom: 0 !important; }
   /* Content: takes remaining space, normal padding */
   .cta-content { padding: 24px 0 24px 24px; flex: 1; min-width: 0; width: auto; box-sizing: border-box; }
-  .cta-title { font-size: 20px; line-height: 1.15; }
+  .cta-title { font-size: 17px; line-height: 1.3; }
   .cta-divider { margin-top: 18px; }
   .cta-desc { font-size: 14px; }
   /* Lottie: right column, flex child, SVG clipped */
