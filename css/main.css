@@ -3676,18 +3676,27 @@ footer {
     max-width: 100%;
     height: auto;
     position: sticky !important;
-    display: flex; flex-direction: row; align-items: stretch;
+    /* Column layout — lottie absolutely positioned, no side column */
+    display: flex; flex-direction: column !important; align-items: stretch;
+    overflow: hidden; /* clips lottie SVG pattern that bleeds beyond its bounds */
     margin-bottom: 28px !important;
     box-shadow: 0 6px 22px rgba(0,0,0,0.14) !important;
   }
   .cta-card:nth-child(1) { top: 72px !important; z-index: 1; }
   .cta-card:nth-child(2) { top: 84px !important; z-index: 2; }
   .cta-card:last-child { margin-bottom: 0 !important; }
-  .cta-content { padding: 22px 0 22px 22px; }
-  .cta-title { font-size: 20px; }
+  /* Content: full-width, bottom padding leaves room for bottom-right lottie */
+  .cta-content { padding: 24px 24px 110px 24px; width: 100%; box-sizing: border-box; }
+  .cta-title { font-size: 20px; line-height: 1.15; }
   .cta-divider { margin-top: 18px; }
   .cta-desc { font-size: 14px; }
-  .cta-lottie { width: 110px; height: 110px; margin-top: 22px; margin-right: 12px; }
+  /* Lottie: bottom-right corner, absolutely pinned, SVG clipped */
+  .cta-lottie {
+    position: absolute;
+    bottom: 12px; right: 8px;
+    width: 120px; height: 120px;
+    margin: 0; overflow: hidden;
+  }
 
   /* ── Footer ── */
   footer {
