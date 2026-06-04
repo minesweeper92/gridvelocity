@@ -829,7 +829,7 @@ body {
 .cta-card-black .cta-label { color: #aaa; }
 
 .cta-title {
-  font-family: 'Boldonse', sans-serif; font-size: 26px; line-height: 1.28;
+  font-family: 'Boldonse', sans-serif; font-size: 26px; line-height: 1.45;
   color: var(--orange); margin-top: 10px;
   letter-spacing: -.005em; text-transform: uppercase;
 }
@@ -3691,7 +3691,7 @@ footer {
   .cta-content { padding: 20px 20px 24px 20px; width: 100%; box-sizing: border-box; }
   /* Title/label area only: right padding clears the astronaut */
   .cta-inner { padding-right: 116px; }
-  .cta-title { font-size: 17px; line-height: 1.3; }
+  .cta-title { font-size: 17px; line-height: 1.45; }
   .cta-divider { margin-top: 18px; }
   .cta-desc { font-size: 14px; }
   /* Button: prevent text wrapping, tighter padding */
