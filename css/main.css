@@ -5214,7 +5214,8 @@ footer::before {
     margin-bottom: 30px;
   }
   .footer-wm-g { font-size: clamp(96px, 28vw, 160px); }
-  .footer-wm-v { font-size: clamp(20px, 5vw, 28px); }
+  /* right: 0.12 × 28vw ÷ 5vw = 0.67em — period-edge compensation for this breakpoint */
+  .footer-wm-v { font-size: clamp(20px, 5vw, 28px); right: 0.67em; }
   .footer-cols { position: static; flex-wrap: wrap; gap: 36px; margin-bottom: 36px; }
   .footer-cta { position: static; padding: 32px 0 0; }
   .footer-cta-h { font-size: clamp(28px, 8vw, 40px); }
@@ -7199,6 +7200,8 @@ footer { overflow: visible !important; }
   .footer-wm-g { font-size: clamp(100px, 26vw, 180px) !important; }
   .footer-wm-v {
     font-size: clamp(20px, 5vw, 32px) !important;
+    /* right: 0.12 × 26vw ÷ 5vw = 0.62em — period-edge compensation for scaler breakpoint */
+    right: 0.62em !important;
   }
   .footer-cols {
     position: static !important;
