@@ -256,7 +256,7 @@ body {
   text-decoration: none;
   transition: background 200ms, color 200ms;
 }
-.nav-cta:hover  { background: var(--black); color: #fff; }
+.nav-cta:hover  { background: #fff; color: var(--black); }
 .nav-cta:active { transform: scale(0.97); }
 /* On scrolled nav the button flips to black; hover goes white */
 .gv-nav.scrolled .nav-cta              { background: var(--black); color: #fff; }
