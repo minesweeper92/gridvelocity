@@ -5146,8 +5146,10 @@ footer::before {
 /* "VELOCITY" — italic Archivo, lower-right of "grid." like the wordmark */
 .footer-wm-v {
   position: absolute;
-  /* em-based offsets so VELOCITY stays locked to grid. at every font size */
-  right: 0;
+  /* em-based offsets so VELOCITY stays locked to grid. at every font size.
+     right: 0.69em compensates for the 0.12em padding-right on .footer-wm-g
+     (0.12 × 240 = 28.8px ÷ 42px ≈ 0.69em) so Y lands on the period's visual edge */
+  right: 0.69em;
   bottom: 0.52em;
   font-family: 'Archivo', sans-serif;
   font-style: italic;
