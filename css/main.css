@@ -5142,7 +5142,9 @@ footer::before {
 /* "VELOCITY" — italic Archivo, lower-right of "grid." like the wordmark */
 .footer-wm-v {
   position: absolute;
-  right: 6px; bottom: 22px;
+  /* em-based offsets so VELOCITY stays locked to grid. at every font size */
+  right: 0;
+  bottom: 0.52em;
   font-family: 'Archivo', sans-serif;
   font-style: italic;
   font-weight: 700;
@@ -5205,7 +5207,7 @@ footer::before {
     margin-bottom: 30px;
   }
   .footer-wm-g { font-size: clamp(96px, 28vw, 160px); }
-  .footer-wm-v { font-size: clamp(20px, 5vw, 28px); bottom: 12px; right: 4px; }
+  .footer-wm-v { font-size: clamp(20px, 5vw, 28px); }
   .footer-cols { position: static; flex-wrap: wrap; gap: 36px; margin-bottom: 36px; }
   .footer-cta { position: static; padding: 32px 0 0; }
   .footer-cta-h { font-size: clamp(28px, 8vw, 40px); }
@@ -7190,8 +7192,6 @@ footer { overflow: visible !important; }
   .footer-wm-g { font-size: clamp(100px, 26vw, 180px) !important; }
   .footer-wm-v {
     font-size: clamp(20px, 5vw, 32px) !important;
-    bottom: clamp(8px, 2vw, 18px) !important;
-    right: 4px !important;
   }
   .footer-cols {
     position: static !important;
