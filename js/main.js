@@ -1950,6 +1950,9 @@ setTimeout(scaleToFit, 150);
 ─────────────────────────────────────────────────────────────────────── */
 (function initCharReveal() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* Utility/secondary pages (careers, blog, blog articles, legal) opt out of
+     the character-by-character scroll reveal entirely — plain solid text. */
+  if (document.body.classList.contains('page-util')) return;
 
   /* Excluded containers — cards, service items, pricing, forms, chrome */
   var excluded =
