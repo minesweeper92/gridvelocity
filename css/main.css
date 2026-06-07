@@ -8496,3 +8496,363 @@ footer { overflow: visible !important; }
   /* Service and careers heroes also fill the viewport like the homepage hero */
   .ab-hero.gv-hero-svc { height: var(--vp-h, 760px); min-height: 0; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY + RHYTHM CONSISTENCY PASS — 2026-06-08
+   Keep this near the end so it normalises older page-specific layers.
+═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --gv-text-light: rgba(13,13,13,0.72);
+  --gv-text-light-muted: rgba(13,13,13,0.58);
+  --gv-text-dark: rgba(255,255,255,0.72);
+  --gv-text-dark-strong: rgba(255,255,255,0.86);
+  --gv-heading-lh: 1.36;
+  --gv-heading-lh-comfy: 1.496; /* +10% for tablet/mobile */
+}
+
+body {
+  color: var(--gv-text-dark);
+}
+
+/* Paragraph colour tokens: consistent contrast on light and dark sections. */
+.specialists p,
+.featured-head p,
+.sv-section.light p,
+.sv-section.off p,
+.sv-section.light li,
+.sv-section.off li,
+.ab-crew p,
+.ab-team p,
+.ab-partners p,
+.ab-culture p,
+.cr-roles-head p,
+.cr-intro-text p,
+.bl-coming p,
+.bl-art-lead,
+.bl-art-body,
+.lg-prose p,
+.lg-prose li,
+.a11y-commit-right p,
+.a11y-tile-desc {
+  color: var(--gv-text-light);
+}
+
+.services-head p,
+.cta-head p,
+.cta-desc,
+.footer-cta-desc,
+.sv-section.dark p,
+.sv-section.dark li,
+.sv-hero p,
+.wk-hero p,
+.cs-overview-body p,
+.ct-lead,
+.ab-reality p,
+.ab-network p,
+.ab-net-roles p,
+.ab-superpower p,
+.a11y-lead,
+.a11y-contact-right p {
+  color: var(--gv-text-dark);
+}
+
+/* Heading family/rhythm: all display headings stay Boldonse, with one shared cadence. */
+.spec-left h2,
+.services-head h2,
+.featured-head h2,
+.cta-head h2,
+.ab-h1,
+.ab-reality-left h2,
+.ab-crew-head h2,
+.ab-team-top-left h2,
+.ab-partners-head h2,
+.ab-net-h2,
+.anr-left h2,
+.ab-sup-left h2,
+.ab-culture-head-wrap h2,
+.sv-hero h1,
+.sv-h2,
+.sv-wyg-heading,
+.wk-hero h1,
+.cs-hero h1,
+.cs-overview h2,
+.ct-title,
+.cr-hero h1,
+.cr-roles-head h2,
+.bl-hero h1,
+.bl-coming h2,
+.bl-art-h1,
+.bl-art-body h2,
+.lg-hero h1,
+.lg-prose h2,
+.a11y-h1,
+.a11y-h2 {
+  font-family: 'Boldonse', sans-serif;
+}
+
+.spec-left h2,
+.services-head h2,
+.featured-head h2,
+.cta-head h2,
+.ab-h1,
+.ab-reality-left h2,
+.ab-crew-head h2,
+.ab-team-top-left h2,
+.ab-partners-head h2,
+.ab-net-h2,
+.anr-left h2,
+.ab-sup-left h2,
+.ab-culture-head-wrap h2,
+.sv-h2,
+.sv-wyg-heading,
+.wk-hero h1,
+.cs-hero h1,
+.ct-title,
+.cr-hero h1,
+.cr-roles-head h2,
+.bl-hero h1,
+.bl-coming h2,
+.bl-art-h1,
+.lg-hero h1,
+.a11y-h1,
+.a11y-h2 {
+  line-height: var(--gv-heading-lh);
+}
+
+.sv-hero h1 {
+  line-height: 0.95;
+}
+
+/* Legal/policy pages: use the same centred content width as editorial pages. */
+.lg-body {
+  padding-top: 100px;
+}
+.lg-prose {
+  max-width: 920px;
+  margin: 0 auto;
+}
+.lg-prose h2 {
+  line-height: var(--gv-heading-lh);
+}
+.lg-prose ul,
+.lg-prose ol {
+  color: var(--gv-text-light);
+  font-family: 'Archivo', sans-serif;
+  font-size: 17px;
+  line-height: 1.8;
+  margin: 0 0 22px;
+  padding-left: 26px;
+}
+.lg-prose li {
+  margin-bottom: 8px;
+}
+
+/* Blog detail pages: give the article a more intentional clearance from nav. */
+.bl-article {
+  padding-top: 170px;
+}
+.bl-art-body h2 {
+  line-height: var(--gv-heading-lh);
+}
+
+/* Services: testimonial no longer runs into the orange CTA block visually. */
+.sv-quote {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(239,72,35,0.34), transparent 34%),
+    linear-gradient(135deg, #552d74 0%, #1c1a1d 58%, #0d0d0d 100%);
+}
+.sv-quote::before {
+  color: rgba(239,72,35,0.22);
+}
+
+/* Testimonial type reduced globally by 15%. */
+.sv-quote-text {
+  font-size: 34px;
+}
+.sv-quote-pair .sv-quote-text {
+  font-size: 18.7px;
+}
+
+@media (max-width: 1023px) {
+  .spec-left h2,
+  .services-head h2,
+  .featured-head h2,
+  .cta-head h2,
+  .ab-h1,
+  .ab-reality-left h2,
+  .ab-crew-head h2,
+  .ab-team-top-left h2,
+  .ab-partners-head h2,
+  .ab-net-h2,
+  .anr-left h2,
+  .ab-sup-left h2,
+  .ab-culture-head-wrap h2,
+  .sv-hero h1,
+  .sv-h2,
+  .sv-wyg-heading,
+  .wk-hero h1,
+  .cs-hero h1,
+  .cs-overview h2,
+  .ct-title,
+  .cr-hero h1,
+  .cr-roles-head h2,
+  .bl-hero h1,
+  .bl-coming h2,
+  .bl-art-h1,
+  .bl-art-body h2,
+  .lg-hero h1,
+  .lg-prose h2,
+  .a11y-h1,
+  .a11y-h2 {
+    line-height: var(--gv-heading-lh-comfy) !important;
+  }
+
+  .bl-article {
+    padding-top: 112px;
+  }
+  .bl-art-h1 {
+    line-height: var(--gv-heading-lh-comfy) !important;
+  }
+  .bl-art-body h2 {
+    line-height: var(--gv-heading-lh-comfy) !important;
+  }
+  .lg-body {
+    padding-top: 72px;
+  }
+  .lg-prose {
+    max-width: 100%;
+  }
+  .sv-quote-text {
+    font-size: 20.4px;
+  }
+  .sv-quote-pair .sv-quote-text {
+    font-size: 15.3px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sv-quote-text {
+    font-size: 28.9px;
+  }
+  .sv-quote-pair .sv-quote-text {
+    font-size: 17px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HEADING SCALE CORRECTION — 2026-06-08
+   Final guardrail after page-specific experiments. Home hero is excluded.
+═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --gv-h1-size: 72px;
+  --gv-h2-size: 44px;
+  --gv-h3-size: 30px;
+  --gv-h4-size: 22px;
+  --gv-h5-size: 18px;
+  --gv-h6-size: 15px;
+  --gv-h-lh: 1.42;
+  --gv-h-lh-compact: 1.34;
+}
+
+#scaler :where(h1, h2, h3, h4, h5, h6):not(.hero-h1) {
+  font-family: 'Boldonse', sans-serif;
+  font-weight: 400;
+  line-height: var(--gv-h-lh);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+#scaler h1:not(.hero-h1),
+.ab-h1,
+.sv-hero h1,
+.wk-hero h1,
+.cs-hero h1,
+.ct-title,
+.cr-hero h1,
+.bl-hero h1,
+.lg-hero h1,
+.a11y-h1 {
+  font-size: var(--gv-h1-size) !important;
+  line-height: var(--gv-h-lh-compact) !important;
+}
+
+#scaler h2,
+.spec-left h2,
+.services-head h2,
+.featured-head h2,
+.cta-head h2,
+.ab-reality-left h2,
+.ab-crew-head h2,
+.ab-team-top-left h2,
+.ab-partners-head h2,
+.ab-net-h2,
+.anr-left h2,
+.ab-sup-left h2,
+.ab-culture-head-wrap h2,
+.sv-h2,
+.sv-wyg-heading,
+.cr-roles-head h2,
+.bl-coming h2,
+.bl-art-h1,
+.bl-art-body h2,
+.lg-prose h2,
+.a11y-h2 {
+  font-size: var(--gv-h2-size) !important;
+  line-height: var(--gv-h-lh) !important;
+}
+
+#scaler h3,
+.sv-step-title,
+.sv-deliver-card h3,
+.sv-proc-title,
+.sv-proc-flower-title,
+.sv-proc-mobile-title,
+.sv-wyg-name,
+.cs-overview h2,
+.bl-art-body h3 {
+  font-size: var(--gv-h3-size) !important;
+  line-height: var(--gv-h-lh) !important;
+}
+
+#scaler h4 { font-size: var(--gv-h4-size) !important; }
+#scaler h5 { font-size: var(--gv-h5-size) !important; }
+#scaler h6 { font-size: var(--gv-h6-size) !important; }
+
+/* Service delivery section: bring the oversized experimental type back in-system. */
+.sv-wyg-heading {
+  max-width: 13ch;
+  margin-bottom: 44px;
+}
+.sv-wyg-heading::after {
+  width: 10px;
+  height: 10px;
+  margin: 0 0 10px 10px;
+}
+.sv-wyg-name {
+  letter-spacing: -0.005em;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --gv-h1-size: clamp(40px, 8.5vw, 62px);
+    --gv-h2-size: clamp(30px, 6.4vw, 44px);
+    --gv-h3-size: clamp(22px, 4.8vw, 30px);
+    --gv-h4-size: 20px;
+    --gv-h5-size: 17px;
+    --gv-h6-size: 14px;
+    --gv-h-lh: 1.56;         /* +10% breathing room */
+    --gv-h-lh-compact: 1.47; /* +10% breathing room */
+  }
+
+  .sv-wyg-heading {
+    max-width: 11ch;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gv-h1-size: clamp(34px, 10vw, 48px);
+    --gv-h2-size: clamp(28px, 8vw, 38px);
+    --gv-h3-size: clamp(20px, 6vw, 28px);
+  }
+}
