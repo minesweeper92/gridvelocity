@@ -850,6 +850,25 @@ setTimeout(scaleToFit, 150);
   });
 })();
 
+/* ── Service hero "See the Process" buttons ────────────────────────
+   Raw hash jumps land awkwardly on the tall process section and can fail in
+   the scaled layout. Scroll to the visible process header instead. */
+(function initServiceProcessButtons() {
+  const links = Array.from(document.querySelectorAll('a.hero-pill[href="#sv-process"]'));
+  if (!links.length) return;
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      const section = document.getElementById('sv-process');
+      if (!section) return;
+      const header = section.querySelector('.sv-proc-flower-header') || section;
+      e.preventDefault();
+      history.replaceState(null, '', '#sv-process');
+      header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
+
 (function initClientsHover() {
   const section = document.querySelector('.sv-cl-section');
   if (!section) return;
@@ -2101,4 +2120,3 @@ var SMOOTH_SCROLL_MS = 800;
   setVpH();
   window.addEventListener('resize', setVpH, { passive: true });
 })();
-

@@ -542,9 +542,11 @@ body {
 .logo-strip {
   width: 1440px;
   background: var(--black);
-  padding: 28px 0;
+  padding: 14px 0 10px;
   overflow: hidden;
   border: none;
+  position: relative;
+  z-index: 2;
 }
 .logo-strip-inner {
   display: flex;
@@ -558,10 +560,10 @@ body {
   flex-shrink: 0;
   padding: 0 64px;
   display: flex; align-items: center; justify-content: center;
-  height: 80px;
+  height: 72px;
 }
 .logo-item img {
-  max-height: 64px; max-width: 200px;
+  max-height: 60px; max-width: 220px;
   object-fit: contain;
   filter: brightness(0) invert(1);
   opacity: .38;
@@ -576,11 +578,13 @@ body {
 .specialists {
   width: 1440px;
   background: var(--white);
-  padding: 80px 80px 180px;
+  padding: 64px 80px 160px;
   display: grid;
   grid-template-columns: 560px 1fr;
   gap: 80px;
   align-items: start;
+  position: relative;
+  z-index: 1;
 }
 .spec-left h2 {
   font-family: 'Boldonse', sans-serif;
@@ -854,6 +858,27 @@ body {
   .cta-lottie { width: 220px; height: 220px; margin-top: 32px; margin-right: 18px; }
   /* Custom Package card only — astronaut pulled up 20% */
   .cta-card-white .cta-lottie { transform: translateY(-20%); }
+}
+
+@media (max-width: 1023px) {
+  .ab-hero.gv-hero-svc,
+  .sv-hero,
+  .sv-section,
+  .sv-wyg-section,
+  .sv-quote,
+  .cta-section {
+    min-height: 100svh;
+  }
+
+  .ab-hero.gv-hero-svc,
+  .sv-section,
+  .sv-wyg-section,
+  .sv-quote,
+  .cta-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .btn-outline-white {
@@ -3617,9 +3642,9 @@ footer {
 
   /* ── Logo strip ── */
   /* Airborne-style on mobile: smaller but same bold rhythm */
-  .logo-strip { width: 100% !important; padding: 20px 0; background: var(--black); }
+  .logo-strip { width: 100% !important; padding: 14px 0 10px; background: var(--black); }
   .logo-item { padding: 0 32px; height: 52px; }
-  .logo-item img { max-height: 40px; max-width: 120px; opacity: .92; }
+  .logo-item img { max-height: 42px; max-width: 136px; opacity: .92; }
 
   /* ── Specialists ── */
   .specialists {
@@ -5715,6 +5740,26 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   color: var(--black);
 }
 
+/* Orange service heroes need black CTAs for contrast and cleaner hover states. */
+.ab-hero[data-svc="branding"] .hero-pill.solid,
+.ab-hero[data-svc="paid-ads"] .hero-pill.solid {
+  background: var(--black);
+  border-color: var(--black);
+  color: #fff;
+}
+.ab-hero[data-svc="branding"] .hero-pill.solid:hover,
+.ab-hero[data-svc="paid-ads"] .hero-pill.solid:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--black);
+}
+.ab-hero[data-svc="branding"] .hero-pill:not(.solid):hover,
+.ab-hero[data-svc="paid-ads"] .hero-pill:not(.solid):hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--black);
+}
+
 /* The "Brands We've Got" client list — heading in Boldonse (was Archivo) */
 .sv-cl-left .sv-h2 { font-family: 'Boldonse', sans-serif !important; }
 .sv-cl-item, .sv-cl-item a { font-family: 'Archivo', sans-serif !important; font-weight: 700; }
@@ -5960,8 +6005,14 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 
 /* ─── BLOG — cream editorial spread with dark type ─────────────────── */
 /* Blog page — light cream hero, nav links + logo orange at rest */
-.page-blog .gv-nav:not(.scrolled) .nav-links a        { color: var(--orange); }
-.page-blog .gv-nav:not(.scrolled) .nav-links a:hover  { color: var(--orange-dark); }
+.page-blog .gv-nav:not(.scrolled) .nav-links > li > a        { color: var(--orange); }
+.page-blog .gv-nav:not(.scrolled) .nav-links > li > a:hover  { color: var(--orange-dark); }
+.page-blog .gv-nav:not(.scrolled) .nav-sub li a {
+  color: var(--offwhite);
+}
+.page-blog .gv-nav:not(.scrolled) .nav-sub li a:hover {
+  color: #fff;
+}
 .page-blog .gv-nav:not(.scrolled) .nav-logo img {
   /* Convert white logo → GV Orange for cream background */
   filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(900%) hue-rotate(335deg);
@@ -7800,9 +7851,9 @@ footer { overflow: visible !important; }
 /* Heading */
 .gv-a11y-panel-h {
   font-family: 'Boldonse', sans-serif;
-  font-size: 80px;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-size: var(--gv-type-section, 44px);
+  line-height: var(--gv-type-lh-display, 1.42);
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   color: var(--black);
   margin: 0 0 30px;
@@ -7891,7 +7942,10 @@ footer { overflow: visible !important; }
 /* Mobile */
 @media (max-width: 768px) {
   .gv-a11y-panel-inner { padding: 110px 24px 80px; }
-  .gv-a11y-panel-h { font-size: 48px; }
+  .gv-a11y-panel-h {
+    font-size: var(--gv-type-section, clamp(28px, 8vw, 38px));
+    line-height: var(--gv-type-lh-display, 1.56);
+  }
   .gv-a11y-close { top: 24px; right: 24px; }
 }
 
@@ -8493,8 +8547,23 @@ footer { overflow: visible !important; }
 /* Mobile uses its own sizing (svh/padding-based), untouched by these rules.   */
 @media (min-width: 1024px) {
   .specialists, .showreel, .services, .featured, .cta-section { min-height: var(--vp-h, auto); }
+  .specialists { min-height: calc(var(--vp-h, 820px) - 96px); }
   /* Service and careers heroes also fill the viewport like the homepage hero */
   .ab-hero.gv-hero-svc { height: var(--vp-h, 760px); min-height: 0; }
+  /* Service pages: each major section should land as one browser viewport. */
+  .sv-section,
+  .sv-wyg-section,
+  .sv-quote,
+  .sv-proc-flower-section {
+    min-height: var(--vp-h, 760px);
+  }
+  .sv-section,
+  .sv-wyg-section,
+  .sv-quote {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -8914,6 +8983,7 @@ body {
 .ab-culture-head-wrap h2,
 .sv-h2,
 .sv-wyg-heading,
+.sv-proc-kicker,
 .cr-roles-head h2,
 .bl-coming h2,
 .a11y-h2 {
@@ -8982,5 +9052,56 @@ body {
     --gv-type-section: clamp(28px, 8vw, 38px);
     --gv-type-content: clamp(22px, 6vw, 28px);
     --gv-type-card: clamp(18px, 5.4vw, 24px);
+  }
+}
+
+/* ─── Homepage hero mobile viewport fit — 2026-06-08 ───────────────
+   Desktop/tablet hero stays untouched. This only prevents the mobile
+   word animation/layout from leaving words outside iPhone-sized screens. */
+@media (max-width: 767px) {
+  .hero-h1 {
+    padding: 76px 18px 0 !important;
+    overflow: hidden !important;
+  }
+
+  .hero-h1 .glyph-word {
+    width: calc(100vw - 36px) !important;
+    max-width: calc(100vw - 36px) !important;
+    margin-left: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .hero-h1 .glyph-word.gw1 {
+    font-size: clamp(30px, 8vw, 34px) !important;
+    line-height: 1.28 !important;
+    text-align: left !important;
+  }
+
+  .hero-h1 .glyph-word.gw2 {
+    font-size: clamp(56px, 16.2vw, 64px) !important;
+    line-height: 1.12 !important;
+    text-align: center !important;
+  }
+
+  .hero-h1 .glyph-word.gw3 {
+    font-size: clamp(29px, 7.7vw, 33px) !important;
+    line-height: 1.28 !important;
+    text-align: left !important;
+  }
+
+  .astro-slot {
+    width: 210px !important;
+    height: 210px !important;
+    right: -2px !important;
+    bottom: 104px !important;
+  }
+
+  .hero-cta-row {
+    left: 18px !important;
+    right: 18px !important;
+    bottom: 30px !important;
   }
 }
