@@ -1116,14 +1116,15 @@ setTimeout(scaleToFit, 150);
 /* ── ABOUT: GSAP polish (about.html only) ──────────────────────────── */
 (function initAboutGSAP() {
   const hero = document.getElementById('ab-hero');
-  if (!hero || typeof gsap === 'undefined') return;
-  const hasST = typeof ScrollTrigger !== 'undefined';
+  if (!hero) return;
+  const hasGSAP = typeof gsap !== 'undefined';
+  const hasST = hasGSAP && typeof ScrollTrigger !== 'undefined';
   if (hasST) gsap.registerPlugin(ScrollTrigger);
 
   /* 1) "Spray-paint the galaxy" — stagger objects into view as the astronaut sprays.
         Only opacity + blur are animated (transforms stay owned by the CSS idle anims). */
-  const objs = gsap.utils.toArray('#ab-hero .ab-dot, #ab-hero .ab-saturn, #ab-hero .ab-streak');
-  if (objs.length) {
+  const objs = Array.from(document.querySelectorAll('#ab-hero .ab-dot, #ab-hero .ab-saturn, #ab-hero .ab-streak'));
+  if (hasGSAP && objs.length) {
     gsap.set(objs, { opacity: 0, filter: 'blur(7px)' });
     gsap.to(objs, {
       opacity: 1,
@@ -1136,8 +1137,8 @@ setTimeout(scaleToFit, 150);
   }
 
   /* 2) Stat count-up on scroll */
-  if (hasST) {
-    gsap.utils.toArray('.ab-stat-val').forEach(el => {
+  if (hasGSAP && hasST) {
+    Array.from(document.querySelectorAll('.ab-stat-val')).forEach(el => {
       const target = parseFloat(el.dataset.count || '0');
       if (!target) return;
       const state = { v: 0 };
@@ -1209,6 +1210,21 @@ setTimeout(scaleToFit, 150);
       floaters.push({ el: el, word: word, cfg: p });
     });
     netRoles.appendChild(floWrap);
+
+    if (!hasGSAP) {
+      anrLines.forEach(function(line) {
+        line.style.opacity = '1';
+        line.style.transform = 'none';
+      });
+      wordEls.forEach(function(word) {
+        word.style.opacity = '1';
+      });
+      floaters.forEach(function(it) {
+        it.el.style.opacity = '0.92';
+        it.el.style.transform = 'rotate(' + it.cfg.rot + 'deg)';
+      });
+      return;
+    }
 
     function anrAnimate() {
       if (anrLeft) gsap.from(anrLeft, { opacity: 0, y: 28, duration: 0.65, ease: 'power3.out' });
