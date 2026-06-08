@@ -387,10 +387,51 @@ setTimeout(scaleToFit, 150);
 /* ── SHOWREEL ──────────────────────────────────────────────────────── */
 (function initShowreel() {
   const overlay = document.getElementById('showreelOverlay');
-  const playBtn = document.getElementById('showreelPlay');
   const wrap    = document.querySelector('.showreel-wrap');
+  const frame   = document.getElementById('showreelFrame');
   const vid     = document.getElementById('showreelVid') || document.querySelector('.showreel-vid');
-  if (!overlay || !playBtn || !vid || !wrap) return;
+  if (!wrap) return;
+
+  if (frame) {
+    const previewSrc = frame.dataset.previewSrc || frame.src;
+    const playSrc = frame.dataset.playSrc || frame.src;
+    let playing = false;
+
+    function setPreview() {
+      playing = false;
+      frame.src = previewSrc;
+      wrap.classList.remove('is-playing');
+      if (overlay) overlay.classList.remove('playing');
+      wrap.setAttribute('aria-label', 'Play showreel');
+    }
+
+    function setPlaying() {
+      playing = true;
+      frame.src = playSrc;
+      wrap.classList.add('is-playing');
+      if (overlay) overlay.classList.add('playing');
+      wrap.setAttribute('aria-label', 'Pause showreel');
+    }
+
+    wrap.setAttribute('role', 'button');
+    wrap.setAttribute('tabindex', '0');
+    wrap.setAttribute('aria-label', 'Play showreel');
+    wrap.addEventListener('mousemove', e => {
+      const r = wrap.getBoundingClientRect();
+      wrap.style.setProperty('--cursor-x', (e.clientX - r.left) + 'px');
+      wrap.style.setProperty('--cursor-y', (e.clientY - r.top) + 'px');
+    });
+    wrap.addEventListener('click', () => playing ? setPreview() : setPlaying());
+    wrap.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      playing ? setPreview() : setPlaying();
+    });
+    return;
+  }
+
+  const playBtn = document.getElementById('showreelPlay');
+  if (!overlay || !playBtn || !vid) return;
 
   /* preview = true  → muted, looped ambient preview (default on load)
      preview = false → unmuted, full showreel playback                 */
@@ -437,6 +478,15 @@ setTimeout(scaleToFit, 150);
   const heroes = document.querySelectorAll('.ab-hero');
   if (!heroes.length) return;
 
+  function syncStageTop(hero) {
+    if (!hero.classList.contains('gv-hero-svc')) return;
+    const cta = hero.querySelector('.ab-cta-row');
+    if (!cta) return;
+    const hr = hero.getBoundingClientRect();
+    const cr = cta.getBoundingClientRect();
+    hero.style.setProperty('--hero-stage-top', Math.round(cr.bottom - hr.top + 5) + 'px');
+  }
+
   heroes.forEach(hero => {
     /* Split each headline line into per-letter glyph spans (continuous stagger) */
     let i = 0;
@@ -462,9 +512,11 @@ setTimeout(scaleToFit, 150);
     const runSeq = () => {
       setTimeout(() => hero.classList.add('lit'),     60);
       setTimeout(() => hero.classList.add('painted'), 1000);
+      setTimeout(() => syncStageTop(hero), 120);
     };
     if (document.readyState === 'complete') runSeq();
     else window.addEventListener('load', runSeq, { once: true });
+    window.addEventListener('resize', () => syncStageTop(hero), { passive: true });
 
     /* Mouse spotlight */
     hero.addEventListener('mousemove', e => {
@@ -850,6 +902,63 @@ setTimeout(scaleToFit, 150);
   });
 })();
 
+/* ── Tunable same-page smooth scroll ─────────────────────────────── */
+(function initSmoothAnchors() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function duration() {
+    const styles = getComputedStyle(document.documentElement);
+    const key = window.innerWidth < 1024 ? '--gv-scroll-mobile-ms' : '--gv-scroll-desktop-ms';
+    const raw = parseFloat(styles.getPropertyValue(key));
+    return Number.isFinite(raw) ? raw : 800;
+  }
+
+  function ease(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  window.gvSmoothScrollTo = function gvSmoothScrollTo(target, opts) {
+    if (!target) return;
+    const options = opts || {};
+    if (prefersReduced.matches) {
+      target.scrollIntoView({ block: options.block || 'start' });
+      return;
+    }
+    const startY = window.scrollY;
+    const rect = target.getBoundingClientRect();
+    const top = rect.top + startY - (options.offset || 0);
+    const distance = top - startY;
+    const total = duration();
+    const start = performance.now();
+
+    function tick(now) {
+      const p = Math.min(1, (now - start) / total);
+      window.scrollTo(0, startY + distance * ease(p));
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  };
+
+  document.addEventListener('click', e => {
+    const link = e.target.closest('a[href^="#"], a[href*=".html#"]');
+    if (!link) return;
+    const url = new URL(link.href, window.location.href);
+    if (url.pathname !== window.location.pathname || !url.hash) return;
+    const target = document.querySelector(url.hash);
+    if (!target) return;
+    e.preventDefault();
+    history.pushState(null, '', url.hash);
+    window.gvSmoothScrollTo(target);
+  });
+
+  if (window.location.hash) {
+    window.setTimeout(() => {
+      const target = document.querySelector(window.location.hash);
+      if (target) window.gvSmoothScrollTo(target);
+    }, 120);
+  }
+})();
+
 /* ── Service hero "See the Process" buttons ────────────────────────
    Raw hash jumps land awkwardly on the tall process section and can fail in
    the scaled layout. Scroll to the visible process header instead. */
@@ -864,7 +973,11 @@ setTimeout(scaleToFit, 150);
       const header = section.querySelector('.sv-proc-flower-header') || section;
       e.preventDefault();
       history.replaceState(null, '', '#sv-process');
-      header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.gvSmoothScrollTo) {
+        window.gvSmoothScrollTo(header);
+      } else {
+        header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 })();
@@ -1018,7 +1131,7 @@ setTimeout(scaleToFit, 150);
     var anrLines  = netRoles.querySelectorAll('.anr-line');
     var anrLeft   = netRoles.querySelector('.anr-left');
     var wordEls   = Array.from(netRoles.querySelectorAll('.anr-word[data-img]'));
-    var supWordEl = supSection ? supSection.querySelector('.ab-sup-word') : null;
+    var supWordEls = supSection ? Array.from(supSection.querySelectorAll('.ab-sup-word')) : [];
 
     /* ── Floater setup ──────────────────────────────────────────────────
        Settled % positions: row-1 words → upper zone, row-2 → lower zone.
@@ -1149,35 +1262,9 @@ setTimeout(scaleToFit, 150);
       });
     }
 
-    /* ── Phase 2 & 3: scroll-driven travel → SUPERPOWER absorption ──────
-       Repeatable: scrolling back up past the trigger resets everything so the
-       full sequence plays again on the next scroll-down pass.
-
-       p = 0  →  crew section bottom first crosses 65 % vh
-       p = 1  →  crew section bottom reaches 0 (SUPERPOWER fills viewport)
-
-       Each floater has a staggered departure offset (0–60 % of overall p)
-       so they leave one by one but all converge at p = 1.  The rAF loop
-       re-evaluates the live SUPERPOWER position every frame, keeping the
-       flight locked to the actual text no matter how fast the user scrolls.
-
-       If the user scrolls back up (p < −0.15) the loop tears down the clones,
-       restores the originals, and resets all flags so the next scroll-down
-       plays the sequence fresh.                                              */
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      var travelStarted = false;
-      var travelClones  = [];
-      var absorbFired   = false;
-      var travelRafId   = null;
-
-      /* Travel trigger threshold.
-         Mobile: 1.0 × vh → starts when section bottom == viewport bottom,
-         giving a full viewport's worth of scroll range so even fast fingers
-         see the astronauts fly.  Desktop: 0.65 × vh (original behaviour). */
-      var TRIG = isMobile ? 1.0 : 0.65;
-
-      /* Dedicated portal — position:fixed child of body, no overflow clipping.
-         Clones live here so body{overflow-x:hidden} can't mask them on iOS. */
+    /* ── Phase 2: simple scrubbed travel into the two US words ───────── */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && hasST && supWordEls.length) {
+      var travelClones = [];
       var travPortal = document.createElement('div');
       travPortal.setAttribute('aria-hidden', 'true');
       travPortal.style.cssText =
@@ -1185,140 +1272,81 @@ setTimeout(scaleToFit, 150);
         'z-index:9980;pointer-events:none;';
       document.body.insertBefore(travPortal, document.body.firstChild);
 
-      function lv(a, b, t)  { return a + (b - a) * t; }  /* lerp        */
-      function ei3(t)        { return t * t * t; }         /* easeInCubic */
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
-      /* Tear-down: remove clones, restore originals, reset all flags */
-      function resetTravel() {
-        if (travelRafId) { cancelAnimationFrame(travelRafId); travelRafId = null; }
+      function clearTravel() {
         travelClones.forEach(function(tc) {
           if (tc && tc.el && tc.el.parentNode) tc.el.parentNode.removeChild(tc.el);
         });
-        travelClones  = [];
-        absorbFired   = false;
-        travelStarted = false;
+        travelClones = [];
         floaters.forEach(function(it) {
           if (it.phase !== 'hidden') it.el.style.opacity = '1';
         });
-        if (supWordEl) supWordEl.classList.remove('sup-absorbing');
+        supWordEls.forEach(function(el) { el.classList.remove('sup-absorbing'); });
       }
 
-      function startScrollTravel() {
-        if (travelStarted) return;
-        travelStarted = true;
-
-        /* Cache vh at the moment travel starts — prevents iOS address-bar
-           height jitter from corrupting rawP mid-animation.               */
-        var cachedVH = window.innerHeight;
-
-        /* Snapshot every settled floater's screen centre */
-        floaters.forEach(function(it) {
-          if (it.phase === 'hidden') { travelClones.push(null); return; }
-          /* Skip floaters hidden by CSS (mobile hides nth-child(n+5)) */
-          if (window.getComputedStyle(it.el).display === 'none') { travelClones.push(null); return; }
+      function makeTravelClones() {
+        clearTravel();
+        floaters.forEach(function(it, i) {
+          if (window.getComputedStyle(it.el).display === 'none') return;
           var fr = it.el.getBoundingClientRect();
-          var sx = fr.left + fr.width  * 0.5;
-          var sy = fr.top  + fr.height * 0.5;
-
+          var size = Math.max(fr.width, fr.height) || SZ;
+          var sx = fr.left + fr.width * 0.5;
+          var sy = fr.top + fr.height * 0.5;
           var clone = document.createElement('img');
           clone.src = it.el.src;
-          clone.setAttribute('aria-hidden', 'true');
+          clone.alt = '';
           clone.style.cssText =
-            'position:fixed;' +
-            'left:' + (sx - SZ * 0.5) + 'px;' +
-            'top:'  + (sy - SZ * 0.5) + 'px;' +
-            'width:' + SZ + 'px;height:' + SZ + 'px;' +
-            'pointer-events:none;opacity:1;' +
-            'transform-origin:center;';
+            'position:fixed;left:' + (sx - size * 0.5) + 'px;top:' + (sy - size * 0.5) + 'px;' +
+            'width:' + size + 'px;height:' + size + 'px;object-fit:contain;opacity:1;' +
+            'transform-origin:center;filter:drop-shadow(0 20px 36px rgba(0,0,0,0.45));';
           travPortal.appendChild(clone);
           it.el.style.opacity = '0';
-
-          travelClones.push({ el: clone, sx: sx, sy: sy, rot: it.cfg.rot, absorbed: false });
+          travelClones.push({ el: clone, sx: sx, sy: sy, size: size, rot: it.cfg.rot, targetIndex: i < 3 ? 0 : 1 });
         });
-
-        function travelFrame() {
-          var crewRect = netRoles.getBoundingClientRect();
-          var vh = cachedVH;
-          var rawP = (vh * TRIG - crewRect.bottom) / (vh * TRIG);
-
-          /* User scrolled back up past start point → reset so next pass replays */
-          if (rawP < -0.15) { resetTravel(); return; }
-
-          var p = Math.max(0, Math.min(1, rawP));
-
-          /* Live SUPERPOWER target — recomputed every frame */
-          var targetX = window.innerWidth  * 0.5;
-          var targetY = window.innerHeight * 0.5;
-          if (supWordEl) {
-            var sr = supWordEl.getBoundingClientRect();
-            targetX = sr.left + sr.width  * 0.5;
-            targetY = sr.top  + sr.height * 0.5;
-          }
-
-          var nActive = travelClones.filter(function(tc) { return tc !== null; }).length;
-          var allDone = true;
-
-          travelClones.forEach(function(tc, i) {
-            if (!tc) return;
-
-            /* Staggered departure: floater-i starts moving at sOffset of p.
-               All arrive together at p = 1.                                 */
-            var sOffset = (nActive > 1) ? (i / (nActive - 1)) * 0.60 : 0;
-            var fp = (sOffset >= 1) ? 0
-                   : Math.max(0, Math.min(1, (p - sOffset) / (1 - sOffset)));
-            var ep = ei3(fp);
-
-            if (fp < 1) allDone = false;
-
-            var cx  = lv(tc.sx, targetX, ep) - SZ * 0.5;
-            var cy  = lv(tc.sy, targetY, ep) - SZ * 0.5;
-            var sc  = lv(1.0, 0.04, ep);
-            var op  = fp > 0.80 ? lv(1, 0, (fp - 0.80) / 0.20) : 1;
-            var rot = tc.rot + ep * (i % 2 === 0 ? 320 : -320);
-
-            tc.el.style.left      = cx.toFixed(1) + 'px';
-            tc.el.style.top       = cy.toFixed(1) + 'px';
-            tc.el.style.transform = 'rotate(' + rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
-            tc.el.style.opacity   = op.toFixed(3);
-
-            if (fp >= 0.92 && !tc.absorbed) {
-              tc.absorbed = true;
-              if (!absorbFired && supWordEl) {
-                absorbFired = true;
-                supWordEl.classList.add('sup-absorbing');
-                setTimeout(function() { supWordEl.classList.remove('sup-absorbing'); }, 1300);
-              }
-            }
-          });
-
-          if (allDone) {
-            /* All absorbed — clean up clones */
-            travelClones.forEach(function(tc) {
-              if (tc && tc.el && tc.el.parentNode) tc.el.parentNode.removeChild(tc.el);
-            });
-            travelClones = [];
-            travelRafId  = null;
-            /* Reset so the sequence replays when user scrolls back down */
-            travelStarted = false;
-            floaters.forEach(function(it) {
-              if (it.phase !== 'hidden') it.el.style.opacity = '1';
-            });
-            return;
-          }
-
-          travelRafId = requestAnimationFrame(travelFrame);
-        }
-
-        travelRafId = requestAnimationFrame(travelFrame);
       }
 
-      /* Persistent listener — re-arms after resetTravel() clears travelStarted */
-      window.addEventListener('scroll', function() {
-        if (!travelStarted &&
-            netRoles.getBoundingClientRect().bottom <= window.innerHeight * TRIG) {
-          startScrollTravel();
+      ScrollTrigger.create({
+        trigger: netRoles,
+        start: 'bottom 88%',
+        end: function() { return '+=' + Math.round(window.innerHeight * 0.95); },
+        scrub: true,
+        invalidateOnRefresh: true,
+        onEnter: makeTravelClones,
+        onEnterBack: makeTravelClones,
+        onLeaveBack: clearTravel,
+        onUpdate: function(self) {
+          if (!travelClones.length && self.progress > 0 && self.progress < 1) makeTravelClones();
+          var active = travelClones.length || 1;
+          travelClones.forEach(function(tc, i) {
+            var target = supWordEls[tc.targetIndex] || supWordEls[0];
+            var tr = target.getBoundingClientRect();
+            var tx = tr.left + tr.width * 0.5;
+            var ty = tr.top + tr.height * 0.5;
+            var offset = active > 1 ? (i / (active - 1)) * 0.32 : 0;
+            var fp = Math.max(0, Math.min(1, (self.progress - offset) / (1 - offset)));
+            var ep = easeOut(fp);
+            var left = lerp(tc.sx, tx, ep) - tc.size * 0.5;
+            var top = lerp(tc.sy, ty, ep) - tc.size * 0.5;
+            var scale = lerp(1, 0.05, ep);
+            var opacity = fp > 0.72 ? lerp(1, 0, (fp - 0.72) / 0.28) : 1;
+            tc.el.style.left = left.toFixed(1) + 'px';
+            tc.el.style.top = top.toFixed(1) + 'px';
+            tc.el.style.opacity = opacity.toFixed(3);
+            tc.el.style.transform = 'rotate(' + (tc.rot + ep * (i % 2 ? -210 : 210)).toFixed(1) + 'deg) scale(' + scale.toFixed(3) + ')';
+          });
+          if (self.progress > 0.9) {
+            supWordEls.forEach(function(el) { el.classList.add('sup-absorbing'); });
+          } else {
+            supWordEls.forEach(function(el) { el.classList.remove('sup-absorbing'); });
+          }
+        },
+        onLeave: function() {
+          supWordEls.forEach(function(el) { el.classList.add('sup-absorbing'); });
+          setTimeout(clearTravel, 350);
         }
-      }, { passive: true });
+      });
     }
   }
 

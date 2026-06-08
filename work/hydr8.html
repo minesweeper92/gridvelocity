@@ -16,7 +16,7 @@
   <link rel="preload" href="../fonts/Boldonse-Regular.ttf"               as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../fonts/Archivo-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin>
 
-  <link rel="stylesheet" href="../css/main.css?v=181">
+  <link rel="stylesheet" href="../css/main.css?v=184">
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
   <!-- Google Analytics 4 -->
@@ -66,6 +66,7 @@
 
 <div class="nav-drawer" id="navDrawer" aria-hidden="true" role="dialog" aria-label="Site navigation">
   <ul class="drawer-links" role="list">
+    <li><a href="/">Home</a></li>
     <li><a href="index.html">Work</a></li>
     <li class="drawer-svc"><button class="drawer-svc-toggle" aria-expanded="false">Services <span class="drawer-svc-chevron" aria-hidden="true">↓</span></button>
       <ul class="drawer-sub" role="list">
@@ -82,14 +83,30 @@
 </div>
 
 <div id="scaler">
-  <main id="main-content" style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#0B0D14; color:#fff; text-align:center; padding:120px 40px;">
-    <p style="font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#EF4823; margin-bottom:24px;">Coming Soon</p>
-    <h1 style="font-family:'Boldonse',sans-serif; font-size:clamp(48px,8vw,96px); line-height:1; margin:0 0 24px; letter-spacing:-.02em;">Hydr8</h1>
-    <p style="font-family:'Archivo',sans-serif; font-size:18px; color:rgba(255,255,255,0.55); max-width:420px; line-height:1.6; margin:0 0 48px;">Video production case study — launching soon.</p>
-    <a href="index.html" style="font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.3); padding-bottom:4px;">← Back to all work</a>
+  <main id="main-content" class="cs-hero">
+    <p class="cs-kicker">Video Production</p>
+    <h1 class="cs-title">Hydr8</h1>
+    <div class="cs-meta">
+      <div><span>Client</span><strong>Viva Beverages</strong></div>
+      <div><span>Project</span><strong>Hydr8 TVC</strong></div>
+      <div><span>Role</span><strong>Production</strong></div>
+    </div>
   </main>
+
+  <section class="cs-video-section" aria-label="Hydr8 project video">
+    <div>
+      <div class="cs-video-label">Main TVC</div>
+      <div class="cs-video-wrap">
+        <iframe src="https://player.vimeo.com/video/1183316451?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1920" height="1080" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Hydr8 | Limitless Hydration" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-next">
+    <a href="index.html" class="cs-next-link">Back to Work <span aria-hidden="true">→</span></a>
+  </section>
 </div>
 
-<script defer src="../js/main.js?v=67"></script>
+<script defer src="../js/main.js?v=70"></script>
 </body>
 </html>

@@ -37,7 +37,7 @@
   <!-- ── Stylesheet ──────────────────────────────────────────────── -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
-  <link rel="stylesheet" href="css/main.css?v=181">
+  <link rel="stylesheet" href="css/main.css?v=184">
 
   <!-- ── Structured Data — Organisation ─────────────────────────── -->
   <script type="application/ld+json">
@@ -101,6 +101,7 @@
     "sameAs": [
       "https://www.instagram.com/gridvelocity/",
       "https://www.linkedin.com/company/gridvelocity",
+      "https://vimeo.com/gridvelocity",
       "https://www.youtube.com/@gridvelocity",
       "https://dribbble.com/gridvelocity",
       "https://www.behance.net/gridvelocityllc",
@@ -243,6 +244,7 @@
 <!-- Mobile fullscreen drawer -->
 <div class="nav-drawer" id="navDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site navigation">
   <ul class="drawer-links" role="list">
+    <li><a href="/">Home</a></li>
     <li><a href="work/index.html">Work</a></li>
     <li class="drawer-svc"><button class="drawer-svc-toggle" aria-expanded="false">Services <span class="drawer-svc-chevron" aria-hidden="true">↓</span></button>
       <ul class="drawer-sub" role="list">
@@ -342,28 +344,22 @@
 
   <!-- ─── SHOWREEL ────────────────────────────────────────────────── -->
   <section class="showreel" id="showreel" aria-label="Grid Velocity Showreel">
-    <div class="showreel-wrap">
-      <!-- Preview loop (muted autoplay). Click to watch full showreel with sound.
-           Swap src for a dedicated ≥6s teaser clip if you have one. -->
-      <video
-        class="showreel-vid"
-        id="showreelVid"
-        src="assets/showreel-2026.mp4"
-        preload="auto"
-        playsinline
-        autoplay
-        muted
-        loop
-        aria-label="Grid Velocity Showreel 2026"
-      ></video>
-      <div class="showreel-overlay" id="showreelOverlay">
-        <button class="showreel-play-btn" id="showreelPlay" aria-label="Play showreel">
-          <span class="play-triangle" aria-hidden="true"></span>
-          <span class="pause-icon" aria-hidden="true">
-            <span class="pause-bar"></span>
-            <span class="pause-bar"></span>
-          </span>
-        </button>
+    <div class="showreel-wrap" id="showreelWrap">
+      <iframe
+        id="showreelFrame"
+        class="showreel-iframe"
+        src="https://player.vimeo.com/video/1127060399?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0"
+        data-preview-src="https://player.vimeo.com/video/1127060399?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0"
+        data-play-src="https://player.vimeo.com/video/1127060399?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;player_id=0&amp;app_id=58479"
+        width="1920"
+        height="1080"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        title="Grid Velocity | AI + Conventional Showreel"
+        loading="lazy"
+        allowfullscreen></iframe>
+      <div class="showreel-overlay" id="showreelOverlay" aria-hidden="true">
         <div class="showreel-label">
           <span class="showreel-eyebrow">Grid Velocity</span>
           <span class="showreel-title">Showreel 2026</span>
@@ -383,7 +379,7 @@
         <div class="svc-orbg"   aria-hidden="true"></div>
         <div class="svc-whitebg" aria-hidden="true"></div>
         <span class="svc-num"   aria-hidden="true">01</span>
-        <img class="svc-astro" src="assets/astronaut-creative.webp" alt="" loading="lazy" aria-hidden="true">
+        <img class="svc-astro" src="assets/Home Page Services Section/Branding.webp" alt="" loading="lazy" aria-hidden="true">
         <h3 class="svc-name">Branding</h3>
         <p class="svc-desc">Visual identity, brand systems and packaging built to last.</p>
         <a href="services/branding.html" class="svc-btn">Explore <span aria-hidden="true">→</span></a>
@@ -392,7 +388,7 @@
         <div class="svc-orbg"   aria-hidden="true"></div>
         <div class="svc-whitebg" aria-hidden="true"></div>
         <span class="svc-num"   aria-hidden="true">02</span>
-        <img class="svc-astro" src="assets/astro-artist.webp" alt="" loading="lazy" aria-hidden="true">
+        <img class="svc-astro" src="assets/Home Page Services Section/Videos.png" alt="" loading="lazy" aria-hidden="true">
         <h3 class="svc-name">Video</h3>
         <p class="svc-desc">2D/3D animation, broadcast TVCs, social and AI-powered video.</p>
         <a href="services/video.html" class="svc-btn">Explore <span aria-hidden="true">→</span></a>
@@ -401,7 +397,7 @@
         <div class="svc-orbg"   aria-hidden="true"></div>
         <div class="svc-whitebg" aria-hidden="true"></div>
         <span class="svc-num"   aria-hidden="true">03</span>
-        <img class="svc-astro" src="assets/astro-dev.webp" alt="" loading="lazy" aria-hidden="true">
+        <img class="svc-astro" src="assets/Home Page Services Section/Web.png" alt="" loading="lazy" aria-hidden="true">
         <h3 class="svc-name">Websites</h3>
         <p class="svc-desc">Webflow, Shopify and custom builds. Designed to convert.</p>
         <a href="services/websites.html" class="svc-btn">Explore <span aria-hidden="true">→</span></a>
@@ -410,7 +406,7 @@
         <div class="svc-orbg"   aria-hidden="true"></div>
         <div class="svc-whitebg" aria-hidden="true"></div>
         <span class="svc-num"   aria-hidden="true">04</span>
-        <img class="svc-astro" src="assets/astronaut-developer.webp" alt="" loading="lazy" aria-hidden="true">
+        <img class="svc-astro" src="assets/Home Page Services Section/Paid Ads.png" alt="" loading="lazy" aria-hidden="true">
         <h3 class="svc-name">Paid Ads</h3>
         <p class="svc-desc">Google, Meta, TikTok. Spend smart, scale faster.</p>
         <a href="services/paid-ads.html" class="svc-btn">Explore <span aria-hidden="true">→</span></a>
@@ -558,22 +554,24 @@
         <ul role="list">
           <li><a href="/">Home</a></li>
           <li><a href="work/index.html">Work</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="/#services">Services</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="blog/index.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="careers.html">Careers <span class="badge-hiring">HIRING</span></a></li>
+          <li><a href="contact.html#faq">FAQ</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Social</h4>
         <ul role="list">
           <li><a href="https://www.instagram.com/gridvelocity/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in new tab)</span></a></li>
-          <li><a href="https://www.youtube.com/@gridvelocity" target="_blank" rel="noopener noreferrer">YouTube<span class="sr-only"> (opens in new tab)</span></a></li>
-          <li><a href="https://dribbble.com/gridvelocity" target="_blank" rel="noopener noreferrer">Dribbble<span class="sr-only"> (opens in new tab)</span></a></li>
-          <li><a href="https://www.behance.net/gridvelocityllc" target="_blank" rel="noopener noreferrer">Behance<span class="sr-only"> (opens in new tab)</span></a></li>
-          <li><a href="https://www.facebook.com/p/Grid-Velocity-61579681033096/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (opens in new tab)</span></a></li>
           <li><a href="https://www.linkedin.com/company/gridvelocity" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.behance.net/gridvelocityllc" target="_blank" rel="noopener noreferrer">Behance<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://vimeo.com/gridvelocity" target="_blank" rel="noopener noreferrer">Vimeo<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/@gridvelocity" target="_blank" rel="noopener noreferrer">YouTube<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://www.facebook.com/p/Grid-Velocity-61579681033096/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a href="https://dribbble.com/gridvelocity" target="_blank" rel="noopener noreferrer">Dribbble<span class="sr-only"> (opens in new tab)</span></a></li>
         </ul>
       </div>
     </nav>
@@ -593,8 +591,12 @@
       <span>
         <a href="legal/privacy.html">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="legal/cookies.html">Cookie Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="legal/terms.html">Terms of Service</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="legal/terms.html">For LLMs</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="legal/accessibility-statement.html">Accessibility Statement</a>
+        <span class="footer-proof">
+          <a href="https://clutch.co/profile/grid-velocity" target="_blank" rel="noopener noreferrer"><span class="footer-proof-logo footer-proof-logo--clutch">Clutch</span><span class="footer-proof-stars" aria-hidden="true">★★★★★</span></a>
+          <a href="https://www.google.com/search?q=Grid+Velocity+reviews" target="_blank" rel="noopener noreferrer"><span class="footer-proof-logo footer-proof-logo--google" aria-hidden="true">G</span><span>Google</span><span class="footer-proof-stars" aria-hidden="true">★★★★★</span></a>
+        </span>
       </span>
     </div>
   </footer>
@@ -604,7 +606,7 @@
 <!-- ── Scripts ─────────────────────────────────────────────────────── -->
 <!-- Lottie Web — loaded before main.js so lottie global is available  -->
 <script src="js/vendor/lottie-light.min.js" defer></script>
-<script src="js/main.js?v=67" defer></script>
+<script src="js/main.js?v=70" defer></script>
 
 </body>
 </html>
