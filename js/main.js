@@ -624,23 +624,23 @@ setTimeout(scaleToFit, 150);
   const strip = document.getElementById('logoStrip');
   if (!strip) return;
   const logos = [
-    { src: 'assets/logos/logo_01_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_02_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_03_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_04_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_05_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_06_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_07_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_08_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_10_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_11_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_12_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_13_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_14_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_15_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_16_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_18_black_156x99_27.svg', alt: 'Client logo' },
-    { src: 'assets/logos/logo_19_black_156x99_27.svg', alt: 'Client logo' }
+    { src: 'assets/Home Page Client Logos/logo_01_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_02_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_03_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_04_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_05_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_06_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_07_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_08_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_10_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_11_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_12_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_13_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_14_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_15_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_16_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_18_black_156x99_27.svg', alt: 'Client logo' },
+    { src: 'assets/Home Page Client Logos/logo_19_black_156x99_27.svg', alt: 'Client logo' }
   ];
   const row = logos
     .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)

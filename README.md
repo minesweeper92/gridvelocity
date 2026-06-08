@@ -132,10 +132,10 @@ npx vercel deploy --prod
 
 | Folder | Convention | Example |
 |--------|-----------|---------|
-| `assets/projects/{project}/hero.ext, gallery-01.ext ...
-| `assets/projects/` | `{project-slug}.ext` | `enkay-consulting.avif` |
-| `assets/team/` | `{firstname-lastname}.ext` | `hashim-hameed.png` |
-| `assets/network-section-images/` | `{role}.png` | `directors.png`, `designers.png` |
+| `assets/Work Images/{project}/` | `hero.ext`, `thumbnail.ext`, `gallery-01.ext` | `assets/Work Images/enkay/hero.avif` |
+| `assets/About Page Team Images/` | `{firstname-lastname}.ext` | `hashim-hameed.png` |
+| `assets/About Page Our Network Section/optimized/` | `{role}.png` | `directors.png`, `designers.png` |
+| `assets/Home Page Client Logos/` | `logo_##_black_156x99_27.svg` | `logo_01_black_156x99_27.svg` |
 
 ---
 
