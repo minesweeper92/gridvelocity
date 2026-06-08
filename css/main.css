@@ -9260,8 +9260,8 @@ body {
     min-height: 100svh;
   }
 
-  /* Home mobile: logo ticker + Specialists + showreel should read as one
-     compact follow-up beat after the hero, not three separate 100svh panels. */
+  /* Home mobile: logo ticker + Specialists + showreel share one 100svh
+     follow-up beat after the hero, matching the section rhythm elsewhere. */
   .logo-strip {
     min-height: 0 !important;
     height: 58px !important;
@@ -9278,9 +9278,11 @@ body {
     max-width: 124px !important;
   }
   .specialists {
-    min-height: 0 !important;
+    min-height: calc(100svh - 56.25vw - 61px) !important;
     padding: 34px 22px 28px !important;
     gap: 18px !important;
+    display: grid !important;
+    align-content: center !important;
   }
   .specialists .spec-left h2 {
     font-size: clamp(27px, 8vw, 36px) !important;
@@ -10034,4 +10036,299 @@ body {
 @keyframes gv-mobile-role-float {
   0%, 100% { translate: 0 0; }
   50% { translate: 0 -14px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LOCAL QA POLISH — service reveals, case video frames, proof logos,
+   About network safety, mobile team swipe, nav/logo polish.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Home hero pills: visual nudge only, no layout shift. */
+.hero.lit .hero-cta-row {
+  transform: translateY(5px);
+}
+
+/* Homepage services: orange mask peels away to reveal the astro/art beneath. */
+.svc-card {
+  background: #fff;
+  isolation: isolate;
+}
+.svc-whitebg {
+  z-index: 0 !important;
+  transform: none !important;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(239,72,35,0.18), transparent 34%),
+    #fff !important;
+}
+.svc-orbg {
+  z-index: 2 !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.14), transparent 42%),
+    var(--orange) !important;
+  transform: translateY(0) scale(1);
+  transform-origin: top center;
+  transition: transform 620ms cubic-bezier(.22,1,.36,1), border-radius 620ms cubic-bezier(.22,1,.36,1);
+}
+.svc-card:hover .svc-orbg,
+.svc-card:focus-within .svc-orbg,
+.svc-card.is-open .svc-orbg {
+  transform: translateY(-104%) scale(0.94);
+  border-radius: 0 0 48% 48%;
+}
+.svc-astro {
+  z-index: 1 !important;
+  opacity: 0;
+  transform: translate(-50%, 14px) scale(0.9) rotate(-4deg);
+  transition:
+    opacity 260ms ease,
+    transform 640ms cubic-bezier(.22,1,.36,1) !important;
+}
+.svc-card:hover .svc-astro,
+.svc-card:focus-within .svc-astro,
+.svc-card.is-open .svc-astro {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1) rotate(0deg);
+}
+.svc-num,
+.svc-name,
+.svc-desc,
+.svc-btn {
+  z-index: 3 !important;
+}
+.svc-card:hover .svc-num,
+.svc-card:focus-within .svc-num,
+.svc-card.is-open .svc-num {
+  color: rgba(239,72,35,0.13);
+  mix-blend-mode: normal;
+}
+.svc-card:hover .svc-name,
+.svc-card:focus-within .svc-name,
+.svc-card.is-open .svc-name {
+  color: var(--orange);
+}
+.svc-card:hover .svc-btn,
+.svc-card:focus-within .svc-btn,
+.svc-card.is-open .svc-btn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Work detail videos: reuse homepage showreel frame language. */
+.gv-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #050505;
+  box-shadow: 0 28px 90px rgba(0,0,0,0.36);
+  cursor: pointer;
+}
+.gv-video-frame iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  pointer-events: none;
+}
+.gv-video-frame::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 26px;
+  bottom: 22px;
+  z-index: 2;
+  font-family: 'Archivo', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.86);
+  transition: opacity 220ms ease;
+}
+.gv-video-frame::after {
+  content: 'Play';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: auto;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Archivo', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 20px 54px rgba(0,0,0,0.34);
+  transition: transform 220ms ease, background 220ms ease, color 220ms ease;
+}
+.gv-video-frame:hover::after,
+.gv-video-frame:focus-visible::after {
+  transform: scale(1.06);
+}
+.gv-video-frame.is-playing::before {
+  opacity: 0;
+}
+.gv-video-frame.is-playing::after {
+  content: 'Pause';
+  background: #fff;
+  color: var(--black);
+}
+.cs-case-image {
+  width: 100%;
+  margin-top: 34px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #111;
+}
+.cs-case-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* About network: keep astros decorative, never competing with text. */
+.anr-floaters {
+  z-index: 1 !important;
+}
+.anr-floater {
+  filter: drop-shadow(0 24px 44px rgba(0,0,0,0.52));
+}
+.anr-left,
+.anr-right,
+.anr-words {
+  position: relative;
+  z-index: 4 !important;
+}
+.anr-body {
+  z-index: 5 !important;
+  background: rgba(28,26,29,0.78);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 18px 24px;
+  backdrop-filter: blur(4px);
+}
+
+/* Team carousel: bigger drag target + mobile auto-hover state. */
+.ab-team-swiper-wrap {
+  cursor: grab;
+}
+.ab-team-swiper-wrap:active {
+  cursor: grabbing;
+}
+.ab-team-swiper {
+  touch-action: pan-y;
+}
+.ab-team-swiper .swiper-slide-active .ab-member {
+  transform: translateY(-6px);
+}
+.ab-team-swiper .swiper-slide-active .ab-member-photo {
+  box-shadow: 0 28px 60px rgba(239,72,35,0.30);
+}
+.ab-team-swiper .swiper-slide-active .ab-member-photo::before {
+  opacity: 1;
+}
+.ab-team-swiper .swiper-slide-active .ab-member-photo img {
+  filter: grayscale(0%);
+  transform: scale(1.08);
+}
+.ab-team-swiper .swiper-slide-active .ab-member-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Footer proof logos use the supplied assets and include Webflow. */
+.footer-proof {
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.footer-proof a {
+  gap: 7px;
+  padding: 6px 10px;
+}
+.footer-proof-logo img {
+  width: auto;
+  height: 16px;
+  display: block;
+  object-fit: contain;
+}
+.footer-proof-logo--webflow img {
+  height: 18px;
+}
+
+/* Navbar/logo polish, including blog accessibility contrast. */
+.nav-logo img {
+  height: 62px;
+}
+.gv-nav.scrolled .nav-logo img {
+  height: 48px;
+}
+.page-blog .gv-nav:not(.scrolled) .nav-a11y {
+  color: var(--orange);
+  border-color: rgba(239,72,35,0.58);
+}
+.page-blog .gv-nav:not(.scrolled) .nav-logo img {
+  filter: none;
+  opacity: 1;
+}
+
+@media (max-width: 1023px) {
+  .nav-logo img {
+    height: 42px !important;
+  }
+  .gv-nav.scrolled .nav-logo img {
+    height: 36px !important;
+  }
+  .svc-card {
+    min-height: 280px;
+  }
+  .svc-card .svc-orbg {
+    transform: translateY(-104%) scale(0.94);
+  }
+  .svc-card .svc-astro,
+  .svc-card.is-open .svc-astro {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1) rotate(0deg);
+  }
+  .gv-video-frame {
+    border-radius: 12px;
+  }
+  .gv-video-frame::before {
+    left: 16px;
+    bottom: 14px;
+    font-size: 10px;
+  }
+  .gv-video-frame::after {
+    width: 62px;
+    height: 62px;
+    font-size: 10px;
+  }
+  .anr-body {
+    padding: 14px 16px;
+  }
+  .ab-team-swiper-wrap {
+    padding: 0 8px 40px !important;
+  }
+  .ab-team-swiper-wrap::after {
+    content: 'Swipe';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(13,13,13,0.45);
+  }
+  .footer-proof {
+    display: flex;
+    margin-left: 0;
+    margin-top: 16px;
+  }
 }
