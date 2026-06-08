@@ -9071,6 +9071,9 @@ body {
   display: block;
   pointer-events: none;
 }
+.showreel-wrap.is-playing .showreel-iframe {
+  pointer-events: auto;
+}
 
 .showreel-wrap:has(.showreel-iframe) {
   cursor: auto;
@@ -10130,6 +10133,9 @@ body {
   display: block;
   border: 0;
   pointer-events: none;
+}
+.gv-video-frame.is-playing iframe {
+  pointer-events: auto;
 }
 .gv-video-frame::before {
   content: attr(data-label);
