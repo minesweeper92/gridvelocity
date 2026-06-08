@@ -9745,6 +9745,13 @@ body {
     top: var(--hero-stage-top, 500px) !important;
     bottom: 0 !important;
     height: auto !important;
+    max-width: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    display: block !important;
+    flex-direction: initial !important;
     animation: none !important;
     transform: none !important;
   }
@@ -9756,14 +9763,22 @@ body {
     display: grid !important;
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 8px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border-bottom: 0 !important;
+    transform: none !important;
+    animation: none !important;
   }
   .ab-hero.gv-hero-svc[data-svc="paid-ads"] .gv-kpi {
+    flex: initial !important;
     min-width: 0 !important;
     padding: 9px 8px !important;
     border-radius: 10px !important;
     text-align: center;
     background: rgba(0,0,0,0.68);
     border-color: rgba(255,255,255,0.24);
+    transform: none !important;
+    animation: none !important;
   }
   .ab-hero.gv-hero-svc[data-svc="paid-ads"] .gv-kpi-label {
     font-size: 8px !important;
@@ -9774,13 +9789,20 @@ body {
     font-size: clamp(19px, 6vw, 28px) !important;
   }
   .ab-hero.gv-hero-svc[data-svc="paid-ads"] .gv-paid-bars {
+    position: absolute !important;
     left: 28px !important;
     right: 28px !important;
     bottom: 0 !important;
     height: min(24svh, 180px) !important;
     justify-content: center;
+    margin: 0 !important;
+    order: initial !important;
   }
   .ab-hero.gv-hero-svc[data-svc="paid-ads"] .gv-paid-grid {
+    inset: auto 0 0 0 !important;
+    height: min(34svh, 260px) !important;
+    border-radius: 0 !important;
+    opacity: 0.26 !important;
     mask-image: radial-gradient(ellipse at 50% 100%, #000 0%, transparent 76%);
   }
   .gv-blog-stage {
