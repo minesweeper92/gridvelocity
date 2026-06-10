@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────────────────
    Grid Velocity — main.js
    Shared scripts for all pages.
-   Expects Lottie Web to be loaded before this script runs.
+   Lottie Web is loaded on demand when an animation container needs it.
 ───────────────────────────────────────────────────────────────────── */
 
 /* ── GLOBAL A11Y PREFS — apply saved prefs on every page ─────────── */
@@ -15,14 +15,44 @@
   } catch (e) { /* ignore */ }
 })();
 
+/* ── LAZY LOTTIE LOADER ───────────────────────────────────────────── */
+let gvLottiePromise = null;
+
+function gvAssetPrefix() {
+  const cssLink = document.querySelector('link[href*="css/main.css"]');
+  return cssLink && cssLink.getAttribute('href').startsWith('../') ? '../' : '';
+}
+
+function loadLottieLibrary() {
+  if (window.lottie) return Promise.resolve(window.lottie);
+  if (gvLottiePromise) return gvLottiePromise;
+
+  gvLottiePromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-gv-lottie]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(window.lottie));
+      existing.addEventListener('error', reject);
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = gvAssetPrefix() + 'js/vendor/lottie-light.min.js';
+    script.defer = true;
+    script.dataset.gvLottie = 'true';
+    script.onload = () => resolve(window.lottie);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+
+  return gvLottiePromise;
+}
+
 /* ── HERO ASTRONAUT LOTTIE — loads per-page animation into .ab-astro-lottie ── */
 (function initHeroLotties() {
-  if (typeof lottie === 'undefined') {
-    // lottie not loaded yet — wait for window load
-    window.addEventListener('load', initHeroLotties);
-    return;
-  }
-  document.querySelectorAll('.ab-astro-lottie[data-src]').forEach(slot => {
+  const slots = document.querySelectorAll('.ab-astro-lottie[data-src]');
+  if (!slots.length) return;
+
+  loadLottieLibrary().then(() => slots.forEach(slot => {
     if (slot.dataset.loaded) return;
     const url = slot.dataset.src;
     slot.dataset.loaded = '1';
@@ -39,7 +69,7 @@
         slot.closest('.ab-painter')?.classList.add('has-lottie');
       })
       .catch(() => { /* keep static img as fallback */ });
-  });
+  })).catch(() => { /* keep static img as fallback */ });
 })();
 
 /* ── SCALE TO VIEWPORT ─────────────────────────────────────────────── */
@@ -188,17 +218,64 @@ setTimeout(scaleToFit, 150);
   }
 
   const items = [];
+  const pending = [];
 
-  /* Homepage featured cards (<img>) */
+  function activateItem(item) {
+    if (item.ready) return;
+
+    if (item.kind === 'home') {
+      const url = item.img.currentSrc || item.img.src;
+      if (!url) return;
+      const { top, bot } = buildHalves(url);
+      item.thumb.appendChild(top);
+      item.thumb.appendChild(bot);
+      item.thumb.classList.add('lb-ready');
+      item.top = top;
+      item.bot = bot;
+      item.scaleEl = item.thumb;
+    } else {
+      const bg = item.imgEl.style.backgroundImage || getComputedStyle(item.imgEl).backgroundImage;
+      const url = (bg.match(/url\(["']?(.*?)["']?\)/) || [])[1];
+      if (!url) return;
+      const { top, bot } = buildHalves(url);
+      item.imgEl.style.display = 'none';
+      item.card.insertBefore(bot, item.card.firstChild);
+      item.card.insertBefore(top, item.card.firstChild);
+      item.top = top;
+      item.bot = bot;
+      item.scaleEl = item.card;
+    }
+
+    item.ready = true;
+    items.push(item);
+  }
+
+  function enterItem(item) {
+    activateItem(item);
+    if (!item.ready) return;
+    item.top.style.transition = `border-radius ${TR}`;
+    item.bot.style.transition = `border-radius ${TR}`;
+    item.scaleEl.style.transition = `transform ${TR}`;
+    if (item.overlay) item.overlay.style.transition = `border-radius ${TR}`;
+    applyBlob(item, 1, true);
+  }
+
+  function leaveItem(item) {
+    if (!item.ready) return;
+    applyBlob(item, 0, true);
+  }
+
+  /* Homepage featured cards (<img>) — prepare near viewport so lazy images stay lazy. */
   document.querySelectorAll('.work-card').forEach(card => {
     const thumb = card.querySelector('.work-thumb');
     const img   = card.querySelector('.work-thumb-img');
     if (!thumb || !img) return;
-    const url = img.currentSrc || img.src;
-    const { top, bot } = buildHalves(url);
-    thumb.appendChild(top); thumb.appendChild(bot);
-    thumb.classList.add('lb-ready');
-    items.push({ card, scaleEl: thumb, top, bot });
+    const item = { kind: 'home', card, thumb, img };
+    pending.push(item);
+    if (canHover) {
+      card.addEventListener('mouseenter', () => enterItem(item));
+      card.addEventListener('mouseleave', () => leaveItem(item));
+    }
   });
 
   /* Work page cards (background-image) */
@@ -206,17 +283,15 @@ setTimeout(scaleToFit, 150);
     const imgEl   = card.querySelector('.wk-card-img');
     const overlay = card.querySelector('.wk-card-overlay');
     if (!imgEl) return;
-    const bg  = imgEl.style.backgroundImage || getComputedStyle(imgEl).backgroundImage;
-    const url = (bg.match(/url\(["']?(.*?)["']?\)/) || [])[1];
-    if (!url) return;
-    const { top, bot } = buildHalves(url);
-    imgEl.style.display = 'none';
-    card.insertBefore(bot, card.firstChild);
-    card.insertBefore(top, card.firstChild);
-    items.push({ card, scaleEl: card, top, bot, overlay });
+    const item = { kind: 'work', card, imgEl, overlay };
+    pending.push(item);
+    if (canHover) {
+      card.addEventListener('mouseenter', () => enterItem(item));
+      card.addEventListener('mouseleave', () => leaveItem(item));
+    }
   });
 
-  if (!items.length) return;
+  if (!pending.length) return;
 
   /* Apply blob amount (0..1) to one card. */
   function applyBlob(item, amt, withScale) {
@@ -231,23 +306,30 @@ setTimeout(scaleToFit, 150);
     }
   }
 
+  let updateBlobCards = null;
+
+  function prepareVisibleCards() {
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const item = pending.find(p => p.card === entry.target);
+          if (item) activateItem(item);
+          observer.unobserve(entry.target);
+          if (!canHover && updateBlobCards) updateBlobCards();
+        });
+      }, { rootMargin: '900px 0px' });
+      pending.forEach(item => obs.observe(item.card));
+    } else {
+      pending.forEach(activateItem);
+    }
+  }
+
   if (canHover) {
-    /* ── Desktop: hover → blob + scale ── */
-    items.forEach(item => {
-      item.card.addEventListener('mouseenter', () => {
-        item.top.style.transition = `border-radius ${TR}`;
-        item.bot.style.transition = `border-radius ${TR}`;
-        item.scaleEl.style.transition = `transform ${TR}`;
-        if (item.overlay) item.overlay.style.transition = `border-radius ${TR}`;
-        applyBlob(item, 1, true);
-      });
-      item.card.addEventListener('mouseleave', () => {
-        applyBlob(item, 0, true);
-      });
-    });
+    prepareVisibleCards();
   } else {
     /* ── Touch: scroll-driven blob (live, no transition, no scale) ── */
-    function update() {
+    updateBlobCards = function update() {
       const vh = window.innerHeight;
       items.forEach(item => {
         item.top.style.transition = 'none';
@@ -258,13 +340,13 @@ setTimeout(scaleToFit, 150);
         const amt    = Math.max(0, Math.min(1, (vh - center) / (vh * 0.6)));
         applyBlob(item, amt, false);
       });
-    }
+    };
     let ticking = false;
     window.addEventListener('scroll', () => {
-      if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
+      if (!ticking) { requestAnimationFrame(() => { updateBlobCards(); ticking = false; }); ticking = true; }
     }, { passive: true });
-    window.addEventListener('resize', update);
-    update();
+    window.addEventListener('resize', updateBlobCards);
+    prepareVisibleCards();
   }
 })();
 
@@ -316,20 +398,22 @@ setTimeout(scaleToFit, 150);
     }, 2350);
   }
 
-  /* Load Lottie animations */
-  if (typeof lottie !== 'undefined') {
-    fetch('assets/astronaut-original.json')
+  /* Load the hero astronaut animation without adding Lottie to the critical path. */
+  const astroSlot = document.getElementById('astroLottie');
+  if (astroSlot) {
+    loadLottieLibrary()
+      .then(() => fetch(gvAssetPrefix() + 'assets/astronaut-original.json'))
       .then(r => r.json())
       .then(data => {
         astroAnim = lottie.loadAnimation({
-          container: document.getElementById('astroLottie'),
+          container: astroSlot,
           renderer: 'svg',
           loop: true,
           autoplay: false,
           animationData: data
         });
-      });
-
+      })
+      .catch(() => {});
   }
 
   if (document.readyState === 'complete') runHeroSequence();
@@ -658,15 +742,14 @@ setTimeout(scaleToFit, 150);
 /* Lazy-loaded via IntersectionObserver — JSON only fetches when the CTA  */
 /* section scrolls into view (saves ~200KB on initial page load).         */
 (function initCtaLotties() {
-  if (typeof lottie === 'undefined') return;
-  const cssLink = document.querySelector('link[href*="css/main.css"]');
-  const prefix = cssLink && cssLink.getAttribute('href').startsWith('../') ? '../' : '';
+  const prefix = gvAssetPrefix();
 
   function loadLottie(el, id) {
     if (el.dataset.loaded) return;
     el.dataset.loaded = '1';
     const url = prefix + (id === 'ctaLaptop' ? 'assets/astro-laptop.json' : 'assets/astro-levitate.json');
-    fetch(url)
+    loadLottieLibrary()
+      .then(() => fetch(url))
       .then(r => r.json())
       .then(data => lottie.loadAnimation({ container: el, renderer: 'svg', loop: true, autoplay: true, animationData: data }))
       .catch(() => {});
@@ -719,7 +802,7 @@ setTimeout(scaleToFit, 150);
     { src: 'assets/Home Page Client Logos/logo_19_black_156x99_27.svg', alt: 'Client logo' }
   ];
   const row = logos
-    .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
+    .map(l => `<div class="logo-item"><img src="${l.src}" alt="${l.alt}" width="156" height="99" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`)
     .join('');
   /* Wrap both copies in flex rows so they sit side-by-side inside the flex container.
      Second copy is purely visual (loop continuity) — hide from screen readers. */
