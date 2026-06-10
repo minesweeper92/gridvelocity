@@ -896,8 +896,7 @@ body {
 
 
 /* ─────────────────────────────────────────────────────────────────────
-   FOOTER — black, GIF masked through logo, nav columns bottom-right
-   Note: footer-anim.gif is ~17MB. Convert to <video> when optimising.
+   FOOTER — black, animated fill masked through logo, nav columns bottom-right
 ───────────────────────────────────────────────────────────────────── */
 footer {
   width: 1440px;
@@ -923,7 +922,7 @@ footer {
 /* Animated GIF masked into logo shape (enhancement) */
 .footer-art-gif {
   position: absolute; inset: 0;
-  background-image: url('../assets/footer-anim.gif');
+  background-image: url('../assets/Footer Animation GV.webp');
   background-size: auto 100%;
   background-position: left center;
   background-repeat: no-repeat;
@@ -4819,7 +4818,7 @@ footer {
 }
 .footer-art-gif {
   position: absolute; inset: 0;
-  background-image: url('../assets/footer-anim.gif');
+  background-image: url('../assets/Footer Animation GV.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -5161,7 +5160,7 @@ footer::before {
   padding-bottom: 0.36em;
   /* Animated fill via background-clip text */
   color: transparent;
-  background-image: url('../assets/footer-anim.gif');
+  background-image: url('../assets/Footer Animation GV.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -5192,7 +5191,7 @@ footer::before {
   letter-spacing: 0.20em;
   text-transform: uppercase;
   color: transparent;
-  background-image: url('../assets/footer-anim.gif');
+  background-image: url('../assets/Footer Animation GV.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -9196,14 +9195,9 @@ body {
   letter-spacing: -0.03em;
 }
 .footer-proof-logo--google {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  display: inline-grid;
-  place-items: center;
-  background: conic-gradient(#4285F4 0 25%, #34A853 0 50%, #FBBC05 0 75%, #EA4335 0);
-  color: #fff;
-  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 2px;
 }
 .footer-proof-stars {
@@ -10228,6 +10222,10 @@ body {
 .footer-proof-logo--webflow img {
   height: 18px;
 }
+.footer-proof-logo--clutch img {
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
 .footer-proof-logo--google img {
   width: 20px;
   height: 20px;
@@ -10246,7 +10244,7 @@ body {
   border-color: rgba(239,72,35,0.58);
 }
 .page-blog .gv-nav:not(.scrolled) .nav-logo img {
-  filter: none;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(900%) hue-rotate(335deg);
   opacity: 1;
 }
 
@@ -10302,5 +10300,183 @@ body {
     display: flex;
     margin-left: 0;
     margin-top: 16px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   QA polish — proof logos, stable WYG tabs, blog nav, mobile hero offset
+───────────────────────────────────────────────────────────────────── */
+
+/* Footer proof logos: show the real supplied assets, not generated badges. */
+.footer-proof-logo--google {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+}
+.footer-proof-logo--google img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+.footer-proof-logo--clutch img {
+  height: 19px;
+  filter: brightness(0) invert(1);
+}
+
+/* What You Get: reserve text space so tab/hover changes do not push sections below. */
+.sv-wyg-list {
+  contain: layout;
+}
+.sv-wyg-item {
+  min-height: 172px;
+}
+.sv-wyg-desc {
+  grid-template-rows: 1fr;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 240ms ease, visibility 240ms ease;
+}
+.sv-wyg-item.wyg-active .sv-wyg-desc {
+  visibility: visible;
+  opacity: 1;
+}
+.sv-wyg-desc-inner {
+  min-height: 96px;
+  max-height: 96px;
+  overflow: hidden;
+}
+
+/* Blog nav rests on cream; keep the GV logo orange until the squeezed nav state. */
+.page-blog .gv-nav:not(.scrolled) .nav-logo img {
+  filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(900%) hue-rotate(335deg);
+  opacity: 1;
+}
+
+@media (max-width: 1023px) {
+  .ab-hero.gv-hero-svc .ab-hero-inner {
+    padding-top: 128px !important;
+  }
+  .sv-wyg-layout {
+    min-height: min(72svh, 600px);
+  }
+  .sv-wyg-item {
+    min-height: auto;
+  }
+  .sv-wyg-mobile-desc {
+    height: 164px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  .wk-page .wk-hero {
+    min-height: calc(100svh - 96px) !important;
+    padding: 132px 22px 42px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .wk-page .wk-filters {
+    min-height: 96px !important;
+    align-content: flex-start;
+  }
+  .wk-page .wk-grid {
+    padding-top: 0 !important;
+  }
+}
+
+/* Homepage services: orange skin peels away to reveal the astro/art beneath. */
+.services .svc-card {
+  background: #fff;
+  isolation: isolate;
+}
+.services .svc-whitebg {
+  z-index: 0 !important;
+  transform: none !important;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(239,72,35,0.18), transparent 34%),
+    #fff !important;
+}
+.services .svc-orbg {
+  z-index: 2 !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.14), transparent 42%),
+    var(--orange) !important;
+  transform: translateY(0) scale(1);
+  transform-origin: top center;
+  transition:
+    transform 620ms cubic-bezier(.22,1,.36,1),
+    border-radius 620ms cubic-bezier(.22,1,.36,1);
+}
+.services .svc-card:hover .svc-orbg,
+.services .svc-card:focus-within .svc-orbg,
+.services .svc-card.is-open .svc-orbg {
+  transform: translateY(-104%) scale(0.94);
+  border-radius: 0 0 48% 48%;
+}
+.services .svc-astro {
+  z-index: 1 !important;
+  opacity: 0;
+  transform: translate(-50%, 14px) scale(0.9) rotate(-4deg);
+  transition:
+    opacity 260ms ease,
+    transform 640ms cubic-bezier(.22,1,.36,1) !important;
+}
+.services .svc-card:hover .svc-astro,
+.services .svc-card:focus-within .svc-astro,
+.services .svc-card.is-open .svc-astro {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1) rotate(0deg);
+}
+.services .svc-num,
+.services .svc-name,
+.services .svc-desc,
+.services .svc-btn {
+  z-index: 3 !important;
+}
+.services .svc-card:hover .svc-num,
+.services .svc-card:focus-within .svc-num,
+.services .svc-card.is-open .svc-num {
+  color: rgba(239,72,35,0.13);
+  mix-blend-mode: normal;
+}
+.services .svc-card:hover .svc-name,
+.services .svc-card:focus-within .svc-name,
+.services .svc-card.is-open .svc-name {
+  color: var(--orange);
+}
+.services .svc-card:hover .svc-btn,
+.services .svc-card:focus-within .svc-btn,
+.services .svc-card.is-open .svc-btn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 1023px) {
+  .services .svc-card.on .svc-orbg,
+  .services .svc-card:focus-within .svc-orbg {
+    transform: translateY(-104%) scale(0.94);
+    border-radius: 0 0 48% 48%;
+  }
+  .services .svc-card.on .svc-astro,
+  .services .svc-card:focus-within .svc-astro {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1) rotate(0deg);
+  }
+  .services .svc-card.on .svc-num,
+  .services .svc-card:focus-within .svc-num {
+    color: rgba(239,72,35,0.13);
+    mix-blend-mode: normal;
+  }
+  .services .svc-card.on .svc-name,
+  .services .svc-card:focus-within .svc-name {
+    color: var(--orange);
+  }
+  .services .svc-card.on .svc-btn,
+  .services .svc-card:focus-within .svc-btn {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

@@ -397,9 +397,30 @@ setTimeout(scaleToFit, 150);
     const playSrc = frame.dataset.playSrc || frame.src;
     let playing = false;
 
+    function loadPreview() {
+      if (playing || frame.dataset.loaded === 'preview') return;
+      frame.src = previewSrc;
+      frame.dataset.loaded = 'preview';
+    }
+
+    function queuePreviewLoad() {
+      if (!previewSrc) return;
+      if (!('IntersectionObserver' in window)) {
+        loadPreview();
+        return;
+      }
+      const observer = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        loadPreview();
+        observer.disconnect();
+      }, { rootMargin: '700px 0px' });
+      observer.observe(wrap);
+    }
+
     function setPreview() {
       playing = false;
       frame.src = previewSrc;
+      frame.dataset.loaded = 'preview';
       wrap.classList.remove('is-playing');
       if (overlay) overlay.classList.remove('playing');
       wrap.setAttribute('aria-label', 'Play showreel');
@@ -408,6 +429,7 @@ setTimeout(scaleToFit, 150);
     function setPlaying() {
       playing = true;
       frame.src = playSrc;
+      frame.dataset.loaded = 'play';
       wrap.classList.add('is-playing');
       if (overlay) overlay.classList.add('playing');
       wrap.setAttribute('aria-label', 'Pause showreel');
@@ -427,6 +449,7 @@ setTimeout(scaleToFit, 150);
       e.preventDefault();
       playing ? setPreview() : setPlaying();
     });
+    queuePreviewLoad();
     return;
   }
 
@@ -483,9 +506,31 @@ setTimeout(scaleToFit, 150);
     const playSrc = frame.dataset.playSrc;
     let playing = false;
 
+    function loadPreview() {
+      if (playing || frame.dataset.loaded === 'preview') return;
+      frame.src = previewSrc;
+      frame.dataset.loaded = 'preview';
+    }
+
+    function queuePreviewLoad() {
+      if (!previewSrc) return;
+      if (!('IntersectionObserver' in window)) {
+        loadPreview();
+        return;
+      }
+      const observer = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        loadPreview();
+        observer.disconnect();
+      }, { rootMargin: '700px 0px' });
+      observer.observe(frameWrap);
+      window.setTimeout(loadPreview, 1800);
+    }
+
     function preview() {
       playing = false;
       frame.src = previewSrc;
+      frame.dataset.loaded = 'preview';
       frameWrap.classList.remove('is-playing');
       frameWrap.setAttribute('aria-label', frameWrap.dataset.playLabel || 'Play project video');
     }
@@ -493,6 +538,7 @@ setTimeout(scaleToFit, 150);
     function play() {
       playing = true;
       frame.src = playSrc;
+      frame.dataset.loaded = 'play';
       frameWrap.classList.add('is-playing');
       frameWrap.setAttribute('aria-label', frameWrap.dataset.pauseLabel || 'Pause project video');
     }
@@ -505,6 +551,7 @@ setTimeout(scaleToFit, 150);
       e.preventDefault();
       playing ? preview() : play();
     });
+    queuePreviewLoad();
   });
 })();
 
