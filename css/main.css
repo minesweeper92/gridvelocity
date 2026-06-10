@@ -10455,26 +10455,26 @@ body {
 }
 
 @media (max-width: 1023px) {
-  .services .svc-card.on .svc-orbg,
+  .services .svc-card.is-open .svc-orbg,
   .services .svc-card:focus-within .svc-orbg {
     transform: translateY(-104%) scale(0.94);
     border-radius: 0 0 48% 48%;
   }
-  .services .svc-card.on .svc-astro,
+  .services .svc-card.is-open .svc-astro,
   .services .svc-card:focus-within .svc-astro {
     opacity: 1;
     transform: translate(-50%, 0) scale(1) rotate(0deg);
   }
-  .services .svc-card.on .svc-num,
+  .services .svc-card.is-open .svc-num,
   .services .svc-card:focus-within .svc-num {
     color: rgba(239,72,35,0.13);
     mix-blend-mode: normal;
   }
-  .services .svc-card.on .svc-name,
+  .services .svc-card.is-open .svc-name,
   .services .svc-card:focus-within .svc-name {
     color: var(--orange);
   }
-  .services .svc-card.on .svc-btn,
+  .services .svc-card.is-open .svc-btn,
   .services .svc-card:focus-within .svc-btn {
     opacity: 1;
     transform: translateX(0);

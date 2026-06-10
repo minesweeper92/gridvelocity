@@ -125,6 +125,35 @@ setTimeout(scaleToFit, 150);
   document.querySelectorAll('.reveal-late').forEach(el => obsLate.observe(el));
 })();
 
+/* ── HOMEPAGE SERVICE CARDS ───────────────────────────────────────── */
+(function initHomeServiceCards() {
+  const cards = [...document.querySelectorAll('.services .svc-card')];
+  if (!cards.length) return;
+
+  const touchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if (!touchLike) return;
+
+  cards.forEach(card => {
+    card.addEventListener('click', event => {
+      const link = event.target.closest('a');
+      if (link && card.classList.contains('is-open')) return;
+
+      if (!card.classList.contains('is-open')) {
+        event.preventDefault();
+        cards.forEach(other => {
+          if (other !== card) other.classList.remove('is-open');
+        });
+        card.classList.add('is-open');
+      }
+    });
+  });
+
+  document.addEventListener('click', event => {
+    if (event.target.closest('.services .svc-card')) return;
+    cards.forEach(card => card.classList.remove('is-open'));
+  });
+})();
+
 /* ── LITEBOX-STYLE CARD BLOB ───────────────────────────────────────
    Exact replication of litebox.ai (values measured from their live DOM).
 
