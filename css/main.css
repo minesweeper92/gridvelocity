@@ -156,7 +156,7 @@ body {
 }
 
 .nav-logo { display: flex; align-items: center; text-decoration: none; }
-.nav-logo img { height: 56px; object-fit: contain; display: block; transition: height 300ms; }
+.nav-logo img { height: 56px; object-fit: contain; display: block; }
 .gv-nav.scrolled .nav-logo img { height: 44px; }
 
 .nav-links {
@@ -659,9 +659,11 @@ body {
 .svc-whitebg {
   position: absolute; inset: 0; background: #fff; z-index: 1;
   transform: translateX(-100%);
-  transition: transform 480ms ease-in;
+  transition: transform 280ms var(--ease-out);
 }
-.svc-card:hover .svc-whitebg { transform: translateX(0); }
+@media (hover: hover) and (pointer: fine) {
+  .svc-card:hover .svc-whitebg { transform: translateX(0); }
+}
 
 .svc-num {
   position: absolute; left: 22px; top: 6px; z-index: 2;
@@ -673,13 +675,15 @@ body {
 
 .svc-astro {
   position: absolute;
-  left: 50%; top: 80px; transform: translate(-50%, 0) scale(0);
+  left: 50%; top: 80px; transform: translate(-50%, 0) scale(0.95);
   width: 240px; height: 240px; object-fit: contain;
   z-index: 2;
-  opacity: 1;
-  transition: transform 580ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0;
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 280ms var(--ease-out);
 }
-.svc-card:hover .svc-astro { transform: translate(-50%, 0) scale(1); }
+@media (hover: hover) and (pointer: fine) {
+  .svc-card:hover .svc-astro { transform: translate(-50%, 0) scale(1); opacity: 1; }
+}
 
 .svc-name {
   position: absolute; left: 22px; bottom: 78px; z-index: 2;
@@ -768,7 +772,7 @@ body {
   overflow: hidden;
   background-size: 100% 200%;
   background-repeat: no-repeat;
-  will-change: border-radius;
+  will-change: transform;
   /* border-radius set by JS — top:0 corners on top half, bottom:0 on bottom */
 }
 .lb-half.lb-top { top: 0;    background-position: center top; }
@@ -819,7 +823,10 @@ body {
   display: flex; flex-direction: row; align-items: stretch;
   transition: transform 360ms cubic-bezier(.22,1,.36,1), box-shadow 360ms;
 }
-.cta-card:hover { transform: translateY(-8px); box-shadow: 0 32px 64px rgba(0,0,0,0.22); }
+@media (hover: hover) and (pointer: fine) {
+  .cta-card:hover { transform: translateY(-8px); box-shadow: 0 32px 64px rgba(0,0,0,0.22); }
+}
+.cta-card:active { transform: scale(0.97); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
 .cta-card-white { background: var(--white); }
 .cta-card-black { background: var(--black); border: 1px solid rgba(112,112,112,0.34); }
 
@@ -989,7 +996,7 @@ footer {
 /* ─────────────────────────────────────────────────────────────────────
    SCROLL REVEAL — applied by IntersectionObserver
 ───────────────────────────────────────────────────────────────────── */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity 700ms ease, transform 700ms ease; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
 .reveal.on { opacity: 1; transform: translateY(0); }
 /* Utility/secondary pages: no reveal animation — content always visible */
 .page-util .reveal,
@@ -1171,10 +1178,10 @@ footer {
   color: rgba(255,255,255,0.88);
   text-decoration: none;
   letter-spacing: -.02em; text-transform: uppercase;
-  transition: color 200ms, letter-spacing 200ms;
+  transition: color 200ms;
   display: block;
 }
-.drawer-links li a:hover { color: var(--orange); letter-spacing: -.01em; }
+.drawer-links li a:hover { color: var(--orange); }
 
 /* Hamburger: Services accordion toggle + collapsible sub-links */
 .drawer-svc { display: block; }
@@ -1186,10 +1193,10 @@ footer {
   line-height: 1.45;
   color: rgba(255,255,255,0.88);
   text-transform: uppercase; letter-spacing: -.02em;
-  transition: color 200ms, letter-spacing 200ms;
+  transition: color 200ms;
   text-align: left;
 }
-.drawer-svc-toggle:hover { color: var(--orange); letter-spacing: -.01em; }
+.drawer-svc-toggle:hover { color: var(--orange); }
 .drawer-svc-chevron {
   font-size: 0.5em;
   font-style: normal;
@@ -2615,7 +2622,10 @@ footer {
   overflow: hidden;
   transition: transform 300ms cubic-bezier(.22,1,.36,1), box-shadow 300ms;
 }
-.sv-deliver-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+@media (hover: hover) and (pointer: fine) {
+  .sv-deliver-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+}
+.sv-deliver-card:active { transform: scale(0.97); }
 .sv-deliver-icon {
   width: 56px; height: 56px; border-radius: 14px;
   display: grid; place-items: center; font-size: 26px;
@@ -3260,7 +3270,10 @@ footer {
   color: rgba(255,255,255,0.7);
   transition: color 220ms, background 220ms, border-color 220ms, transform 220ms;
 }
-.wk-filter:hover { color: #fff; border-color: #fff; transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) {
+  .wk-filter:hover { color: #fff; border-color: #fff; transform: translateY(-2px); }
+}
+.wk-filter:active { transform: scale(0.96); }
 .wk-filter.active { background: var(--orange); border-color: var(--orange); color: #fff; }
 
 /* Grid — work page, litebox-style */
@@ -3305,11 +3318,16 @@ footer {
   letter-spacing: .1em; text-transform: uppercase; color: #fff;
   display: inline-flex; align-items: center; gap: 8px;
   margin-top: 0; max-height: 0; opacity: 0; overflow: hidden;
-  transition: max-height 400ms ease, opacity 300ms ease, margin-top 400ms ease;
+  transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
+  transform: translateY(6px);
 }
-.wk-card:hover .wk-card-view { max-height: 40px; opacity: 1; margin-top: 16px; }
-.wk-card-view span { transition: transform 220ms; }
-.wk-card:hover .wk-card-view span { transform: translateX(5px); }
+@media (hover: hover) and (pointer: fine) {
+  .wk-card:hover .wk-card-view { max-height: 40px; opacity: 1; margin-top: 16px; transform: translateY(0); }
+}
+.wk-card-view span { transition: transform 220ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .wk-card:hover .wk-card-view span { transform: translateX(5px); }
+}
 .wk-badge {
   position: absolute; top: 22px; left: 22px; z-index: 2;
   font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 800;
@@ -7558,10 +7576,10 @@ footer { overflow: visible !important; }
    Injected by main.js (outside #scaler) on every page except contact.html.
 ─────────────────────────────────────────────────────────────────────── */
 @keyframes gv-bubble-in {
-  0%   { transform: scale(0); }
-  50%  { transform: scale(1.2); }
-  70%  { transform: scale(0.9); }
-  90%  { transform: scale(1.05); }
+  0%   { transform: scale(0.8); opacity: 0; }
+  50%  { transform: scale(1.1); opacity: 1; }
+  70%  { transform: scale(0.95); }
+  90%  { transform: scale(1.03); }
   100% { transform: scale(1); }
 }
 @keyframes gv-bubble-out {
@@ -7649,10 +7667,10 @@ footer { overflow: visible !important; }
   white-space: nowrap;
 }
 .gv-bubble-text.text-line1 span {
-  transition: transform 0.4s ease-in 0.3s, opacity 0.4s ease-out;
+  transition: transform 0.35s var(--ease-out) 0.25s, opacity 0.35s var(--ease-out) 0.25s;
 }
 .gv-bubble-text.text-line2 span {
-  transition: transform 0.4s ease-in 0.5s, opacity 0.4s ease-out;
+  transition: transform 0.35s var(--ease-out) 0.4s, opacity 0.35s var(--ease-out) 0.4s;
 }
 .gv-cta-bubble.is-visible .gv-bubble-text span {
   opacity: 1;
