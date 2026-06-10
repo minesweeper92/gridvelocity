@@ -10051,69 +10051,32 @@ body {
   transform: translateY(5px);
 }
 
-/* Homepage services: orange mask peels away to reveal the astro/art beneath. */
-.svc-card {
-  background: #fff;
-  isolation: isolate;
+/* Homepage services: preserve the original white-swipe + astronaut-pop animation. */
+.svc-card:focus-within .svc-whitebg,
+.svc-card.is-open .svc-whitebg {
+  transform: translateX(0);
 }
-.svc-whitebg {
-  z-index: 0 !important;
-  transform: none !important;
-  background:
-    radial-gradient(circle at 50% 22%, rgba(239,72,35,0.18), transparent 34%),
-    #fff !important;
-}
-.svc-orbg {
-  z-index: 2 !important;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,0.14), transparent 42%),
-    var(--orange) !important;
-  transform: translateY(0) scale(1);
-  transform-origin: top center;
-  transition: transform 620ms cubic-bezier(.22,1,.36,1), border-radius 620ms cubic-bezier(.22,1,.36,1);
-}
-.svc-card:hover .svc-orbg,
-.svc-card:focus-within .svc-orbg,
-.svc-card.is-open .svc-orbg {
-  transform: translateY(-104%) scale(0.94);
-  border-radius: 0 0 48% 48%;
-}
-.svc-astro {
-  z-index: 1 !important;
-  opacity: 0;
-  transform: translate(-50%, 14px) scale(0.9) rotate(-4deg);
-  transition:
-    opacity 260ms ease,
-    transform 640ms cubic-bezier(.22,1,.36,1) !important;
-}
-.svc-card:hover .svc-astro,
 .svc-card:focus-within .svc-astro,
 .svc-card.is-open .svc-astro {
-  opacity: 1;
-  transform: translate(-50%, 0) scale(1) rotate(0deg);
+  transform: translate(-50%, 0) scale(1);
 }
-.svc-num,
-.svc-name,
-.svc-desc,
-.svc-btn {
-  z-index: 3 !important;
-}
-.svc-card:hover .svc-num,
 .svc-card:focus-within .svc-num,
 .svc-card.is-open .svc-num {
-  color: rgba(239,72,35,0.13);
+  color: rgba(239,72,35,0.12);
   mix-blend-mode: normal;
 }
-.svc-card:hover .svc-name,
 .svc-card:focus-within .svc-name,
 .svc-card.is-open .svc-name {
   color: var(--orange);
 }
-.svc-card:hover .svc-btn,
 .svc-card:focus-within .svc-btn,
 .svc-card.is-open .svc-btn {
   opacity: 1;
   transform: translateX(0);
+}
+.svc-card:focus-within .svc-desc,
+.svc-card.is-open .svc-desc {
+  bottom: 78px;
 }
 
 /* Work detail videos: reuse homepage showreel frame language. */
@@ -10265,6 +10228,11 @@ body {
 .footer-proof-logo--webflow img {
   height: 18px;
 }
+.footer-proof-logo--google img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
 
 /* Navbar/logo polish, including blog accessibility contrast. */
 .nav-logo img {
@@ -10292,13 +10260,11 @@ body {
   .svc-card {
     min-height: 280px;
   }
-  .svc-card .svc-orbg {
-    transform: translateY(-104%) scale(0.94);
+  .svc-card.is-open .svc-whitebg {
+    transform: translateX(0);
   }
-  .svc-card .svc-astro,
   .svc-card.is-open .svc-astro {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1) rotate(0deg);
+    transform: translate(-50%, 0) scale(1);
   }
   .gv-video-frame {
     border-radius: 12px;
