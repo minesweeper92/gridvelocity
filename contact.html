@@ -31,7 +31,7 @@
 
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
-  <link rel="stylesheet" href="css/main.css?v=201">
+  <link rel="stylesheet" href="css/main.css?v=202">
   <!-- ── Structured Data — SEO Page Metadata ─────────────────────── -->
   <script type="application/ld+json">
   [
@@ -193,11 +193,11 @@
             <label class="ct-chip"><input type="checkbox" name="services" value="Video"><span>Video</span></label>
             <label class="ct-chip"><input type="checkbox" name="services" value="Websites"><span>Websites</span></label>
             <label class="ct-chip"><input type="checkbox" name="services" value="Paid Ads"><span>Paid Ads</span></label>
-            <label class="ct-chip"><input type="checkbox" name="services" value="Other"><span>Other</span></label>
+            <label class="ct-chip"><input type="checkbox" name="services" value="Other"><span>Something else</span></label>
           </div>
         </div>
         <div class="ct-field">
-          <label for="ct-budget">Budget</label>
+          <label for="ct-budget">Approximate budget (USD)</label>
           <select id="ct-budget" name="budget">
             <option value="">Select a range</option>
             <option>Under $5k</option>
@@ -211,7 +211,7 @@
           <label for="ct-message">Tell us about it</label>
           <textarea id="ct-message" name="message" placeholder="A few lines about your project, goals and timeline…" required aria-required="true"></textarea>
         </div>
-        <button type="submit" class="ct-submit" id="ct-submit-btn">Send Message</button>
+        <button type="submit" class="ct-submit" id="ct-submit-btn">Start the Conversation</button>
         <p class="ct-note" id="ct-form-note">We reply within one business day. No spam, ever.</p>
       </form>
 
@@ -346,11 +346,11 @@ function gvContactSubmit(e) {
 
   const btn  = document.getElementById('ct-submit-btn');
   const note = document.getElementById('ct-form-note');
-  btn.textContent  = 'Opening your email…';
+  btn.textContent  = 'Ready — check your email app →';
   btn.disabled     = true;
-  if (note) note.textContent = 'Your email client should open with everything pre-filled.';
+  if (note) note.textContent = 'Your email is pre-filled. Just press send.';
   setTimeout(function() {
-    btn.textContent  = 'Send Message';
+    btn.textContent  = 'Start the Conversation';
     btn.disabled     = false;
     if (note) note.textContent = 'We reply within one business day. No spam, ever.';
   }, 4000);

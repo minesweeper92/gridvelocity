@@ -813,8 +813,9 @@ setTimeout(scaleToFit, 150);
 
 /* ── WORK FILTER (work page) ───────────────────────────────────────── */
 (function initWorkFilter() {
-  const bar = document.querySelector('.wk-filters');
-  const grid = document.querySelector('.wk-grid');
+  const bar   = document.querySelector('.wk-filters');
+  const grid  = document.querySelector('.wk-grid');
+  const empty = document.getElementById('wkEmpty');
   if (!bar || !grid) return;
   const cards = Array.from(grid.querySelectorAll('.wk-card'));
   const tabs  = Array.from(bar.querySelectorAll('.wk-filter'));
@@ -829,16 +830,29 @@ setTimeout(scaleToFit, 150);
     btn.setAttribute('aria-selected', 'true');
     btn.setAttribute('tabindex', '0');
     const cat = btn.dataset.filter;
+    let visible = 0;
     cards.forEach(card => {
       const match = cat === 'all' || (card.dataset.category || '').split(' ').includes(cat);
       card.classList.remove('enter');
       if (match) {
         card.classList.remove('hide');
-        void card.offsetWidth; /* replay entrance */
+        void card.offsetWidth;
         card.classList.add('enter');
+        visible++;
       } else {
         card.classList.add('hide');
       }
+    });
+    if (empty) empty.hidden = visible > 0;
+  }
+
+  /* Wire "See all work →" link inside empty state */
+  if (empty) {
+    const allLink = empty.querySelector('[data-filter="all"]');
+    if (allLink) allLink.addEventListener('click', e => {
+      e.preventDefault();
+      const allTab = tabs.find(b => b.dataset.filter === 'all');
+      if (allTab) { activateTab(allTab); allTab.focus(); }
     });
   }
 

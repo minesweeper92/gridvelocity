@@ -3291,6 +3291,12 @@ footer {
   /* transform (scroll scale + hover shrink) set by JS */
 }
 .wk-card.hide { display: none; }
+.wk-empty {
+  color: rgba(255,255,255,.45); font-size: 14px; text-align: center;
+  padding: 64px 0; width: 100%;
+}
+.wk-empty a { color: rgba(255,255,255,.7); text-decoration: underline; }
+.wk-empty a:hover { color: #fff; }
 .wk-card.enter { animation: wk-in 500ms cubic-bezier(.22,1,.36,1) both; }
 @keyframes wk-in { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
 .wk-card-img {
