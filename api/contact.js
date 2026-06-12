@@ -37,7 +37,7 @@ module.exports = async function handler(req, res) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Grid Velocity Website <hello@gridvelocity.com>',
+      from: 'Grid Velocity Website <noreply@forms.gridvelocity.com>',
       to: ['hello@gridvelocity.com'],
       reply_to: email,
       subject: company ? `Enquiry — ${company}` : `Enquiry — ${name}`,
