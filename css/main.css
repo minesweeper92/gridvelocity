@@ -3452,6 +3452,18 @@ footer {
 .ct-submit:hover  { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(239,72,35,0.45); }
 .ct-submit:active { transform: scale(0.97); box-shadow: none; }
 .ct-note { font-family: 'Archivo', sans-serif; font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 16px; text-align: center; }
+.ct-consent-field { margin-top: 8px; }
+.ct-consent-label {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-family: 'Archivo', sans-serif; font-size: 12px;
+  color: rgba(255,255,255,0.5); cursor: pointer; line-height: 1.5;
+}
+.ct-consent-label input[type="checkbox"] {
+  flex-shrink: 0; width: 16px; height: 16px; margin-top: 1px;
+  accent-color: var(--orange); cursor: pointer;
+}
+.ct-consent-label a { color: rgba(255,255,255,0.7); text-decoration: underline; }
+.ct-consent-label a:hover { color: #fff; }
 /* Entrance — transform-only (reliable above the fold) */
 .ct-intro > *, .ct-form { animation: sv-hero-in 800ms cubic-bezier(.22,1,.36,1) both; }
 .ct-intro > *:nth-child(1) { animation-delay: 60ms; }

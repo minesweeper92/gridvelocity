@@ -31,7 +31,7 @@
 
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
-  <link rel="stylesheet" href="css/main.css?v=203">
+  <link rel="stylesheet" href="css/main.css?v=204">
   <!-- ── Structured Data — SEO Page Metadata ─────────────────────── -->
   <script type="application/ld+json">
   [
@@ -210,6 +210,12 @@
         <div class="ct-field">
           <label for="ct-message">Tell us about it</label>
           <textarea id="ct-message" name="message" placeholder="A few lines about your project, goals and timeline…" required aria-required="true"></textarea>
+        </div>
+        <div class="ct-field ct-consent-field">
+          <label class="ct-consent-label">
+            <input type="checkbox" id="ct-consent" name="consent" required aria-required="true">
+            <span>I agree to Grid Velocity processing my data to respond to this enquiry. <a href="legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+          </label>
         </div>
         <button type="submit" class="ct-submit" id="ct-submit-btn">Start the Conversation</button>
         <p class="ct-note" id="ct-form-note">We reply within one business day. No spam, ever.</p>
