@@ -30,7 +30,7 @@
 
   <link rel="preload" href="../fonts/Boldonse-Regular.woff2"               as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="../css/main.css?v=208">
+  <link rel="stylesheet" href="../css/main.css?v=209">
 
   <script type="application/ld+json">
   {
@@ -153,6 +153,55 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-PX6EFBB6R3');
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a website cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A landing page and a full e-commerce build are different projects with different price tags. Choose a budget range below and we’ll scope what delivers the most impact within it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What platform do you build on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Webflow for marketing sites — fast, secure and easy for your team to update. Shopify for e-commerce. Custom builds when the project genuinely needs one. We recommend based on your case, not our convenience."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a website take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most builds move in weeks: design first, then development, then a proper QA pass across devices. We confirm the timeline in the proposal — and we don’t go quiet mid-project."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who maintains the site after launch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your call. We hand over clean, documented builds your team can run — or we stay on for updates, improvements and growth as an ongoing partner. Most clients start with handover and come back for more."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it work on mobile?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It’s designed for mobile from the first wireframe, not adapted to it at the end. Speed, accessibility and SEO are part of the build standard — not an add-on."
+      }
+    }
+  ]
+}
   </script>
 </head>
 
@@ -556,7 +605,7 @@
           </div>
           <div class="cta-divider" aria-hidden="true"></div>
           <p class="cta-desc">One build, scoped precisely and executed completely.</p>
-          <div class="cta-btn"><a href="../contact.html" class="btn-dark">Start a project <span aria-hidden="true">→</span></a></div>
+          <div class="cta-btn"><a href="#sv-start" class="btn-dark">Start a project <span aria-hidden="true">→</span></a></div>
         </div>
         <div class="cta-lottie" id="ctaLaptop" aria-hidden="true"></div>
       </div>
@@ -568,10 +617,98 @@
           </div>
           <div class="cta-divider" aria-hidden="true"></div>
           <p class="cta-desc">Ongoing design &amp; dev. Scale up, slow down: we move with you.</p>
-          <div class="cta-btn"><a href="../contact.html" class="btn-outline-white">Set up a retainer <span aria-hidden="true">→</span></a></div>
+          <div class="cta-btn"><a href="#sv-start" class="btn-outline-white">Set up a retainer <span aria-hidden="true">→</span></a></div>
         </div>
         <div class="cta-lottie" id="ctaLevitate" aria-hidden="true"></div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ─── SERVICE FAQ ──────────────────────────────────────────────── -->
+  <section class="ct-faq sv-landing-faq" id="sv-faq" aria-labelledby="sv-faq-heading">
+    <div class="ct-faq-head">
+      <h2 id="sv-faq-heading">Questions, Answered</h2>
+      <p class="ct-faq-lead">The things clients ask before we begin.</p>
+    </div>
+    <div class="ct-faq-list">
+      <details class="ct-faq-item">
+        <summary>What does a website cost?</summary>
+        <p>A landing page and a full e-commerce build are different projects with different price tags. Choose a budget range below and we’ll scope what delivers the most impact within it.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>What platform do you build on?</summary>
+        <p>Webflow for marketing sites — fast, secure and easy for your team to update. Shopify for e-commerce. Custom builds when the project genuinely needs one. We recommend based on your case, not our convenience.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>How long does a website take?</summary>
+        <p>Most builds move in weeks: design first, then development, then a proper QA pass across devices. We confirm the timeline in the proposal — and we don’t go quiet mid-project.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>Who maintains the site after launch?</summary>
+        <p>Your call. We hand over clean, documented builds your team can run — or we stay on for updates, improvements and growth as an ongoing partner. Most clients start with handover and come back for more.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>Will it work on mobile?</summary>
+        <p>It’s designed for mobile from the first wireframe, not adapted to it at the end. Speed, accessibility and SEO are part of the build standard — not an add-on.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ─── LEAD FORM ────────────────────────────────────────────────── -->
+  <section class="svl-section" id="sv-start" aria-labelledby="svl-h">
+    <div class="svl-glow" aria-hidden="true"></div>
+    <div class="svl-grid">
+      <div class="svl-intro">
+        <div class="svl-kicker">Start Your Build</div>
+        <h2 class="svl-h" id="svl-h">Let’s build a site that does the selling for you.</h2>
+        <p class="svl-lead">Tell us what your website needs to achieve. We’ll map the build, the platform and the launch plan — no jargon, no padding.</p>
+        <ul class="svl-points" role="list">
+          <li>We reply within one business day</li>
+          <li>Senior team on every project, no hand-offs</li>
+          <li>No obligation &mdash; just a straight answer</li>
+        </ul>
+      </div>
+      <form class="ct-form svl-form" aria-label="Project enquiry" data-service="Websites">
+        <div class="ct-field-row">
+          <div class="ct-field">
+            <label for="sl-name">Name <span aria-hidden="true" style="color:var(--orange)">*</span></label>
+            <input type="text" id="sl-name" name="name" placeholder="Your name" autocomplete="name" required aria-required="true">
+          </div>
+          <div class="ct-field">
+            <label for="sl-email">Email <span aria-hidden="true" style="color:var(--orange)">*</span></label>
+            <input type="email" id="sl-email" name="email" placeholder="you@company.com" autocomplete="email" required aria-required="true">
+          </div>
+        </div>
+        <div class="ct-field">
+          <label for="sl-company">Company <span style="opacity:.5">(optional)</span></label>
+          <input type="text" id="sl-company" name="company" placeholder="Company name" autocomplete="organization">
+        </div>
+        <div class="ct-field">
+          <label for="sl-budget">Approximate budget (USD)</label>
+          <select id="sl-budget" name="budget">
+            <option value="">Select a range</option>
+            <option>Under $5k</option>
+            <option>$5k &ndash; $15k</option>
+            <option>$15k &ndash; $40k</option>
+            <option>$40k+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="ct-field">
+          <label for="sl-message">Tell us about it</label>
+          <textarea id="sl-message" name="message" placeholder="A few lines about your project, goals and timeline&hellip;" required aria-required="true"></textarea>
+        </div>
+        <div class="ct-field ct-consent-field">
+          <label class="ct-consent-label">
+            <input type="checkbox" id="sl-consent" name="consent" required aria-required="true">
+            <span>I agree to Grid Velocity processing my data to respond to this enquiry. <a href="../legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+          </label>
+        </div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADjJa7RhVE8aTG86" data-theme="dark"></div>
+        <button type="submit" class="ct-submit">Start the Conversation</button>
+        <p class="ct-note">We reply within one business day. No spam, ever.</p>
+      </form>
     </div>
   </section>
 
@@ -639,7 +776,7 @@
 
 <script src="../js/vendor/gsap.min.js" defer></script>
 <script src="../js/vendor/ScrollTrigger.min.js" defer></script>
-<script src="../js/main.js?v=83" defer></script>
+<script src="../js/main.js?v=84" defer></script>
 
 </body>
 </html>

@@ -36,7 +36,7 @@
   <link rel="preload" href="../fonts/Boldonse-Regular.woff2"               as="font" type="font/woff2" crossorigin>
 
   <!-- ── Stylesheet ──────────────────────────────────────────────── -->
-  <link rel="stylesheet" href="../css/main.css?v=208">
+  <link rel="stylesheet" href="../css/main.css?v=209">
 
   <!-- ── Structured Data ─────────────────────────────────────────── -->
   <script type="application/ld+json">
@@ -160,6 +160,55 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-PX6EFBB6R3');
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a brand identity project cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on scope: a focused logo refresh and a full identity system are very different builds. Pick a budget range in the form below and we’ll tell you honestly what it gets you — and what we’d prioritise first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does branding take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most identity projects move in weeks, not months. The exact timeline depends on scope and how fast feedback rounds move — we confirm dates in the proposal and then we hit them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "We already have a logo. Can you work with it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Not every brand needs to start over. We can evolve what you have — tightening the system, the palette, the voice — or rebuild from the ground up if that’s what the work demands. We’ll tell you which one you actually need."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do you need from us to start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A conversation. The brand workshop is designed to pull everything we need out of your head — positioning, audience, ambition. You don’t need a brief, a deck or design opinions. Just show up knowing your business."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work with international clients?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Constantly. We work async across time zones with founders and marketing teams in Pakistan, the Gulf, North America and beyond. Clear process, scheduled checkpoints, no chasing."
+      }
+    }
+  ]
+}
   </script>
 </head>
 
@@ -508,7 +557,7 @@
           <div class="cta-divider" aria-hidden="true"></div>
           <p class="cta-desc">Scoped precisely. Executed completely. One brand engagement, built to last.</p>
           <div class="cta-btn">
-            <a href="../contact.html" class="btn-dark">Start a project <span aria-hidden="true">→</span></a>
+            <a href="#sv-start" class="btn-dark">Start a project <span aria-hidden="true">→</span></a>
           </div>
         </div>
         <div class="cta-lottie" id="ctaLaptop" aria-hidden="true"></div>
@@ -522,11 +571,99 @@
           <div class="cta-divider" aria-hidden="true"></div>
           <p class="cta-desc">Flexible by nature. Scale up, slow down, or pivot: we move with you.</p>
           <div class="cta-btn">
-            <a href="../contact.html" class="btn-outline-white">Set up a retainer <span aria-hidden="true">→</span></a>
+            <a href="#sv-start" class="btn-outline-white">Set up a retainer <span aria-hidden="true">→</span></a>
           </div>
         </div>
         <div class="cta-lottie" id="ctaLevitate" aria-hidden="true"></div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ─── SERVICE FAQ ──────────────────────────────────────────────── -->
+  <section class="ct-faq sv-landing-faq" id="sv-faq" aria-labelledby="sv-faq-heading">
+    <div class="ct-faq-head">
+      <h2 id="sv-faq-heading">Questions, Answered</h2>
+      <p class="ct-faq-lead">The things clients ask before we begin.</p>
+    </div>
+    <div class="ct-faq-list">
+      <details class="ct-faq-item">
+        <summary>What does a brand identity project cost?</summary>
+        <p>It depends on scope: a focused logo refresh and a full identity system are very different builds. Pick a budget range in the form below and we’ll tell you honestly what it gets you — and what we’d prioritise first.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>How long does branding take?</summary>
+        <p>Most identity projects move in weeks, not months. The exact timeline depends on scope and how fast feedback rounds move — we confirm dates in the proposal and then we hit them.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>We already have a logo. Can you work with it?</summary>
+        <p>Yes. Not every brand needs to start over. We can evolve what you have — tightening the system, the palette, the voice — or rebuild from the ground up if that’s what the work demands. We’ll tell you which one you actually need.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>What do you need from us to start?</summary>
+        <p>A conversation. The brand workshop is designed to pull everything we need out of your head — positioning, audience, ambition. You don’t need a brief, a deck or design opinions. Just show up knowing your business.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>Do you work with international clients?</summary>
+        <p>Constantly. We work async across time zones with founders and marketing teams in Pakistan, the Gulf, North America and beyond. Clear process, scheduled checkpoints, no chasing.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ─── LEAD FORM ────────────────────────────────────────────────── -->
+  <section class="svl-section" id="sv-start" aria-labelledby="svl-h">
+    <div class="svl-glow" aria-hidden="true"></div>
+    <div class="svl-grid">
+      <div class="svl-intro">
+        <div class="svl-kicker">Start Your Brand</div>
+        <h2 class="svl-h" id="svl-h">Ready to build a brand that can’t be ignored?</h2>
+        <p class="svl-lead">Tell us where your brand is going. We’ll tell you exactly how we’d get it there — scope, timeline and a plan you can hold us to.</p>
+        <ul class="svl-points" role="list">
+          <li>We reply within one business day</li>
+          <li>Senior team on every project, no hand-offs</li>
+          <li>No obligation &mdash; just a straight answer</li>
+        </ul>
+      </div>
+      <form class="ct-form svl-form" aria-label="Project enquiry" data-service="Branding">
+        <div class="ct-field-row">
+          <div class="ct-field">
+            <label for="sl-name">Name <span aria-hidden="true" style="color:var(--orange)">*</span></label>
+            <input type="text" id="sl-name" name="name" placeholder="Your name" autocomplete="name" required aria-required="true">
+          </div>
+          <div class="ct-field">
+            <label for="sl-email">Email <span aria-hidden="true" style="color:var(--orange)">*</span></label>
+            <input type="email" id="sl-email" name="email" placeholder="you@company.com" autocomplete="email" required aria-required="true">
+          </div>
+        </div>
+        <div class="ct-field">
+          <label for="sl-company">Company <span style="opacity:.5">(optional)</span></label>
+          <input type="text" id="sl-company" name="company" placeholder="Company name" autocomplete="organization">
+        </div>
+        <div class="ct-field">
+          <label for="sl-budget">Approximate budget (USD)</label>
+          <select id="sl-budget" name="budget">
+            <option value="">Select a range</option>
+            <option>Under $5k</option>
+            <option>$5k &ndash; $15k</option>
+            <option>$15k &ndash; $40k</option>
+            <option>$40k+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="ct-field">
+          <label for="sl-message">Tell us about it</label>
+          <textarea id="sl-message" name="message" placeholder="A few lines about your project, goals and timeline&hellip;" required aria-required="true"></textarea>
+        </div>
+        <div class="ct-field ct-consent-field">
+          <label class="ct-consent-label">
+            <input type="checkbox" id="sl-consent" name="consent" required aria-required="true">
+            <span>I agree to Grid Velocity processing my data to respond to this enquiry. <a href="../legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+          </label>
+        </div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADjJa7RhVE8aTG86" data-theme="dark"></div>
+        <button type="submit" class="ct-submit">Start the Conversation</button>
+        <p class="ct-note">We reply within one business day. No spam, ever.</p>
+      </form>
     </div>
   </section>
 
@@ -598,7 +735,7 @@
 <!-- ── Scripts ─────────────────────────────────────────────────────── -->
 <script src="../js/vendor/gsap.min.js" defer></script>
 <script src="../js/vendor/ScrollTrigger.min.js" defer></script>
-<script src="../js/main.js?v=83" defer></script>
+<script src="../js/main.js?v=84" defer></script>
 
 </body>
 </html>

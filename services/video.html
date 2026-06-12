@@ -36,7 +36,7 @@
   <link rel="preload" href="../fonts/Boldonse-Regular.woff2"               as="font" type="font/woff2" crossorigin>
 
   <!-- ── Stylesheet ──────────────────────────────────────────────── -->
-  <link rel="stylesheet" href="../css/main.css?v=208">
+  <link rel="stylesheet" href="../css/main.css?v=209">
 
   <!-- ── Structured Data ─────────────────────────────────────────── -->
   <script type="application/ld+json">
@@ -160,6 +160,55 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-PX6EFBB6R3');
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does video production cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A social cutdown and a full TVC shoot live in different worlds. Pick a budget range below and we’ll tell you what’s achievable at that level — including where AI production can stretch it further."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you handle everything end-to-end?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Concept, script, casting, location, shoot, edit, sound, grade, delivery. You can hand us a finished script or a one-line idea — we’ll meet you wherever you are in the process."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast can you deliver?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depends on the format. Social content can move in days; brand films and TVCs need proper pre-production. Tell us your deadline in the form and we’ll tell you straight if it’s realistic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you shoot outside Pakistan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We shoot across Pakistan and coordinate productions in the Gulf and beyond — and for many briefs, AI production removes geography from the equation entirely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do AI video content?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — it’s one of our sharpest tools. We blend AI generation with real production craft for brands that need volume and speed without losing polish. Ask us what’s possible; the answer has probably changed since you last checked."
+      }
+    }
+  ]
+}
   </script>
 </head>
 
@@ -541,7 +590,7 @@
           <div class="cta-divider" aria-hidden="true"></div>
           <p class="cta-desc">Scoped precisely. Executed completely. One video project, built to perform.</p>
           <div class="cta-btn">
-            <a href="../contact.html" class="btn-dark">Start a project <span aria-hidden="true">→</span></a>
+            <a href="#sv-start" class="btn-dark">Start a project <span aria-hidden="true">→</span></a>
           </div>
         </div>
         <div class="cta-lottie" id="ctaLaptop" aria-hidden="true"></div>
@@ -555,11 +604,99 @@
           <div class="cta-divider" aria-hidden="true"></div>
           <p class="cta-desc">Ongoing content production. Scale up, slow down, or pivot: we move with you.</p>
           <div class="cta-btn">
-            <a href="../contact.html" class="btn-outline-white">Set up a retainer <span aria-hidden="true">→</span></a>
+            <a href="#sv-start" class="btn-outline-white">Set up a retainer <span aria-hidden="true">→</span></a>
           </div>
         </div>
         <div class="cta-lottie" id="ctaLevitate" aria-hidden="true"></div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ─── SERVICE FAQ ──────────────────────────────────────────────── -->
+  <section class="ct-faq sv-landing-faq" id="sv-faq" aria-labelledby="sv-faq-heading">
+    <div class="ct-faq-head">
+      <h2 id="sv-faq-heading">Questions, Answered</h2>
+      <p class="ct-faq-lead">The things clients ask before we begin.</p>
+    </div>
+    <div class="ct-faq-list">
+      <details class="ct-faq-item">
+        <summary>What does video production cost?</summary>
+        <p>A social cutdown and a full TVC shoot live in different worlds. Pick a budget range below and we’ll tell you what’s achievable at that level — including where AI production can stretch it further.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>Do you handle everything end-to-end?</summary>
+        <p>Yes. Concept, script, casting, location, shoot, edit, sound, grade, delivery. You can hand us a finished script or a one-line idea — we’ll meet you wherever you are in the process.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>How fast can you deliver?</summary>
+        <p>Depends on the format. Social content can move in days; brand films and TVCs need proper pre-production. Tell us your deadline in the form and we’ll tell you straight if it’s realistic.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>Can you shoot outside Pakistan?</summary>
+        <p>We shoot across Pakistan and coordinate productions in the Gulf and beyond — and for many briefs, AI production removes geography from the equation entirely.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>Do you do AI video content?</summary>
+        <p>Yes — it’s one of our sharpest tools. We blend AI generation with real production craft for brands that need volume and speed without losing polish. Ask us what’s possible; the answer has probably changed since you last checked.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ─── LEAD FORM ────────────────────────────────────────────────── -->
+  <section class="svl-section" id="sv-start" aria-labelledby="svl-h">
+    <div class="svl-glow" aria-hidden="true"></div>
+    <div class="svl-grid">
+      <div class="svl-intro">
+        <div class="svl-kicker">Start Your Production</div>
+        <h2 class="svl-h" id="svl-h">Got a story worth telling?</h2>
+        <p class="svl-lead">Tell us what you’re making and when you need it. We’ll come back with an approach, a crew and a timeline — within one business day.</p>
+        <ul class="svl-points" role="list">
+          <li>We reply within one business day</li>
+          <li>Senior team on every project, no hand-offs</li>
+          <li>No obligation &mdash; just a straight answer</li>
+        </ul>
+      </div>
+      <form class="ct-form svl-form" aria-label="Project enquiry" data-service="Video">
+        <div class="ct-field-row">
+          <div class="ct-field">
+            <label for="sl-name">Name <span aria-hidden="true" style="color:var(--orange)">*</span></label>
+            <input type="text" id="sl-name" name="name" placeholder="Your name" autocomplete="name" required aria-required="true">
+          </div>
+          <div class="ct-field">
+            <label for="sl-email">Email <span aria-hidden="true" style="color:var(--orange)">*</span></label>
+            <input type="email" id="sl-email" name="email" placeholder="you@company.com" autocomplete="email" required aria-required="true">
+          </div>
+        </div>
+        <div class="ct-field">
+          <label for="sl-company">Company <span style="opacity:.5">(optional)</span></label>
+          <input type="text" id="sl-company" name="company" placeholder="Company name" autocomplete="organization">
+        </div>
+        <div class="ct-field">
+          <label for="sl-budget">Approximate budget (USD)</label>
+          <select id="sl-budget" name="budget">
+            <option value="">Select a range</option>
+            <option>Under $5k</option>
+            <option>$5k &ndash; $15k</option>
+            <option>$15k &ndash; $40k</option>
+            <option>$40k+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="ct-field">
+          <label for="sl-message">Tell us about it</label>
+          <textarea id="sl-message" name="message" placeholder="A few lines about your project, goals and timeline&hellip;" required aria-required="true"></textarea>
+        </div>
+        <div class="ct-field ct-consent-field">
+          <label class="ct-consent-label">
+            <input type="checkbox" id="sl-consent" name="consent" required aria-required="true">
+            <span>I agree to Grid Velocity processing my data to respond to this enquiry. <a href="../legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+          </label>
+        </div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADjJa7RhVE8aTG86" data-theme="dark"></div>
+        <button type="submit" class="ct-submit">Start the Conversation</button>
+        <p class="ct-note">We reply within one business day. No spam, ever.</p>
+      </form>
     </div>
   </section>
 
@@ -631,7 +768,7 @@
 <!-- ── Scripts ─────────────────────────────────────────────────────── -->
 <script src="../js/vendor/gsap.min.js" defer></script>
 <script src="../js/vendor/ScrollTrigger.min.js" defer></script>
-<script src="../js/main.js?v=83" defer></script>
+<script src="../js/main.js?v=84" defer></script>
 
 </body>
 </html>

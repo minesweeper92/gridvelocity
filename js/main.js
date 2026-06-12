@@ -2591,3 +2591,54 @@ void main(){
   io.observe(host);
   document.addEventListener('visibilitychange', () => setRunning(!document.hidden));
 })();
+
+/* ── SERVICE LANDING LEAD FORM ────────────────────────────────────────
+   Service pages double as standalone landing pages: this submits their
+   on-page enquiry form to /api/contact with the service pre-attributed. */
+(function initServiceLeadForm() {
+  const form = document.querySelector('.svl-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn  = form.querySelector('.ct-submit');
+    const note = form.querySelector('.ct-note');
+
+    const payload = {
+      name:    (form.querySelector('[name="name"]').value    || '').trim(),
+      email:   (form.querySelector('[name="email"]').value   || '').trim(),
+      company: (form.querySelector('[name="company"]').value || '').trim(),
+      services: (form.dataset.service || 'Service') + ' — service page enquiry',
+      budget:   form.querySelector('[name="budget"]').value,
+      message: (form.querySelector('[name="message"]').value || '').trim(),
+      'cf-turnstile-response': (form.querySelector('[name="cf-turnstile-response"]') || {}).value || '',
+    };
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const res  = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        btn.textContent = 'Sent — we\'ll be in touch soon';
+        if (note) note.textContent = 'We reply within one business day.';
+        form.reset();
+        if (window.turnstile) window.turnstile.reset();
+      } else {
+        if (note) note.textContent = data.error || 'Something went wrong. Please try again.';
+        btn.textContent = 'Start the Conversation';
+        btn.disabled = false;
+      }
+    } catch (_) {
+      if (note) note.textContent = 'Connection error — please try again or email hello@gridvelocity.com directly.';
+      btn.textContent = 'Start the Conversation';
+      btn.disabled = false;
+    }
+  });
+})();
