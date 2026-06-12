@@ -2386,7 +2386,7 @@ function gvMotionOK() {
       wipe = document.createElement('div');
       wipe.className = 'gv-wipe';
       wipe.setAttribute('aria-hidden', 'true');
-      wipe.innerHTML = '<span class="gv-wipe-a"></span><span class="gv-wipe-b"></span>';
+      wipe.innerHTML = '<span class="gv-wipe-a"></span><span class="gv-wipe-b"><span class="gv-wipe-mark">grid.</span></span>';
       document.body.appendChild(wipe);
     }
     // Two frames so the append registers before the animation class lands.
@@ -2641,4 +2641,35 @@ void main(){
       btn.disabled = false;
     }
   });
+})();
+
+/* ── SHOWREEL SCALE-IN (homepage, scroll-linked) ──────────────────── */
+(function initShowreelScale() {
+  const wrap = document.getElementById('showreelWrap');
+  if (!wrap || !gvMotionOK()) return;
+
+  let raf = null;
+  function update() {
+    raf = null;
+    const r = wrap.getBoundingClientRect();
+    const vh = window.innerHeight;
+    if (r.bottom < -80 || r.top > vh + 80) return;       // offscreen: leave as-is
+    const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.9)));
+    wrap.style.transform = 'scale(' + (0.9 + 0.1 * p).toFixed(4) + ')';
+    wrap.style.borderRadius = (36 * (1 - p)).toFixed(1) + 'px';
+  }
+  const queue = () => { if (!raf) raf = requestAnimationFrame(update); };
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue, { passive: true });
+  update();
+})();
+
+/* ── FOOTER WORDMARK ART: lazy-load the 1.2MB webp ────────────────── */
+(function lazyFooterArt() {
+  const el = document.querySelector('.footer-wm-g');
+  if (!el) return;
+  const io = new IntersectionObserver(en => {
+    if (en[0].isIntersecting) { el.classList.add('gv-bg-loaded'); io.disconnect(); }
+  }, { rootMargin: '600px' });
+  io.observe(el);
 })();

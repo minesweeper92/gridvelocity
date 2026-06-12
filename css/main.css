@@ -10597,3 +10597,35 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
   .svl-intro { position: static; }
   .svl-lead { font-size: 16px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   EXPERIENCE UPGRADE — WAVE 4 — 2026-06-13 (dev branch)
+   Transition wordmark · showreel scale-in · card zoom · footer art lazy
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Wordmark flash during page transitions ── */
+.gv-wipe .gv-wipe-b { display: flex; align-items: center; justify-content: center; }
+.gv-wipe-mark {
+  font-family: 'Boldonse', sans-serif; font-size: clamp(30px, 4.2vw, 58px);
+  color: #fff; letter-spacing: -.02em; line-height: 1;
+  opacity: 0; transform: translateY(16px);
+}
+.gv-wipe.run .gv-wipe-mark { animation: gv-mark-in 320ms cubic-bezier(0.23, 1, 0.32, 1) 290ms forwards; }
+@keyframes gv-mark-in { to { opacity: 1; transform: translateY(0); } }
+
+html.gv-in::before {
+  content: 'grid.';
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Boldonse', sans-serif; font-size: clamp(30px, 4.2vw, 58px);
+  color: #fff; letter-spacing: -.02em; line-height: 1;
+}
+
+/* ── Work card image zoom on hover ── */
+.wk-card .lb-half, .work-card .lb-half { transition: transform 700ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .wk-card:hover .lb-half, .work-card:hover .lb-half { transform: scale(1.04); }
+}
+
+/* ── Footer wordmark art: defer the 1.2MB webp until footer nears view.
+      Until it loads, show the wordmark as solid text instead of clip-fill. ── */
+.footer-wm-g:not(.gv-bg-loaded) { background-image: none !important; color: rgba(255,255,255,0.55); }
