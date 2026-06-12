@@ -31,7 +31,8 @@
 
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
-  <link rel="stylesheet" href="css/main.css?v=204">
+  <link rel="stylesheet" href="css/main.css?v=205">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <!-- ── Structured Data — SEO Page Metadata ─────────────────────── -->
   <script type="application/ld+json">
   [
@@ -217,6 +218,7 @@
             <span>I agree to Grid Velocity processing my data to respond to this enquiry. <a href="legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
           </label>
         </div>
+        <div class="cf-turnstile" data-sitekey="PASTE_YOUR_TURNSTILE_SITE_KEY_HERE" data-theme="dark"></div>
         <button type="submit" class="ct-submit" id="ct-submit-btn">Start the Conversation</button>
         <p class="ct-note" id="ct-form-note">We reply within one business day. No spam, ever.</p>
       </form>
@@ -327,39 +329,48 @@
 <script src="js/vendor/ScrollTrigger.min.js" defer></script>
 <script src="js/main.js?v=81" defer></script>
 <script>
-function gvContactSubmit(e) {
+async function gvContactSubmit(e) {
   e.preventDefault();
-  const form  = e.target;
-  const name  = (form.querySelector('#ct-name').value  || '').trim();
-  const email = (form.querySelector('#ct-email').value || '').trim();
-  const co    = (form.querySelector('#ct-company').value || '').trim();
-  const svcs  = Array.from(form.querySelectorAll('input[name="services"]:checked'))
-                  .map(cb => cb.value).join(', ');
-  const bud   = form.querySelector('#ct-budget').value;
-  const msg   = (form.querySelector('#ct-message').value || '').trim();
-
-  const subject = co ? `Project Enquiry — ${co}` : `Project Enquiry — ${name}`;
-  let body = `Name: ${name}\nEmail: ${email}`;
-  if (co)   body += `\nCompany: ${co}`;
-  if (svcs) body += `\nServices: ${svcs}`;
-  if (bud)  body += `\nBudget: ${bud}`;
-  body += `\n\nMessage:\n${msg}`;
-
-  window.location.href =
-    'mailto:hello@gridvelocity.com' +
-    '?subject=' + encodeURIComponent(subject) +
-    '&body='    + encodeURIComponent(body);
-
+  const form = e.target;
   const btn  = document.getElementById('ct-submit-btn');
   const note = document.getElementById('ct-form-note');
-  btn.textContent  = 'Ready — check your email app →';
-  btn.disabled     = true;
-  if (note) note.textContent = 'Your email is pre-filled. Just press send.';
-  setTimeout(function() {
-    btn.textContent  = 'Start the Conversation';
-    btn.disabled     = false;
-    if (note) note.textContent = 'We reply within one business day. No spam, ever.';
-  }, 4000);
+
+  const payload = {
+    name:     (form.querySelector('#ct-name').value    || '').trim(),
+    email:    (form.querySelector('#ct-email').value   || '').trim(),
+    company:  (form.querySelector('#ct-company').value || '').trim(),
+    services: Array.from(form.querySelectorAll('input[name="services"]:checked')).map(c => c.value).join(', '),
+    budget:   form.querySelector('#ct-budget').value,
+    message:  (form.querySelector('#ct-message').value || '').trim(),
+    'cf-turnstile-response': (form.querySelector('[name="cf-turnstile-response"]') || {}).value || '',
+  };
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res  = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      btn.textContent = 'Sent — we\'ll be in touch soon';
+      if (note) note.textContent = 'We reply within one business day.';
+      form.reset();
+      if (window.turnstile) window.turnstile.reset();
+    } else {
+      if (note) note.textContent = data.error || 'Something went wrong. Please try again.';
+      btn.textContent = 'Start the Conversation';
+      btn.disabled = false;
+    }
+  } catch (_) {
+    if (note) note.textContent = 'Connection error — please try again or email hello@gridvelocity.com directly.';
+    btn.textContent = 'Start the Conversation';
+    btn.disabled = false;
+  }
 }
 </script>
 
