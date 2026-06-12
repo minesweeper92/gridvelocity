@@ -2504,3 +2504,90 @@ function gvMotionOK() {
   // If arriving via a transition, let the curtain lift before revealing.
   setTimeout(start, document.documentElement.classList.contains('gv-in') ? 420 : 0);
 })();
+
+/* ── CONTACT GLOW: live WebGL aurora (no library) ─────────────────────
+   Renders layered flowing noise in GV orange/purple inside .ct-glow.
+   Low-res canvas upscaled + parent blur = soft, cheap. Falls back to the
+   existing static gradient when WebGL/motion is unavailable. */
+(function initContactAurora() {
+  const host = document.querySelector('.ct-glow');
+  if (!host || !gvMotionOK()) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.className = 'ct-glow-gl';
+  canvas.setAttribute('aria-hidden', 'true');
+  const gl = canvas.getContext('webgl', { alpha: true, antialias: false, powerPreference: 'low-power' });
+  if (!gl) return;
+  host.appendChild(canvas);
+
+  const VERT = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  const FRAG = `
+precision mediump float;
+uniform vec2 r;uniform float t;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.1;a*=.5;}return v;}
+void main(){
+  vec2 uv=gl_FragCoord.xy/r;
+  vec2 q=uv*vec2(r.x/r.y,1.);
+  float f1=fbm(q*1.6+vec2(t*.05,t*.03));
+  float f2=fbm(q*2.2-vec2(t*.04,t*.06)+f1);
+  float glow=smoothstep(.25,.95,f1*.6+f2*.55);
+  vec3 orange=vec3(.937,.282,.137);
+  vec3 purple=vec3(.333,.176,.455);
+  vec3 col=mix(purple*.55,orange,smoothstep(.2,.85,f2));
+  float vig=1.-smoothstep(.35,1.15,distance(uv,vec2(.42,.38)));
+  float a=glow*vig*.85;
+  gl_FragColor=vec4(col*a,a);
+}`;
+
+  function shader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s);
+    return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+  }
+  const vs = shader(gl.VERTEX_SHADER, VERT);
+  const fs = shader(gl.FRAGMENT_SHADER, FRAG);
+  if (!vs || !fs) return;
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+  gl.useProgram(prog);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'p');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uR = gl.getUniformLocation(prog, 'r');
+  const uT = gl.getUniformLocation(prog, 't');
+
+  function size() {
+    const w = Math.max(2, Math.round(host.clientWidth * 0.25));
+    const hgt = Math.max(2, Math.round(host.clientHeight * 0.25));
+    if (canvas.width !== w || canvas.height !== hgt) {
+      canvas.width = w; canvas.height = hgt;
+      gl.viewport(0, 0, w, hgt);
+      gl.uniform2f(uR, w, hgt);
+    }
+  }
+
+  let running = false, raf = null;
+  const t0 = performance.now();
+  function frame() {
+    if (!running) { raf = null; return; }
+    size();
+    gl.uniform1f(uT, (performance.now() - t0) / 1000);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    raf = requestAnimationFrame(frame);
+  }
+  function setRunning(on) {
+    running = on;
+    if (on && !raf) raf = requestAnimationFrame(frame);
+  }
+
+  const io = new IntersectionObserver(en => setRunning(en[0].isIntersecting && !document.hidden), { rootMargin: '120px' });
+  io.observe(host);
+  document.addEventListener('visibilitychange', () => setRunning(!document.hidden));
+})();

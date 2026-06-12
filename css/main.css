@@ -10570,3 +10570,6 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
   transition: background-size 350ms var(--ease-out), color 200ms;
 }
 .footer-col a:hover { background-size: 100% 1px; }
+
+/* ── Contact aurora canvas (WebGL layer inside .ct-glow) ── */
+.ct-glow-gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
