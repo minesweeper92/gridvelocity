@@ -24,8 +24,9 @@ module.exports = async function handler(req, res) {
       remoteip: ip,
     }),
   });
-  const { success } = await tsRes.json();
-  if (!success) {
+  const tsData = await tsRes.json();
+  console.log('Turnstile result:', JSON.stringify(tsData));
+  if (!tsData.success) {
     return res.status(400).json({ error: 'Security check failed. Please refresh and try again.' });
   }
 
