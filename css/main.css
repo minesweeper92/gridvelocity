@@ -10248,7 +10248,6 @@ body {
 }
 .footer-proof-logo--clutch img {
   height: 18px;
-  filter: brightness(0) invert(1);
 }
 .footer-proof-logo--google img {
   width: 20px;
@@ -10346,7 +10345,6 @@ body {
 }
 .footer-proof-logo--clutch img {
   height: 19px;
-  filter: brightness(0) invert(1);
 }
 
 /* What You Get: reserve text space so tab/hover changes do not push sections below. */
