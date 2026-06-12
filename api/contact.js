@@ -24,10 +24,9 @@ module.exports = async function handler(req, res) {
       remoteip: ip,
     }),
   });
-  const tsData = await tsRes.json();
-  console.log('Turnstile result:', JSON.stringify(tsData));
-  if (!tsData.success) {
-    return res.status(400).json({ error: `Security check failed: ${JSON.stringify(tsData['error-codes'])}` });
+  const { success } = await tsRes.json();
+  if (!success) {
+    return res.status(400).json({ error: 'Security check failed. Please refresh and try again.' });
   }
 
   // Send email via Resend
@@ -47,9 +46,8 @@ module.exports = async function handler(req, res) {
   });
 
   if (!sendRes.ok) {
-    const err = await sendRes.json().catch(() => ({}));
-    console.error('Resend error:', err);
-    return res.status(500).json({ error: `Resend error: ${JSON.stringify(err)}` });
+    console.error('Resend error:', await sendRes.json().catch(() => ({})));
+    return res.status(500).json({ error: 'Could not send your message. Please email hello@gridvelocity.com directly.' });
   }
 
   return res.status(200).json({ ok: true });
