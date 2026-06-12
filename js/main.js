@@ -2340,3 +2340,167 @@ var SMOOTH_SCROLL_MS = 800;
   setVpH();
   window.addEventListener('resize', setVpH, { passive: true });
 })();
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   EXPERIENCE UPGRADE — WAVE 1 — 2026-06-12 (dev branch)
+   Page transitions · magnetic CTAs · velocity ticker · heading reveals
+   All dependency-free (no GSAP requirement — homepage doesn't load it).
+   ═══════════════════════════════════════════════════════════════════ */
+
+function gvMotionOK() {
+  return !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+         !document.documentElement.classList.contains('a11y-reduce-motion');
+}
+
+/* ── PAGE TRANSITIONS ─────────────────────────────────────────────── */
+(function initPageTransitions() {
+  const docEl = document.documentElement;
+
+  // Entrance: drop the curtain pseudo-elements once the reveal finishes.
+  if (docEl.classList.contains('gv-in')) {
+    setTimeout(() => docEl.classList.remove('gv-in'), 950);
+  }
+
+  if (!gvMotionOK()) return;
+
+  let wipe = null;
+  let leaving = false;
+
+  document.addEventListener('click', e => {
+    if (leaving || e.defaultPrevented || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest('a');
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    const raw = a.getAttribute('href');
+    if (!raw || raw.startsWith('#') || raw.startsWith('mailto:') || raw.startsWith('tel:')) return;
+    let url;
+    try { url = new URL(a.href, location.href); } catch (_) { return; }
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.hash) return;          // same-page anchor
+    if (/\.(pdf|zip|jpe?g|png|webp|avif|svg|mp4|webm)(\?|$)/i.test(url.pathname)) return;
+
+    e.preventDefault();
+    leaving = true;
+    if (!wipe) {
+      wipe = document.createElement('div');
+      wipe.className = 'gv-wipe';
+      wipe.setAttribute('aria-hidden', 'true');
+      wipe.innerHTML = '<span class="gv-wipe-a"></span><span class="gv-wipe-b"></span>';
+      document.body.appendChild(wipe);
+    }
+    // Two frames so the append registers before the animation class lands.
+    requestAnimationFrame(() => requestAnimationFrame(() => wipe.classList.add('run')));
+    try { sessionStorage.setItem('gv-nav', '1'); } catch (_) { /* ignore */ }
+    setTimeout(() => { location.href = url.href; }, 560);
+  });
+
+  // BFCache restore (e.g. Safari back button): clear any stuck overlay state.
+  window.addEventListener('pageshow', e => {
+    if (!e.persisted) return;
+    leaving = false;
+    docEl.classList.remove('gv-in');
+    if (wipe) wipe.classList.remove('run');
+  });
+})();
+
+/* ── MAGNETIC CTAs (desktop pointer only) ─────────────────────────── */
+(function initMagneticCTAs() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  if (!gvMotionOK()) return;
+
+  document.querySelectorAll('.nav-cta, .hero-pill, .btn-dark, .ct-submit, [data-magnetic]').forEach(el => {
+    let tx = 0, ty = 0, cx = 0, cy = 0, ts = 1, cs = 1, raf = null;
+
+    const tick = () => {
+      cx += (tx - cx) * 0.18;
+      cy += (ty - cy) * 0.18;
+      cs += (ts - cs) * 0.25;
+      const settled = Math.abs(tx - cx) < 0.1 && Math.abs(ty - cy) < 0.1 && Math.abs(ts - cs) < 0.002;
+      if (settled && tx === 0 && ty === 0 && ts === 1) {
+        el.style.transform = '';                       // restore CSS-driven hover states at rest
+        raf = null;
+        return;
+      }
+      el.style.transform = `translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px) scale(${cs.toFixed(3)})`;
+      raf = requestAnimationFrame(tick);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      tx = (e.clientX - r.left - r.width / 2) * 0.28;
+      ty = (e.clientY - r.top - r.height / 2) * 0.34;
+      kick();
+    });
+    el.addEventListener('mouseleave', () => { tx = 0; ty = 0; ts = 1; kick(); });
+    el.addEventListener('mousedown',  () => { ts = 0.96; kick(); });
+    el.addEventListener('mouseup',    () => { ts = 1; kick(); });
+  });
+})();
+
+/* ── LOGO TICKER: scroll-velocity skew ────────────────────────────── */
+(function initTickerVelocity() {
+  const strip = document.querySelector('.logo-strip');
+  if (!strip || !gvMotionOK()) return;
+
+  let lastY = window.scrollY, lastT = performance.now(), skew = 0, raf = null;
+
+  const tick = () => {
+    const now = performance.now();
+    const y = window.scrollY;
+    const dt = Math.max(now - lastT, 1);
+    const v = (y - lastY) / dt;                        // px per ms
+    lastY = y; lastT = now;
+    const target = Math.max(-6, Math.min(6, -v * 8));
+    skew += (target - skew) * 0.12;
+    if (Math.abs(skew) < 0.05 && Math.abs(target) < 0.05) {
+      strip.style.transform = '';
+      raf = null;
+      return;
+    }
+    strip.style.transform = `skewX(${skew.toFixed(2)}deg)`;
+    raf = requestAnimationFrame(tick);
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!raf) { lastY = window.scrollY; lastT = performance.now(); raf = requestAnimationFrame(tick); }
+  }, { passive: true });
+})();
+
+/* ── MASKED HEADING REVEALS (site-wide, IO-driven) ────────────────── */
+(function initHeadingReveals() {
+  if (!gvMotionOK()) return;
+  // About page has its own GSAP choreography — leave it alone.
+  if (/about/.test(location.pathname)) return;
+
+  const headings = Array.from(document.querySelectorAll('h2')).filter(h =>
+    !h.closest('.reveal') &&
+    !h.closest('nav') &&
+    !h.closest('.nav-drawer') &&
+    !h.closest('[role="dialog"]') &&
+    !/a11y/.test(h.className)
+  );
+  if (!headings.length) return;
+
+  const start = () => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) { en.target.classList.add('gv-on'); obs.unobserve(en.target); }
+      });
+    }, { threshold: 0.25, rootMargin: '0px 0px -8% 0px' });
+    headings.forEach(h => obs.observe(h));
+    // Failsafe: if IO is starved (throttled/background tab), never leave
+    // an on-screen heading clipped.
+    setTimeout(() => {
+      headings.forEach(h => {
+        if (h.classList.contains('gv-on')) return;
+        const r = h.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) h.classList.add('gv-on');
+      });
+    }, 5000);
+  };
+  headings.forEach(h => h.classList.add('gv-h-rev'));
+  // If arriving via a transition, let the curtain lift before revealing.
+  setTimeout(start, document.documentElement.classList.contains('gv-in') ? 420 : 0);
+})();

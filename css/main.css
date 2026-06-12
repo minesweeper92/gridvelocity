@@ -10518,3 +10518,52 @@ body {
     transform: translateX(0);
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   EXPERIENCE UPGRADE — WAVE 1 — 2026-06-12 (dev branch)
+   Page transitions · heading reveals · link underlines
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Page transition: exit wipe (element injected by JS on internal nav) ── */
+.gv-wipe { position: fixed; inset: 0; z-index: 12000; pointer-events: none; }
+.gv-wipe span { position: absolute; inset: -1px; transform: translateY(103%); will-change: transform; }
+.gv-wipe .gv-wipe-a { background: var(--orange);   z-index: 1; }
+.gv-wipe .gv-wipe-b { background: var(--gv-black); z-index: 2; }
+.gv-wipe.run .gv-wipe-a { animation: gv-cover-up 420ms cubic-bezier(0.77, 0, 0.175, 1) forwards; }
+.gv-wipe.run .gv-wipe-b { animation: gv-cover-up 420ms cubic-bezier(0.77, 0, 0.175, 1) 80ms forwards; }
+@keyframes gv-cover-up { to { transform: translateY(0); } }
+
+/* ── Page transition: entrance reveal (html.gv-in set by inline head script,
+      so the curtain is present at first paint — no flash) ── */
+html.gv-in::before, html.gv-in::after {
+  content: ''; position: fixed; inset: -1px; pointer-events: none; will-change: transform;
+}
+html.gv-in::before { background: var(--gv-black); z-index: 12002;
+  animation: gv-reveal-up 620ms cubic-bezier(0.77, 0, 0.175, 1)  60ms forwards; }
+html.gv-in::after  { background: var(--orange);   z-index: 12001;
+  animation: gv-reveal-up 620ms cubic-bezier(0.77, 0, 0.175, 1) 160ms forwards; }
+@keyframes gv-reveal-up { to { transform: translateY(-103%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html.gv-in::before, html.gv-in::after, .gv-wipe { display: none; }
+}
+html.a11y-reduce-motion.gv-in::before,
+html.a11y-reduce-motion.gv-in::after,
+html.a11y-reduce-motion .gv-wipe { display: none; }
+
+/* ── Masked heading reveal (class added by JS, IO-driven) ── */
+.gv-h-rev {
+  clip-path: inset(-10% -8% 103% -8%);
+  transform: translateY(26px);
+  transition: clip-path 850ms var(--ease-out), transform 850ms var(--ease-out);
+}
+.gv-h-rev.gv-on { clip-path: inset(-10% -8% -14% -8%); transform: translateY(0); }
+html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition: none; }
+
+/* ── Footer link underline grow ── */
+.footer-col a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat;
+  transition: background-size 350ms var(--ease-out), color 200ms;
+}
+.footer-col a:hover { background-size: 100% 1px; }
