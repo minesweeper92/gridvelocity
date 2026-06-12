@@ -7,19 +7,22 @@
 /* ── FONTS ─────────────────────────────────────────────────────────── */
 @font-face {
   font-family: 'Boldonse';
-  src: url('../fonts/Boldonse-Regular.ttf') format('truetype');
+  src: url('../fonts/Boldonse-Regular.woff2') format('woff2'),
+       url('../fonts/Boldonse-Regular.ttf') format('truetype');
   font-display: swap;
 }
 @font-face {
   font-family: 'Archivo';
-  src: url('../fonts/Archivo-VariableFont_wdth,wght.ttf') format('truetype');
+  src: url('../fonts/Archivo-VariableFont_wdth,wght.woff2') format('woff2-variations'),
+       url('../fonts/Archivo-VariableFont_wdth,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Archivo';
-  src: url('../fonts/Archivo-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+  src: url('../fonts/Archivo-Italic-VariableFont_wdth,wght.woff2') format('woff2-variations'),
+       url('../fonts/Archivo-Italic-VariableFont_wdth,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
