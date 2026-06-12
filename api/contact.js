@@ -49,7 +49,7 @@ module.exports = async function handler(req, res) {
   if (!sendRes.ok) {
     const err = await sendRes.json().catch(() => ({}));
     console.error('Resend error:', err);
-    return res.status(500).json({ error: 'Could not send your message. Please email hello@gridvelocity.com directly.' });
+    return res.status(500).json({ error: `Resend error: ${JSON.stringify(err)}` });
   }
 
   return res.status(200).json({ ok: true });
