@@ -4,7 +4,7 @@ module.exports = async function handler(req, res) {
   }
 
   const {
-    name, email, company, services, budget, message,
+    name, email, company, services, budget, message, timezone, meeting_time,
     'cf-turnstile-response': token,
   } = req.body || {};
 
@@ -53,7 +53,7 @@ module.exports = async function handler(req, res) {
   return res.status(200).json({ ok: true });
 };
 
-function buildEmailHtml({ name, email, company, services, budget, message }) {
+function buildEmailHtml({ name, email, company, services, budget, message, timezone, meeting_time }) {
   const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   const rows = [
@@ -61,7 +61,9 @@ function buildEmailHtml({ name, email, company, services, budget, message }) {
     ['Email',    `<a href="mailto:${esc(email)}" style="color:#EF4823">${esc(email)}</a>`],
     company  ? ['Company',  esc(company)]  : null,
     services ? ['Services', esc(services)] : null,
-    budget   ? ['Budget',   esc(budget)]   : null,
+    budget       ? ['Budget',         esc(budget)]       : null,
+    timezone     ? ['Timezone',       esc(timezone)]     : null,
+    meeting_time ? ['Preferred time', esc(meeting_time)] : null,
   ].filter(Boolean).map(([k, v]) => `
     <tr>
       <td style="padding:6px 20px 6px 0;font-size:13px;color:#888;white-space:nowrap;vertical-align:top">${k}</td>

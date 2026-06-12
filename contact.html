@@ -212,6 +212,21 @@
           <label for="ct-message">Tell us about it</label>
           <textarea id="ct-message" name="message" placeholder="A few lines about your project, goals and timeline…" required aria-required="true"></textarea>
         </div>
+        <div class="ct-field-row">
+          <div class="ct-field">
+            <label for="ct-timezone">Your timezone <span style="opacity:.5">(auto-detected)</span></label>
+            <select id="ct-timezone" name="timezone"></select>
+          </div>
+          <div class="ct-field">
+            <label for="ct-meeting-time">Preferred meeting time</label>
+            <select id="ct-meeting-time" name="meeting_time">
+              <option value="">No preference</option>
+              <option>Morning (9am – 12pm)</option>
+              <option>Afternoon (12pm – 5pm)</option>
+              <option>Evening (5pm – 8pm)</option>
+            </select>
+          </div>
+        </div>
         <div class="ct-field ct-consent-field">
           <label class="ct-consent-label">
             <input type="checkbox" id="ct-consent" name="consent" required aria-required="true">
@@ -329,6 +344,27 @@
 <script src="js/vendor/ScrollTrigger.min.js" defer></script>
 <script src="js/main.js?v=81" defer></script>
 <script>
+(function populateTimezones() {
+  const sel = document.getElementById('ct-timezone');
+  if (!sel) return;
+  const detected = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const zones = Intl.supportedValuesOf ? Intl.supportedValuesOf('timeZone') : [
+    'Pacific/Auckland','Australia/Sydney','Asia/Tokyo','Asia/Shanghai','Asia/Singapore',
+    'Asia/Karachi','Asia/Dubai','Asia/Kolkata','Europe/Moscow','Africa/Nairobi',
+    'Europe/Istanbul','Europe/Athens','Europe/Berlin','Europe/London','UTC',
+    'Atlantic/Azores','America/Sao_Paulo','America/Toronto','America/New_York',
+    'America/Chicago','America/Denver','America/Los_Angeles','America/Vancouver',
+    'America/Anchorage','Pacific/Honolulu',
+  ];
+  zones.forEach(tz => {
+    const opt = document.createElement('option');
+    opt.value = tz;
+    opt.textContent = tz.replace(/_/g, ' ');
+    if (tz === detected) opt.selected = true;
+    sel.appendChild(opt);
+  });
+})();
+
 async function gvContactSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -340,8 +376,10 @@ async function gvContactSubmit(e) {
     email:    (form.querySelector('#ct-email').value   || '').trim(),
     company:  (form.querySelector('#ct-company').value || '').trim(),
     services: Array.from(form.querySelectorAll('input[name="services"]:checked')).map(c => c.value).join(', '),
-    budget:   form.querySelector('#ct-budget').value,
-    message:  (form.querySelector('#ct-message').value || '').trim(),
+    budget:       form.querySelector('#ct-budget').value,
+    message:      (form.querySelector('#ct-message').value || '').trim(),
+    timezone:     form.querySelector('#ct-timezone').value,
+    meeting_time: form.querySelector('#ct-meeting-time').value,
     'cf-turnstile-response': (form.querySelector('[name="cf-turnstile-response"]') || {}).value || '',
   };
 
