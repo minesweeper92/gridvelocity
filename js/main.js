@@ -1344,7 +1344,10 @@ setTimeout(scaleToFit, 150);
   if (netRoles) {
     var anrLines  = netRoles.querySelectorAll('.anr-line');
     var anrLeft   = netRoles.querySelector('.anr-left');
-    var wordEls   = Array.from(netRoles.querySelectorAll('.anr-word[data-img]'));
+    /* Floating astronauts temporarily disabled on live (2026-06-13): the legacy
+       positions overlapped the heading and broke on mobile. Crew section now shows
+       heading + role words cleanly; a rebuilt pop-in animation restores them properly. */
+    var wordEls   = [];
     var supWordEls = supSection ? Array.from(supSection.querySelectorAll('.ab-sup-word')) : [];
     var floWrap = document.createElement('div');
     floWrap.className = 'anr-floaters';
