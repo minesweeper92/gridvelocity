@@ -1338,7 +1338,9 @@ setTimeout(scaleToFit, 150);
      Astros settle in safe outer lanes first, then scrub toward the two “Us.”
      words as the reader leaves the crew section. Keep the math direct so the
      animation tracks the scroll instead of firing late/early. */
-  var netRoles   = document.querySelector('.ab-net-roles');
+  /* Legacy floating-astronaut animation — superseded by initCrewReveal for the
+     rebuilt .ab-crew structure. Only runs on a legacy (non-rebuilt) section. */
+  var netRoles   = document.querySelector('.ab-net-roles:not(.ab-crew)');
   var supSection = document.querySelector('.ab-superpower');
 
   if (netRoles) {
@@ -2478,3 +2480,35 @@ void main(){
   document.addEventListener('visibilitychange', () => setRunning(!document.hidden));
 })();
 
+
+
+/* ── CREW: scattered astronaut float-in (rebuild 2026-06-13) ──────────
+   Astronauts are scattered (CSS) in a zone below the heading. When the
+   section scrolls into view they float in one-by-one. No pin/portal —
+   robust and identical on every screen size. */
+(function initCrewReveal() {
+  var section = document.querySelector('.ab-crew');
+  if (!section) return;
+  var scatter = section.querySelector('.crew-scatter');
+  var astros  = Array.prototype.slice.call(section.querySelectorAll('.crew-astro'));
+  if (!scatter || !astros.length) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            || document.documentElement.classList.contains('a11y-reduce-motion');
+  if (reduce) { astros.forEach(function (a) { a.classList.add('pop'); }); return; }
+
+  scatter.classList.add('crew-js');
+  var done = false;
+  function play() {
+    if (done) return; done = true;
+    astros.forEach(function (a, i) { setTimeout(function () { a.classList.add('pop'); }, 110 * i); });
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries, obs) {
+      if (entries[0].isIntersecting) { obs.disconnect(); play(); }
+    }, { threshold: 0.25 });
+    io.observe(section);
+  } else {
+    astros.forEach(function (a) { a.classList.add('pop'); });
+  }
+})();
