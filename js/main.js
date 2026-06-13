@@ -440,6 +440,10 @@ setTimeout(scaleToFit, 150);
     toggle.setAttribute('aria-expanded', 'true');
     drawer.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    /* Hide the floating "Let's Talk" bubble while the drawer is open —
+       the drawer already has its own Let's Talk pill. */
+    const bubble = document.getElementById('gvFloatCTA');
+    if (bubble) bubble.classList.add('drawer-hidden');
     /* Move focus to the first item in the drawer */
     const first = getFocusable()[0];
     if (first) requestAnimationFrame(() => first.focus());
@@ -451,6 +455,8 @@ setTimeout(scaleToFit, 150);
     toggle.setAttribute('aria-expanded', 'false');
     drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    const bubble = document.getElementById('gvFloatCTA');
+    if (bubble) bubble.classList.remove('drawer-hidden');
     /* Collapse services accordion on close */
     const svcItem = drawer.querySelector('.drawer-svc');
     const svcBtn  = drawer.querySelector('.drawer-svc-toggle');

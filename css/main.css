@@ -7195,6 +7195,15 @@ footer { overflow: visible !important; }
   animation: gv-bubble-out 0.5s ease-in-out forwards;
   pointer-events: none;
 }
+/* Hidden while the mobile nav drawer is open (drawer has its own CTA).
+   animation:none cancels the show/hide keyframes so the bubble falls back
+   to its base scale(0) + opacity:0 state regardless of animation timing. */
+.gv-cta-bubble.drawer-hidden {
+  opacity: 0 !important;
+  transform: scale(0) !important;
+  animation: none !important;
+  pointer-events: none !important;
+}
 
 .gv-cta-bubble > a {
   position: absolute;
