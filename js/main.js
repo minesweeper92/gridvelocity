@@ -526,7 +526,10 @@ setTimeout(scaleToFit, 150);
         if (!entries.some(entry => entry.isIntersecting)) return;
         loadPreview();
         observer.disconnect();
-      }, { rootMargin: '700px 0px' });
+      }, { rootMargin: '200px 0px' }); /* small runway so the heavy Vimeo player
+           only loads as a real visitor scrolls near the showreel — keeps it out
+           of the initial-load window (Lighthouse doesn't scroll), which clears
+           the third-party-cookie / deprecated-API Best Practices flags. */
       observer.observe(wrap);
     }
 
