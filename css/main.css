@@ -10553,10 +10553,10 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
 
 /* ── Footer Webflow proof: inline W + "Certified Partner" (no white pill) ── */
 .footer-proof-logo--webflow svg { height: 18px; width: auto; display: block; }
-.footer-proof-wf {
+.footer-proof .footer-proof-wf {
   font-family: 'Archivo', sans-serif; font-weight: 700;
   font-size: 8.5px; letter-spacing: .11em; text-transform: uppercase;
-  color: rgba(255,255,255,0.72); line-height: 1.18; text-align: left;
+  color: rgba(255,255,255,0.78); line-height: 1.18; text-align: left;
 }
 
 /* ── Contact form: align timezone + meeting-time row (reserve label height) ── */
