@@ -10561,3 +10561,14 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
 
 /* ── Contact form: align timezone + meeting-time row (reserve label height) ── */
 .ct-field-row .ct-field > label { min-height: 2.6em; }
+
+/* ── Footer: cascaded service links under "Services" ── */
+.footer-subnav {
+  list-style: none;
+  margin: 9px 0 2px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(255,255,255,0.13);
+  display: flex; flex-direction: column; gap: 7px;
+}
+.footer-subnav li a { font-size: 0.9em; opacity: 0.74; }
+.footer-subnav li a:hover { opacity: 1; }
