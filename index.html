@@ -35,12 +35,77 @@
   <link rel="preload" href="fonts/Boldonse-Regular.woff2"                              as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/Archivo-VariableFont_wdth,wght.woff2"               as="font" type="font/woff2" crossorigin>
 
-  <!-- ── Stylesheet ──────────────────────────────────────────────── -->
+  <!-- ── Connection hints ────────────────────────────────────────── -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://player.vimeo.com">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://f.vimeocdn.com">
-  <link rel="stylesheet" href="css/main.css?v=216">
+
+  <!-- ── Critical above-the-fold CSS (hero + nav) ─────────────────────
+       Inlined so the hero paints without waiting on the full stylesheet.
+       The LCP element (ambient hero text) is styled here; full sheet
+       loads async below. Font URLs are document-relative (no ../). ──── -->
+  <style>
+    @font-face{font-family:'Boldonse';src:url('fonts/Boldonse-Regular.woff2') format('woff2'),url('fonts/Boldonse-Regular.ttf') format('truetype');font-display:swap}
+    @font-face{font-family:'Archivo';src:url('fonts/Archivo-VariableFont_wdth,wght.woff2') format('woff2-variations'),url('fonts/Archivo-VariableFont_wdth,wght.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--orange:#EF4823;--orange-dark:#b53a1a;--black:#0D0D0D;--white:#FFFFFF}
+    body{background:#0D0D0D;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-family:'Archivo',sans-serif}
+    #scaler{width:1440px;transform-origin:top left}
+    .gv-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;pointer-events:none}
+    .gv-nav-inner{pointer-events:all;margin:0 auto;display:flex;align-items:center;height:68px;border-radius:9999px;padding:0 28px;background:transparent;max-width:calc(100% - 56px);position:relative}
+    .nav-logo{display:flex;align-items:center;text-decoration:none}
+    .nav-logo img{height:56px;object-fit:contain;display:block}
+    .nav-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+    .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:6px;cursor:pointer;background:none;border:none;padding:10px 6px;margin-left:auto;flex-shrink:0}
+    .nav-toggle span{display:block;width:26px;height:2px;background:#fff;border-radius:2px;transform-origin:center}
+    .nav-a11y{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.55);background:transparent;color:#fff;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+    .hero{width:1440px;height:var(--vp-h,820px);background:var(--orange);position:relative;overflow:hidden;isolation:isolate}
+    .hero-ambient{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .amb-row{position:absolute;left:-15%;width:130%;display:flex;font-family:'Boldonse',sans-serif;text-transform:uppercase;letter-spacing:-.02em;white-space:nowrap;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,0.22)}
+    .amb-row.r1{top:3%;font-size:170px;line-height:1;transform:rotate(-3deg)}
+    .amb-row.r2{top:42%;font-size:120px;line-height:1;transform:rotate(1deg);opacity:.65}
+    .amb-row.r3{top:78%;font-size:140px;line-height:1;transform:rotate(2deg)}
+    .amb-scroll{display:flex;width:max-content}
+    .amb-scroll>span{padding-right:48px}
+    .hero-inner{position:relative;z-index:4;display:block;text-align:left;padding:0;width:100%;min-height:820px}
+    .hero-h1{position:relative;width:1440px;height:680px;margin:0 auto;font-family:'Boldonse',sans-serif;font-size:54px;text-transform:uppercase;color:#fff;letter-spacing:-.02em;line-height:.95;text-align:left;z-index:4}
+    .glyph-word{position:absolute;white-space:nowrap;display:inline-flex;align-items:flex-end}
+    .glyph-word.gw1{top:25%;left:80px;font-size:97.2px}
+    .glyph-word.gw2{top:47%;left:380px;font-size:142.2px}
+    .glyph-word.gw3{top:75%;left:140px;font-size:97.2px}
+    .glyph{display:inline-block;transform:translateY(-180%) rotate(-14deg);opacity:0}
+    .glyph-cap,.hero-corner,.hero-cta-row,.scroll-ind{opacity:0}
+    .hero-cta-row{position:absolute;left:80px;bottom:96px;z-index:4;display:flex;gap:14px}
+    .m-hero-pills{display:none}
+    .astro-slot{position:absolute;right:40px;bottom:40px;width:320px;height:320px;pointer-events:none;z-index:3}
+    @media (max-width:1023px){
+      #scaler{width:100%!important}
+      .hero{width:100%!important;height:100svh;min-height:100svh;overflow:hidden}
+      .nav-toggle{display:flex;margin-left:8px}
+      .nav-right{display:flex;gap:6px;align-items:center}
+      .gv-nav{padding:0}
+      .gv-nav-inner{margin:10px 10px;max-width:none;padding:0 6px 0 16px;height:50px;border-radius:9999px;background:transparent;box-shadow:none}
+      .nav-logo img{height:36px;width:auto}
+      .hero-inner{height:100svh;min-height:100svh;padding:0;position:relative;overflow:hidden}
+      .hero-h1{position:absolute!important;inset:0!important;padding:clamp(49px,10.8svh,90px) 90px 0 20px;box-sizing:border-box;overflow:visible;display:flex;flex-direction:column;justify-content:flex-start}
+      .glyph-cap{display:none}
+      .m-hero-pills{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10.6svh;width:100vw;margin-left:-20px;padding:0 20px;box-sizing:border-box;opacity:0}
+      .glyph-word{position:relative!important;top:auto;left:auto;right:auto;bottom:auto;white-space:nowrap;display:block;opacity:0}
+      .glyph-word.gw1{font-size:clamp(31px,8.25vw,42px);line-height:1.65;text-align:left}
+      .glyph-word.gw2{font-size:clamp(64px,17.5vw,82px);line-height:1.55;width:100vw;margin-left:-20px;text-align:center}
+      .glyph-word.gw3{font-size:clamp(33px,8.8vw,46px);line-height:1.65;text-align:left}
+      .astro-slot{width:230px;height:230px;right:0;bottom:13%;top:auto}
+      .hero-cta-row{left:20px;right:20px;bottom:22px;gap:10px}
+      .amb-row.r1{font-size:88px}
+      .amb-row.r2{top:38%;font-size:70px}
+      .amb-row.r3{top:65%;font-size:80px}
+    }
+  </style>
+
+  <!-- ── Full stylesheet (loaded async, non-render-blocking) ──────── -->
+  <link rel="preload" href="css/main.css?v=217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/main.css?v=217"></noscript>
 
   <!-- ── Structured Data — Organisation ─────────────────────────── -->
   <script type="application/ld+json">
