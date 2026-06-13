@@ -32,10 +32,10 @@
   <link rel="apple-touch-icon" href="../assets/favicon.png">
 
   <!-- ── Font preloads ───────────────────────────────────────────── -->
-  <link rel="preload" href="../fonts/Boldonse-Regular.ttf"               as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/Boldonse-Regular.woff2"               as="font" type="font/woff2" crossorigin>
 
   <!-- ── Stylesheet ──────────────────────────────────────────────── -->
-  <link rel="stylesheet" href="../css/main.css?v=204">
+  <link rel="stylesheet" href="../css/main.css?v=212">
 
   <!-- ── Structured Data ─────────────────────────────────────────── -->
   <script type="application/ld+json">
@@ -529,6 +529,37 @@
     </div>
   </section>
 
+
+  <!-- ─── FAQ ──────────────────────────────────────────────────────── -->
+  <section class="ct-faq svc-faq" id="faq" aria-labelledby="svc-faq-heading">
+    <div class="ct-faq-head">
+      <h2 id="svc-faq-heading">Questions, Answered</h2>
+      <p class="ct-faq-lead">The things clients usually ask about branding.</p>
+    </div>
+    <div class="ct-faq-list">
+      <details class="ct-faq-item">
+        <summary>Can you create a brand identity from scratch?</summary>
+        <p>Yes. We can help with logo design, visual identity, typography, colours, applications, guidelines and launch assets.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>Can you refresh an existing brand instead of starting over?</summary>
+        <p>Yes. Not every brand needs to be rebuilt from zero. Sometimes the smarter move is to sharpen what already exists and make it more consistent, ownable and scalable.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>What do we get in a branding project?</summary>
+        <p>Depending on scope, deliverables can include a logo system, visual identity, brand book, colour and typography system, packaging direction, social templates, marketing material and brand applications.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>Do you only design logos?</summary>
+        <p>We can, but a logo on its own is rarely enough. We usually recommend building at least a basic identity system so the brand works properly across digital, print, packaging and content.</p>
+      </details>
+      <details class="ct-faq-item">
+        <summary>How many logo options do you provide?</summary>
+        <p>This depends on the scope, but we usually explore focused creative directions rather than flooding you with random options. The goal is to get to the right answer, not just more answers.</p>
+      </details>
+    </div>
+  </section>
+
   <!-- ─── FOOTER ────────────────────────────────────────────────────── -->
   <footer role="contentinfo">
     <div class="footer-art" aria-hidden="true">
@@ -544,7 +575,14 @@
         <ul role="list">
           <li><a href="/">Home</a></li>
           <li><a href="../work/index.html">Work</a></li>
-          <li><a href="/#services">Services</a></li>
+          <li><a href="/#services">Services</a>
+            <ul class="footer-subnav" role="list">
+              <li><a href="../services/branding.html">Branding</a></li>
+              <li><a href="../services/video.html">Video</a></li>
+              <li><a href="../services/websites.html">Websites</a></li>
+              <li><a href="../services/paid-ads.html">Paid Ads</a></li>
+            </ul>
+          </li>
           <li><a href="../about.html">About</a></li>
           <li><a href="../blog/index.html">Blog</a></li>
           <li><a href="../contact.html">Contact</a></li>
@@ -586,7 +624,7 @@
         <span class="footer-proof">
           <a href="https://clutch.co/profile/grid-velocity" target="_blank" rel="noopener noreferrer"><span class="footer-proof-logo footer-proof-logo--clutch"><img src="/assets/Other Logos/Clutch/clutch-white.svg" alt="Clutch" width="406" height="115"></span><span class="footer-proof-stars" aria-hidden="true">★★★★★</span></a>
           <a href="https://www.google.com/search?q=Grid+Velocity+reviews" target="_blank" rel="noopener noreferrer"><span class="footer-proof-logo footer-proof-logo--google"><img src="/assets/Other Logos/Google/Google_Symbol_2.webp" alt="Google Reviews" width="800" height="817"></span><span class="footer-proof-stars" aria-hidden="true">★★★★★</span></a>
-          <a href="https://webflow.com/@gridvelocity" target="_blank" rel="noopener noreferrer"><span class="footer-proof-logo footer-proof-logo--webflow"><img src="/assets/Other Logos/certified_partner_badge_white.svg" alt="Webflow Partner" width="160" height="33"></span></a>
+          <a href="https://webflow.com/@gridvelocity" target="_blank" rel="noopener noreferrer" aria-label="Webflow Certified Partner"><span class="footer-proof-logo footer-proof-logo--webflow"><svg viewBox="8.35 8.75 25.65 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M34 8.75369L25.8154 24.7537H18.1278L21.553 18.1226H21.3993C18.5735 21.7909 14.3574 24.2057 8.34998 24.7537V18.2144C8.34998 18.2144 12.193 17.9874 14.4523 15.6121H8.34998V8.75382H15.2083V14.3947L15.3622 14.3941L18.1648 8.75382H23.3515V14.3589L23.5055 14.3587L26.4132 8.75369H34Z" fill="#146EF5"/></svg></span><span class="footer-proof-wf">Certified<br>Partner</span></a>
         </span>
       </span>
     </div>
@@ -597,7 +635,7 @@
 <!-- ── Scripts ─────────────────────────────────────────────────────── -->
 <script src="../js/vendor/gsap.min.js" defer></script>
 <script src="../js/vendor/ScrollTrigger.min.js" defer></script>
-<script src="../js/main.js?v=81" defer></script>
+<script src="../js/main.js?v=86" defer></script>
 
 </body>
 </html>
