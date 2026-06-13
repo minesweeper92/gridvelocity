@@ -398,9 +398,11 @@ setTimeout(scaleToFit, 150);
     }, 2350);
   }
 
-  /* Load the hero astronaut animation without adding Lottie to the critical path. */
+  /* Load the hero astronaut animation without adding Lottie to the critical path.
+     Skip on mobile (<1024px) — the slot is display:none there anyway, saving
+     291KB JSON + 164KB Lottie lib on mobile connections. */
   const astroSlot = document.getElementById('astroLottie');
-  if (astroSlot) {
+  if (astroSlot && window.innerWidth >= 1024) {
     loadLottieLibrary()
       .then(() => fetch(gvAssetPrefix() + 'assets/astronaut-original.json'))
       .then(r => r.json())
