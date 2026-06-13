@@ -1,10 +1,5 @@
-/* ─────────────────────────────────────────────────────────────────────
-   Grid Velocity — main.css
-   Shared stylesheet for all pages.
-   1440px design width, scale-to-viewport via JS.
-───────────────────────────────────────────────────────────────────── */
 
-/* ── FONTS ─────────────────────────────────────────────────────────── */
+
 @font-face {
   font-family: 'Boldonse';
   src: url('../fonts/Boldonse-Regular.woff2') format('woff2'),
@@ -28,7 +23,6 @@
   font-display: swap;
 }
 
-/* ── RESET + ROOT ───────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -38,14 +32,14 @@
   --white:       #FFFFFF;
   --offwhite:    #F5F4F2;
   --gray:        #888888;
-  /* ── GV full brand palette ── */
+
   --gv-yellow:   #f0c133;
   --gv-black:    #1c1a1d;
   --gv-orange:   #ef4823;
   --gv-purple:   #552d74;
   --gv-green:    #a4c443;
   --gv-blue:     #a2d0ce;
-  /* ── Custom easing curves ── */
+
   --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -61,10 +55,8 @@ body {
   font-family: 'Archivo', sans-serif;
 }
 
-/* Scale wrapper — JS sets transform: scale(vw/1440) on this */
 #scaler { width: 1440px; transform-origin: top left; }
 
-/* ── SCREEN-READER ONLY utility (visually hidden but accessible) ──── */
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -75,7 +67,6 @@ body {
   border: 0;
 }
 
-/* ── SKIP LINK (accessibility) ──────────────────────────────────────── */
 .skip-link {
   position: absolute;
   top: -100%;
@@ -93,36 +84,21 @@ body {
 }
 .skip-link:focus { top: 12px; }
 
-/* ── Global keyboard focus ring ─────────────────────────────────────
-   Only fires for keyboard / sequential navigation (not mouse clicks).
-   Uses the brand orange so the ring always feels intentional.        */
 :focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 3px;
   border-radius: 2px;
 }
-/* Suppress the focus ring on elements that supply their own indicator */
+
 .ct-field input:focus-visible,
 .ct-field textarea:focus-visible,
 .ct-field select:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px rgba(239,72,35,0.28);
 }
-/* Accordion rows are full-width — inset the ring so it stays inside */
+
 .sv-prow:focus-visible { outline-offset: -3px; border-radius: 0; }
 
-/* ─────────────────────────────────────────────────────────────────────
-   CUSTOM CURSOR
-   Two-element pattern: outer positions via JS transform, inner is the
-   visible dot with CSS transitions for size and opacity.
-   mix-blend-mode: difference = white on dark, black on light — no need
-   to track background colour explicitly.
-───────────────────────────────────────────────────────────────────── */
-
-/* ─────────────────────────────────────────────────────────────────────
-   NAV
-   Transparent over hero, morphs to pill on scroll.
-───────────────────────────────────────────────────────────────────── */
 .gv-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 14px 0;
@@ -133,9 +109,7 @@ body {
 
 .gv-nav-inner {
   pointer-events: all;
-  /* Always centered; we animate max-width between two numeric values so the
-     stretch/shrink eases both ways. (max-width:none and margin:auto are not
-     animatable — that was the abrupt snap when scrolling back to top.) */
+
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -182,7 +156,7 @@ body {
   padding: 8px 0;
   position: relative;
 }
-/* Animated underline — scaleX from left on hover (non-dropdown links only) */
+
 .nav-links > li:not(.has-sub) > a::before {
   content: '';
   position: absolute;
@@ -196,12 +170,11 @@ body {
 }
 .nav-links > li:not(.has-sub) > a:hover::before { transform: scaleX(1); }
 .nav-links a:hover { color: rgba(255,255,255,0.9); }
-/* "Services" parent is a hover-only dropdown trigger — never navigates */
+
 .nav-links .nav-svc-label { cursor: default; }
 .nav-links li.current > a { text-decoration: none; }
 .nav-links li.current:not(.has-sub) > a::before { transform: scaleX(1); opacity: 0.55; }
 
-/* Dropdown caret */
 .nav-links .has-sub > a::after {
   content: '';
   width: 5px; height: 5px;
@@ -242,7 +215,7 @@ body {
   border-radius: 8px;
 }
 .nav-sub li a:hover { color: #fff; background: rgba(255,255,255,0.1); opacity: 1; }
-/* Current item: white on orange-dark bg — orange text was nearly invisible */
+
 .nav-sub li.current > a { color: #fff; background: rgba(255,255,255,0.18); }
 .nav-sub li.current > a:hover { background: rgba(255,255,255,0.26); }
 
@@ -261,16 +234,10 @@ body {
 }
 .nav-cta:hover  { background: #fff; color: var(--black); }
 .nav-cta:active { transform: scale(0.97); }
-/* On scrolled nav the button flips to black; hover goes white */
+
 .gv-nav.scrolled .nav-cta              { background: var(--black); color: #fff; }
 .gv-nav.scrolled .nav-cta:hover        { background: #fff; color: var(--black); }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   HERO
-   Scattered mega-type layout, 1440×820px.
-   Letters fall in with a stagger; astronaut lands after.
-───────────────────────────────────────────────────────────────────── */
 .hero {
   width: 1440px; height: var(--vp-h, 820px);
   background: var(--orange);
@@ -278,7 +245,6 @@ body {
   isolation: isolate;
 }
 
-/* Scrolling ambient text rows behind everything */
 .hero-ambient { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .amb-row {
   position: absolute; left: -15%; width: 130%;
@@ -298,7 +264,6 @@ body {
 .amb-row.r3 .amb-scroll { animation: amb-x 65s linear infinite; }
 @keyframes amb-x { to { transform: translateX(-50%); } }
 
-/* Mouse-follow spotlight */
 .hero-spot {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: radial-gradient(circle 380px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.16), transparent 60%);
@@ -306,7 +271,6 @@ body {
 }
 .hero.lit .hero-spot { opacity: 1; }
 
-/* Corner labels */
 .hero-corner {
   position: absolute; z-index: 5;
   font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 700;
@@ -326,7 +290,6 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Main headline container */
 .hero-inner {
   position: relative; z-index: 4;
   display: block;
@@ -348,7 +311,7 @@ body {
   text-align: left;
   z-index: 4;
 }
-/* Screen shake on astronaut landing */
+
 .hero.astro-landed .hero-h1 { animation: shake 480ms cubic-bezier(.36,0,.2,1); }
 @keyframes shake {
   0%,100% { transform: translate(0,0); }
@@ -359,7 +322,6 @@ body {
   85%  { transform: translate(-1px, 0); }
 }
 
-/* Scattered glyph words */
 .glyph-word {
   position: absolute;
   white-space: nowrap;
@@ -370,7 +332,6 @@ body {
 .glyph-word.gw2 { top: 47%; left: 380px;  font-size: 142.2px; }
 .glyph-word.gw3 { top: 75%; left: 140px;  font-size: 97.2px; }
 
-/* Caption / sub-headline (top-right) */
 .glyph-cap {
   position: absolute;
   top: 22%; right: 96px;
@@ -390,7 +351,6 @@ body {
 }
 .hero.lit .glyph-cap { opacity: 1; transform: translateY(0); }
 
-/* Individual character spans (created by JS) */
 .glyph {
   display: inline-block; cursor: default;
   transform: translateY(-180%) rotate(-14deg);
@@ -404,8 +364,7 @@ body {
   position: relative; z-index: 2;
 }
 .hero.lit .glyph { transform: translateY(0) rotate(0); opacity: 1; }
-/* Pop-out is gated behind .hero-ready so a cursor resting on a letter
-   during page load can't trigger it before the intro animation finishes. */
+
 .hero.hero-ready .glyph:hover {
   transform: translateY(-14px) scale(1.08) rotate(-3deg) !important;
   transition: transform 240ms cubic-bezier(.34,1.56,.64,1), text-shadow 220ms ease;
@@ -417,7 +376,6 @@ body {
 }
 .glyph-space { display: inline-block; width: .34em; }
 
-/* Radial halo behind headline */
 .hero-halo {
   position: absolute;
   left: 42%; top: 34%;
@@ -429,7 +387,6 @@ body {
 }
 .hero.lit .hero-halo { opacity: 1; }
 
-/* Astronaut Lottie — bottom-right corner */
 .astro-slot {
   position: absolute;
   right: 40px; bottom: 40px;
@@ -441,9 +398,7 @@ body {
   width: 100%; height: 100%;
   opacity: 0;
   transform: translateY(-600px) rotate(-12deg);
-  /* Gravity fall: accelerates downward (ease-in) so the astronaut SLAMS into
-     the ground at the end of the 750ms transition — the exact moment the
-     shake + dust fire (astro-landed @ 2350ms). Keeps drop/shake/dust in sync. */
+
   transition: transform 750ms cubic-bezier(0.5, 0, 0.75, 0), opacity 200ms ease;
 }
 .hero.astro-fall .astro-lottie { opacity: 1; transform: translateY(0) rotate(0); }
@@ -453,7 +408,6 @@ body {
   50%      { transform: translateY(-6px) rotate(-1deg); }
 }
 
-/* Landing dust puff */
 .dust {
   position: absolute;
   right: 60px; bottom: 40px;
@@ -486,7 +440,6 @@ body {
   100% { transform: scale(2.4) translateY(-32px); opacity: 0; }
 }
 
-/* Hero CTA buttons */
 .hero-cta-row {
   position: absolute; left: 80px; bottom: 96px; z-index: 4;
   display: flex; gap: 14px; justify-content: flex-start; margin-top: 0;
@@ -511,7 +464,6 @@ body {
 .hero-pill.solid:hover  { background: #fff; color: var(--black); border-color: #fff; }
 .hero-pill.solid:active { transform: scale(0.97); }
 
-/* Vertical scroll indicator */
 .scroll-ind {
   position: absolute;
   right: 380px; bottom: 80px;
@@ -537,11 +489,6 @@ body {
 }
 @keyframes scroll-flow { 0% { top: -50%; } 100% { top: 100%; } }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   LOGO STRIP — infinite ticker, white background
-───────────────────────────────────────────────────────────────────── */
-/* Airborne-style logo bar: black strip, full colour logos, generous spacing */
 .logo-strip {
   width: 1440px;
   background: var(--black);
@@ -574,10 +521,6 @@ body {
 }
 .logo-item img:hover { opacity: 1; }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   SPECIALISTS
-───────────────────────────────────────────────────────────────────── */
 .specialists {
   width: 1440px;
   background: var(--white);
@@ -620,10 +563,6 @@ body {
 .btn-dark:hover  { background: var(--orange); }
 .btn-dark:active { transform: scale(0.97); }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   SERVICES — orange background, 4-column grid, hover reveals white
-───────────────────────────────────────────────────────────────────── */
 .services {
   width: 1440px;
   background: var(--orange);
@@ -718,10 +657,6 @@ body {
 .svc-btn:hover { background: var(--orange); }
 .svc-card:hover .svc-desc { bottom: 78px; }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   FEATURED WORK — white, 2-column grid, g-mask hover effect
-───────────────────────────────────────────────────────────────────── */
 .featured {
   width: 1440px;
   background: var(--white);
@@ -748,8 +683,6 @@ body {
   padding-top: 12px;
 }
 
-/* ── HOMEPAGE FEATURED WORK — litebox-style scroll reveal + hover ─── */
-/* litebox exact: 16px column gap, 131px row gap */
 .work-grid { display: flex; flex-direction: column; gap: 131px; }
 .work-row  { display: flex; gap: 16px; }
 .work-card { flex: 1; cursor: pointer; text-decoration: none; }
@@ -759,16 +692,15 @@ body {
   position: relative; overflow: visible;
   background: transparent;
   will-change: transform;
-  /* transform (scroll scale + hover shrink) set by JS */
+
 }
 .work-thumb-img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-  /* Hidden once JS builds the two-half structure */
+
 }
 .work-thumb.lb-ready .work-thumb-img { display: none; }
 
-/* ── Two-half blob structure (litebox) ── */
 .lb-half {
   position: absolute; left: 0; width: 100%;
   height: calc(50% + 1px);
@@ -776,7 +708,7 @@ body {
   background-size: 100% 200%;
   background-repeat: no-repeat;
   will-change: transform;
-  /* border-radius set by JS — top:0 corners on top half, bottom:0 on bottom */
+
 }
 .lb-half.lb-top { top: 0;    background-position: center top; }
 .lb-half.lb-bot { bottom: 0; background-position: center bottom; }
@@ -804,10 +736,6 @@ body {
 }
 .work-cta a:hover { color: var(--orange); border-color: var(--orange); }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   CTA SECTION — orange, two cards (white + black)
-───────────────────────────────────────────────────────────────────── */
 .cta-section { width: 1440px; background: var(--orange); padding: 120px 60px; }
 .cta-head    { text-align: center; margin-bottom: 80px; }
 .cta-head h2 {
@@ -866,7 +794,7 @@ body {
 }
 @media (min-width: 1024px) {
   .cta-lottie { width: 220px; height: 220px; margin-top: 32px; margin-right: 18px; }
-  /* Custom Package card only — astronaut pulled up 20% */
+
   .cta-card-white .cta-lottie { transform: translateY(-20%); }
 }
 
@@ -904,10 +832,6 @@ body {
 .btn-outline-white:hover  { background: #fff; color: #000; border-color: #fff; }
 .btn-outline-white:active { transform: scale(0.97); }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   FOOTER — black, animated fill masked through logo, nav columns bottom-right
-───────────────────────────────────────────────────────────────────── */
 footer {
   width: 1440px;
   background: #0D0D0D;
@@ -917,19 +841,19 @@ footer {
 }
 
 .footer-art {
-  /* Container — holds the logo img + GIF overlay */
+
   position: absolute; left: 40px; top: 50px;
   width: 720px; height: 180px;
   pointer-events: none; user-select: none;
 }
-/* Always-visible white logo PNG */
+
 .footer-art-logo {
   display: block;
   height: 72px; width: auto;
   position: absolute; left: 0; top: 50%; transform: translateY(-50%);
   opacity: 0.55;
 }
-/* Animated GIF masked into logo shape (enhancement) */
+
 .footer-art-gif {
   position: absolute; inset: 0;
   background-image: url('../assets/Footer Animation GV.avif');
@@ -995,13 +919,9 @@ footer {
 }
 .footer-bottom a:hover { color: #fff; }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   SCROLL REVEAL — applied by IntersectionObserver
-───────────────────────────────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
 .reveal.on { opacity: 1; transform: translateY(0); }
-/* Utility/secondary pages: no reveal animation — content always visible */
+
 .page-util .reveal,
 .page-util .reveal.d1, .page-util .reveal.d2,
 .page-util .reveal.d3, .page-util .reveal.d4 {
@@ -1012,16 +932,10 @@ footer {
 .reveal.d3 { transition-delay: 320ms; }
 .reveal.d4 { transition-delay: 420ms; }
 
-/* ── Character-level paragraph reveal (litebox.ai style) ─────────── */
-/* No CSS transition — reveal is 100% scroll-position driven, no lag  */
 .rc { opacity: 0.12; }
 .rc.rc-on { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .rc { opacity: 1 !important; } }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   SHOWREEL — edge-to-edge video section
-───────────────────────────────────────────────────────────────────── */
 .showreel {
   width: 1440px;
   background: var(--black);
@@ -1032,10 +946,10 @@ footer {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #111;
-  /* ▶ Play cursor — entire section is the play target */
+
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Ccircle cx='28' cy='28' r='26' fill='black' fill-opacity='0.62' stroke='white' stroke-width='2'/%3E%3Cpolygon points='22,16 44,28 22,40' fill='white'/%3E%3C/svg%3E") 28 28, pointer;
 }
-/* ⏸ Pause cursor while playing */
+
 .showreel-wrap.is-playing {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Ccircle cx='28' cy='28' r='26' fill='black' fill-opacity='0.62' stroke='white' stroke-width='2'/%3E%3Crect x='17' y='16' width='7' height='24' rx='2' fill='white'/%3E%3Crect x='32' y='16' width='7' height='24' rx='2' fill='white'/%3E%3C/svg%3E") 28 28, pointer;
 }
@@ -1053,11 +967,11 @@ footer {
   transition: opacity 500ms;
   cursor: pointer;
 }
-/* While playing, fade the overlay out but keep it pointer-interactive so clicking pauses */
+
 .showreel-overlay.playing {
   opacity: 0;
 }
-/* Hover while playing reveals a subtle pause affordance */
+
 .showreel-overlay.playing:hover {
   opacity: 1;
 }
@@ -1076,7 +990,7 @@ footer {
   border-color: #fff;
   transform: scale(1.08);
 }
-/* Pause icon shown when playing */
+
 .showreel-play-btn .pause-icon {
   display: none;
   gap: 5px;
@@ -1103,7 +1017,7 @@ footer {
   line-height: 1;
   transition: opacity 500ms, transform 500ms;
 }
-/* Hide label text when real playback starts */
+
 .showreel-overlay.playing .showreel-label {
   opacity: 0;
   pointer-events: none;
@@ -1119,10 +1033,6 @@ footer {
   color: #fff; letter-spacing: -.01em; text-transform: uppercase;
 }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   NAV TOGGLE + MOBILE DRAWER
-───────────────────────────────────────────────────────────────────── */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -1144,7 +1054,7 @@ footer {
               width 220ms ease;
   transform-origin: center;
 }
-/* 3-line hamburger → × on open: top rotates down, middle disappears, bottom rotates up */
+
 .gv-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .gv-nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; width: 0; }
 .gv-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
@@ -1186,7 +1096,6 @@ footer {
 }
 .drawer-links li a:hover { color: var(--orange); }
 
-/* Hamburger: Services accordion toggle + collapsible sub-links */
 .drawer-svc { display: block; }
 .drawer-svc-toggle {
   display: flex; align-items: center; justify-content: space-between;
@@ -1238,7 +1147,6 @@ footer {
 .drawer-sub li a:hover,
 .drawer-sub li a:active { color: var(--orange); }
 
-/* Eyekiller-style CTA pill in mobile drawer */
 .drawer-cta-pill {
   display: inline-flex; align-items: center;
   font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 17px;
@@ -1254,7 +1162,6 @@ footer {
 .drawer-cta-pill:hover  { background: var(--orange-dark); }
 .drawer-cta-pill:active { transform: scale(0.96); }
 
-/* Instagram link in drawer footer */
 .drawer-contact {
   display: flex; align-items: center; gap: 8px;
 }
@@ -1267,15 +1174,8 @@ footer {
 }
 .drawer-contact a:hover { color: var(--orange); }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   ABOUT PAGE
-───────────────────────────────────────────────────────────────────── */
-
-/* ── Shared util for about page ── */
 .ab-orange { color: var(--orange); }
 
-/* ── About Hero ──────────────────────────────────────────────────── */
 .ab-hero {
   width: 1440px;
   height: 820px;
@@ -1285,7 +1185,6 @@ footer {
   background: var(--orange);
 }
 
-/* ── Painted galaxy — the dark space the astronaut sprays into (right side) ── */
 .ab-galaxy {
   position: absolute;
   inset: 0;
@@ -1301,14 +1200,13 @@ footer {
       rgba(120,40,170,0.22) 0%,
       rgba(60,20,110,0.10) 45%,
       transparent 72%);
-  /* Reveal the painted galaxy as it's "sprayed" on */
+
   opacity: 0;
   transform: scale(1.04);
   transition: opacity 1100ms ease 200ms, transform 1400ms cubic-bezier(.16,1,.3,1) 200ms;
 }
 .ab-hero.lit .ab-galaxy { opacity: 1; transform: scale(1); }
 
-/* ── Ambient scrolling type — same language as homepage ── */
 .ab-ambient { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .ab-amb-row {
   position: absolute; left: -15%; width: 130%;
@@ -1326,7 +1224,6 @@ footer {
 .ab-amb-row.ar2 .ab-amb-scroll { animation: ab-amb-x 72s linear infinite reverse; }
 @keyframes ab-amb-x { to { transform: translateX(-50%); } }
 
-/* ── Mouse-follow spotlight ── */
 .ab-spot {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background: radial-gradient(circle 360px at var(--mx,70%) var(--my,50%), rgba(255,255,255,0.14), transparent 60%);
@@ -1334,7 +1231,6 @@ footer {
 }
 .ab-hero.lit .ab-spot { opacity: 1; }
 
-/* ── Corner labels ── */
 .ab-corner {
   position: absolute; z-index: 6;
   font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 700;
@@ -1353,7 +1249,6 @@ footer {
   animation: spin 7s linear infinite;
 }
 
-/* Coloured floating dots */
 .ab-dot {
   position: absolute;
   border-radius: 50%;
@@ -1365,7 +1260,6 @@ footer {
   50%       { transform: translateY(-10px) scale(1.08); }
 }
 
-/* Coloured floating dots */
 .ab-dot {
   position: absolute;
   border-radius: 50%;
@@ -1376,7 +1270,6 @@ footer {
   50%       { transform: translateY(-10px) scale(1.08); }
 }
 
-/* 4-pointed sparkle stars */
 .ab-sparkle {
   position: absolute;
   background: rgba(215,215,215,0.92);
@@ -1388,7 +1281,6 @@ footer {
   50%       { opacity: 1;   transform: scale(1.2) rotate(12deg); }
 }
 
-/* Saturn-like planet */
 .ab-saturn {
   position: absolute;
   top: 10%; right: 9%;
@@ -1425,7 +1317,6 @@ footer {
   70%       { transform: translateY(9px) rotate(-2deg); }
 }
 
-/* Nebula depth cloud — sits behind the astronaut on the painted side */
 .ab-nebula {
   position: absolute;
   width: 760px; height: 620px;
@@ -1447,7 +1338,6 @@ footer {
 }
 .ab-hero.lit .ab-nebula { opacity: 1; }
 
-/* Spray streaks toward the galaxy */
 .ab-streak {
   position: absolute;
   height: 1px;
@@ -1456,7 +1346,6 @@ footer {
   z-index: 1;
 }
 
-/* ── Astronaut painter — floats up & down spray-painting the galaxy ── */
 .ab-painter {
   position: absolute;
   width: 290px; height: 290px;
@@ -1468,13 +1357,13 @@ footer {
 }
 .ab-astro-glow {
   position: absolute;
-  /* Oversized so the radial-gradient fades to transparent well before the edge — no blur clipping box */
+
   width: 200%; height: 200%;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: radial-gradient(circle, rgba(239,72,35,0.32) 0%, rgba(239,72,35,0.14) 28%, rgba(239,72,35,0.04) 50%, transparent 68%);
-  /* No filter:blur — gradient handles the soft fade; blur caused the visible square box */
+
   animation: ab-glow-pulse 4.2s ease-in-out 0s infinite;
   pointer-events: none;
 }
@@ -1482,7 +1371,7 @@ footer {
   0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
   50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.14); }
 }
-/* Inner element does the entrance fall, then the spray-paint bob */
+
 .ab-astro-inner {
   position: relative;
   width: 100%; height: 100%;
@@ -1505,7 +1394,6 @@ footer {
   pointer-events: none;
 }
 
-/* Spray mist emitting from the can (tune left/top to match final art) */
 .ab-spray {
   position: absolute;
   top: 52%; left: 80%;
@@ -1527,7 +1415,6 @@ footer {
   100% { opacity: 0; transform: translate(var(--sx,-130px), var(--sy,-70px)) scale(1.7); }
 }
 
-/* ── Hero content (headline column, left) ── */
 .ab-hero-inner {
   position: absolute;
   z-index: 4;
@@ -1577,7 +1464,6 @@ footer {
 }
 .ab-glyph-line { display: block; white-space: nowrap; }
 
-/* Per-letter glyph fall — same language as the homepage hero */
 .ab-glyph {
   display: inline-block;
   transform: translateY(-130%) rotate(-12deg);
@@ -1612,7 +1498,6 @@ footer {
 }
 .ab-hero.lit .ab-cta-row { opacity: 1; transform: translateY(0); }
 
-/* ── Numbers ──────────────────────────────────────────────────────── */
 .ab-numbers {
   width: 1440px;
   background: #1c1a1d;
@@ -1621,7 +1506,7 @@ footer {
   overflow: hidden;
   position: relative;
 }
-/* Faint orange warmth behind the independent stat */
+
 .ab-numbers::after {
   content: '';
   position: absolute;
@@ -1640,7 +1525,6 @@ footer {
   padding: 80px 88px;
 }
 
-/* Individual stat — natural width, no flex stretch */
 .ab-stat {
   display: flex;
   flex-direction: column;
@@ -1651,7 +1535,6 @@ footer {
 .ab-stat:first-child { padding-left: 0; }
 .ab-stat.ab-stat-indep { padding-right: 0; }
 
-/* The enormous typographic number */
 .ab-stat-num {
   font-family: 'Boldonse', sans-serif;
   font-size: 140px;
@@ -1662,7 +1545,7 @@ footer {
   align-items: baseline;
   gap: 2px;
 }
-/* 100% gets the orange — it's the standout claim */
+
 .ab-stat.ab-stat-indep .ab-stat-num {
   color: var(--orange);
 }
@@ -1673,7 +1556,6 @@ footer {
   letter-spacing: -.01em;
 }
 
-/* Thin rule separating number from label */
 .ab-stat-rule {
   width: 100%;
   height: 1px;
@@ -1693,9 +1575,6 @@ footer {
   line-height: 1.5;
 }
 
-/* No operator separators — stats separated by spacing only */
-
-/* ── The Reality ──────────────────────────────────────────────────── */
 .ab-reality {
   width: 1440px;
   background: #1c1a1d;
@@ -1751,7 +1630,6 @@ footer {
   color: rgba(255,255,255,0.75);
 }
 
-/* ── Crew ─────────────────────────────────────────────────────────── */
 .ab-crew {
   width: 1440px;
   background: #fff;
@@ -1809,7 +1687,7 @@ footer {
   box-shadow: 0 6px 20px rgba(0,0,0,0.07);
   will-change: transform;
 }
-/* Sliding sheen that sweeps across on hover */
+
 .ab-pill::before {
   content: '';
   position: absolute;
@@ -1821,7 +1699,6 @@ footer {
 }
 .ab-pill:hover::before { transform: translateX(130%); }
 
-/* Override reveal defaults so rotation persists through the entrance animation */
 .ab-pill.reveal {
   opacity: 0;
   transform: rotate(var(--rot, 0deg)) translateY(calc(var(--ty, 0px) + 28px));
@@ -1870,7 +1747,6 @@ footer {
   z-index: 1;
 }
 
-/* ── Team ─────────────────────────────────────────────────────────── */
 .ab-team {
   width: 1440px;
   background: var(--offwhite);
@@ -1934,7 +1810,6 @@ footer {
 }
 .ab-member:hover .ab-member-photo { box-shadow: 0 28px 60px rgba(239,72,35,0.30); }
 
-/* Orange wash that fades in on hover, sitting under the photo */
 .ab-member-photo::before {
   content: '';
   position: absolute;
@@ -1975,7 +1850,6 @@ footer {
   background: linear-gradient(160deg, #333, #111);
 }
 
-/* Info slides up from the bottom on hover */
 .ab-member-info {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -2008,7 +1882,6 @@ footer {
   color: rgba(255,255,255,0.85);
 }
 
-/* ── Partners ─────────────────────────────────────────────────────── */
 .ab-partners {
   width: 1440px;
   background: #fff;
@@ -2038,14 +1911,13 @@ footer {
   margin: 0 auto;
 }
 
-/* Official partner seal cards */
 .ab-seal-row {
   display: flex;
   justify-content: center;
   gap: 24px;
   margin-bottom: 96px;
 }
-/* Spacers only needed on mobile for sticky stacking scroll runway */
+
 .seal-spacer, .card-spacer { display: none; }
 .ab-seal {
   display: flex;
@@ -2102,7 +1974,6 @@ footer {
   color: var(--orange);
 }
 
-/* Tools wordmark marquee */
 .ab-tools-label {
   font-family: 'Archivo', sans-serif;
   font-size: 12px;
@@ -2143,8 +2014,6 @@ footer {
 }
 @keyframes ab-tools-x { to { transform: translateX(-50%); } }
 
-
-/* ── Our Network (full-bleed photo band) ──────────────────────────── */
 .ab-network {
   position: relative;
   width: 1440px;
@@ -2156,7 +2025,7 @@ footer {
   isolation: isolate;
   background: #0B0B0F;
 }
-/* Photo layer — slow ken-burns drift. JS adds extra scroll parallax. */
+
 .ab-net-bg {
   position: absolute;
   inset: -8% 0;
@@ -2173,7 +2042,7 @@ footer {
   from { transform: scale(1.05) translateY(0); }
   to   { transform: scale(1.14) translateY(-2%); }
 }
-/* Orange duotone wash + legibility gradient */
+
 .ab-net-tint {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
@@ -2185,7 +2054,7 @@ footer {
   position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.06;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-/* Drifting sparkle accents */
+
 .ab-net-stars { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .ab-net-spark {
   position: absolute;
@@ -2195,7 +2064,7 @@ footer {
   opacity: .5;
   animation: ab-sparkle-pulse 3.6s ease-in-out var(--d, 0s) infinite;
 }
-/* Content */
+
 .ab-net-inner {
   position: relative;
   z-index: 4;
@@ -2256,12 +2125,6 @@ footer {
 .ab-net-cta span { transition: transform 220ms; }
 .ab-net-cta:hover span { transform: translateX(5px); }
 
-
-/* ═══════════════════════════════════════════════════════════════════════
-   SERVICE PAGES  (.sv-*)  — shared system for Branding / Video / Websites
-═══════════════════════════════════════════════════════════════════════ */
-
-/* ── Service hero ── */
 .sv-hero {
   position: relative;
   width: 1440px;
@@ -2285,7 +2148,7 @@ footer {
   animation: sv-glow-in 1200ms ease 150ms forwards;
 }
 @keyframes sv-glow-in { to { opacity: 1; } }
-/* Floating colour swatches (branding theme) */
+
 .sv-swatches { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .sv-swatch {
   position: absolute;
@@ -2301,7 +2164,7 @@ footer {
   0%, 100% { transform: rotate(var(--r,0deg)) translateY(0); }
   50%       { transform: rotate(var(--r,0deg)) translateY(-26px); }
 }
-/* Video hero: play emblem + drifting rings */
+
 .sv-play {
   position: absolute; z-index: 2;
   width: var(--s,150px); height: var(--s,150px); border-radius: 50%;
@@ -2323,7 +2186,7 @@ footer {
   width: var(--s,200px); height: var(--s,200px);
   animation: sv-float var(--dur,9s) ease-in-out var(--del,0s) infinite;
 }
-/* Web hero: floating browser window */
+
 .sv-window {
   position: absolute; z-index: 2;
   width: var(--w,340px); border-radius: 14px; overflow: hidden;
@@ -2387,7 +2250,7 @@ footer {
 .sv-hero-cta:active { transform: scale(0.97); }
 .sv-hero-cta span   { color: var(--orange); transition: transform 200ms var(--ease-out); }
 .sv-hero-cta:hover span { transform: translateX(5px); }
-/* Hero entrance — transform-only so content stays visible even if anim is throttled */
+
 .sv-hero-inner > * { animation: sv-hero-in 850ms cubic-bezier(.22,1,.36,1) both; }
 .sv-hero-inner > *:nth-child(1) { animation-delay: 60ms; }
 .sv-hero-inner > *:nth-child(2) { animation-delay: 150ms; }
@@ -2395,7 +2258,6 @@ footer {
 .sv-hero-inner > *:nth-child(4) { animation-delay: 400ms; }
 @keyframes sv-hero-in { from { transform: translateY(28px); } to { transform: none; } }
 
-/* ── Section shells ── */
 .sv-section { width: 1440px; padding: 140px 88px; }
 .sv-section.dark  { background: #0D0D0D; }
 .sv-section.light { background: #fff; }
@@ -2420,7 +2282,6 @@ footer {
 .sv-section.dark .sv-lead { color: rgba(255,255,255,0.62); }
 .sv-section.light .sv-lead, .sv-section.off .sv-lead { color: rgba(0,0,0,0.55); }
 
-/* ── About service: split + capability grid ── */
 .sv-about-grid { display: grid; grid-template-columns: 460px 1fr; gap: 90px; align-items: start; }
 .sv-about-grid--wide { grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .sv-about-right { display: flex; flex-direction: column; gap: 24px; }
@@ -2457,7 +2318,6 @@ footer {
 .sv-cap:hover { transform: translateX(6px); box-shadow: 0 16px 38px rgba(0,0,0,0.10); border-color: rgba(239,72,35,0.4); color: var(--orange); }
 .sv-cap:hover::after { transform: scaleY(1); }
 
-/* ── Process: big numbered steps ── */
 .sv-steps { display: flex; flex-direction: column; gap: 0; margin-top: 70px; }
 .sv-step {
   display: grid; grid-template-columns: 200px 1fr; gap: 60px;
@@ -2485,7 +2345,6 @@ footer {
 .sv-section.dark .sv-step-desc { color: rgba(255,255,255,0.6); }
 .sv-section.light .sv-step-desc, .sv-section.off .sv-step-desc { color: rgba(0,0,0,0.55); }
 
-/* ── Process timeline v2 (scroll-driven) ──────────────────────────── */
 .sv-proc-head { max-width: 680px; margin-bottom: 80px; }
 
 .sv-proc-track {
@@ -2493,7 +2352,6 @@ footer {
   padding-left: 80px;
 }
 
-/* Faint background rail */
 .sv-proc-track::before {
   content: '';
   position: absolute;
@@ -2504,7 +2362,6 @@ footer {
   pointer-events: none;
 }
 
-/* Orange fill — JS sets height */
 .sv-proc-fill {
   position: absolute;
   left: 22px; top: 40px;
@@ -2523,7 +2380,6 @@ footer {
 }
 .sv-proc-step:last-child { border-bottom: none; }
 
-/* Node dot on the rail — center at 22px from track left */
 .sv-proc-node {
   position: absolute;
   left: -72px; top: 70px;
@@ -2543,7 +2399,6 @@ footer {
   box-shadow: 0 0 0 6px rgba(239,72,35,0.18), 0 0 0 12px rgba(239,72,35,0.07);
 }
 
-/* Large decorative background number */
 .sv-proc-num {
   font-family: 'Boldonse', sans-serif;
   font-size: 130px;
@@ -2567,7 +2422,6 @@ footer {
   -webkit-text-stroke: 1.5px rgba(239,72,35,0.3);
 }
 
-/* Title — clip-path wipe from left */
 .sv-proc-title {
   font-family: 'Boldonse', sans-serif;
   font-size: 39.6px;
@@ -2585,7 +2439,6 @@ footer {
   clip-path: inset(0 0% 0 0);
 }
 
-/* Description — fade + rise */
 .sv-proc-desc {
   font-family: 'Archivo', sans-serif;
   font-size: 18px;
@@ -2603,7 +2456,6 @@ footer {
   transform: translateY(0);
 }
 
-/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .sv-proc-fill { transition: none; }
   .sv-proc-num  { transition: opacity 300ms ease; transform: none; }
@@ -2612,7 +2464,6 @@ footer {
   .sv-proc-desc { transform: none; transition: opacity 300ms ease; }
 }
 
-/* ── Deliverables: cards ── */
 .sv-deliver-head { text-align: center; max-width: 620px; margin: 0 auto 70px; }
 .sv-deliver-head .sv-lead { margin: 0 auto; }
 .sv-deliver-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
@@ -2642,7 +2493,6 @@ footer {
   font-family: 'Archivo', sans-serif; font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.58); margin: 0;
 }
 
-/* ── Clients logo wall (marquee) ── */
 .sv-clients-head { text-align: center; margin-bottom: 60px; }
 .sv-marquee { position: relative; overflow: hidden; width: 100%;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
@@ -2655,7 +2505,6 @@ footer {
 .sv-mq-track a:hover img { opacity: 1; filter: grayscale(0%); }
 @keyframes sv-mq { to { transform: translateX(-50%); } }
 
-/* ── Process redesign: bold full-width rows (v3) ─────────────────── */
 .sv-prow-head { max-width: 680px; margin-bottom: 100px; }
 .sv-prow-list { border-bottom: 1px solid rgba(255,255,255,0.08); }
 
@@ -2668,7 +2517,6 @@ footer {
 }
 .sv-prow:hover { background: rgba(255,255,255,0.025); }
 
-/* Top divider — scaleX draws left to right on scroll */
 .sv-prow-line {
   position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: rgba(255,255,255,0.10);
@@ -2677,7 +2525,6 @@ footer {
 }
 .sv-prow.prow-in .sv-prow-line { transform: scaleX(1); }
 
-/* Step meta: number badge + phase tag */
 .sv-prow-meta {
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 22px;
@@ -2701,7 +2548,6 @@ footer {
   border-radius: 100px; padding: 7px 20px;
 }
 
-/* Big title — clip-path wipe */
 .sv-prow-title {
   font-family: 'Boldonse', sans-serif;
   font-size: 72px; line-height: 1;
@@ -2713,12 +2559,10 @@ footer {
 }
 .sv-prow.prow-in .sv-prow-title { clip-path: inset(0 0% 0 0); }
 
-/* Heading row: title + collapse arrow */
 .sv-prow-hd {
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
 
-/* Plus/cross toggle — CSS-drawn circle with + that rotates to × */
 .sv-prow-arrow {
   flex-shrink: 0; width: 36px; height: 36px;
   border-radius: 50%;
@@ -2746,10 +2590,8 @@ footer {
 .sv-prow[aria-expanded="true"] .sv-prow-arrow::before,
 .sv-prow[aria-expanded="true"] .sv-prow-arrow::after { background: #fff; }
 
-/* Orange top line when expanded */
 .sv-prow[aria-expanded="true"] .sv-prow-line { background: var(--orange); }
 
-/* Collapsible body — grid trick animates to height: auto */
 .sv-prow-body {
   display: grid;
   grid-template-rows: 0fr;
@@ -2762,7 +2604,6 @@ footer {
   opacity: 1;
 }
 
-/* Description — lives inside .sv-prow-body; accordion handles show/hide */
 .sv-prow-desc {
   font-family: 'Archivo', sans-serif;
   font-size: 18px; line-height: 1.75;
@@ -2779,7 +2620,6 @@ footer {
   .sv-prow-arrow { transition: none; }
 }
 
-/* ── FLOWER PROCESS (Litebox-style scroll section) ───────────────── */
 .sv-proc-flower-section {
   width: 1440px;
   background: var(--offwhite);
@@ -2826,14 +2666,11 @@ footer {
   max-width: 480px;
   text-align: right;
 }
-/* scroll container — height set by JS */
+
 .sv-proc-flower-scroll {
   position: relative;
 }
-/* Desktop: manually-positioned sticky container — translate3d driven by a
-   rAF loop in main.js (native sticky can't pin inside the scaled #scaler).
-   will-change promotes it to its own GPU layer so per-frame transforms only
-   recomposite rather than repaint. */
+
 .sv-proc-flower-sticky {
   position: absolute;
   top: 0; left: 0; width: 100%;
@@ -2843,10 +2680,7 @@ footer {
   will-change: transform;
   backface-visibility: hidden;
 }
-/* Desktop: the flower is portaled out of #scaler into <body> by main.js and
-   pinned with position:fixed (escapes the scale transform → compositor-smooth,
-   no JS jitter). JS sets width/height/scale inline to match the scaled design;
-   it's only revealed (opacity) while the scroll zone covers the viewport. */
+
 .sv-proc-flower-sticky.gv-flower-fixed {
   position: fixed;
   top: 0; left: 0;
@@ -2868,7 +2702,7 @@ footer {
   display: block;
 }
 .sv-proc-stroke {
-  /* stroke-dashoffset animated via JS scroll */
+
 }
 .sv-proc-flower-content {
   position: absolute;
@@ -2922,10 +2756,9 @@ footer {
   color: rgba(0,0,0,0.58);
   max-width: 300px;
 }
-/* Mobile fallback: show process as plain vertical list */
+
 .sv-proc-mobile-list { display: none; }
 
-/* ── WHAT YOU GET (Litebox-style hover list) ─────────────────────── */
 .sv-wyg-section {
   width: 1440px;
   background: #fff;
@@ -2987,7 +2820,7 @@ footer {
   transition: opacity 280ms ease;
 }
 .sv-wyg-item:first-child { border-top: 1px solid rgba(0,0,0,0.09); }
-/* non-active items stay grey/light — only selected one is fully visible */
+
 .sv-wyg-item:not(.wyg-active) { opacity: 0.28; }
 .sv-wyg-item:not(.wyg-active):hover { opacity: 0.55; }
 .sv-wyg-row {
@@ -3025,7 +2858,7 @@ footer {
   color: rgba(0,0,0,0.58);
   max-width: 520px;
   padding-left: 32px;
-  /* accordion reveal */
+
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
@@ -3036,9 +2869,9 @@ footer {
   grid-template-rows: 1fr;
   opacity: 1;
 }
-/* Mobile-only description — hidden on desktop */
+
 .sv-wyg-mobile-desc { display: none; }
-/* Progress bar — desktop: vertical alongside panel; mobile: horizontal */
+
 .wyg-progress-wrap {
   position: absolute;
   left: -16px;
@@ -3092,10 +2925,9 @@ footer {
   opacity: 1;
   transform: scale(1);
 }
-/* ── Mock document visuals — CSS-only mockups per deliverable ──────── */
-.sv-wyg-panel-img::after { display: none; } /* remove old placeholder */
 
-/* Card 1 — Brand Book: color palette bar + text skeleton */
+.sv-wyg-panel-img::after { display: none; }
+
 .sv-wyg-panel-img[data-for="0"] {
   background:
     linear-gradient(to right, var(--orange) 25%, #222 25% 50%, #fff 50% 75%, #e8e4df 75%) 32px 32px / calc(100% - 64px) 24px no-repeat,
@@ -3108,7 +2940,7 @@ footer {
     linear-gradient(#bbb 8px, transparent 8px) 32px 204px / 58% 8px no-repeat,
     #f7f5f2;
 }
-/* Card 2 — Marketing Materials: social post mockup */
+
 .sv-wyg-panel-img[data-for="1"] {
   background:
     linear-gradient(var(--orange) 38%, #1a1a1a 38% 40%, #f4f1ed 40%);
@@ -3122,7 +2954,7 @@ footer {
   border-radius: 12px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.12);
 }
-/* Card 3 — Style Guide: typography + swatch grid */
+
 .sv-wyg-panel-img[data-for="2"] {
   background:
     linear-gradient(#333 7px, transparent 7px) 32px 32px / 30% 7px no-repeat,
@@ -3135,12 +2967,11 @@ footer {
     linear-gradient(#f0c040 100%, transparent 0) 60% 132px / 16% 16px no-repeat,
     #f7f5f2;
 }
-/* Card 4+ — generic gradient for other service pages */
+
 .sv-wyg-panel-img[data-for="3"] {
   background: linear-gradient(135deg, var(--orange) 30%, #222 70%);
 }
 
-/* ── Clients: interactive hover list with image panel ────────────── */
 .sv-cl-layout {
   display: flex; align-items: flex-start; gap: 80px;
 }
@@ -3163,7 +2994,6 @@ footer {
 }
 .sv-cl-img.cl-vis img { transform: scale(1); }
 
-/* Client names list */
 .sv-cl-list {
   list-style: none; padding: 0; margin: 48px 0 0;
   display: flex; flex-direction: column;
@@ -3179,10 +3009,9 @@ footer {
   transition: border-color 180ms ease, opacity 250ms ease;
 }
 .sv-cl-item.cl-active a { border-color: var(--black); }
-/* Dim non-active items while hovering */
+
 .sv-cl-list.cl-live .sv-cl-item:not(.cl-active) a { opacity: 0.2; }
 
-/* See-all work link below the client list */
 .sv-cl-see-all {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: 'Archivo', sans-serif;
@@ -3198,7 +3027,6 @@ footer {
 .sv-cl-see-all span { transition: transform 200ms ease; }
 .sv-cl-see-all:hover span { transform: translateX(4px); }
 
-/* ── Testimonial ── */
 .sv-quote { width: 1440px; background: var(--orange); padding: 130px 88px; text-align: center; position: relative; overflow: hidden; }
 .sv-quote::before {
   content: '“'; position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
@@ -3213,7 +3041,6 @@ footer {
 .sv-quote-name { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: .02em; }
 .sv-quote-role { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 6px; }
 
-/* ── Dual-quote layout (two testimonials side by side) ── */
 .sv-quote-pair {
   display: grid; grid-template-columns: 1fr 1fr; gap: 0;
   position: relative; z-index: 1;
@@ -3231,10 +3058,6 @@ footer {
 }
 .sv-quote-pair .sv-quote-by { text-align: left; }
 
-
-/* ═══════════════════════════════════════════════════════════════════════
-   WORK PAGE  (.wk-*)
-═══════════════════════════════════════════════════════════════════════ */
 .wk-page { background: #0D0D0D; }
 .wk-hero {
   width: 1440px; background: #0D0D0D;
@@ -3254,13 +3077,12 @@ footer {
   font-family: 'Archivo', sans-serif; font-size: 20px; line-height: 1.7;
   color: rgba(255,255,255,0.62); max-width: 560px; margin: 0;
 }
-/* Hero entrance — transform-only (reliable above the fold) */
+
 .wk-hero > * { animation: sv-hero-in 850ms cubic-bezier(.22,1,.36,1) both; }
 .wk-hero-eyebrow { animation-delay: 60ms; }
 .wk-hero h1 { animation-delay: 150ms; }
 .wk-hero-sub { animation-delay: 300ms; }
 
-/* Filter bar */
 .wk-filters {
   width: 1440px; background: #0D0D0D; padding: 18px 88px 46px;
   display: flex; gap: 12px; flex-wrap: wrap;
@@ -3279,8 +3101,6 @@ footer {
 .wk-filter:active { transform: scale(0.96); }
 .wk-filter.active { background: var(--orange); border-color: var(--orange); color: #fff; }
 
-/* Grid — work page, litebox-style */
-/* litebox exact: 16px column gap, 131px row gap */
 .wk-grid {
   width: 1440px; background: #0D0D0D; padding: 0 88px 120px;
   display: grid; grid-template-columns: 1fr 1fr;
@@ -3291,7 +3111,7 @@ footer {
   overflow: visible; aspect-ratio: 1.12 / 1;
   background: transparent;
   will-change: transform;
-  /* transform (scroll scale + hover shrink) set by JS */
+
 }
 .wk-card.hide { display: none; }
 .wk-empty {
@@ -3305,7 +3125,7 @@ footer {
 .wk-card-img {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  /* hidden once JS builds the two-half blob structure */
+
 }
 .wk-card-overlay {
   position: absolute; inset: 0; z-index: 2;
@@ -3344,10 +3164,6 @@ footer {
   background: var(--orange); padding: 7px 14px; border-radius: 9999px;
 }
 
-
-/* ═══════════════════════════════════════════════════════════════════════
-   CASE STUDY / WORK DETAIL  (.cs-*)
-═══════════════════════════════════════════════════════════════════════ */
 .cs-hero { width: 1440px; background: #0D0D0D; padding: 170px 88px 0; }
 .cs-back {
   display: inline-flex; align-items: center; gap: 8px;
@@ -3373,14 +3189,12 @@ footer {
   background-size: cover; background-position: center;
 }
 
-/* Overview */
 .cs-overview { width: 1440px; background: #0D0D0D; padding: 120px 88px; display: grid; grid-template-columns: 380px 1fr; gap: 90px; align-items: start; }
 .cs-overview h2 { font-family: 'Boldonse', sans-serif; font-size: 36px; line-height: 1.3; text-transform: uppercase; color: #fff; margin: 0; letter-spacing: -.01em; }
 .cs-overview-body p { font-family: 'Archivo', sans-serif; font-size: 19px; line-height: 1.8; color: rgba(255,255,255,0.85); font-weight: 500; margin: 0 0 26px; }
 .cs-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
 .cs-tag { font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; border: 1.5px solid rgba(255,255,255,0.2); padding: 9px 18px; border-radius: 9999px; }
 
-/* Gallery */
 .cs-gallery { width: 1440px; background: #0D0D0D; padding: 0 88px 40px; display: flex; flex-direction: column; gap: 28px; }
 .cs-shot { width: 100%; border-radius: 16px; background-size: cover; background-position: center; }
 .cs-shot.tall { height: 720px; }
@@ -3388,13 +3202,11 @@ footer {
 .cs-shot-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .cs-shot-row .cs-shot { height: 460px; }
 
-/* Results */
 .cs-results { width: 1440px; background: var(--orange); padding: 110px 88px; }
 .cs-results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .cs-result-num { font-family: 'Boldonse', sans-serif; font-size: 78px; line-height: 1; color: #fff; letter-spacing: -.02em; }
 .cs-result-label { font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,0.82); margin-top: 14px; }
 
-/* Next project */
 .cs-next { width: 1440px; background: #0D0D0D; padding: 120px 88px; text-align: center; position: relative; overflow: hidden; }
 .cs-next-label { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 22px; }
 .cs-next-link { font-family: 'Boldonse', sans-serif; font-size: 68.4px; line-height: 1.1; text-transform: uppercase; color: #fff; text-decoration: none; letter-spacing: -1px; display: inline-flex; align-items: center; gap: 28px; transition: color 240ms; }
@@ -3402,10 +3214,6 @@ footer {
 .cs-next-link .cs-arrow { transition: transform 280ms; }
 .cs-next-link:hover .cs-arrow { transform: translateX(16px); }
 
-
-/* ═══════════════════════════════════════════════════════════════════════
-   CONTACT PAGE  (.ct-*)
-═══════════════════════════════════════════════════════════════════════ */
 .ct-main { width: 1440px; background: #0D0D0D; padding: 180px 88px 140px; position: relative; overflow: clip; }
 .ct-glow { position: absolute; z-index: 0; width: 1000px; height: 1000px; bottom: -360px; left: -240px; border-radius: 50%;
   background: radial-gradient(circle, rgba(239,72,35,0.30) 0%, rgba(239,72,35,0.08) 44%, transparent 68%); filter: blur(20px); pointer-events: none; }
@@ -3420,7 +3228,6 @@ footer {
 .ct-detail a, .ct-detail span { font-family: 'Archivo', sans-serif; font-size: 20px; font-weight: 600; color: #fff; text-decoration: none; transition: color 200ms; }
 .ct-detail a:hover { color: var(--orange); }
 
-/* Form */
 .ct-form { background: #161616; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 44px; }
 .ct-field { margin-bottom: 22px; }
 .ct-field label { display: block; font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px; }
@@ -3432,7 +3239,7 @@ footer {
 }
 .ct-field input::placeholder, .ct-field textarea::placeholder { color: rgba(255,255,255,0.45); }
 .ct-field input:focus, .ct-field textarea:focus, .ct-field select:focus { outline: none; border-color: var(--orange); background: #111; }
-/* Keyboard-only focus: add glow on top of the border change */
+
 .ct-field input:focus-visible, .ct-field textarea:focus-visible, .ct-field select:focus-visible { box-shadow: 0 0 0 3px rgba(239,72,35,0.25); }
 .ct-field textarea { resize: vertical; min-height: 130px; }
 .ct-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -3468,7 +3275,7 @@ footer {
 }
 .ct-consent-label a { color: rgba(255,255,255,0.7); text-decoration: underline; }
 .ct-consent-label a:hover { color: #fff; }
-/* Entrance — transform-only (reliable above the fold) */
+
 .ct-intro > *, .ct-form { animation: sv-hero-in 800ms cubic-bezier(.22,1,.36,1) both; }
 .ct-intro > *:nth-child(1) { animation-delay: 60ms; }
 .ct-intro > *:nth-child(2) { animation-delay: 150ms; }
@@ -3478,7 +3285,6 @@ footer {
 .ct-intro > *:nth-child(6) { animation-delay: 500ms; }
 .ct-form { animation-delay: 240ms; }
 
-/* Paid Ads hero motif: rising bar chart */
 .sv-bars { position: absolute; z-index: 2; display: flex; align-items: flex-end; gap: 16px; }
 .sv-bar {
   width: 44px; border-radius: 12px 12px 0 0;
@@ -3488,9 +3294,6 @@ footer {
 }
 @keyframes sv-bar { from { transform: scaleY(.45); } to { transform: scaleY(1); } }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   LEGAL PAGES  (.lg-*)
-═══════════════════════════════════════════════════════════════════════ */
 .lg-hero { width: 1440px; background: #0D0D0D; padding: 180px 88px 76px; }
 .lg-hero h1 { font-family: 'Boldonse', sans-serif; font-size: 61.2px; line-height: 1.36; letter-spacing: -1px; text-transform: uppercase; color: #fff; margin: 0 0 18px; }
 .lg-hero p { font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin: 0; }
@@ -3503,14 +3306,9 @@ footer {
 .lg-prose a:hover { text-decoration: underline; }
 .lg-note { font-family: 'Archivo', sans-serif; font-size: 13px; color: rgba(0,0,0,0.55); background: rgba(239,72,35,0.06); padding: 16px 20px; border-radius: 8px; margin-bottom: 40px; }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   MOBILE + TABLET RESPONSIVE  — breakpoint: 1024px
-   Below this width: disable the scale transform, use real CSS layout.
-───────────────────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
 
-  /* ── Global overrides ── */
+
   #scaler { width: 100% !important; }
   .hero, .logo-strip, .specialists, .showreel,
   .services, .featured, .cta-section, footer,
@@ -3527,13 +3325,13 @@ footer {
     width: 100% !important;
   }
 
-  /* ── Nav ── */
+
   .nav-links { display: none; }
-  .nav-cta { display: none; }     /* hide Let's Talk pill from bar — it lives in the drawer */
-  .nav-right { display: flex; gap: 6px; align-items: center; }  /* keep a11y icon visible */
+  .nav-cta { display: none; }
+  .nav-right { display: flex; gap: 6px; align-items: center; }
   .nav-toggle { display: flex; margin-left: 8px; }
   .gv-nav { padding: 0; }
-  /* At rest: transparent pill — matches desktop behaviour */
+
   .gv-nav-inner {
     margin: 10px 10px;
     max-width: none;
@@ -3545,7 +3343,7 @@ footer {
     -webkit-backdrop-filter: none;
     box-shadow: none;
   }
-  /* Scrolled: pill shrinks to match eyekiller (calc(100% - 50px) centred) */
+
   .gv-nav.scrolled .gv-nav-inner {
     width: calc(100% - 70px);
     margin: 10px auto;
@@ -3555,18 +3353,17 @@ footer {
     background: var(--orange-dark);
     box-shadow: 0 6px 24px rgba(0,0,0,0.22);
   }
-  /* Keep a11y icon white on both states */
+
   .gv-nav.scrolled .nav-a11y { border-color: rgba(255,255,255,0.5); color: #fff; }
-  /* Override HTML width="168" attribute so logo scales with height */
+
   .nav-logo img { height: 36px; width: auto; }
   .gv-nav.scrolled .nav-logo img { height: 30px; width: auto; }
 
-  /* ── Hero — mobile creative layout ── */
+
   .hero { height: 100svh; min-height: 100svh; overflow: hidden; }
   .hero-inner { height: 100svh; min-height: 100svh; padding: 0; position: relative; overflow: hidden; }
 
-  /* Hero h1: tight text block — starts in the upper-centre zone
-     padding-top clears the nav; text fills from ~18svh downward */
+
   .hero-h1 {
     position: absolute !important;
     inset: 0 !important;
@@ -3575,13 +3372,13 @@ footer {
     display: flex; flex-direction: column; justify-content: flex-start;
   }
 
-  /* Kill per-glyph entrance on mobile — word-level animations replace it */
+
   .glyph { transform: none !important; transition: none !important; }
   .glyph-cap { display: none; }
   .hero-corner.tl { display: none; }
   .hero-corner.tr { display: none; }
 
-  /* Pill badges — mobile only, hidden on desktop */
+
   .m-hero-pills {
     display: flex; justify-content: space-between; align-items: center;
     gap: 8px; margin-bottom: 10.6svh;
@@ -3601,14 +3398,14 @@ footer {
     white-space: nowrap;
   }
 
-  /* Words flow in the flex column — position: relative clears absolute scatter */
+
   .glyph-word {
     position: relative !important;
     top: auto; left: auto; right: auto; bottom: auto;
     white-space: nowrap; display: block;
   }
 
-  /* gw1 "Production," — top, left-aligned */
+
   .glyph-word.gw1 {
     top: auto; left: auto; right: auto; bottom: auto;
     font-size: clamp(31px, 8.25vw, 42px); line-height: 1.65;
@@ -3618,7 +3415,7 @@ footer {
                 opacity 400ms ease 80ms;
   }
 
-  /* gw2 "Design" — dominant word, viewport-width block so text-align:center works */
+
   .glyph-word.gw2 {
     top: auto; left: auto; right: auto; bottom: auto;
     font-size: clamp(64px, 17.5vw, 82px); line-height: 1.55;
@@ -3628,7 +3425,7 @@ footer {
                 opacity 480ms ease 300ms;
   }
 
-  /* gw3 "& Web Studio" — bottom, left-aligned */
+
   .glyph-word.gw3 {
     top: auto; left: auto; right: auto; bottom: auto;
     font-size: clamp(33px, 8.8vw, 46px); line-height: 1.65;
@@ -3638,12 +3435,12 @@ footer {
                 opacity 440ms ease 540ms;
   }
 
-  /* .hero.lit — triggers all word entrances */
+
   .hero.lit .glyph-word.gw1,
   .hero.lit .glyph-word.gw2,
   .hero.lit .glyph-word.gw3 { transform: none; opacity: 1; }
 
-  /* ── Post-landing float — organic drift after astronaut touches down ── */
+
   @keyframes m-float-word {
     0%, 100% { transform: translateY(0); }
     50%       { transform: translateY(-6px); }
@@ -3652,7 +3449,7 @@ footer {
   .hero.astro-landed .glyph-word.gw2 { animation: m-float-word 6.5s ease-in-out 0.9s infinite; }
   .hero.astro-landed .glyph-word.gw3 { animation: m-float-word 4.5s ease-in-out 1.5s infinite; }
 
-  /* ── Shimmer wave through DESIGN letters (replaces hover on touch) ── */
+
   @keyframes m-glyph-shine {
     0%, 72%, 100% { text-shadow: none; }
     78%  { text-shadow:  3px -2px 0 rgba(255,255,255,.22); }
@@ -3662,30 +3459,30 @@ footer {
     animation: m-glyph-shine 3.8s ease-in-out calc(var(--i, 0) * 95ms) infinite;
   }
 
-  /* Touch-press feedback */
+
   .glyph-word:active { filter: brightness(0.78); transition: filter 70ms ease; }
 
-  /* Astronaut — top-right corner, above the text block */
+
   .astro-slot { width: 230px; height: 230px; right: 0px; bottom: 13%; top: auto; }
   .dust { display: none; }
 
-  /* CTA row */
+
   .hero-cta-row { left: 20px; right: 20px; bottom: 22px; gap: 10px; }
   .hero-pill { font-size: 11px; padding: 12px 18px; }
   .scroll-ind { display: none; }
 
-  /* Ambient background text — redistributed to fill the lower zone */
+
   .amb-row.r1 { font-size: 88px; }
   .amb-row.r2 { top: 38%; font-size: 70px; }
   .amb-row.r3 { top: 65%; font-size: 80px; }
 
-  /* ── Logo strip ── */
-  /* Airborne-style on mobile: smaller but same bold rhythm */
+
+
   .logo-strip { width: 100% !important; padding: 14px 0 10px; background: var(--black); }
   .logo-item { padding: 0 32px; height: 52px; }
   .logo-item img { max-height: 42px; max-width: 136px; opacity: .92; }
 
-  /* ── Specialists ── */
+
   .specialists {
     padding: 60px 24px 72px;
     grid-template-columns: 1fr;
@@ -3694,7 +3491,7 @@ footer {
   .spec-left h2 { font-size: clamp(30px, 9vw, 40px); }
   .spec-right p { font-size: 16px; line-height: 1.6; }
 
-  /* ── Showreel — litebox.ai style on mobile ── */
+
   .showreel { padding: 20px 20px 48px; background: #fff; }
   .showreel-wrap {
     border-radius: 12px;
@@ -3709,7 +3506,7 @@ footer {
   .showreel-play-btn { width: 56px; height: 56px; }
   .play-triangle { border-width: 9px 0 9px 16px; }
 
-  /* ── Services ── */
+
   .services { padding: 60px 16px 72px; }
   .services-head { margin-bottom: 40px; }
   .services-head h2 { font-size: clamp(28px, 8.5vw, 38px); }
@@ -3722,7 +3519,7 @@ footer {
   .svc-btn { font-size: 10px; padding: 8px 14px; left: 16px; bottom: 16px; }
   .svc-astro { width: 90px; height: 90px; top: 70px; }
 
-  /* ── Featured Work ── */
+
   .featured { padding: 60px 20px 72px; }
   .featured-head { grid-template-columns: 1fr; gap: 14px; margin-bottom: 36px; }
   .featured-head h2 { font-size: clamp(28px, 8.5vw, 38px); }
@@ -3734,10 +3531,10 @@ footer {
   .work-cat { font-size: 13px; }
   .work-grid { gap: 55px; }
   .work-row + .work-row { margin-top: 0; }
-  /* Show 3 rows (6 projects) max on mobile — keeps scroll length sane */
+
   .work-row:nth-child(n+4) { display: none; }
 
-  /* ── CTA Section ── */
+
   .cta-section { padding: 60px 20px 72px; }
   .cta-head { margin-bottom: 40px; }
   .cta-head h2 { font-size: clamp(28px, 8.5vw, 38px); }
@@ -3748,7 +3545,7 @@ footer {
     max-width: 100%;
     height: auto;
     position: sticky !important;
-    /* Block layout — lottie is absolutely positioned so text flows full-width */
+
     display: block !important;
     overflow: hidden;
     margin-bottom: 28px !important;
@@ -3757,17 +3554,17 @@ footer {
   .cta-card:nth-child(1) { top: 72px !important; z-index: 1; }
   .cta-card:nth-child(2) { top: 84px !important; z-index: 2; }
   .cta-card:last-child { margin-bottom: 0 !important; }
-  /* Content: full-width block */
+
   .cta-content { padding: 20px 20px 24px 20px; width: 100%; box-sizing: border-box; }
-  /* Title/label area only: right padding clears the astronaut */
+
   .cta-inner { padding-right: 116px; }
   .cta-title { font-size: 17px; line-height: 1.45; }
   .cta-divider { margin-top: 18px; }
   .cta-desc { font-size: 14px; }
-  /* Button: prevent text wrapping, tighter padding */
+
   .cta-btn .btn-dark,
   .cta-btn .btn-outline-white { white-space: nowrap; padding: 10px 18px; font-size: 12px; }
-  /* Lottie: absolute top-right. Custom Package pulled up (top:0), Subscription stays original */
+
   .cta-lottie {
     position: absolute !important;
     top: 0; right: 8px;
@@ -3777,7 +3574,7 @@ footer {
   }
   .cta-card-black .cta-lottie { top: 20px; }
 
-  /* ── Footer ── */
+
   footer {
     position: relative;
     min-height: 0;
@@ -3812,7 +3609,7 @@ footer {
     gap: 8px;
   }
 
-  /* ── About Hero — mobile ── */
+
   .ab-hero {
     height: auto; min-height: auto;
     background: var(--orange);
@@ -3832,7 +3629,7 @@ footer {
     position: relative;
     width: 100%; height: auto;
     left: 0; top: 0;
-    padding: 112px 24px 0;   /* 96px nav + 16px breathing room */
+    padding: 112px 24px 0;
     display: block;
   }
   .ab-eyebrow { margin-bottom: 20px; opacity: 1; transform: none; }
@@ -3850,13 +3647,13 @@ footer {
   }
   .ab-astro-inner { opacity: 1; transform: none; }
   .ab-astro-glow { width: 180px; height: 180px; }
-  .ab-saturn { top: 120px !important; right: 16px !important; }  /* align with heading */
+  .ab-saturn { top: 120px !important; right: 16px !important; }
 
-  /* ── Numbers — mobile (2×2 grid with divider background trick) ── */
+
   .ab-numbers-inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: stretch !important; /* force equal cell heights within each row */
+    align-items: stretch !important;
     gap: 1px;
     padding: 0;
     background: rgba(255,255,255,0.05);
@@ -3869,10 +3666,10 @@ footer {
   }
   .ab-stat:first-child { padding-left: 22px; }
   .ab-stat.ab-stat-indep { padding-right: 22px; }
-  .ab-stat-num { font-size: clamp(38px, 11vw, 56px); } /* scales with viewport, fits "100%" in half cell */
+  .ab-stat-num { font-size: clamp(38px, 11vw, 56px); }
   .ab-stat-sup { font-size: clamp(20px, 6vw, 32px); }
 
-  /* ── Reality — mobile ── */
+
   .ab-reality {
     padding: 72px 24px;
     grid-template-columns: 1fr;
@@ -3881,17 +3678,17 @@ footer {
   .ab-reality-left h2 { font-size: clamp(42px, 12vw, 56px); position: static; }
   .ab-reality-right p { font-size: 15px; }
 
-  /* ── Crew — mobile ── */
+
   .ab-crew { padding: 72px 20px 88px; }
   .ab-crew-head h2 { font-size: clamp(30px, 9vw, 42px); }
   .ab-crew-head { margin-bottom: 52px; }
   .ab-pill-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 100%; }
   .ab-pill { font-size: 13px; padding: 8px 18px 8px 8px; gap: 9px; }
-  .ab-pill.reveal, .ab-pill.reveal.on { transform: none; }   /* no scatter on mobile */
+  .ab-pill.reveal, .ab-pill.reveal.on { transform: none; }
   .ab-pill:hover { transform: translateY(-4px) scale(1.04) !important; }
   .ab-pill-icon { width: 30px; height: 30px; font-size: 14px; }
 
-  /* ── Team — mobile (info shown statically; no hover on touch) ── */
+
   .ab-team { padding: 72px 20px 88px; }
   .ab-team-top { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
   .ab-team-top-left h2 { font-size: clamp(30px, 9vw, 42px); }
@@ -3899,14 +3696,14 @@ footer {
   .ab-team-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .ab-member { display: block; transform: none !important; }
   .ab-member-photo { width: 100%; height: auto; aspect-ratio: 3 / 4; border-radius: 12px; }
-  .ab-member-photo::before { opacity: 1; }            /* keep orange wash for legibility */
+  .ab-member-photo::before { opacity: 1; }
   .ab-member-photo img { filter: grayscale(0%); transform: none; }
   .ab-member-init { font-size: 30px; }
   .ab-member-info { position: absolute; left: 0; right: 0; bottom: 0; transform: none; opacity: 1; padding: 16px 14px 14px; }
   .ab-member-name { font-size: 15px; color: #fff; }
   .ab-member-role { font-size: 10px; color: rgba(255,255,255,0.9); }
 
-  /* ── Partners — mobile ── */
+
   .ab-partners { padding: 72px 20px 88px; }
   .ab-partners-head h2 { font-size: clamp(28px, 8.5vw, 40px); }
   .ab-seal-row { flex-direction: column; align-items: center; gap: 14px; margin-bottom: 56px; }
@@ -3916,13 +3713,13 @@ footer {
   .ab-tools-track { gap: 38px; }
   .ab-tools-track span { font-size: 30px; }
 
-  /* ── Network roles — mobile ── */
+
   .anr-left h2 { font-size: clamp(32px, 8vw, 48px) !important; position: static !important; }
   .anr-word { font-size: clamp(24px, 6vw, 38px) !important; }
   .anr-body { font-size: 15px !important; margin-top: 40px !important; }
   .anr-hover-img { display: none !important; }
 
-  /* ── Team swiper side arrows — mobile ── */
+
   .ab-swiper-prev { left: -16px; width: 42px; height: 42px; font-size: 16px; }
   .ab-swiper-next { right: -16px; width: 42px; height: 42px; font-size: 16px; }
   .ab-net-eyebrow { margin-bottom: 18px; }
@@ -3932,7 +3729,7 @@ footer {
   .ab-net-sub { font-size: 15px; margin-bottom: 30px; opacity: 1; transform: none; }
   .ab-net-cta { padding: 15px 32px; font-size: 13px; opacity: 1; transform: none; }
 
-  /* ── Service pages — mobile ── */
+
   .sv-hero { height: auto; min-height: 580px; padding: 110px 0 70px; }
   .sv-hero-inner { padding: 0 24px; }
   .sv-hero h1 { font-size: clamp(36px, 11vw, 56px); line-height: 1.16; }
@@ -3958,7 +3755,7 @@ footer {
   .sv-mq-track { gap: 44px; }
   .sv-mq-track img { height: 26px; }
 
-  /* ── Process timeline — mobile ── */
+
   .sv-proc-track { padding-left: 48px; }
   .sv-proc-track::before { left: 14px; }
   .sv-proc-fill { left: 14px; }
@@ -3968,13 +3765,13 @@ footer {
   .sv-proc-title { font-size: clamp(22px, 6.5vw, 30px); }
   .sv-proc-desc { font-size: 15px; }
 
-  /* ── Process redesign mobile ── */
+
   .sv-prow-head { margin-bottom: 60px; }
   .sv-prow { padding: 40px 0; }
   .sv-prow-title { font-size: clamp(28px, 9vw, 44px); margin-bottom: 16px; }
   .sv-prow-desc { font-size: 15px; max-width: 100%; }
 
-  /* ── Flower process — mobile: hide SVG, show plain step list ── */
+
   .sv-proc-flower-section { padding: 72px 22px 80px; }
   .sv-proc-flower-header { padding: 0 0 40px; }
   .sv-proc-kicker { font-size: clamp(32px, 8vw, 44px); line-height: 1.1; margin-bottom: 24px; }
@@ -4004,7 +3801,7 @@ footer {
     font-family: 'Archivo', sans-serif; font-size: 15px; line-height: 1.7; color: rgba(0,0,0,0.55);
   }
 
-  /* ── What You Get — mobile (Litebox-style tab layout) ── */
+
   .sv-wyg-section { padding: 72px 22px 80px; }
   .sv-wyg-heading { font-size: clamp(40px, 12vw, 64px) !important; margin-bottom: 28px; }
   .sv-wyg-header-row { flex-direction: column; gap: 12px; padding-bottom: 32px; }
@@ -4012,7 +3809,7 @@ footer {
   .sv-wyg-layout { flex-direction: column; gap: 0; }
   .sv-wyg-section::after { display: none; }
 
-  /* ── Tab-style name list ── */
+
   .sv-wyg-list { gap: 0; }
   .sv-wyg-item {
     padding: 10px 0 10px 0 !important;
@@ -4020,25 +3817,25 @@ footer {
     cursor: pointer;
   }
   .sv-wyg-item:first-child { border: none !important; }
-  .sv-wyg-item:not(.wyg-active) { opacity: 1 !important; } /* override desktop dim */
+  .sv-wyg-item:not(.wyg-active) { opacity: 1 !important; }
   .sv-wyg-name {
     font-size: clamp(18px, 5.5vw, 24px) !important;
     font-weight: 600 !important;
-    color: rgba(0,0,0,0.25) !important; /* grey for inactive */
+    color: rgba(0,0,0,0.25) !important;
     transition: color 260ms ease !important;
   }
   .sv-wyg-item.wyg-active .sv-wyg-name {
-    color: var(--black) !important; /* dark for active */
+    color: var(--black) !important;
     transform: none !important;
   }
   .sv-wyg-bullet {
     width: 10px !important; height: 10px !important;
     border-radius: 2px !important;
   }
-  /* Hide inline descriptions on mobile — shown via .sv-wyg-mobile-desc below */
+
   .sv-wyg-desc { display: none !important; }
 
-  /* ── Image panel — visible on mobile ── */
+
   .sv-wyg-panel {
     display: block !important;
     flex: none !important;
@@ -4053,7 +3850,7 @@ footer {
   .sv-wyg-panel-img { border-radius: 12px !important; }
   .sv-wyg-list { order: 1; }
 
-  /* ── Accent bar + description below panel ── */
+
   .sv-wyg-mobile-desc {
     display: block !important;
     order: 3;
@@ -4066,7 +3863,7 @@ footer {
     border-top: 4px solid var(--orange);
   }
 
-  /* ── Clients hover list mobile ── */
+
   .sv-cl-layout { flex-direction: column; gap: 32px; }
   .sv-cl-left { width: 100%; }
   .sv-cl-right { width: 100%; order: -1; }
@@ -4074,7 +3871,7 @@ footer {
   .sv-cl-list { margin-top: 32px; }
   .sv-cl-item a { font-size: 22px; padding: 6px 14px; margin-left: -14px; }
 
-  /* ── Work page — mobile ── */
+
   .wk-hero { padding: 130px 22px 36px; }
   .wk-hero h1 { font-size: clamp(44px, 15vw, 72px); line-height: 1.36; }
   .wk-hero-sub { font-size: 16px; }
@@ -4084,7 +3881,7 @@ footer {
   .wk-card-title { font-size: 24px; }
   .wk-card-overlay { padding: 24px; }
 
-  /* ── Case study — mobile ── */
+
   .cs-hero { padding: 120px 22px 0; }
   .cs-title { font-size: clamp(34px, 11vw, 56px); margin-bottom: 32px; }
   .cs-meta { gap: 28px 40px; padding-bottom: 36px; }
@@ -4103,7 +3900,7 @@ footer {
   .cs-next { padding: 72px 22px; }
   .cs-next-link { font-size: clamp(32px, 10vw, 48px); gap: 16px; }
 
-  /* ── Contact — mobile ── */
+
   .ct-main { padding: 120px 22px 90px; }
   .ct-grid { grid-template-columns: 1fr; gap: 48px; }
   .ct-title { font-size: clamp(40px, 13vw, 60px); }
@@ -4112,19 +3909,19 @@ footer {
   .ct-intro { position: static; }
   .ct-field-row { grid-template-columns: 1fr; gap: 0; }
 
-  /* ── Legal — mobile ── */
+
   .lg-hero { padding: 120px 22px 48px; }
   .lg-hero h1 { font-size: clamp(34px, 11vw, 52px); }
   .lg-body { padding: 56px 22px 90px; }
   .lg-prose h2 { font-size: 20px; }
   .lg-prose p { font-size: 15px; }
 
-  /* ── Cookie banner — mobile ── */
+
   .gv-cookie { flex-direction: column; align-items: flex-start; padding: 20px 22px; gap: 16px; }
   .gv-cookie-btns { width: 100%; }
   .gv-cookie-btn { flex: 1; text-align: center; padding: 14px 16px; }
 
-  /* ── Careers — mobile ── */
+
   .cr-hero { padding: 110px 22px 64px; }
   .cr-hero h1 { font-size: clamp(34px, 11vw, 52px); }
   .cr-roles { padding: 64px 22px 80px; }
@@ -4134,12 +3931,12 @@ footer {
   .cr-intro-block { flex-direction: column; align-items: flex-start; gap: 32px; }
   .cr-intro-text p { font-size: 15px; }
 
-  /* ── Blog — mobile ── */
+
   .bl-hero { padding: 120px 22px 64px; }
   .bl-hero h1 { font-size: clamp(34px, 11vw, 52px); }
   .bl-body { padding: 0; }
 
-  /* ── Accessibility — mobile ── */
+
   .a11y-hero { padding: 128px 22px 64px; }
   .a11y-h1 { font-size: clamp(46px, 15vw, 72px); line-height: 1.12; }
   .a11y-lead { font-size: 16px; line-height: 1.85; max-width: none; }
@@ -4161,21 +3958,16 @@ footer {
 
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   TABLET  — 768px–1023px
-   Inherits all the mobile layout above. These overrides add breathing
-   room, re-enable some two-column layouts, and scale up type/padding.
-───────────────────────────────────────────────────────────────────── */
 @media (min-width: 768px) and (max-width: 1023px) {
 
-  /* ── Nav ── */
-  /* Tablet: wider pill with more breathing room */
+
+
   .gv-nav-inner { margin: 12px 20px; padding: 0 10px 0 20px; height: 52px; }
   .gv-nav.scrolled .gv-nav-inner { margin: 12px 20px; max-width: calc(100% - 50px); }
   .nav-logo img { height: 38px; }
 
-  /* ── Hero ── */
-  /* Tablet: hero-h1 uses wider padding, words still flow as a block */
+
+
   .hero-h1 { padding: 80px 48px 0; }
   .glyph-word.gw1 { top: auto; left: auto; right: auto; bottom: auto; font-size: clamp(48px, 6.5vw, 66px); text-align: left; }
   .glyph-word.gw2 { top: auto; left: auto; right: auto; bottom: auto; font-size: clamp(90px, 14vw, 120px); width: 100vw; margin-left: -48px; text-align: center; }
@@ -4184,20 +3976,20 @@ footer {
   .astro-slot     { width: 300px; height: 300px; right: -8px; bottom: 13%; }
   .dust           { right: 18px; bottom: 13%; }
 
-  /* ── Specialists ── */
+
   .specialists { padding: 80px 48px; }
   .spec-left h2 { font-size: 44px; }
 
-  /* ── Showreel ── */
+
   .showreel-label { left: 32px; bottom: 28px; }
 
-  /* ── Services ── */
+
   .services { padding: 72px 48px; }
   .services-head h2 { font-size: clamp(32px, 5vw, 44px); }
   .services-cards { grid-template-columns: 1fr 1fr; gap: 12px; padding: 0; }
   .svc-card { height: 300px; }
 
-  /* ── Featured Work ── */
+
   .featured { padding: 72px 48px; }
   .featured-head h2 { font-size: clamp(32px, 5vw, 44px); }
   .work-row { flex-direction: row; gap: 16px; }
@@ -4206,7 +3998,7 @@ footer {
   .work-row:nth-child(n+4) { display: flex; }
   .work-grid { gap: 72px; }
 
-  /* ── CTA Section ── */
+
   .cta-section { padding: 80px 48px; }
   .cta-cards   { flex-direction: row; align-items: stretch; gap: 16px; }
   .cta-card    { height: 380px; max-width: none; }
@@ -4215,13 +4007,13 @@ footer {
   .cta-lottie  { width: 160px; height: 160px; margin-top: 26px; margin-right: 14px; }
   .cta-head h2 { font-size: 44px; }
 
-  /* ── Footer ── */
+
   footer { padding: 64px 48px 40px; }
 
-  /* ── About ── */
+
   .ab-hero-inner { padding: 116px 48px 0; }
   .ab-h1 { font-size: clamp(46px, 8.5vw, 72px); }
-  /* Tablet: restore flex row, show separators, shrink numbers slightly */
+
   .ab-numbers-inner {
     display: flex;
     align-items: center;
@@ -4232,7 +4024,7 @@ footer {
   .ab-stat:nth-child(odd) { border-right: none; }
   .ab-stat:first-child { padding-left: 0; }
   .ab-stat.ab-stat-indep { padding-right: 0; }
-  /* no stat separators */
+
   .ab-stat-num { font-size: 88px; }
   .ab-stat-sup { font-size: 48px; }
   .ab-reality { padding: 80px 48px; }
@@ -4247,37 +4039,37 @@ footer {
   .ab-net-inner { padding: 0 48px; }
   .ab-net-h2  { font-size: clamp(36px, 7vw, 56px); }
 
-  /* ── Service pages ── */
+
   .sv-hero-inner { padding: 0 48px; }
   .sv-hero h1    { font-size: clamp(42px, 7.5vw, 66px); }
   .sv-section    { padding: 80px 48px; }
   .sv-h2         { font-size: clamp(34px, 5.5vw, 48px); }
 
-  /* ── Process rows ── */
+
   .sv-prow-title { font-size: clamp(36px, 6.5vw, 56px); }
   .sv-proc-title { font-size: clamp(26px, 4.5vw, 38px); }
 
-  /* ── Flower process — tablet ── */
+
   .sv-proc-flower-section { padding: 0; }
   .sv-proc-flower-header { padding: 80px 48px 48px; }
   .sv-proc-mobile-title { font-size: clamp(28px, 4.5vw, 40px); }
 
-  /* ── WYG — tablet ── */
+
   .sv-wyg-section { padding: 80px 48px 100px; }
   .sv-wyg-heading { font-size: clamp(52px, 8vw, 72px); }
   .sv-wyg-name { font-size: clamp(32px, 5vw, 44px); }
   .sv-wyg-panel { flex: 0 0 380px; }
 
-  /* ── Client list ── */
+
   .sv-cl-item a  { font-size: clamp(24px, 4vw, 32px); }
 
-  /* ── Work page ── */
+
   .wk-hero    { padding: 140px 48px 40px; }
   .wk-hero h1 { font-size: clamp(52px, 8.5vw, 80px); }
   .wk-filters { padding: 12px 48px 36px; }
   .wk-grid    { grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: 72px; padding: 0 48px 100px; }
 
-  /* ── Case study ── */
+
   .cs-hero    { padding: 140px 48px 0; }
   .cs-title   { font-size: clamp(42px, 7vw, 64px); }
   .cs-overview { padding: 80px 48px; }
@@ -4288,27 +4080,27 @@ footer {
   .cs-next     { padding: 80px 48px; }
   .cs-next-link { font-size: clamp(38px, 6vw, 54px); }
 
-  /* ── Contact ── */
+
   .ct-main    { padding: 130px 48px 100px; }
   .ct-title   { font-size: clamp(46px, 7vw, 68px); }
   .ct-grid    { grid-template-columns: 1fr; gap: 52px; }
   .ct-form    { order: -1; }
   .ct-intro   { position: static; }
 
-  /* ── Legal ── */
+
   .lg-hero    { padding: 130px 48px 56px; }
   .lg-hero h1 { font-size: clamp(40px, 6vw, 56px); }
   .lg-body    { padding: 64px 48px 100px; }
 
-  /* ── Careers ── */
+
   .cr-hero    { padding: 130px 48px 72px; }
   .cr-roles   { padding: 80px 48px; }
 
-  /* ── Blog ── */
+
   .bl-hero    { padding: 130px 48px 80px; }
   .bl-body    { padding: 0; }
 
-  /* ── Accessibility — tablet ── */
+
   .a11y-hero    { padding: 150px 48px 80px; }
   .a11y-h1      { font-size: clamp(64px, 10vw, 88px); }
   .a11y-lead    { font-size: 18px; }
@@ -4318,49 +4110,39 @@ footer {
   .a11y-commit  { padding: 90px 48px; gap: 48px; }
   .a11y-contact { padding: 90px 48px; }
 
-  /* ── Cookie banner ── */
+
   .gv-cookie  { padding: 22px 40px; }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   MOBILE LANDSCAPE  — short viewport (rotated phones)
-   Phones in landscape mode have ~360-428px height. Keep content
-   accessible without forcing excessive vertical scroll.
-───────────────────────────────────────────────────────────────────── */
 @media (max-height: 480px) and (orientation: landscape) {
 
-  /* Hero: let it grow naturally rather than locking to 100svh */
+
   .hero, .hero-inner { height: auto; min-height: 100svh; }
 
-  /* Reduce astro slot so it doesn't dominate small landscape viewport */
+
   .astro-slot { width: 180px; height: 180px; bottom: 60px; right: -10px; }
   .dust       { width: 140px; }
 
-  /* Tighten hero word positions for landscape */
+
   .glyph-word.gw1 { top: 56px; font-size: clamp(26px, 5.5vw, 36px); }
   .glyph-word.gw2 { top: 30%; font-size: clamp(54px, 13vw, 72px); }
   .glyph-word.gw3 { bottom: 72px; font-size: clamp(22px, 4.5vw, 30px); }
   .hero-cta-row   { bottom: 18px; }
 
-  /* Service hero: collapse min-height */
+
   .sv-hero { min-height: auto; padding: 90px 0 60px; }
 
-  /* About hero: already auto-height on mobile, just reduce padding */
+
   .ab-hero-inner { padding-top: 48px; }
   .ab-h1 { font-size: clamp(32px, 8vw, 50px); }
 
-  /* Nav drawer: scrollable in landscape */
+
   .nav-drawer { max-height: 80svh; overflow-y: auto; }
 
-  /* Scroll indicator off in landscape (height too tight) */
+
   .scroll-ind { display: none; }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   COOKIE CONSENT BANNER
-   Fixed to bottom, slides up on first visit.
-   Dismissed state stored in localStorage (key: gv_cookie_consent).
-───────────────────────────────────────────────────────────────────── */
 .gv-cookie {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -4419,9 +4201,6 @@ footer {
 }
 .gv-cookie-btn--accept:hover { opacity: 0.88; }
 
-/* ─────────────────────────────────────────────────────────────────────
-   CAREERS PAGE
-───────────────────────────────────────────────────────────────────── */
 .cr-hero {
   background: var(--black);
   padding: 160px 120px 100px;
@@ -4521,7 +4300,6 @@ footer {
 }
 .cr-role-link:hover { gap: 14px; }
 
-/* "Introduce yourself" state — shown when no roles are listed */
 .cr-intro-block {
   display: flex;
   align-items: flex-end;
@@ -4555,9 +4333,6 @@ footer {
   margin-bottom: 32px;
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   BLOG INDEX PAGE  (coming soon)
-───────────────────────────────────────────────────────────────────── */
 .bl-hero {
   background: var(--black);
   padding: 160px 120px 120px;
@@ -4624,24 +4399,13 @@ footer {
   line-height: 1.65;
 }
 
-
-/* ─────────────────────────────────────────────────────────────────────
-   UNIFIED RICH HERO — extensions for service, blog & careers heroes
-   Reuses .ab-hero (about hero) DNA — see lines 1089+.
-───────────────────────────────────────────────────────────────────── */
-
-/* Blog hero: hide the ambient scrolling text rows — visual noise on cream bg */
 .ab-hero[data-svc="blog"] .ab-ambient { display: none !important; }
 
-/* Service heroes are a touch shorter and use slightly tighter type so
-   longer titles ("Make First Impressions Count.") fit two lines */
 .ab-hero.gv-hero-svc { height: 760px; min-height: 760px; }
 .ab-hero.gv-hero-svc .ab-h1 { font-size: 86.4px; }
 .ab-hero.gv-hero-svc .ab-painter { width: 320px; height: 320px; }
 .ab-hero.gv-hero-svc .ab-astro-glow { width: 280px; height: 280px; }
 
-/* Eyebrow variant for non-about heroes — small orange star + label,
-   right above the H1. Same DNA as .ab-net-eyebrow. */
 .ab-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: 'Archivo', sans-serif;
@@ -4667,9 +4431,6 @@ footer {
 }
 .ab-hero.lit .ab-eyebrow { opacity: 1; transform: translateY(0); }
 
-/* Per-page motif chips — small decorative shapes that sit inside .ab-galaxy
-   to communicate the service without resorting to icons in the headline.
-   Use inline styles for position so they're tweakable per page. */
 .gv-chip {
   position: absolute;
   z-index: 1;
@@ -4684,32 +4445,30 @@ footer {
   50%      { transform: translateY(-22px) rotate(calc(var(--r, 0deg) + 4deg)); }
 }
 
-/* Paint can (Branding) */
 .gv-chip-paint {
   width: 84px; height: 96px;
   background:
-    /* lid */
+
     linear-gradient(180deg, rgba(255,255,255,0.16) 0 6px, transparent 6px) top/100% no-repeat,
-    /* body */
+
     linear-gradient(180deg, var(--orange) 0%, #B83518 100%);
   border-radius: 6px 6px 8px 8px;
   box-shadow: inset 0 -16px 0 rgba(0,0,0,0.18), 0 24px 40px rgba(239,72,35,0.25);
 }
 .gv-chip-paint::before {
-  /* handle */
+
   content: ''; position: absolute; left: 50%; top: -10px;
   width: 64px; height: 12px; transform: translateX(-50%);
   border: 2px solid rgba(255,255,255,0.45);
   border-bottom: none; border-radius: 999px 999px 0 0;
 }
 .gv-chip-paint::after {
-  /* drip */
+
   content: ''; position: absolute; left: 14px; top: 28px;
   width: 12px; height: 38px; border-radius: 0 0 50% 50%;
   background: var(--orange);
 }
 
-/* Play emblem (Video) */
 .gv-chip-play {
   width: 110px; height: 110px;
   background: rgba(255,255,255,0.04);
@@ -4727,7 +4486,6 @@ footer {
   border-color: transparent transparent transparent var(--orange);
 }
 
-/* Browser window (Websites) */
 .gv-chip-window {
   width: 220px; height: 138px;
   background: #fff;
@@ -4754,7 +4512,6 @@ footer {
     repeating-linear-gradient(180deg, transparent 0 38px, rgba(0,0,0,0.06) 38px 39px);
 }
 
-/* Rising bars (Paid Ads) */
 .gv-chip-bars {
   width: 140px; height: 110px;
   display: flex; align-items: flex-end; gap: 10px;
@@ -4776,7 +4533,7 @@ footer {
   50%      { transform: scaleY(1.08); }
 }
 .gv-chip-bars::after {
-  /* trend arrow */
+
   content: ''; position: absolute; right: -22px; top: -12px;
   width: 56px; height: 4px; background: var(--orange); border-radius: 999px;
   transform: rotate(-26deg); transform-origin: left center;
@@ -4789,7 +4546,6 @@ footer {
   transform: rotate(-26deg);
 }
 
-/* Speech / quote bubble (Blog) */
 .gv-chip-quote {
   width: 130px; height: 130px;
   background: var(--orange);
@@ -4809,7 +4565,6 @@ footer {
   clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-/* Planet + flag (Careers) */
 .gv-chip-planet {
   width: 150px; height: 150px;
   border-radius: 50%;
@@ -4818,7 +4573,7 @@ footer {
   box-shadow: inset -22px -28px 50px rgba(0,0,0,0.45), 0 30px 60px rgba(239,72,35,0.3);
 }
 .gv-chip-planet::before {
-  /* ring */
+
   content: ''; position: absolute;
   left: -36px; right: -36px;
   top: 50%; height: 28px;
@@ -4828,7 +4583,7 @@ footer {
   border-left-color: transparent; border-right-color: transparent;
 }
 .gv-chip-planet::after {
-  /* flag */
+
   content: 'HIRING';
   position: absolute; left: 50%; bottom: 100%;
   transform: translateX(-50%) translateY(-8px);
@@ -4841,12 +4596,9 @@ footer {
   white-space: nowrap;
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   FOOTER LOGO + GIF — fix sizing & alignment so they overlap properly
-───────────────────────────────────────────────────────────────────── */
 .footer-art {
   position: absolute; left: 60px; top: 60px;
-  /* 949:525 aspect ratio of logo-long-white.png at ~80px tall */
+
   width: 320px; height: 80px;
   pointer-events: none; user-select: none;
 }
@@ -4884,17 +4636,12 @@ footer {
   .footer-art-logo { opacity: 0.55; }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   HOW WE DO IT — brand-style upgrade for .sv-proc-flower
-   Keeps scroll behavior + SVG intact; refreshes type, colors, decoration.
-───────────────────────────────────────────────────────────────────── */
 .sv-proc-flower-section {
   background: var(--black);
   color: #fff;
   overflow: hidden;
 }
 
-/* Ambient logo-pattern texture behind everything */
 .sv-proc-flower-section::before {
   content: '';
   position: absolute; inset: 0;
@@ -4905,7 +4652,6 @@ footer {
   mix-blend-mode: screen;
 }
 
-/* Glow behind the flower */
 .sv-proc-flower-section::after {
   content: '';
   position: absolute;
@@ -4924,10 +4670,9 @@ footer {
 .sv-proc-sub-row { border-bottom-color: rgba(255,255,255,0.1); }
 .sv-proc-intro { color: rgba(255,255,255,0.6); }
 
-/* Soften the SVG ring strokes for the dark backdrop */
 .sv-proc-flower-section .sv-proc-flower-shape { position: relative; z-index: 2; }
 .sv-proc-flower-section .sv-proc-flower-svg path[stroke^='rgba(239'] { stroke: rgba(255,255,255,0.10); }
-/* Orange dashed orbit ring around the flower for personality */
+
 .sv-proc-flower-shape::before {
   content: ''; position: absolute; inset: -40px;
   border: 1.5px dashed rgba(239,72,35,0.45);
@@ -4941,7 +4686,6 @@ footer {
 }
 @keyframes gv-orbit { to { transform: rotate(360deg); } }
 
-/* Step content — repaint for dark bg */
 .sv-proc-flower-num {
   width: 56px; height: 56px;
   border: 2px solid var(--orange);
@@ -4966,7 +4710,6 @@ footer {
   font-size: 16px;
 }
 
-/* Floating stars sprinkled in the section background */
 .sv-proc-stars {
   position: absolute; inset: 0;
   pointer-events: none;
@@ -4987,7 +4730,6 @@ footer {
   50%      { opacity: 0.9; transform: scale(1); }
 }
 
-/* Mobile list — repaint for dark bg */
 @media (max-width: 768px) {
   .sv-proc-flower-section::after { display: none; }
   .sv-proc-mobile-item {
@@ -5001,10 +4743,6 @@ footer {
   .sv-proc-mobile-desc { color: rgba(255,255,255,0.6) !important; }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   WHAT YOU GET — brand-style upgrade for .sv-wyg
-   Keeps hover-list functionality; refreshes type, panel & numbering.
-───────────────────────────────────────────────────────────────────── */
 .sv-wyg-section {
   background: var(--offwhite);
   position: relative;
@@ -5054,10 +4792,9 @@ footer {
 }
 .sv-wyg-header-row, .sv-wyg-layout { position: relative; z-index: 2; }
 
-/* Item rows — Boldonse names, ordinal numbers, orange hairline on active */
 .sv-wyg-item { position: relative; padding-left: 84px; }
 .sv-wyg-item::before {
-  /* numbering tag */
+
   content: '0' counter(wyg-i);
   counter-increment: wyg-i;
   position: absolute; left: 0; top: 44px;
@@ -5071,7 +4808,7 @@ footer {
 .sv-wyg-item.wyg-active::before { color: var(--orange); }
 
 .sv-wyg-item::after {
-  /* active row underline accent — disabled */
+
   display: none;
 }
 
@@ -5086,17 +4823,16 @@ footer {
 .sv-wyg-bullet { background: var(--orange); border-radius: 50%; width: 12px; height: 12px; }
 .sv-wyg-desc { color: rgba(13,13,13,0.6); padding-left: 30px; }
 
-/* Sticky preview panel — clean card with mock document visuals */
 .sv-wyg-panel-inner {
   background: #f7f5f2;
   border-radius: 24px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.10);
 }
 .sv-wyg-panel-bg {
-  display: none; /* remove dot pattern — mock visuals provide the visual */
+  display: none;
 }
 .sv-wyg-panel-img::after {
-  display: none; /* removed — mock visuals via data-for backgrounds */
+  display: none;
   width: 80px; height: 80px;
   border-radius: 0;
   background: #fff;
@@ -5117,15 +4853,14 @@ footer {
       #000 75% 87.5%, transparent 87.5% 100%);
 }
 
-/* ── Mobile: Litebox-style tab layout for WYG ──────────────────────── */
 @media (max-width: 1023px) {
   .sv-wyg-item {
-    padding: 8px 0 8px 0 !important; /* compact tabs, no left padding */
+    padding: 8px 0 8px 0 !important;
     border-bottom: none !important;
   }
   .sv-wyg-item:first-child { border-top: none !important; }
-  .sv-wyg-item::before { display: none !important; } /* hide 01 02 03 counters */
-  .sv-wyg-item::after  { display: none !important; } /* hide underline accent */
+  .sv-wyg-item::before { display: none !important; }
+  .sv-wyg-item::after  { display: none !important; }
   .sv-wyg-name {
     font-size: clamp(17px, 5vw, 22px) !important;
     font-weight: 600 !important;
@@ -5162,15 +4897,12 @@ footer {
   }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   FOOTER — figma-accurate lockup (massive grid./VELOCITY with GIF fill)
-───────────────────────────────────────────────────────────────────── */
 footer {
   position: relative;
   min-height: 820px;
   padding-top: 70px;
 }
-/* Thin orange top stripe */
+
 footer::before {
   content: '';
   position: absolute; top: 0; left: 0; right: 0; height: 4px;
@@ -5178,7 +4910,6 @@ footer::before {
   z-index: 3;
 }
 
-/* Reset earlier footer-art rules — repurpose container for the wordmark lockup */
 .footer-art {
   position: absolute; left: 60px; top: 70px;
   width: auto; height: auto;
@@ -5186,7 +4917,6 @@ footer::before {
 }
 .footer-wordmark { position: relative; line-height: 0.82; }
 
-/* "grid." set in Boldonse at hero-display scale, GIF clipped to the glyphs */
 .footer-wm-g {
   font-family: 'Archivo', sans-serif;
   font-weight: 900;
@@ -5194,14 +4924,11 @@ footer::before {
   line-height: 1;
   letter-spacing: -0.04em;
   text-transform: lowercase;
-  /* Padding must contain the full Boldonse ink extent so background-clip:text
-     fills every glyph. At 280px: baseline=311px from elem top, actual ink
-     overflows 25px above (needs ≥0.16em top) and 23px below (needs ≥0.32em btm).
-     Values here add 10px safety buffer on each side. */
+
   padding-top: 0.18em;
   padding-right: 0.12em;
   padding-bottom: 0.36em;
-  /* Animated fill via background-clip text */
+
   color: transparent;
   background-image: url('../assets/Footer Animation GV.avif');
   background-size: cover;
@@ -5213,17 +4940,14 @@ footer::before {
   position: relative;
 }
 .footer-wm-g > span { display: inline; }
-/* Fallback (no background-clip support): show as white */
+
 @supports not (background-clip: text) {
   .footer-wm-g { color: rgba(255,255,255,0.55); background-image: none; }
 }
 
-/* "VELOCITY" — italic Archivo, lower-right of "grid." like the wordmark */
 .footer-wm-v {
   position: absolute;
-  /* em-based offsets so VELOCITY stays locked to grid. at every font size.
-     right: 0.69em compensates for the 0.12em padding-right on .footer-wm-g
-     (0.12 × 240 = 28.8px ÷ 42px ≈ 0.69em) so Y lands on the period's visual edge */
+
   right: 0.69em;
   bottom: 0.52em;
   font-family: 'Archivo', sans-serif;
@@ -5245,14 +4969,11 @@ footer::before {
   .footer-wm-v { color: rgba(255,255,255,0.5); background-image: none; }
 }
 
-/* Hide any legacy .footer-art-logo / .footer-art-gif if a page still has them */
 .footer-art-logo, .footer-art-gif { display: none; }
 
-/* Right-side nav columns sit further right + a tad higher */
 .footer-cols { position: absolute; right: 80px; top: 100px; gap: 80px; }
 .footer-col h4 { font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 700; }
 
-/* CTA band — push below the wordmark lockup */
 .footer-cta { top: 540px; padding: 50px 80px 0; }
 .footer-cta-h {
   font-family: 'Boldonse', sans-serif;
@@ -5265,16 +4986,15 @@ footer::before {
 .footer-cta-right { width: 540px; align-self: flex-end; padding-bottom: 4px; }
 .footer-cta-desc { font-size: 16px; line-height: 1.6; }
 
-/* footer-cta-inner vertical centering */
 .footer-cta-inner { align-items: center; }
-/* Let's Work → secondary (white outline on dark footer) */
+
 .footer-cta .btn-dark {
   background: transparent;
   border: 1.5px solid rgba(255,255,255,0.6);
   color: #fff;
 }
 .footer-cta .btn-dark:hover { background: #fff; color: var(--black); border-color: #fff; }
-/* Footer bottom links underline */
+
 .footer-bottom a { text-decoration: underline; }
 
 .footer-bottom { top: 740px; padding: 22px 80px; }
@@ -5287,11 +5007,10 @@ footer::before {
     position: static;
     margin-bottom: 30px;
   }
-  /* fit-content so .footer-wordmark hugs the grid. text width —
-     without this it stretches full-width and right:Xem measures from screen edge */
+
   .footer-wordmark { width: fit-content; }
   .footer-wm-g { font-size: clamp(96px, 28vw, 160px); }
-  /* right: 0.12 × 28vw ÷ 5vw = 0.67em — period-edge compensation for this breakpoint */
+
   .footer-wm-v { font-size: clamp(20px, 5vw, 28px); right: 0.67em; }
   .footer-cols { position: static; flex-wrap: wrap; gap: 36px; margin-bottom: 36px; }
   .footer-cta { position: static; padding: 32px 0 0; }
@@ -5301,9 +5020,6 @@ footer::before {
   .footer-bottom { position: static; padding: 24px 0 0; flex-direction: column; gap: 12px; align-items: flex-start; }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   NAV — accessibility icon button
-───────────────────────────────────────────────────────────────────── */
 .nav-right { display: flex; align-items: center; gap: 14px; }
 .nav-a11y {
   width: 38px; height: 38px;
@@ -5318,15 +5034,10 @@ footer::before {
 .nav-a11y:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
 .nav-a11y:active { transform: scale(0.94); }
 .nav-a11y svg { display: block; }
-/* In scrolled / inverted nav: */
+
 .gv-nav.scrolled .nav-a11y { border-color: rgba(13,13,13,0.45); color: var(--black); }
 .gv-nav.scrolled .nav-a11y:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
 
-/* nav-a11y is now visible at all breakpoints — shown next to hamburger on mobile/tablet */
-
-/* ─────────────────────────────────────────────────────────────────────
-   BRAND PATTERN BACKDROPS — use the curly-letters tile
-───────────────────────────────────────────────────────────────────── */
 .sv-proc-flower-section::before {
   background-image: url('../assets/logo-pattern-big.png');
   background-size: 480px auto;
@@ -5342,9 +5053,6 @@ footer::before {
   opacity: 0.06;
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   SERVICE PAGE H2s — Boldonse, uppercase, tighter (sv-h2)
-───────────────────────────────────────────────────────────────────── */
 .sv-h2,
 .cs-h2 {
   font-family: 'Boldonse', sans-serif !important;
@@ -5353,31 +5061,22 @@ footer::before {
   line-height: 1.36;
   font-weight: 400;
 }
-/* On dark sections, .sv-h2 stays white; on light/off sections, black — already inherited */
 
-/* The "Brands We've Got" client list — clients in Archivo (already are) */
 .sv-cl-item a {
   font-family: 'Archivo', sans-serif !important;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   HOW WE DO IT — replace inner circle with an orange star at the centre
-   instead of the litebox-style flower. Keep outer dashed orbits.
-───────────────────────────────────────────────────────────────────── */
-/* Hide the original flower SVG curves */
 .sv-proc-flower-svg path:not(.sv-proc-stroke) { display: none; }
 .sv-proc-flower-svg .sv-proc-stroke { display: none; }
 
-/* Replace with a stylised constellation: large orange star at centre,
-   pulsing rings, plus tiny orbiting dots */
 .sv-proc-flower-shape::before {
-  /* outermost dashed orbit (was already set earlier) */
+
   inset: 0;
 }
 .sv-proc-flower-shape::after {
-  /* second orbit, smaller */
+
   inset: 80px;
   border: 1px dashed rgba(255,255,255,0.10);
   border-radius: 50%;
@@ -5401,7 +5100,7 @@ footer::before {
   position: absolute; left: 50%; top: 50%;
   width: 200px; height: 200px;
   transform: translate(-50%, -50%);
-  /* 8-point starburst built from a single conic gradient + mask */
+
   background: conic-gradient(from 22.5deg,
     var(--orange) 0 6.25%, transparent 6.25% 18.75%,
     var(--orange) 18.75% 31.25%, transparent 31.25% 43.75%,
@@ -5414,7 +5113,6 @@ footer::before {
   animation: gv-orbit 32s linear infinite reverse;
 }
 
-/* Step pill (number + step label) sits between the orange star and orbit text */
 .sv-proc-flower-step { padding: 0; }
 .sv-proc-flower-num {
   background: var(--orange);
@@ -5424,7 +5122,6 @@ footer::before {
 .sv-proc-flower-title { font-size: 32.4px; max-width: none; white-space: normal; }
 .sv-proc-flower-desc { color: rgba(255,255,255,0.65); max-width: 340px; }
 
-/* Three orbiting micro-dots — purely decorative */
 .sv-proc-orbiter {
   position: absolute;
   inset: 0;
@@ -5442,9 +5139,6 @@ footer::before {
   transform: translateX(-50%);
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   CTA Cards — Lottie sizing (desktop only — mobile overrides in mobile block)
-───────────────────────────────────────────────────────────────────── */
 @media (min-width: 1024px) {
   .cta-lottie {
     width: 220px; height: 220px;
@@ -5454,9 +5148,6 @@ footer::before {
   }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   ACCESSIBILITY PAGE
-───────────────────────────────────────────────────────────────────── */
 .a11y-hero {
   width: 1440px;
   background: var(--black);
@@ -5510,7 +5201,6 @@ footer::before {
   max-width: 640px;
 }
 
-/* Controls */
 .a11y-controls {
   width: 1440px;
   background: var(--offwhite);
@@ -5613,7 +5303,6 @@ footer::before {
 
 .a11y-reset-row { margin-top: 36px; text-align: right; }
 
-/* Commitment */
 .a11y-commit {
   width: 1440px;
   background: #fff;
@@ -5637,7 +5326,6 @@ footer::before {
   font-size: 0.9em;
 }
 
-/* Contact band */
 .a11y-contact {
   width: 1440px;
   background: var(--black);
@@ -5693,9 +5381,6 @@ footer::before {
   .a11y-contact-inner { grid-template-columns: 1fr; gap: 30px; }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   GLOBAL A11Y PREFERENCE OVERRIDES — added to <html> when toggled on
-───────────────────────────────────────────────────────────────────── */
 html.a11y-large-text       { font-size: 18px; }
 html.a11y-high-contrast body { background: #fff; }
 html.a11y-high-contrast .ab-hero, html.a11y-high-contrast .hero,
@@ -5711,10 +5396,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   text-underline-offset: 3px;
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   HERO FIXES — text/image overlap, per-page Lottie astronaut support
-───────────────────────────────────────────────────────────────────── */
-/* Tighten service/blog/careers hero text column + give the mascot more room */
 .ab-hero.gv-hero-svc .ab-hero-inner {
   width: 880px;
   left: 80px;
@@ -5735,7 +5416,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   width: 340px; height: 340px;
 }
 
-/* Lottie astronaut slot (replaces static .ab-astro-img when present) */
 .ab-astro-lottie {
   width: 100%; height: 100%;
   position: relative;
@@ -5745,7 +5425,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .ab-painter .ab-astro-img { transition: opacity 240ms ease; }
 .ab-painter.has-lottie .ab-astro-img { opacity: 0; }
 
-/* Per-page subtle layout variations so heroes don't all look identical */
 .ab-hero.gv-hero-svc[data-svc="branding"] .ab-painter { top: 52%; right: 130px; }
 .ab-hero.gv-hero-svc[data-svc="video"]    .ab-painter { top: 56%; right: 100px; width: 380px; height: 380px; }
 .ab-hero.gv-hero-svc[data-svc="websites"] .ab-painter { top: 58%; right: 140px; }
@@ -5753,19 +5432,15 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .ab-hero.gv-hero-svc[data-svc="blog"]     .ab-painter { top: 54%; right: 120px; }
 .ab-hero.gv-hero-svc[data-svc="careers"]  .ab-painter { top: 56%; right: 110px; }
 
-/* Heading orange accent for the last word of each h1 (per-page) */
 .ab-h1 .ab-orange { color: var(--orange); }
 
-/* When using a Lottie astro: brighten the glow + give it a bouncier idle */
 .ab-painter.has-lottie .ab-astro-glow {
   background: radial-gradient(circle,
     rgba(239,72,35,0.36) 0%, rgba(239,72,35,0.10) 55%, transparent 75%);
 }
 
-/* Make sure CTAs sit above the floating chip so they're clickable */
 .ab-hero.gv-hero-svc .ab-cta-row { z-index: 5; position: relative; }
 
-/* Dark-hero pill overrides: solid pill uses orange (black is invisible on dark bg) */
 .ab-hero.gv-hero-svc .hero-pill.solid {
   background: var(--orange);
   border-color: var(--orange);
@@ -5776,13 +5451,12 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   border-color: #fff;
   color: var(--black);
 }
-/* Outline pill on dark bg: white → white fill on hover (already correct, add explicit) */
+
 .ab-hero.gv-hero-svc .hero-pill:not(.solid):hover {
   background: #fff;
   color: var(--black);
 }
 
-/* Orange service heroes need black CTAs for contrast and cleaner hover states. */
 .ab-hero[data-svc="branding"] .hero-pill.solid,
 .ab-hero[data-svc="paid-ads"] .hero-pill.solid {
   background: var(--black);
@@ -5802,21 +5476,9 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   color: var(--black);
 }
 
-/* The "Brands We've Got" client list — heading in Boldonse (was Archivo) */
 .sv-cl-left .sv-h2 { font-family: 'Boldonse', sans-serif !important; }
 .sv-cl-item, .sv-cl-item a { font-family: 'Archivo', sans-serif !important; font-weight: 700; }
 
-
-/* ═════════════════════════════════════════════════════════════════════
-   ROUND-4 REBUILD — fix broken pinwheel, footer proportions, shrink
-   patterns, and give every service hero its own concept
-   (overrides earlier rules — placed at end of file).
-═════════════════════════════════════════════════════════════════════ */
-
-/* ─── FOOTER REBALANCE ────────────────────────────────────────────── */
-/* Round-4 footer override removed — original footer wordmark values restored */
-
-/* ─── PATTERN BACKGROUND TUNING ──────────────────────────────────── */
 .sv-proc-flower-section::before {
   background-size: 180px auto;
   opacity: 0.05;
@@ -5826,7 +5488,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   opacity: 0.04;
 }
 
-/* ─── HOW WE DO IT — kill the broken pinwheel, clean inner ───────── */
 .sv-proc-star, .sv-proc-glyph { display: none !important; }
 .sv-proc-center { z-index: 0; }
 .sv-proc-flower-content { z-index: 3; position: absolute; inset: 0; }
@@ -5838,7 +5499,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   inset: -90px;
   border: 1px solid rgba(255,255,255,0.06);
 }
-/* Add a soft orange glow behind the step content instead of the pinwheel */
+
 .sv-proc-flower-step::before {
   content: '';
   position: absolute; left: 50%; top: 50%;
@@ -5856,7 +5517,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .sv-proc-flower-title { font-size: 39.6px; max-width: 10ch; }
 .sv-proc-flower-desc { max-width: 360px; }
 
-/* ─── WHAT YOU GET — tidy panel placeholder ───────────────────────── */
 .sv-wyg-panel-img::after {
   width: 48px; height: 48px;
   -webkit-mask: none;  mask: none;
@@ -5865,11 +5525,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   border: 3px solid rgba(255,255,255,0.4);
 }
 
-/* ═════════════════════════════════════════════════════════════════════
-   PER-PAGE HERO CONCEPTS — visually distinct per service
-═════════════════════════════════════════════════════════════════════ */
-
-/* Shared service-hero reset: tighter h1, more room for the mascot */
 .ab-hero.gv-hero-svc { height: 760px; min-height: 760px; }
 .ab-hero.gv-hero-svc .ab-hero-inner {
   width: 900px;
@@ -5889,7 +5544,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 }
 .ab-hero.gv-hero-svc .ab-astro-glow { width: 320px; height: 320px; }
 
-/* ─── BRANDING — orange CANVAS with paint splatters everywhere ───── */
 .ab-hero[data-svc="branding"] {
   background: linear-gradient(135deg, var(--orange) 0%, #C7331A 100%);
 }
@@ -5900,13 +5554,12 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 }
 .ab-hero[data-svc="branding"] .ab-amb-row { -webkit-text-stroke: 1.5px rgba(0,0,0,0.22); }
 .ab-hero[data-svc="branding"] .ab-nebula { display: none; }
-/* Splat dots — replace generic dots with paint-like blobs */
+
 .ab-hero[data-svc="branding"] .ab-dot {
   border-radius: 60% 40% 50% 50% / 60% 50% 50% 40%;
   filter: blur(0.3px);
 }
 
-/* ─── VIDEO — full BLACK cinema, film grain + concentric play rings ── */
 .ab-hero[data-svc="video"] {
   background: #050505;
 }
@@ -5916,7 +5569,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
     radial-gradient(ellipse 700px 600px at 77% 50%, rgba(239,72,35,0.07) 0%, transparent 70%);
 }
 .ab-hero[data-svc="video"] .ab-galaxy::before {
-  /* Grain texture */
+
   content: '';
   position: absolute; inset: 0;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.35 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
@@ -5924,7 +5577,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   mix-blend-mode: overlay;
   pointer-events: none;
 }
-/* Concentric play rings expanding behind the mascot */
+
 .ab-hero[data-svc="video"] .ab-painter::before,
 .ab-hero[data-svc="video"] .ab-painter::after {
   content: '';
@@ -5945,20 +5598,19 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .ab-hero[data-svc="video"] .ab-amb-row { -webkit-text-stroke: 1.5px rgba(255,255,255,0.10); }
 .ab-hero[data-svc="video"] .ab-amb-row.ar2 .ab-amb-scroll { animation-direction: reverse; }
 
-/* ─── WEBSITES — slate / navy with stacked browser windows ─────────── */
 .ab-hero[data-svc="websites"] {
   background: linear-gradient(180deg, #0F1422 0%, #050810 100%);
 }
 .ab-hero[data-svc="websites"] .ab-galaxy {
   background:
-    /* subtle grid */
+
     linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 60px 60px,
     linear-gradient(0deg, rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 60px 60px,
     radial-gradient(ellipse 600px 500px at 80% 40%, rgba(239,72,35,0.22), transparent 65%);
 }
 .ab-hero[data-svc="websites"] .ab-amb-row { -webkit-text-stroke: 1.5px rgba(255,255,255,0.08); }
 .ab-hero[data-svc="websites"] .ab-nebula { display: none; }
-/* Stack 3 browser windows behind the mascot, perspective-tilted */
+
 .ab-hero[data-svc="websites"] .ab-painter { right: 100px; }
 .gv-window-stack {
   position: absolute;
@@ -5999,7 +5651,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   border-radius: 6px;
 }
 
-/* ─── PAID ADS — orange gradient + giant chart bars rising up ─────── */
 .ab-hero[data-svc="paid-ads"] {
   background: linear-gradient(180deg, var(--orange) 0%, #8C2A12 100%);
 }
@@ -6045,8 +5696,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   100% { transform: scaleY(0.7); }
 }
 
-/* ─── BLOG — cream editorial spread with dark type ─────────────────── */
-/* Blog page — light cream hero, nav links + logo orange at rest */
 .page-blog .gv-nav:not(.scrolled) .nav-links > li > a        { color: var(--orange); }
 .page-blog .gv-nav:not(.scrolled) .nav-links > li > a:hover  { color: var(--orange-dark); }
 .page-blog .gv-nav:not(.scrolled) .nav-sub li a {
@@ -6056,13 +5705,12 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   color: #fff;
 }
 .page-blog .gv-nav:not(.scrolled) .nav-logo img {
-  /* Convert white logo → GV Orange for cream background */
+
   filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(900%) hue-rotate(335deg);
 }
-/* Mobile: hamburger spans are white by default — invisible on cream hero */
+
 .page-blog .gv-nav:not(.scrolled):not(.nav-open) .nav-toggle span { background: var(--black); }
 
-/* Pages with orange hero (homepage, branding) — button must be black to contrast */
 .page-hero-orange .gv-nav:not(.scrolled) .nav-cta        { background: var(--black); color: #fff; }
 .page-hero-orange .gv-nav:not(.scrolled) .nav-cta:hover  { background: #fff; color: var(--black); }
 
@@ -6082,7 +5730,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .ab-hero[data-svc="blog"] .hero-pill.solid { background: var(--black); color: #fff; border-color: var(--black); }
 .ab-hero[data-svc="blog"] .ab-dot { mix-blend-mode: multiply; opacity: 0.45; }
 .ab-hero[data-svc="blog"] .ab-sparkle { filter: invert(1) brightness(0.4); opacity: 0.3; }
-/* Floating article card thumbnails */
+
 .gv-blog-cards {
   position: absolute;
   right: 60px; top: 22%;
@@ -6115,7 +5763,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-blog-cards .gv-bc:nth-child(2) { width: 220px; top: 140px; left: 0;   transform: rotate(-3deg); }
 .gv-blog-cards .gv-bc:nth-child(3) { width: 220px; top: 290px; left: 130px; transform: rotate(2deg); }
 
-/* ─── CAREERS — deep black with constellation of role pills ──────── */
 .ab-hero[data-svc="careers"] {
   background: #050308;
 }
@@ -6125,7 +5772,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
     radial-gradient(ellipse 800px 500px at 30% 80%, rgba(127,55,206,0.10), transparent 65%);
 }
 .ab-hero[data-svc="careers"] .ab-amb-row { -webkit-text-stroke: 1.5px rgba(255,255,255,0.08); }
-/* Floating role pills */
+
 .gv-role-cloud {
   position: absolute;
   right: 60px; top: 22%;
@@ -6162,17 +5809,14 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   50%      { transform: translateY(-10px); }
 }
 
-/* ─── Drop the redundant in-galaxy gv-chip on pages that now have richer motifs ── */
 .ab-hero[data-svc="video"] .gv-chip-play,
 .ab-hero[data-svc="websites"] .gv-chip-window,
 .ab-hero[data-svc="paid-ads"] .gv-chip-bars,
 .ab-hero[data-svc="blog"] .gv-chip-quote,
 .ab-hero[data-svc="careers"] .gv-chip-planet { display: none; }
 
-/* Keep branding's paint can floating — but reposition higher so it doesn't clash */
 .ab-hero[data-svc="branding"] .gv-chip-paint { top: 18%; left: 56%; }
 
-/* ─── MOBILE — keep heroes readable, hide decorative extras ───────── */
 @media (max-width: 768px) {
   .ab-hero[data-svc] { background: var(--orange); }
   .ab-hero[data-svc="video"], .ab-hero[data-svc="websites"], .ab-hero[data-svc="careers"] { background: #050505; }
@@ -6181,13 +5825,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   .gv-window-stack, .gv-blog-cards, .gv-role-cloud, .gv-paid-bars { display: none; }
 }
 
-
-/* ═════════════════════════════════════════════════════════════════════
-   ROUND-5 — ASTRONAUTS OUT, ANIMATED SERVICE-METAPHORS IN
-   Each hero has its own concept-driven visual stage on the right.
-═════════════════════════════════════════════════════════════════════ */
-
-/* Eyebrow with brand star */
 .ab-eyebrow { display: inline-flex; align-items: center; gap: 12px; }
 .ab-eb-star {
   width: 12px; height: 12px;
@@ -6203,7 +5840,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   color: var(--orange);
 }
 
-/* The visual stages all sit on the right half of the 1440 hero */
 .gv-color-wall, .gv-film-stage, .gv-web-stage,
 .gv-paid-stage, .gv-blog-stage, .gv-role-cloud {
   position: absolute;
@@ -6211,7 +5847,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   pointer-events: none;
 }
 
-/* ─── BRANDING — colour-system tile wall ─────────────────────────── */
 .gv-color-wall {
   right: 80px; top: 16%;
   width: 460px; height: 460px;
@@ -6226,7 +5861,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   background: var(--c, var(--orange));
   border-radius: 14px;
   position: relative;
-  /* No drop-shadow — it was creating dark lines and dirty artifacts between tiles */
+
   display: grid; place-items: end start;
   padding: 14px;
   color: rgba(255,255,255,0.7);
@@ -6236,8 +5871,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   will-change: transform, opacity;
 }
 
-/* ─── VIDEO — full-height cinema stage: three filmstrips + projector emblem ─ */
-/* ─── VIDEO — Director's Viewfinder ─────────────────────────────── */
 .gv-film-stage {
   right: 0; top: 0;
   width: 560px; height: 100%;
@@ -6248,7 +5881,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
     #040200 100%);
 }
 
-/* Film perforation strip — left edge, keeps film DNA */
 .gv-perf-strip {
   position: absolute;
   left: 0; top: 0; bottom: 0;
@@ -6268,7 +5900,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   background: rgba(239,72,35,0.04);
 }
 
-/* Viewfinder corner brackets */
 .gv-vf-corner {
   position: absolute;
   width: 32px; height: 32px;
@@ -6288,7 +5919,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-vf-bl { bottom: 52px; left: 48px;  transform: scaleY(-1); }
 .gv-vf-br { bottom: 52px; right: 26px; transform: scale(-1); }
 
-/* Tiny centre crosshair */
 .gv-vf-cross {
   position: absolute;
   left: 50%; top: 50%;
@@ -6305,7 +5935,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-vf-cross::before { width: 1px; height: 100%; left: 50%; top: 0; transform: translateX(-50%); }
 .gv-vf-cross::after  { height: 1px; width: 100%; top: 50%; left: 0; transform: translateY(-50%); }
 
-/* LIVE badge — top left */
 .gv-live-badge {
   position: absolute;
   top: 56px; left: 48px;
@@ -6318,7 +5947,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   z-index: 8;
 }
 
-/* Timecode display — bottom left */
 .gv-timecode {
   position: absolute;
   bottom: 58px; left: 48px;
@@ -6333,7 +5961,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   95%, 100% { opacity: 0.55; }
 }
 
-/* Audio waveform — bottom right */
 .gv-audio-wave {
   position: absolute;
   bottom: 50px; right: 30px;
@@ -6366,7 +5993,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   50%       { transform: scaleY(0.22); }
 }
 
-/* Fine scanline overlay across the whole stage */
 .gv-scan-lines {
   position: absolute; inset: 0;
   background: repeating-linear-gradient(
@@ -6379,7 +6005,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   z-index: 10;
 }
 
-/* ── Play emblem — viewfinder centre ─────────────────────────────── */
 .gv-play-emblem {
   position: absolute;
   left: 50%; top: 50%;
@@ -6388,7 +6013,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   z-index: 6;
 }
 
-/* Expanding pulse rings — staggered via --ri */
 .gv-play-ring {
   position: absolute;
   left: 50%; top: 50%;
@@ -6405,7 +6029,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   100% { transform: translate(-50%,-50%) scale(1.85); opacity: 0; }
 }
 
-/* Slow-orbit arc with glowing dot */
 .gv-play-orbit {
   position: absolute;
   left: 50%; top: 50%;
@@ -6429,7 +6052,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   to { transform: translate(-50%,-50%) rotate(360deg); }
 }
 
-/* Inner core circle with play icon */
 .gv-play-core {
   position: absolute;
   left: 50%; top: 50%;
@@ -6454,7 +6076,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   transform: translateX(6px);
 }
 
-/* Now Playing bar */
 .gv-np-bar {
   position: absolute;
   bottom: 50px; left: 22px;
@@ -6482,7 +6103,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-np-sep { opacity: 0.22; }
 .gv-np-type { color: rgba(255,255,255,0.68); }
 
-/* Reel counter */
 .gv-reel-id {
   position: absolute;
   top: 42px; right: 20px;
@@ -6494,7 +6114,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 }
 .gv-reel-id span { color: rgba(239,72,35,0.6); }
 
-/* Cinematic letterbox bars */
 .gv-cinebar {
   position: absolute; left: 0; right: 0;
   height: 22px;
@@ -6505,7 +6124,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-cinebar-t { top: 0; }
 .gv-cinebar-b { bottom: 0; }
 
-/* ─── WEBSITES — premium browser showcase ─────────────────────────── */
 .gv-web-stage {
   right: 60px; top: 14%;
   width: 500px; height: 420px;
@@ -6513,7 +6131,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   perspective: 1400px;
 }
 
-/* Ambient glow — breathes with the JS yoyo animation */
 .gv-web-glow {
   position: absolute;
   left: 5%; right: 5%; bottom: -50px;
@@ -6550,7 +6167,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 }
 .gv-w-card-1 { background: #111520; }
 
-/* Browser chrome bar */
 .gv-w-bar {
   height: 36px;
   display: flex; align-items: center; gap: 7px;
@@ -6578,7 +6194,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   border: 1px solid rgba(255,255,255,0.06);
 }
 
-/* Live scroll area */
 .gv-w-scroll {
   padding: 14px 16px;
   display: flex; flex-direction: column; gap: 10px;
@@ -6587,7 +6202,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 }
 .gv-w-row { flex-shrink: 0; border-radius: 8px; }
 
-/* Hero block — orange gradient, looks like a real hero section */
 .gv-w-hero {
   height: 76px;
   background: linear-gradient(125deg,
@@ -6613,7 +6227,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   background: rgba(255,255,255,0.2);
   border-radius: 2px;
 }
-/* Alternate hero — blue-ish */
+
 .gv-w-hero-alt {
   background: linear-gradient(125deg,
     rgba(62,160,200,0.7) 0%,
@@ -6621,11 +6235,9 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
     rgba(20,15,40,0.9) 100%);
 }
 
-/* Body text lines */
 .gv-w-body { height: 10px; background: rgba(255,255,255,0.09); width: 82%; }
 .gv-w-body-s { width: 55%; }
 
-/* CTA button */
 .gv-w-cta {
   height: 28px; width: 100px;
   background: var(--orange);
@@ -6633,7 +6245,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   box-shadow: 0 4px 18px rgba(239,72,35,0.45);
 }
 
-/* Card grid */
 .gv-w-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; background: transparent; }
 .gv-w-grid span {
   height: 52px;
@@ -6642,7 +6253,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   border: 1px solid rgba(255,255,255,0.06);
 }
 
-/* Floating domain chip below the stack */
 .gv-web-url-chip {
   position: absolute;
   bottom: -40px; left: 50%;
@@ -6669,7 +6279,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   animation: gv-blink 2.4s ease-in-out infinite;
 }
 
-/* ─── PAID ADS — stage with grid + bars + KPI ticker ────────────── */
 .gv-paid-stage {
   right: 0; bottom: 0; top: 0;
   width: 720px;
@@ -6697,7 +6306,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   opacity: 0.18;
   transform-origin: bottom;
   transform: scaleY(0.05);
-  /* GSAP will animate scaleY to final height */
+
 }
 .gv-paid-stage .gv-paid-bars span:nth-child(5),
 .gv-paid-stage .gv-paid-bars span:nth-child(8),
@@ -6742,7 +6351,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   color: var(--orange);
 }
 
-/* ─── BLOG — magazine card spread with hover stagger ─────────────── */
 .gv-blog-stage {
   right: 80px; top: 14%;
   width: 460px; height: 500px;
@@ -6785,7 +6393,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-blog-card-2 { --rot: -3deg;  top: 160px; left: 0;      animation: gv-card-in 0.9s 0.48s cubic-bezier(0.16,1,0.3,1) both; }
 .gv-blog-card-3 { --rot: 2deg;   top: 310px; right: 30px;  animation: gv-card-in 0.9s 0.66s cubic-bezier(0.16,1,0.3,1) both; }
 
-/* ─── CAREERS — role cloud with connection lines ─────────────────── */
 @keyframes gv-role-in {
   from { opacity: 0; transform: translateY(28px) scale(0.85); }
   to   { opacity: 1; transform: translateY(0)    scale(1); }
@@ -6823,7 +6430,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   padding: 13px 26px;
   box-shadow: 0 0 28px rgba(239,72,35,0.55);
 }
-/* Position + staggered reveal delay per pill */
+
 .gv-role-cloud .gv-role:nth-child(1) { animation-delay: 0.30s; }
 .gv-role-cloud .gv-role:nth-child(2) { top: 30px;  left: 80px;  animation-delay: 0.42s; }
 .gv-role-cloud .gv-role:nth-child(3) { top: 80px;  right: 20px; animation-delay: 0.54s; }
@@ -6832,8 +6439,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-role-cloud .gv-role:nth-child(6) { top: 320px; left: 80px;  animation-delay: 0.90s; }
 .gv-role-cloud .gv-role:nth-child(7) { top: 370px; right: 20px; animation-delay: 1.02s; }
 
-/* ─── Reduce intensity of ambient elements when a service hero has its
-       own bold visual (don't compete) ─────────────────────────────── */
 .ab-hero[data-svc] .ab-dot { opacity: 0.4; }
 .ab-hero[data-svc] .ab-sparkle { opacity: 0.4; }
 .ab-hero[data-svc] .ab-streak { display: none; }
@@ -6844,12 +6449,10 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .ab-hero[data-svc="websites"] .ab-dot { opacity: 0.5; }
 .ab-hero[data-svc="blog"] .ab-galaxy { display: none; }
 
-/* On blog, since bg is light, text contrast adjustments */
 .ab-hero[data-svc="blog"] .ab-glyph { color: var(--black); }
 .ab-hero[data-svc="blog"] .ab-eb-star { color: var(--orange); }
 .ab-hero[data-svc="blog"] .ab-amb-row { color: transparent; -webkit-text-stroke: 1.5px rgba(0,0,0,0.08); }
 
-/* Branding page — stars invisible on orange bg, make them dark */
 .ab-hero[data-svc="branding"] .ab-eb-star { color: #1c1a1d; }
 .ab-hero[data-svc="branding"] .ab-eyebrow::before {
   background:
@@ -6862,9 +6465,8 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   filter: none;
 }
 
-/* Branding tile game — enable pointer events + interactivity */
 .ab-hero[data-svc="branding"] .gv-color-wall { pointer-events: all; }
-/* Hero-inner overlaps the first column of the tile wall; passthrough clicks */
+
 .ab-hero[data-svc="branding"] .ab-hero-inner         { pointer-events: none; }
 .ab-hero[data-svc="branding"] .ab-hero-inner a,
 .ab-hero[data-svc="branding"] .ab-hero-inner button  { pointer-events: all; }
@@ -6879,7 +6481,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 .gv-cw-tile.brd-match {
   box-shadow: 0 0 0 3px #fff, 0 0 24px rgba(255,255,255,0.55);
 }
-/* Hint label — desktop: sits below the grid; mobile: sits above */
+
 .brd-hint {
   position: absolute;
   bottom: -36px;
@@ -6904,16 +6506,16 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 @media (max-width: 768px) {
   .gv-cinebar { display: none; }
 
-  /* ── Mobile size overrides (base positioning already set at ≤1023px) ── */
+
   .gv-color-wall {
     width: calc(100% - 48px) !important;
     max-width: none !important;
     margin-top: 28px !important;
   }
 
-  /* Video — viewfinder, phone height */
+
   .gv-film-stage { height: 280px !important; }
-  /* Tighten the corner brackets for phone width */
+
   .gv-vf-tl { top: 16px !important;    left: 14px !important; }
   .gv-vf-tr { top: 16px !important;    right: 14px !important; }
   .gv-vf-bl { bottom: 16px !important; left: 14px !important; }
@@ -6922,12 +6524,12 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   .gv-reel-id    { top: 18px !important; right: 14px !important; }
   .gv-timecode   { bottom: 18px !important; left: 14px !important; }
   .gv-audio-wave { bottom: 16px !important; right: 14px !important; }
-  /* Smaller play core on phone */
+
   .gv-play-core  { width: 110px !important; height: 110px !important; }
   .gv-play-core svg { width: 44px !important; height: 44px !important; }
   .gv-play-orbit { width: 170px !important; height: 170px !important; }
 
-  /* Websites — browser showcase, phone dimensions */
+
   .gv-web-stage {
     width: calc(100% - 48px) !important;
     max-width: none !important;
@@ -6935,7 +6537,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   }
   .gv-web-url-chip { display: none !important; }
 
-  /* Paid Ads — phone: narrow the card */
+
   .gv-paid-stage {
     width: calc(100% - 48px) !important;
     max-width: none !important;
@@ -6946,13 +6548,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   .gv-paid-stage .gv-paid-bars { margin: 0 12px !important; }
 }
 
-/* ═════════════════════════════════════════════════════════════════════
-   ABOUT PAGE — SIGNAL NETWORK SECTION (marquee edition)
-   3 GSAP-powered scrolling tracks + editorial header
-═════════════════════════════════════════════════════════════════════ */
-
-/* ─── NETWORK ROLES — litebox-style stacked type ────────────────────── */
-/* ─── NETWORK IS OUR SUPERPOWER — two-column layout ─────────────────── */
 .ab-net-roles {
   background: #1c1a1d;
   width: 1440px;
@@ -6963,7 +6558,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   text-align: center;
 }
 
-/* Grain overlay */
 .ab-net-roles::before {
   content: '';
   position: absolute; inset: 0;
@@ -6974,7 +6568,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   z-index: 0;
 }
 
-/* Heading — centred above the role words */
 .anr-left {
   position: relative;
   z-index: 3;
@@ -6990,18 +6583,15 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   text-transform: uppercase;
 }
 
-/* Role words — centred below the heading */
 .anr-right {
   position: relative;
   z-index: 3;
 }
 
-/* Word stack container */
 .anr-words {
   position: relative;
 }
 
-/* Each row of role words */
 .anr-line {
   display: flex;
   align-items: baseline;
@@ -7009,13 +6599,12 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   line-height: 1;
 }
 
-/* Individual role word */
 .anr-word {
   font-family: 'Boldonse', sans-serif;
   font-size: 38px;
   line-height: 1.582;
-  color: rgba(255,255,255,0.70);  /* visible from first sight — GSAP takes to full white */
-  display: inline-block;          /* needed for GSAP scale transform */
+  color: rgba(255,255,255,0.70);
+  display: inline-block;
   cursor: default;
   user-select: none;
   white-space: nowrap;
@@ -7025,13 +6614,12 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   margin-left: 0.25em;
 }
 
-/* ─── Floating astronaut images (pop in on scroll, fall away on exit) ─── */
 .anr-floaters {
   position: absolute;
   inset: 0;
-  z-index: 1;            /* behind the heading + words (z-index 3) */
+  z-index: 1;
   pointer-events: none;
-  overflow: hidden;       /* clip floaters as they fall past the section edge */
+  overflow: hidden;
 }
 .anr-floater {
   position: absolute;
@@ -7044,11 +6632,10 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   filter: drop-shadow(0 22px 40px rgba(0,0,0,0.45));
 }
 @media (prefers-reduced-motion: reduce) {
-  /* Show them settled, no scroll motion */
+
   .anr-floater { opacity: 0.9; transform: none; }
 }
 
-/* Body copy */
 .anr-body {
   position: relative;
   z-index: 2;
@@ -7061,7 +6648,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   text-align: center;
 }
 
-/* ─── OUR NETWORK IS OUR SUPERPOWER ─────────────────────────────────── */
 .ab-superpower {
   background: #0c0c10;
   width: 1440px;
@@ -7096,7 +6682,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   font-weight: 400;
 }
 
-/* Subtle ghost astronauts — visual echo of the travellers from above */
 .ab-sup-floaters {
   position: absolute;
   inset: 0;
@@ -7132,7 +6717,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
 @keyframes ab-sup-drift2 { from { transform: rotate(11deg)  translateY(0);  } to { transform: rotate(13deg)  translateY(-16px); } }
 @keyframes ab-sup-drift3 { from { transform: rotate(-7deg)  translateY(0);  } to { transform: rotate(-10deg) translateY(18px);  } }
 
-/* SUPERPOWER absorption pulse — triggered by JS when astronauts arrive */
 .ab-sup-word {
   display: inline-block;
   transform-origin: center;
@@ -7146,9 +6730,7 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   60%  { transform: scale(1.22); filter: brightness(1.6) drop-shadow(0 0 56px rgba(239,72,35,1));    }
   100% { transform: scale(1);    filter: brightness(1)   drop-shadow(0 0  0px rgba(239,72,35,0)); }
 }
-/* Overflow is contained by .ab-superpower { overflow: hidden } above */
 
-/* ─── THE GRID CODE — Culture / Values ──────────────────────────────── */
 .ab-culture {
   background: #f0ede8;
   width: 1440px;
@@ -7204,7 +6786,6 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   font-weight: 400;
 }
 
-/* Screen-reader only list */
 .ab-signal-sronly {
   position: absolute;
   width: 1px; height: 1px;
@@ -7215,27 +6796,24 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   border: 0;
 }
 
-/* ─── TEAM SWIPER ────────────────────────────────────────────────────── */
-
-/* ─── TEAM SWIPER — side arrows ──────────────────────────────────────── */
 .ab-team-swiper-wrap {
   position: relative;
-  padding: 0 44px; /* gives arrows 44px clearance before first/last slide */
+  padding: 0 44px;
 }
 .ab-team-swiper {
   overflow: hidden;
-  /* Prevent flash of all slides stacked before Swiper initialises */
+
   transition: opacity 0.3s ease;
 }
 .ab-team-swiper:not(.swiper-initialized) { opacity: 0; }
 .ab-team-swiper .ab-member {
   width: 100%;
 }
-/* Arrow buttons — positioned at left and right edges of swiper */
+
 .ab-swiper-prev,
 .ab-swiper-next {
   position: absolute;
-  top: 38%; /* aligned to photo area, not full card height */
+  top: 38%;
   transform: translateY(-50%);
   z-index: 10;
   width: 52px; height: 52px;
@@ -7263,50 +6841,42 @@ html.a11y-underline-links a:not(.btn-dark):not(.btn-outline-white):not(.btn-outl
   transform: translateY(-50%) scale(0.95);
 }
 
-/* ─── FOOTER FIX ─────────────────────────────────────────────────────── */
 footer { overflow: visible !important; }
 
-/* ─── FOOTER TEXT LINE HEIGHT ────────────────────────────────────────── */
 .footer-col ul li a   { line-height: 1.6 !important; }
 .footer-col h4        { line-height: 1.6 !important; }
 .footer-bottom        { line-height: 1.65 !important; }
 .footer-cta-desc      { line-height: 1.7 !important; }
 
-/* ═════════════════════════════════════════════════════════════════════
-   SUPPLEMENTARY MOBILE — max-width: 1023px
-   These rules close the 769px–1023px gap left by late-added sections
-   that only shipped with @media (max-width: 768px) guards.
-   Because this block is the LAST in the file it wins the cascade.
-═════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1023px) {
 
-  /* ── Force new sections into 100% width (supplements the global list) ── */
+
   .ab-net-roles { width: 100% !important; }
 
-  /* ── About — Superpower section ── */
+
   .ab-superpower {
     padding: 80px 22px 100px !important;
     grid-template-columns: 1fr !important;
     gap: 40px !important;
   }
-  .ab-sup-left h2 { font-size: clamp(32px, 8vw, 48px) !important; line-height: 1.38 !important; } /* 1.2 × 1.15 */
+  .ab-sup-left h2 { font-size: clamp(32px, 8vw, 48px) !important; line-height: 1.38 !important; }
   .ab-sup-right p { font-size: 15px !important; }
   .ab-sup-fl-1 { width: 88px !important; height: 88px !important; top: -4% !important; right: 3% !important; }
   .ab-sup-fl-2, .ab-sup-fl-3 { display: none !important; }
 
-  /* ── About — Culture / Grid Code section ── */
+
   .ab-culture { padding: 80px 22px 100px !important; }
   .ab-culture-head-wrap { margin-bottom: 56px !important; }
-  .ab-culture-head-wrap h2 { font-size: clamp(36px, 9vw, 54px) !important; line-height: 1.32 !important; } /* 1.15 × 1.15 */
+  .ab-culture-head-wrap h2 { font-size: clamp(36px, 9vw, 54px) !important; line-height: 1.32 !important; }
   .ab-culture-pillars { grid-template-columns: 1fr !important; gap: 44px !important; }
   .ab-pillar-title { font-size: 20px !important; line-height: 1.40 !important; }
-  /* Tablet heading line-heights — +15% on all Boldonse h2s in About */
-  .ab-reality-left h2  { line-height: 1.24 !important; }  /* 1.08 × 1.15 */
-  .anr-left h2         { line-height: 1.40 !important; }  /* 1.22 × 1.15 */
+
+  .ab-reality-left h2  { line-height: 1.24 !important; }
+  .anr-left h2         { line-height: 1.40 !important; }
   .ab-team-top-left h2 { line-height: 1.32 !important; }
   .ab-partners-head h2 { line-height: 1.32 !important; }
 
-  /* ── Footer — new wordmark lockup (overwrites the absolute layout) ── */
+
   footer {
     min-height: 0 !important;
     padding: 56px 22px 32px !important;
@@ -7317,12 +6887,12 @@ footer { overflow: visible !important; }
     height: auto !important;
     margin-bottom: 36px;
   }
-  /* fit-content so right:Xem measures from grid.'s text edge, not screen edge */
+
   .footer-wordmark { width: fit-content !important; }
   .footer-wm-g { font-size: clamp(100px, 26vw, 180px) !important; }
   .footer-wm-v {
     font-size: clamp(20px, 5vw, 32px) !important;
-    /* right: 0.12 × 26vw ÷ 5vw = 0.62em — period-edge compensation for scaler breakpoint */
+
     right: 0.62em !important;
   }
   .footer-cols {
@@ -7349,16 +6919,16 @@ footer { overflow: visible !important; }
     gap: 10px;
   }
 
-  /* ── Network Roles section — mobile ── */
+
   .ab-net-roles { padding: 80px 22px 64px !important; grid-template-columns: 1fr !important; gap: 40px !important; }
   .anr-left h2 { font-size: clamp(32px, 8vw, 48px) !important; position: static !important; }
   .anr-word { font-size: clamp(26px, 6.5vw, 40px) !important; }
   .anr-body { font-size: 15px !important; margin-top: 36px !important; max-width: 100% !important; }
 
-  /* ── Blog/role stages — still hidden below desktop ── */
+
   .gv-blog-stage, .gv-role-cloud { display: none; }
 
-  /* ── Service hero — expand to contain the stage visual ── */
+
   .ab-hero.gv-hero-svc {
     height: auto !important;
     min-height: auto !important;
@@ -7366,7 +6936,7 @@ footer { overflow: visible !important; }
     padding-bottom: 48px !important;
   }
 
-  /* ── Shared stage base: pull out of absolute, flow below headline ── */
+
   .gv-color-wall,
   .gv-film-stage,
   .gv-web-stage,
@@ -7380,7 +6950,7 @@ footer { overflow: visible !important; }
     z-index: 3 !important;
   }
 
-  /* ── BRANDING — colour tile wall (tablet size) ── */
+
   .gv-color-wall {
     display: grid !important;
     width: calc(100% - 80px) !important;
@@ -7388,17 +6958,17 @@ footer { overflow: visible !important; }
     aspect-ratio: 1 / 1 !important;
     perspective: none !important;
     max-width: 480px !important;
-    margin-top: 64px !important; /* extra room so hint at top:-40px clears CTA buttons */
+    margin-top: 64px !important;
   }
 
-  /* ── VIDEO — director's viewfinder (tablet size) ── */
+
   .gv-film-stage {
     width: 100% !important;
     height: 360px !important;
     overflow: hidden !important;
     border-radius: 0 !important;
   }
-  /* Scale corner brackets inward for smaller container */
+
   .gv-vf-tl { top: 20px !important;    left: 20px !important; }
   .gv-vf-tr { top: 20px !important;    right: 20px !important; }
   .gv-vf-bl { bottom: 20px !important; left: 20px !important; }
@@ -7408,7 +6978,7 @@ footer { overflow: visible !important; }
   .gv-timecode   { bottom: 24px !important; left: 22px !important; }
   .gv-audio-wave { bottom: 20px !important; right: 22px !important; }
 
-  /* ── WEBSITES — premium browser showcase (tablet size) ── */
+
   .gv-web-stage {
     width: calc(100% - 80px) !important;
     height: 340px !important;
@@ -7416,9 +6986,9 @@ footer { overflow: visible !important; }
     perspective: 1400px !important;
     overflow: visible !important;
   }
-  .gv-web-url-chip { display: none !important; } /* chip overflows at tablet width */
+  .gv-web-url-chip { display: none !important; }
 
-  /* ── PAID ADS — dashboard card layout (tablet + mobile) ── */
+
   .gv-paid-stage {
     width: calc(100% - 80px) !important;
     max-width: 540px !important;
@@ -7430,12 +7000,12 @@ footer { overflow: visible !important; }
     display: flex !important;
     flex-direction: column !important;
   }
-  /* Dot grid fills the card background */
+
   .gv-paid-grid {
     border-radius: 16px !important;
     mask-image: radial-gradient(ellipse at 50% 100%, #000 0%, transparent 80%) !important;
   }
-  /* KPI row — pinned at top, horizontal */
+
   .gv-paid-kpis {
     position: relative !important;
     right: auto !important; top: auto !important;
@@ -7458,7 +7028,7 @@ footer { overflow: visible !important; }
   }
   .gv-kpi-label { font-size: 9px !important; margin-bottom: 4px !important; }
   .gv-kpi-val   { font-size: 28px !important; }
-  /* Bars — fill remaining space below KPIs */
+
   .gv-paid-stage .gv-paid-bars {
     position: relative !important;
     left: auto !important; right: auto !important; bottom: auto !important;
@@ -7469,7 +7039,7 @@ footer { overflow: visible !important; }
     align-items: flex-end !important;
   }
 
-  /* ── Accessibility page — apply single-column layout ── */
+
   .a11y-hero, .a11y-controls, .a11y-commit, .a11y-contact {
     width: 100% !important;
     padding-left: 22px !important;
@@ -7486,7 +7056,7 @@ footer { overflow: visible !important; }
   }
   .a11y-contact-inner { grid-template-columns: 1fr !important; gap: 30px !important; }
 
-  /* ── Service page hero backgrounds ── */
+
   .ab-hero[data-svc="video"],
   .ab-hero[data-svc="websites"],
   .ab-hero[data-svc="careers"] { background: #050505; }
@@ -7494,26 +7064,24 @@ footer { overflow: visible !important; }
   .ab-hero[data-svc="blog"] .ab-h1,
   .ab-hero[data-svc="blog"] .ab-sub { color: var(--black); }
 
-  /* ── Flower section — dark theme colors for mobile step list ── */
+
   .sv-proc-flower-section::after { display: none; }
   .sv-proc-mobile-item { border-top-color: rgba(255,255,255,0.10) !important; }
   .sv-proc-mobile-num { border-color: var(--orange) !important; color: #fff !important; }
   .sv-proc-mobile-title { color: #fff !important; }
   .sv-proc-mobile-desc { color: rgba(255,255,255,0.6) !important; }
 
-  /* ── WYG section mobile adjustments ── */
+
   .sv-wyg-heading { font-size: clamp(40px, 12vw, 64px) !important; letter-spacing: -0.01em; }
   .sv-wyg-item { padding-left: 36px; }
   .sv-wyg-name { font-size: clamp(28px, 8vw, 40px) !important; }
 
-  /* ── Blog body + Careers roles + Flower header ──
-     All have unconditional large side paddings that override the
-     main mobile block's 22px values. ── */
+
   .bl-body  { padding: 64px 22px 80px !important; }
   .cr-roles { padding: 64px 22px 80px !important; }
   .sv-proc-flower-header { padding: 0 0 40px !important; flex-direction: column !important; gap: 16px !important; }
 
-  /* ── Careers intro block — unconditional row layout overrides mobile column ── */
+
   .cr-intro-block {
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -7522,10 +7090,7 @@ footer { overflow: visible !important; }
   }
   .cr-intro-text p { font-size: 15px !important; }
 
-  /* ── Service / blog / careers hero (gv-hero-svc) ──────────────────
-     Round-4 rebuild added unconditional 760px height + 900px inner
-     width — both have higher specificity than the generic .ab-hero
-     mobile rules and overflow at phone/tablet widths. Fix them here. */
+
   .ab-hero.gv-hero-svc {
     height: auto !important;
     min-height: auto !important;
@@ -7536,8 +7101,7 @@ footer { overflow: visible !important; }
     left: 0 !important;
     padding: 96px 24px 0 !important;
   }
-  /* Scale heading down; keep each design-line intact (glyphs are inline-block,
-     so 'normal' would break mid-word between letters) */
+
   .ab-hero.gv-hero-svc .ab-h1 {
     font-size: clamp(22px, 7.2vw, 50px) !important;
     line-height: 1.3 !important;
@@ -7549,10 +7113,8 @@ footer { overflow: visible !important; }
   }
 }
 
-/* ── CUSTOM CURSOR ─────────────────────────────────────────────────── */
-/* Fine-pointer devices only (mouse/trackpad). Touch screens keep default. */
 @media (pointer: fine) {
-  /* Position-only wrapper — JS sets transform: translate(x,y) via spring  */
+
   .gv-cursor {
     position: fixed;
     top: 0; left: 0;
@@ -7561,8 +7123,8 @@ footer { overflow: visible !important; }
     will-change: transform;
   }
 
-  /* The visible circle — centered on position via individual translate,   */
-  /* scaled in/out independently. No conflict with JS transform on parent. */
+
+
   .gv-cursor-dot {
     position: absolute;
     width: 20px;
@@ -7577,29 +7139,25 @@ footer { overflow: visible !important; }
       height 350ms cubic-bezier(.76, 0, .24, 1);
   }
 
-  /* Show: circle springs in with overshoot */
+
   .gv-cursor.gv-show .gv-cursor-dot {
     scale: 1;
     transition-timing-function: cubic-bezier(.34, 1.56, .64, 1);
   }
 
-  /* None: circle scales out (form inputs / mouse leave window) */
+
   .gv-cursor.gv-none .gv-cursor-dot {
     scale: 0;
     transition-timing-function: cubic-bezier(.76, 0, .24, 1);
   }
 
-  /* Hover over interactive elements: circle grows */
+
   .gv-cursor.gv-hov .gv-cursor-dot {
     width: 44px;
     height: 44px;
   }
 }
 
-/* ── FLOATING "LET'S TALK" BUBBLE ───────────────────────────────────────
-   Eyekiller-style quarter-circle — GV Green anchored to bottom-right.
-   Injected by main.js (outside #scaler) on every page except contact.html.
-─────────────────────────────────────────────────────────────────────── */
 @keyframes gv-bubble-in {
   0%   { transform: scale(0.8); opacity: 0; }
   50%  { transform: scale(1.1); opacity: 1; }
@@ -7613,7 +7171,6 @@ footer { overflow: visible !important; }
   100% { transform: scale(0); }
 }
 
-/* Container — mostly off-screen, only top-left quadrant visible */
 .gv-cta-bubble {
   position: fixed;
   bottom: -95px; right: -95px;
@@ -7629,7 +7186,7 @@ footer { overflow: visible !important; }
   animation: gv-bubble-in 0.5s ease-in-out forwards;
   pointer-events: auto;
 }
-/* Hide bubble when footer is visible */
+
 .gv-cta-bubble.footer-in-view {
   animation: gv-bubble-out 0.4s ease-in-out forwards;
   pointer-events: none;
@@ -7639,7 +7196,6 @@ footer { overflow: visible !important; }
   pointer-events: none;
 }
 
-/* The green circle */
 .gv-cta-bubble > a {
   position: absolute;
   inset: 0;
@@ -7654,7 +7210,6 @@ footer { overflow: visible !important; }
   text-decoration: none;
 }
 
-/* Speech-bubble smiley icon */
 .gv-cta-icon {
   position: absolute;
   left: -5px; top: 26px;
@@ -7669,8 +7224,6 @@ footer { overflow: visible !important; }
   .gv-cta-bubble > a:hover .gv-cta-icon { transform: rotate(10deg); }
 }
 
-/* Text lines — overflow:hidden + slide-up reveal */
-/* font-size and height are set in px (not rem) to match eyekiller exactly */
 .gv-bubble-text {
   color: var(--gv-black);
   font-family: 'Archivo', sans-serif;
@@ -7706,7 +7259,6 @@ footer { overflow: visible !important; }
   transform: translateY(100%);
 }
 
-/* Mobile: compact circle, text centred, smiley outside top-left */
 @media (max-width: 767px) {
   .gv-cta-bubble { bottom: 20px; right: 20px; width: 80px; height: 80px; }
   .gv-cta-bubble > a {
@@ -7725,31 +7277,26 @@ footer { overflow: visible !important; }
   .gv-bubble-text { font-size: 16px; height: 16px; text-align: center; line-height: 0.9; }
 }
 
-/* Tablet / Desktop: pixel-accurate match to eyekiller quarter-circle */
 @media (min-width: 768px) {
   .gv-cta-bubble { bottom: -111px; right: -155px; width: 270px; height: 222px; }
-  .gv-cta-bubble > a { padding: 40px 40px 40px 45px; } /* -5px left nudge */
+  .gv-cta-bubble > a { padding: 40px 40px 40px 45px; }
   .gv-cta-icon { width: 45px; height: 45px; left: -10px; top: 30px; }
   .gv-bubble-text { font-size: 30px; height: 30px; margin-left: -5px; }
 }
 @media (min-width: 1024px) {
   .m-hero-pills { display: none; }
   .gv-cta-bubble { bottom: -118px; right: -158px; width: 287px; height: 236px; }
-  .gv-cta-bubble > a { padding: 41px 45px 41px 50px; } /* -5px left nudge */
+  .gv-cta-bubble > a { padding: 41px 45px 41px 50px; }
   .gv-cta-icon { width: 50px; height: 50px; left: -10px; top: 33px; }
   .gv-bubble-text { font-size: 33px; height: 33px; margin-left: -5px; }
 }
 @media (min-width: 1440px) {
   .gv-cta-bubble { bottom: -125px; right: -162px; width: 305px; height: 251px; }
-  .gv-cta-bubble > a { padding: 42px 50px 42px 55px; } /* -5px left nudge */
+  .gv-cta-bubble > a { padding: 42px 50px 42px 55px; }
   .gv-cta-icon { width: 55px; height: 55px; left: -10px; top: 36px; }
   .gv-bubble-text { font-size: 37px; height: 37px; margin-left: -5px; }
 }
 
-/* ── ACCESSIBILITY STATEMENT SECTION ────────────────────────────────
-   Editorial statement block on accessibility.html.
-   White background, narrow column, bold uppercase headings.
-─────────────────────────────────────────────────────────────────────── */
 .a11y-stmt {
   background: #fff;
   padding: 100px 0 120px;
@@ -7837,11 +7384,6 @@ footer { overflow: visible !important; }
   .a11y-stmt-title { font-size: 36px; }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   ACCESSIBILITY PANEL OVERLAY
-   Full-screen takeover triggered by .nav-a11y icon — same pattern as
-   eyekiller.com. Injected into <body> by main.js on every page.
-───────────────────────────────────────────────────────────────────── */
 .gv-a11y-panel {
   position: fixed;
   inset: 0;
@@ -7849,7 +7391,7 @@ footer { overflow: visible !important; }
   background: var(--orange);
   color: var(--black);
   overflow-y: auto;
-  /* Closed state */
+
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px) scale(0.99);
@@ -7866,7 +7408,6 @@ footer { overflow: visible !important; }
   pointer-events: all;
 }
 
-/* Close button — top-right corner */
 .gv-a11y-close {
   position: fixed;
   top: 40px;
@@ -7884,13 +7425,11 @@ footer { overflow: visible !important; }
 .gv-a11y-close:hover { background: rgba(0,0,0,0.24); transform: scale(1.07); }
 .gv-a11y-close:active { transform: scale(0.95); }
 
-/* Inner layout */
 .gv-a11y-panel-inner {
   max-width: 600px;
   padding: 120px 88px 100px;
 }
 
-/* Heading */
 .gv-a11y-panel-h {
   font-family: 'Boldonse', sans-serif;
   font-size: var(--gv-type-section, 44px);
@@ -7901,7 +7440,6 @@ footer { overflow: visible !important; }
   margin: 0 0 30px;
 }
 
-/* Sub-text */
 .gv-a11y-panel-sub {
   font-family: 'Archivo', sans-serif;
   font-size: 17px;
@@ -7911,7 +7449,6 @@ footer { overflow: visible !important; }
   margin-bottom: 48px;
 }
 
-/* Toggle rows */
 .gv-a11y-panel-controls {
   display: flex;
   flex-direction: column;
@@ -7939,13 +7476,11 @@ footer { overflow: visible !important; }
   margin-top: 3px;
 }
 
-/* Override toggle track colors for orange BG context */
 .gv-a11y-panel .a11y-toggle-track    { background: rgba(0,0,0,0.22); }
 .gv-a11y-panel .a11y-toggle.on .a11y-toggle-track { background: var(--black); }
 .gv-a11y-panel .a11y-toggle-knob     { background: #fff; }
 .gv-a11y-panel .a11y-toggle          { color: var(--black); }
 
-/* Reset link */
 .gv-a11y-panel-reset {
   background: none;
   border: 0;
@@ -7964,7 +7499,6 @@ footer { overflow: visible !important; }
 }
 .gv-a11y-panel-reset:hover { color: var(--black); }
 
-/* Bottom links */
 .gv-a11y-panel-links {
   display: flex;
   gap: 28px;
@@ -7981,7 +7515,6 @@ footer { overflow: visible !important; }
 }
 .gv-a11y-panel-links a:hover { opacity: 0.55; }
 
-/* Mobile */
 @media (max-width: 768px) {
   .gv-a11y-panel-inner { padding: 110px 24px 80px; }
   .gv-a11y-panel-h {
@@ -7991,21 +7524,13 @@ footer { overflow: visible !important; }
   .gv-a11y-close { top: 24px; right: 24px; }
 }
 
-/* ═════════════════════════════════════════════════════════════════════
-   MOBILE — RICH SERVICE-PAGE EXPERIENCE  (authoritative, EOF = cascade win)
-   Brings the desktop animations to mobile instead of the simplified
-   fallbacks: the scroll-driven "How We Do It" flower, and the branded
-   "What You Get" preview card. Litebox-grade, optimised for touch.
-═════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1023px) {
 
-  /* ───────── "HOW WE DO IT" — animated flower on mobile ───────── */
+
   .sv-proc-flower-scroll { display: block !important; }
   .sv-proc-mobile-list   { display: none !important; }
 
-  /* Mobile has no #scaler transform, so use native compositor-driven sticky
-     for perfectly smooth pinning (no per-frame JS transform). JS only advances
-     the stroke + active step here. */
+
   .sv-proc-flower-sticky {
     position: sticky !important;
     top: 0 !important;
@@ -8013,24 +7538,20 @@ footer { overflow: visible !important; }
     transform: none !important;
     will-change: auto !important;
   }
-  /* The section uses overflow:hidden to clip the orbit-ring decorations, but
-     `hidden` makes it a scroll container and that BREAKS native sticky. `clip`
-     clips identically WITHOUT becoming a scroll container, so sticky still pins
-     to the viewport. (Verified: pins at top:0, no horizontal scroll.) */
+
   .sv-proc-flower-section { overflow: clip !important; }
-  /* Keep the outer orbit ring from bleeding past the viewport now that the
-     section no longer hard-clips a scroll box. */
+
   .sv-proc-flower-shape::after { inset: -30px !important; }
 
   .sv-proc-flower-section { padding: 80px 22px 84px !important; }
   .sv-proc-flower-header  { padding: 0 0 6px !important; }
 
-  /* Flower sized to the phone; stays centred on-screen while pinned */
+
   .sv-proc-flower-shape {
     width: min(82vw, 420px) !important;
     height: min(82vw, 420px) !important;
   }
-  /* Tighten the decorative orbit rings so they don't dominate */
+
   .sv-proc-flower-shape::before { inset: -22px !important; }
   .sv-proc-flower-shape::after  { inset: -52px !important; }
 
@@ -8046,9 +7567,9 @@ footer { overflow: visible !important; }
     max-width: 270px !important;
   }
 
-  /* ───────── "WHAT YOU GET" — branded preview card + accordion ───────── */
+
   .sv-wyg-layout { flex-direction: column !important; gap: 0 !important; }
-  /* Remove the old fallback orange bar — the real card returns below */
+
   .sv-wyg-section::after { display: none !important; }
 
   .sv-wyg-panel {
@@ -8056,7 +7577,7 @@ footer { overflow: visible !important; }
     position: static !important;
     flex: none !important;
     width: 100% !important;
-    order: 2 !important; /* names first, then panel, then description */
+    order: 2 !important;
     margin: 16px 0 0 !important;
   }
   .sv-wyg-panel-inner {
@@ -8066,7 +7587,7 @@ footer { overflow: visible !important; }
   }
   .sv-wyg-panel-img::after { width: 56px !important; height: 56px !important; }
 
-  /* Litebox-style tab rows — compact names, active highlighted, others grey */
+
   .sv-wyg-item {
     padding: 6px 0 !important;
     border: none !important;
@@ -8091,10 +7612,10 @@ footer { overflow: visible !important; }
   .sv-wyg-row { gap: 10px !important; }
   .sv-wyg-desc { display: none !important; }
   .sv-wyg-list { order: 1 !important; }
-  /* Progress bar — Litebox-style loading line between panel and desc */
+
   .wyg-progress-wrap {
     display: block !important;
-    position: static !important; /* override desktop absolute */
+    position: static !important;
     order: 3 !important;
     width: 100% !important;
     height: 4px !important;
@@ -8120,17 +7641,17 @@ footer { overflow: visible !important; }
     line-height: 1.7 !important;
     color: rgba(0,0,0,0.6) !important;
     padding-top: 16px !important;
-    border: none !important; /* remove orange accent bar */
+    border: none !important;
   }
 
-  /* ── Mock panel visuals — CSS-only document mockups per deliverable ── */
+
   .sv-wyg-panel-img {
     background: #f4f1ed !important;
   }
   .sv-wyg-panel-img::after {
-    display: none !important; /* remove old placeholder circle/star */
+    display: none !important;
   }
-  /* Each card gets a unique CSS mockup via nth-child pseudo-elements */
+
   .sv-wyg-panel-img::before {
     content: '' !important;
     position: absolute !important;
@@ -8138,7 +7659,7 @@ footer { overflow: visible !important; }
     border-radius: 8px !important;
     opacity: 1 !important;
   }
-  /* Card 1 — Brand Book: color palette + text blocks */
+
   .sv-wyg-panel-img[data-for="0"]::before {
     background:
       linear-gradient(to right, var(--orange) 25%, #222 25% 50%, #fff 50% 75%, #e8e4df 75%) !important;
@@ -8157,7 +7678,7 @@ footer { overflow: visible !important; }
       linear-gradient(#bbb 8px, transparent 8px) 30px 178px / 55% 8px no-repeat,
       #f4f1ed !important;
   }
-  /* Card 2 — Marketing Materials: social post mockup */
+
   .sv-wyg-panel-img[data-for="1"] {
     background:
       linear-gradient(var(--orange) 40%, #222 40% 42%, #f4f1ed 42%) !important;
@@ -8168,7 +7689,7 @@ footer { overflow: visible !important; }
     box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
     border: none !important;
   }
-  /* Card 3 — Style Guide: typography + swatch grid */
+
   .sv-wyg-panel-img[data-for="2"] {
     background:
       linear-gradient(#222 8px, transparent 8px) 24px 24px / 35% 8px no-repeat,
@@ -8183,29 +7704,24 @@ footer { overflow: visible !important; }
   .sv-wyg-panel-img[data-for="2"]::before {
     display: none !important;
   }
-  /* Card 4+ — generic for other service pages */
+
   .sv-wyg-panel-img[data-for="3"] {
     background:
       linear-gradient(135deg, var(--orange) 30%, #222 70%) !important;
   }
 
-  /* ───────── ABOUT — team carousel: swipe-first on mobile ───────── */
-  /* Arrows overlap the larger mobile cards — hide them; swipe is natural.
-     Slide width is driven by Swiper (slidesPerView 1.15→2); just give the
-     card room to breathe. Swiper owns its own peek-clipping. */
+
+
   .ab-swiper-prev, .ab-swiper-next { display: none !important; }
   .ab-member-photo { width: 100% !important; height: auto !important; aspect-ratio: 3 / 4 !important; }
   .ab-member-info  { padding: 18px 16px 16px !important; }
   .ab-member-name  { font-size: 16px !important; }
   .ab-member-role  { font-size: 10.5px !important; }
 
-  /* ───────── ABOUT — "Our network is our superpower" roles ───────── */
-  /* Desktop centres fixed-width non-wrapping rows; on a phone those rows
-     overflow both edges and clip. Reflow the words into a tidy, legible
-     wrapped cloud, and make sure the heading clears the side padding. */
+
+
   .ab-net-roles { padding: 72px 22px !important; }
-  /* Relative (not static) so its z-index keeps the heading ABOVE the floaters;
-     not sticky, so it won't pin over the word cloud. */
+
   .anr-left { position: relative !important; top: auto !important; z-index: 3 !important; margin-bottom: 28px !important; }
   .anr-right { z-index: 3 !important; }
   .anr-left h2 {
@@ -8217,7 +7733,7 @@ footer { overflow: visible !important; }
   .anr-words {
     display: flex !important;
     flex-wrap: wrap !important;
-    justify-content: center !important;   /* centred to match the heading */
+    justify-content: center !important;
     align-items: baseline !important;
     gap: 4px 14px !important;
   }
@@ -8229,24 +7745,22 @@ footer { overflow: visible !important; }
     white-space: nowrap !important;
   }
   .anr-word + .anr-word { margin-left: 0 !important; }
-  /* Brighten a couple to keep the brand's playful accent without hover */
+
   .anr-line:nth-child(odd) .anr-word:first-child { color: var(--orange) !important; }
 
-  /* Floaters: smaller on phones so they read as accents around the text */
-  .anr-floater { --sz: 84px !important; }
-  .anr-floater:nth-child(n+5) { display: none !important; }  /* keep 4 on mobile */
 
-  /* ─── Section heading line-heights +15% on mobile ───────────────────── */
-  .ab-reality-left h2    { line-height: 1.36 !important; }  /* 1.18 × 1.15 */
-  .anr-left h2           { line-height: 1.40 !important; }  /* 1.22 × 1.15 */
+  .anr-floater { --sz: 84px !important; }
+  .anr-floater:nth-child(n+5) { display: none !important; }
+
+
+  .ab-reality-left h2    { line-height: 1.36 !important; }
+  .anr-left h2           { line-height: 1.40 !important; }
   .ab-team-top-left h2   { line-height: 1.32 !important; }
   .ab-partners-head h2   { line-height: 1.32 !important; }
-  .cta-head h2           { line-height: 1.40 !important; }  /* 1.4 kept high for orange bg */
+  .cta-head h2           { line-height: 1.40 !important; }
 
-  /* ─── Partners seals — sticky stacking card scroll effect ─────────── */
-  /* Each card has 150px of dedicated scroll space so the page pauses
-     long enough for all 4 to visually stack before content moves on.
-     position:sticky + increasing top offsets create the deck layering. */
+
+
   .ab-seal-row {
     flex-direction: column !important;
     gap: 0 !important;
@@ -8264,41 +7778,30 @@ footer { overflow: visible !important; }
   .ab-seal:nth-child(1) { top: 72px !important;  z-index: 1; }
   .ab-seal:nth-child(2) { top: 84px !important;  z-index: 2; }
   .ab-seal:nth-child(3) { top: 96px !important;  z-index: 3; }
-  .ab-seal:nth-child(4) { top: 108px !important; z-index: 4; /* same margin as others so deck unsticks together */ }
+  .ab-seal:nth-child(4) { top: 108px !important; z-index: 4;  }
 
-  /* ─── Superpower section — let absorption glow spill past column ──── */
-  /* .ab-superpower already has overflow:hidden at section level;
-     .ab-sup-left's own containment is removed so the scale + glow aren't
-     double-clipped on mobile single-column layout. */
+
+
   .ab-sup-left  { overflow: visible !important; }
   .ab-superpower { overflow: hidden !important; }
 
 }
 
-/* ═════════════════════════════════════════════════════════════════════
-   UNIFORM BODY-INTRO BRIGHTNESS  (overrides earlier muted values)
-   Section intro / body paragraphs across pages used inconsistent muted
-   alphas (0.45–0.58), so some read noticeably greyer than others. Bring them
-   up to a crisp, consistent level matching the home page and the About
-   "Reality" section (~0.75 white on dark; ~rgb(56,56,56) on light). Colour
-   only — font-weights unchanged. Applies on all viewports.
-═════════════════════════════════════════════════════════════════════ */
-.anr-body             { color: rgba(255,255,255,0.75); } /* About · network roles (dark) */
-.ab-team-top-right p  { color: rgba(0,0,0,0.78); }       /* About · team intro (light)   */
-.ab-partners-sub      { color: rgba(0,0,0,0.78); }       /* About · partners (light)     */
-.cr-roles-head p      { color: rgba(13,13,13,0.82); }    /* Careers · roles head (light) */
-.cr-intro-text p      { color: rgba(13,13,13,0.82); }    /* Careers · intro (light)      */
-.bl-coming p          { color: rgba(13,13,13,0.82); }    /* Blog · coming soon (light)   */
-.a11y-commit-right p  { color: rgba(13,13,13,0.82); }    /* Accessibility · commit (light) */
-.a11y-contact-right p { color: rgba(255,255,255,0.78); } /* Accessibility · contact (dark) */
-/* Service pages — about-the-service lead + "What you get" descriptions */
+.anr-body             { color: rgba(255,255,255,0.75); }
+.ab-team-top-right p  { color: rgba(0,0,0,0.78); }
+.ab-partners-sub      { color: rgba(0,0,0,0.78); }
+.cr-roles-head p      { color: rgba(13,13,13,0.82); }
+.cr-intro-text p      { color: rgba(13,13,13,0.82); }
+.bl-coming p          { color: rgba(13,13,13,0.82); }
+.a11y-commit-right p  { color: rgba(13,13,13,0.82); }
+.a11y-contact-right p { color: rgba(255,255,255,0.78); }
+
 .sv-section.dark .sv-lead { color: rgba(255,255,255,0.75); }
 .sv-section.light .sv-lead, .sv-section.off .sv-lead { color: rgba(0,0,0,0.78); }
 .sv-section.dark .sv-lead-2 { color: rgba(255,255,255,0.75); }
 .sv-section.light .sv-lead-2, .sv-section.off .sv-lead-2 { color: rgba(0,0,0,0.78); }
 .sv-wyg-desc { color: rgba(13,13,13,0.82); }
 
-/* ─── Case Study — Video Section ──────────────────────────── */
 .cs-video-section {
   width: 1440px;
   padding: 0 80px 80px;
@@ -8308,7 +7811,7 @@ footer { overflow: visible !important; }
 }
 .cs-video-wrap {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
   border-radius: 16px;
@@ -8330,7 +7833,6 @@ footer { overflow: visible !important; }
   margin-bottom: 8px;
 }
 
-/* ─── Case Study — Team Credits ────────────────────────────── */
 .cs-credits {
   width: 1440px;
   padding: 80px 80px;
@@ -8364,7 +7866,6 @@ footer { overflow: visible !important; }
   margin: 0;
 }
 
-/* ─── Case Study — Live site link ──────────────────────────── */
 .cs-meta-link {
   color: var(--orange);
   text-decoration: none;
@@ -8372,15 +7873,12 @@ footer { overflow: visible !important; }
 }
 .cs-meta-link:hover { text-decoration: underline; }
 
-/* ─── Mobile responsive for video + credits ─────────────────── */
 @media (max-width: 1023px) {
   .cs-video-section { width: 100% !important; padding: 0 22px 48px !important; }
   .cs-credits { width: 100% !important; padding: 48px 22px !important; }
   .cs-credits-list { gap: 20px 40px; }
 }
 
-
-/* ─── LLM-readable About blurb ──────────────────────────────── */
 .gv-about-blurb {
   width: 1440px;
   background: var(--black);
@@ -8401,7 +7899,6 @@ footer { overflow: visible !important; }
   .gv-about-blurb-text { font-size: 12px; text-align: left; }
 }
 
-/* ─── Blog article layout ────────────────────────────────────── */
 .bl-article {
   width: 1440px;
   background: #f5f4f1;
@@ -8499,7 +7996,6 @@ footer { overflow: visible !important; }
 }
 .bl-art-related-link:hover { text-decoration: underline; }
 
-/* ─── Blog card grid ─────────────────────────────────────────── */
 .bl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -8562,13 +8058,13 @@ footer { overflow: visible !important; }
 .bl-card:hover .bl-card-read { background: var(--orange-dark); }
 
 @media (max-width: 1023px) {
-  /* Blog index cards */
+
   .bl-grid { grid-template-columns: 1fr; padding: 48px 20px 80px; gap: 16px; }
   .bl-card-link { padding: 32px 28px 28px; }
   .bl-card-h { font-size: 20px; }
   .bl-card-read { padding: 10px 16px; font-size: 11px; }
 
-  /* Blog article pages */
+
   .bl-article { padding: 56px 20px 72px; }
   .bl-art-header { max-width: 100%; margin-bottom: 32px; text-align: left; }
   .bl-art-h1 { font-size: clamp(26px, 7.5vw, 38px); line-height: 1.25; margin-bottom: 20px; }
@@ -8584,16 +8080,12 @@ footer { overflow: visible !important; }
   .bl-art-related-link { font-size: 15px; }
 }
 
-/* ═══ VIEWPORT-HEIGHT SECTIONS (desktop only — --vp-h set by JS) ═══ */
-/* Each homepage section fills at least one full browser viewport height.      */
-/* --vp-h = innerHeight / (innerWidth/1440) so it works inside the scaler.     */
-/* Mobile uses its own sizing (svh/padding-based), untouched by these rules.   */
 @media (min-width: 1024px) {
   .specialists, .showreel, .services, .featured, .cta-section { min-height: var(--vp-h, auto); }
   .specialists { min-height: calc(var(--vp-h, 820px) - 96px); }
-  /* Service and careers heroes also fill the viewport like the homepage hero */
+
   .ab-hero.gv-hero-svc { height: var(--vp-h, 760px); min-height: 0; }
-  /* Service pages: each major section should land as one browser viewport. */
+
   .sv-section,
   .sv-wyg-section,
   .sv-quote,
@@ -8609,24 +8101,19 @@ footer { overflow: visible !important; }
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   TYPOGRAPHY + RHYTHM CONSISTENCY PASS — 2026-06-08
-   Keep this near the end so it normalises older page-specific layers.
-═══════════════════════════════════════════════════════════════════════ */
 :root {
   --gv-text-light: rgba(13,13,13,0.72);
   --gv-text-light-muted: rgba(13,13,13,0.58);
   --gv-text-dark: rgba(255,255,255,0.72);
   --gv-text-dark-strong: rgba(255,255,255,0.86);
   --gv-heading-lh: 1.36;
-  --gv-heading-lh-comfy: 1.496; /* +10% for tablet/mobile */
+  --gv-heading-lh-comfy: 1.496;
 }
 
 body {
   color: var(--gv-text-dark);
 }
 
-/* Paragraph colour tokens: consistent contrast on light and dark sections. */
 .specialists p,
 .featured-head p,
 .sv-section.light p,
@@ -8668,7 +8155,6 @@ body {
   color: var(--gv-text-dark);
 }
 
-/* Heading family/rhythm: all display headings stay Boldonse, with one shared cadence. */
 .spec-left h2,
 .services-head h2,
 .featured-head h2,
@@ -8735,7 +8221,6 @@ body {
   line-height: 0.95;
 }
 
-/* Legal/policy pages: use the same centred content width as editorial pages. */
 .lg-body {
   padding-top: 100px;
 }
@@ -8759,7 +8244,6 @@ body {
   margin-bottom: 8px;
 }
 
-/* Blog detail pages: give the article a more intentional clearance from nav. */
 .bl-article {
   padding-top: 170px;
 }
@@ -8767,7 +8251,6 @@ body {
   line-height: var(--gv-heading-lh);
 }
 
-/* Services: testimonial no longer runs into the orange CTA block visually. */
 .sv-quote {
   background:
     radial-gradient(circle at 12% 18%, rgba(239,72,35,0.34), transparent 34%),
@@ -8777,7 +8260,6 @@ body {
   color: rgba(239,72,35,0.22);
 }
 
-/* Testimonial type reduced globally by 15%. */
 .sv-quote-text {
   font-size: 34px;
 }
@@ -8851,10 +8333,6 @@ body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   HEADING SCALE CORRECTION — 2026-06-08
-   Final guardrail after page-specific experiments. Home hero is excluded.
-═══════════════════════════════════════════════════════════════════════ */
 :root {
   --gv-h1-size: 72px;
   --gv-h2-size: 44px;
@@ -8930,7 +8408,6 @@ body {
 #scaler h5 { font-size: var(--gv-h5-size) !important; }
 #scaler h6 { font-size: var(--gv-h6-size) !important; }
 
-/* Service delivery section: bring the oversized experimental type back in-system. */
 .sv-wyg-heading {
   max-width: 13ch;
   margin-bottom: 44px;
@@ -8952,8 +8429,8 @@ body {
     --gv-h4-size: 20px;
     --gv-h5-size: 17px;
     --gv-h6-size: 14px;
-    --gv-h-lh: 1.56;         /* +10% breathing room */
-    --gv-h-lh-compact: 1.47; /* +10% breathing room */
+    --gv-h-lh: 1.56;
+    --gv-h-lh-compact: 1.47;
   }
 
   .sv-wyg-heading {
@@ -8969,12 +8446,6 @@ body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   ROLE-BASED HEADING HIERARCHY — 2026-06-08
-   Semantics stay intact, but visual scale follows page role:
-   hero, section, content/prose, card, and compact component titles.
-   Homepage hero remains untouched.
-═══════════════════════════════════════════════════════════════════════ */
 :root {
   --gv-type-hero: 72px;
   --gv-type-section: 44px;
@@ -8986,7 +8457,6 @@ body {
   --gv-type-lh-title: 1.46;
 }
 
-/* Safe base for unclassified headings inside the site wrapper. */
 #scaler :where(h1, h2, h3, h4, h5, h6):not(.hero-h1) {
   font-family: 'Boldonse', sans-serif;
   font-weight: 400;
@@ -8995,7 +8465,6 @@ body {
   line-height: var(--gv-type-lh-title) !important;
 }
 
-/* Hero/page H1s. */
 #scaler h1:not(.hero-h1),
 .ab-h1,
 .sv-hero h1,
@@ -9011,7 +8480,6 @@ body {
   line-height: var(--gv-type-lh-hero) !important;
 }
 
-/* Major section H2s. */
 .spec-left h2,
 .services-head h2,
 .featured-head h2,
@@ -9034,7 +8502,6 @@ body {
   line-height: var(--gv-type-lh-display) !important;
 }
 
-/* Editorial/prose H2s: blog articles and legal docs should read, not shout. */
 #scaler .bl-art-body h2,
 #scaler .lg-prose h2,
 #scaler .cs-overview h2,
@@ -9044,7 +8511,6 @@ body {
   line-height: var(--gv-type-lh-title) !important;
 }
 
-/* Card/list titles. These often use h2 semantically but must not be section scale. */
 #scaler .wk-card-title,
 #scaler .bl-card-h,
 #scaler .svc-name,
@@ -9054,7 +8520,6 @@ body {
   line-height: var(--gv-type-lh-title) !important;
 }
 
-/* H3 / component titles. */
 #scaler .sv-step-title,
 #scaler .sv-deliver-card h3,
 #scaler .sv-proc-title,
@@ -9098,10 +8563,6 @@ body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   MOBILE VIEWPORT + CONTENT POLISH — 2026-06-08
-   Final mobile-only pass. Desktop hero/stage behaviour remains untouched.
-═══════════════════════════════════════════════════════════════════════ */
 :root {
   --gv-scroll-desktop-ms: 720;
   --gv-scroll-mobile-ms: 920;
@@ -9301,8 +8762,7 @@ body {
     min-height: 100svh;
   }
 
-  /* Home mobile: logo ticker + Specialists + showreel share one 100svh
-     follow-up beat after the hero, matching the section rhythm elsewhere. */
+
   .logo-strip {
     min-height: 0 !important;
     height: 58px !important;
@@ -9541,12 +9001,6 @@ body {
     flex-wrap: wrap;
   }
 }
-
-/* ═══════════════════════════════════════════════════════════════════════
-   RESPONSIVE POLISH PASS — 2026-06-08 PM
-   Local QA fixes: mobile hero fit, richer service stages, about network,
-   FAQ rows, showreel preview/play cursor, 404.
-═══════════════════════════════════════════════════════════════════════ */
 
 .showreel-wrap {
   cursor: none;
@@ -10079,17 +9533,10 @@ body {
   50% { translate: 0 -14px; }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   LOCAL QA POLISH — service reveals, case video frames, proof logos,
-   About network safety, mobile team swipe, nav/logo polish.
-   ═══════════════════════════════════════════════════════════════════════ */
-
-/* Home hero pills: visual nudge only, no layout shift. */
 .hero.lit .hero-cta-row {
   transform: translateY(5px);
 }
 
-/* Homepage services: preserve the original white-swipe + astronaut-pop animation. */
 .svc-card:focus-within .svc-whitebg,
 .svc-card.is-open .svc-whitebg {
   transform: translateX(0);
@@ -10117,7 +9564,6 @@ body {
   bottom: 78px;
 }
 
-/* Work detail videos: reuse homepage showreel frame language. */
 .gv-video-frame {
   position: relative;
   width: 100%;
@@ -10198,7 +9644,6 @@ body {
   display: block;
 }
 
-/* About network: keep astros decorative, never competing with text. */
 .anr-floaters {
   z-index: 1 !important;
 }
@@ -10220,7 +9665,6 @@ body {
   backdrop-filter: blur(4px);
 }
 
-/* Team carousel: bigger drag target + mobile auto-hover state. */
 .ab-team-swiper-wrap {
   cursor: grab;
 }
@@ -10248,7 +9692,6 @@ body {
   opacity: 1;
 }
 
-/* Footer proof logos use the supplied assets and include Webflow. */
 .footer-proof {
   gap: 7px;
   flex-wrap: wrap;
@@ -10275,7 +9718,6 @@ body {
   object-fit: contain;
 }
 
-/* Navbar/logo polish, including blog accessibility contrast. */
 .nav-logo img {
   height: 62px;
 }
@@ -10346,11 +9788,6 @@ body {
   }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   QA polish — proof logos, stable WYG tabs, blog nav, mobile hero offset
-───────────────────────────────────────────────────────────────────── */
-
-/* Footer proof logos: show the real supplied assets, not generated badges. */
 .footer-proof-logo--google {
   width: auto;
   height: auto;
@@ -10367,7 +9804,6 @@ body {
   height: 19px;
 }
 
-/* What You Get: reserve text space so tab/hover changes do not push sections below. */
 .sv-wyg-list {
   contain: layout;
 }
@@ -10390,7 +9826,6 @@ body {
   overflow: hidden;
 }
 
-/* Blog nav rests on cream; keep the GV logo orange until the squeezed nav state. */
 .page-blog .gv-nav:not(.scrolled) .nav-logo img {
   filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(900%) hue-rotate(335deg);
   opacity: 1;
@@ -10429,7 +9864,6 @@ body {
   }
 }
 
-/* Homepage services: orange skin peels away to reveal the astro/art beneath. */
 .services .svc-card {
   background: #fff;
   isolation: isolate;
@@ -10523,12 +9957,6 @@ body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   LIVE RELEASE — 2026-06-13 — approved enhancements
-   Heading reveals · footer underline · contact aurora canvas
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* Masked heading reveal (class added by JS, IO-driven) */
 .gv-h-rev {
   clip-path: inset(-10% -8% 103% -8%);
   transform: translateY(26px);
@@ -10540,7 +9968,6 @@ body {
 }
 html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition: none; }
 
-/* Footer link underline grow on hover */
 .footer-col a {
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat;
@@ -10548,10 +9975,8 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
 }
 .footer-col a:hover { background-size: 100% 1px; }
 
-/* Contact aurora canvas (WebGL layer inside .ct-glow) */
 .ct-glow-gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-/* ── Footer Webflow proof: inline W + "Certified Partner" (no white pill) ── */
 .footer-proof-logo--webflow svg { height: 18px; width: auto; display: block; }
 .footer-proof .footer-proof-wf {
   font-family: 'Archivo', sans-serif; font-weight: 700;
@@ -10559,10 +9984,8 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
   color: rgba(255,255,255,0.78); line-height: 1.18; text-align: left;
 }
 
-/* ── Contact form: align timezone + meeting-time row (reserve label height) ── */
 .ct-field-row .ct-field > label { min-height: 2.6em; }
 
-/* ── Footer: cascaded service links under "Services" ── */
 .footer-subnav {
   list-style: none;
   margin: 9px 0 2px;
@@ -10573,13 +9996,6 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
 .footer-subnav li a { font-size: 0.9em; opacity: 0.74; }
 .footer-subnav li a:hover { opacity: 1; }
 
-
-/* ═══════════════════════════════════════════════════════════════════
-   CREW — scattered astronaut float-in (rebuild 2026-06-13)
-   Heading sits on top; astronauts scatter organically in a zone BELOW it
-   (never behind the heading text) and float in staggered when the section
-   enters view. Robust on all screens — no pin, no portal.
-   ═══════════════════════════════════════════════════════════════════ */
 .ab-crew { text-align: center; }
 .ab-crew .anr-left { margin-bottom: 36px; }
 
@@ -10604,7 +10020,6 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
   white-space: nowrap;
 }
 
-/* Scattered positions (centre points) + varied sizes/tilts — organic, not a grid */
 .ab-crew .crew-astro:nth-child(1) { left: 11%; top: 16%; --sz: 124px; --r: -9deg; }
 .ab-crew .crew-astro:nth-child(2) { left: 70%; top: 9%;  --sz: 108px; --r:  8deg; }
 .ab-crew .crew-astro:nth-child(3) { left: 40%; top: 30%; --sz: 96px;  --r: -4deg; }
@@ -10613,7 +10028,6 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
 .ab-crew .crew-astro:nth-child(6) { left: 52%; top: 74%; --sz: 130px; --r:  5deg; }
 .ab-crew .crew-astro:nth-child(7) { left: 26%; top: 88%; --sz: 92px;  --r: -6deg; }
 
-/* Float-in (class added by JS so non-JS shows them settled) */
 .crew-scatter.crew-js .crew-astro {
   opacity: 0;
   transform: translate(-50%, -50%) translateY(30px) scale(0.35) rotate(var(--r, -6deg));
