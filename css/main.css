@@ -932,7 +932,7 @@ footer {
 /* Animated GIF masked into logo shape (enhancement) */
 .footer-art-gif {
   position: absolute; inset: 0;
-  background-image: url('../assets/Footer Animation GV.webp');
+  background-image: url('../assets/Footer Animation GV.avif');
   background-size: auto 100%;
   background-position: left center;
   background-repeat: no-repeat;
@@ -4861,7 +4861,7 @@ footer {
 }
 .footer-art-gif {
   position: absolute; inset: 0;
-  background-image: url('../assets/Footer Animation GV.webp');
+  background-image: url('../assets/Footer Animation GV.avif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -5203,7 +5203,7 @@ footer::before {
   padding-bottom: 0.36em;
   /* Animated fill via background-clip text */
   color: transparent;
-  background-image: url('../assets/Footer Animation GV.webp');
+  background-image: url('../assets/Footer Animation GV.avif');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -5234,7 +5234,7 @@ footer::before {
   letter-spacing: 0.20em;
   text-transform: uppercase;
   color: transparent;
-  background-image: url('../assets/Footer Animation GV.webp');
+  background-image: url('../assets/Footer Animation GV.avif');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

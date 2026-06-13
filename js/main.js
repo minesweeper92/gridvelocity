@@ -743,7 +743,9 @@ setTimeout(scaleToFit, 150);
 /* ── CTA Card Lotties (any page with ctaLaptop / ctaLevitate slots) ─── */
 /* Lazy-loaded via IntersectionObserver — JSON only fetches when the CTA  */
 /* section scrolls into view (saves ~200KB on initial page load).         */
+/* Skipped on mobile (<1024px) — slots are display:none there anyway.     */
 (function initCtaLotties() {
+  if (window.innerWidth < 1024) return;
   const prefix = gvAssetPrefix();
 
   function loadLottie(el, id) {
