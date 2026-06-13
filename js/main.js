@@ -398,11 +398,9 @@ setTimeout(scaleToFit, 150);
     }, 2350);
   }
 
-  /* Load the hero astronaut animation without adding Lottie to the critical path.
-     Skip on mobile (<1024px) — the slot is display:none there anyway, saving
-     291KB JSON + 164KB Lottie lib on mobile connections. */
+  /* Load the hero astronaut animation without adding Lottie to the critical path. */
   const astroSlot = document.getElementById('astroLottie');
-  if (astroSlot && window.innerWidth >= 1024) {
+  if (astroSlot) {
     loadLottieLibrary()
       .then(() => fetch(gvAssetPrefix() + 'assets/astronaut-original.json'))
       .then(r => r.json())
@@ -743,9 +741,7 @@ setTimeout(scaleToFit, 150);
 /* ── CTA Card Lotties (any page with ctaLaptop / ctaLevitate slots) ─── */
 /* Lazy-loaded via IntersectionObserver — JSON only fetches when the CTA  */
 /* section scrolls into view (saves ~200KB on initial page load).         */
-/* Skipped on mobile (<1024px) — slots are display:none there anyway.     */
 (function initCtaLotties() {
-  if (window.innerWidth < 1024) return;
   const prefix = gvAssetPrefix();
 
   function loadLottie(el, id) {
