@@ -57,6 +57,12 @@ body {
 
 #scaler { width: 1440px; transform-origin: top left; }
 
+/* ── Lenis smooth scroll (desktop/pointer only; class added by JS) ──── */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -856,7 +862,7 @@ footer {
 
 .footer-art-gif {
   position: absolute; inset: 0;
-  background-image: url('../assets/Footer Animation GV.avif');
+  background-image: url('../assets/Footer Animation GV.webp');
   background-size: auto 100%;
   background-position: left center;
   background-repeat: no-repeat;
@@ -4613,7 +4619,7 @@ footer {
 }
 .footer-art-gif {
   position: absolute; inset: 0;
-  background-image: url('../assets/Footer Animation GV.avif');
+  background-image: url('../assets/Footer Animation GV.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -4930,7 +4936,7 @@ footer::before {
   padding-bottom: 0.36em;
 
   color: transparent;
-  background-image: url('../assets/Footer Animation GV.avif');
+  background-image: url('../assets/Footer Animation GV.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -4958,7 +4964,7 @@ footer::before {
   letter-spacing: 0.20em;
   text-transform: uppercase;
   color: transparent;
-  background-image: url('../assets/Footer Animation GV.avif');
+  background-image: url('../assets/Footer Animation GV.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -10006,53 +10012,55 @@ html.a11y-reduce-motion .gv-h-rev { clip-path: none; transform: none; transition
 .footer-subnav li a:hover { opacity: 1; }
 
 .ab-crew { text-align: center; }
-.ab-crew .anr-left { margin-bottom: 36px; }
+.ab-crew .anr-left { margin-bottom: 28px; }
 
 .ab-crew .crew-scatter {
   position: relative;
-  width: 100%; max-width: 1080px;
+  width: 100%; max-width: 1180px;
   margin: 0 auto;
-  height: clamp(440px, 48vh, 580px);
+  height: clamp(560px, 66vh, 760px);
+  perspective: 1200px;
 }
 .ab-crew .crew-astro {
   position: absolute; margin: 0;
-  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  /* GSAP owns transform (xPercent/yPercent center it). translate is the
+     no-JS / reduced-motion fallback for centering. */
   transform: translate(-50%, -50%);
+  will-change: transform, opacity;
 }
 .ab-crew .crew-astro img {
-  width: var(--sz, 120px); height: auto; display: block;
-  filter: drop-shadow(0 18px 34px rgba(0,0,0,0.45));
+  width: var(--sz, 170px); height: auto; display: block;
+  filter: drop-shadow(0 22px 40px rgba(0,0,0,0.5));
+  will-change: transform, filter;
 }
 .ab-crew .crew-astro figcaption {
-  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 11px;
-  letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,0.55);
+  font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 13px;
+  letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,0.62);
   white-space: nowrap;
 }
 
-.ab-crew .crew-astro:nth-child(1) { left: 11%; top: 16%; --sz: 124px; --r: -9deg; }
-.ab-crew .crew-astro:nth-child(2) { left: 70%; top: 9%;  --sz: 108px; --r:  8deg; }
-.ab-crew .crew-astro:nth-child(3) { left: 40%; top: 30%; --sz: 96px;  --r: -4deg; }
-.ab-crew .crew-astro:nth-child(4) { left: 8%;  top: 66%; --sz: 116px; --r:  6deg; }
-.ab-crew .crew-astro:nth-child(5) { left: 78%; top: 56%; --sz: 104px; --r: -7deg; }
-.ab-crew .crew-astro:nth-child(6) { left: 52%; top: 74%; --sz: 130px; --r:  5deg; }
-.ab-crew .crew-astro:nth-child(7) { left: 26%; top: 88%; --sz: 92px;  --r: -6deg; }
-
-.crew-scatter.crew-js .crew-astro {
-  opacity: 0;
-  transform: translate(-50%, -50%) translateY(30px) scale(0.35) rotate(var(--r, -6deg));
-  transition: opacity .45s ease-out, transform .68s cubic-bezier(0.34, 1.55, 0.5, 1);
-  will-change: transform, opacity;
-}
-.crew-scatter.crew-js .crew-astro.pop {
-  opacity: 1;
-  transform: translate(-50%, -50%) translateY(0) scale(1) rotate(0deg);
-}
+/* Bigger, depth-staggered scatter. --d = depth weight (0 near → 1 far),
+   used by GSAP for parallax + entrance order. */
+.ab-crew .crew-astro:nth-child(1) { left: 13%; top: 20%; --sz: 200px; --r: -8deg; --d: 0.15; }
+.ab-crew .crew-astro:nth-child(2) { left: 73%; top: 13%; --sz: 168px; --r:  7deg; --d: 0.55; }
+.ab-crew .crew-astro:nth-child(3) { left: 44%; top: 38%; --sz: 150px; --r: -4deg; --d: 0.80; }
+.ab-crew .crew-astro:nth-child(4) { left: 11%; top: 73%; --sz: 188px; --r:  6deg; --d: 0.25; }
+.ab-crew .crew-astro:nth-child(5) { left: 81%; top: 63%; --sz: 162px; --r: -7deg; --d: 0.60; }
+.ab-crew .crew-astro:nth-child(6) { left: 55%; top: 82%; --sz: 210px; --r:  5deg; --d: 0.05; }
+.ab-crew .crew-astro:nth-child(7) { left: 30%; top: 92%; --sz: 150px; --r: -6deg; --d: 0.70; }
 
 @media (max-width: 1023px) {
-  .ab-crew .crew-scatter { max-width: 440px; height: clamp(420px, 62vh, 560px); }
-  .ab-crew .crew-astro img { width: calc(var(--sz, 120px) * 0.74); }
+  .ab-crew .crew-scatter { max-width: 460px; height: clamp(500px, 76vh, 660px); }
+  .ab-crew .crew-astro img { width: calc(var(--sz, 170px) * 0.62); }
+  .ab-crew .crew-astro figcaption { font-size: 11px; }
 }
+
+/* No-JS / reduced-motion fallback: astronauts simply shown in place. */
+.crew-scatter.crew-js .crew-astro { opacity: 0; }
+.crew-scatter.crew-js .crew-astro.pop { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
-  .crew-scatter.crew-js .crew-astro { opacity: 1; transform: translate(-50%, -50%); transition: none; }
+  .crew-scatter.crew-js .crew-astro,
+  .crew-scatter.crew-js .crew-astro.pop { opacity: 1; transform: translate(-50%, -50%); }
 }
-html.a11y-reduce-motion .crew-scatter.crew-js .crew-astro { opacity: 1; transform: translate(-50%, -50%); transition: none; }
+html.a11y-reduce-motion .crew-scatter.crew-js .crew-astro { opacity: 1; transform: translate(-50%, -50%); }

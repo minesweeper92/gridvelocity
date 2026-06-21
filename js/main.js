@@ -92,6 +92,44 @@ window.addEventListener('load', scaleToFit);
 window.addEventListener('resize', scaleToFit);
 setTimeout(scaleToFit, 150);
 
+/* ── LENIS SMOOTH SCROLL ────────────────────────────────────────────
+   Premium inertial scrolling on pointer / desktop devices only — touch
+   stays native (snappier, and avoids fighting the #scaler on mobile).
+   Self-hosted + lazy-injected so it never touches the critical path, and
+   wired into the GSAP ticker + ScrollTrigger when those are present so
+   scroll-driven animations stay in sync. Real window scroll is preserved
+   (Lenis default), so existing scrollY-based handlers keep working.
+   Disabled for reduced-motion. window.gvLenis is the kill-switch handle. */
+(function initLenis() {
+  var fine   = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            || document.documentElement.classList.contains('a11y-reduce-motion');
+  if (!fine || reduce) return;
+
+  var s = document.createElement('script');
+  s.src = gvAssetPrefix() + 'js/vendor/lenis.min.js';
+  s.onload = function () {
+    if (typeof Lenis === 'undefined') return;
+    var lenis = new Lenis({
+      duration: 1.05,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      anchors: true            /* smooth in-page #anchor links where supported */
+    });
+    window.gvLenis = lenis;
+
+    var hasST = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+    if (hasST) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })();
+    }
+  };
+  document.head.appendChild(s);
+})();
+
 /* ── NAV SCROLL (eyekiller-style smart hide/show) ──────────────────── */
 (function initNav() {
   const nav = document.getElementById('nav');
@@ -2495,6 +2533,13 @@ void main(){
    Astronauts are scattered (CSS) in a zone below the heading. When the
    section scrolls into view they float in one-by-one. No pin/portal —
    robust and identical on every screen size. */
+/* ── CREW — "Every Adventure Needs a Good Crew" ──────────────────────
+   Scroll-scrubbed GSAP/ScrollTrigger entrance: the astronauts drift in
+   from depth (scale + blur + lift) as the section passes the viewport,
+   staggered, then settle into a gentle continuous float. Centering is
+   done with xPercent/yPercent so GSAP can compose extra transforms on
+   top of it. Falls back to a plain fade (CSS .pop) without GSAP or when
+   reduced-motion is requested. Non-pinned, so it is #scaler-safe. */
 (function initCrewReveal() {
   var section = document.querySelector('.ab-crew');
   if (!section) return;
@@ -2502,22 +2547,65 @@ void main(){
   var astros  = Array.prototype.slice.call(section.querySelectorAll('.crew-astro'));
   if (!scatter || !astros.length) return;
 
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-            || document.documentElement.classList.contains('a11y-reduce-motion');
-  if (reduce) { astros.forEach(function (a) { a.classList.add('pop'); }); return; }
-
   scatter.classList.add('crew-js');
-  var done = false;
-  function play() {
-    if (done) return; done = true;
-    astros.forEach(function (a, i) { setTimeout(function () { a.classList.add('pop'); }, 110 * i); });
-  }
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries, obs) {
-      if (entries[0].isIntersecting) { obs.disconnect(); play(); }
-    }, { threshold: 0.25 });
-    io.observe(section);
-  } else {
+
+  var reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+             || document.documentElement.classList.contains('a11y-reduce-motion');
+  var hasGSAP = typeof gsap !== 'undefined';
+  var hasST   = hasGSAP && typeof ScrollTrigger !== 'undefined';
+
+  /* Fallback — no GSAP/ScrollTrigger or reduced motion: just reveal them. */
+  if (!hasST || reduce) {
     astros.forEach(function (a) { a.classList.add('pop'); });
+    return;
   }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* Center each astronaut; GSAP composes scale/rotation/y on top. */
+  gsap.set(astros, { xPercent: -50, yPercent: -50 });
+
+  astros.forEach(function (a) {
+    var img = a.querySelector('img');
+    var cap = a.querySelector('figcaption');
+    var rot = parseFloat(getComputedStyle(a).getPropertyValue('--r')) || 0;
+    a._rot = rot;
+    gsap.set(a,   { opacity: 0, scale: 0.4, y: 80, rotation: rot });
+    if (img) gsap.set(img, { filter: 'blur(14px)' });
+    if (cap) gsap.set(cap, { opacity: 0, y: 14 });
+  });
+
+  /* Scrubbed entrance tied to scroll position. */
+  var tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top 80%',
+      end:   'top 18%',
+      scrub: 0.8
+    }
+  });
+  astros.forEach(function (a, i) {
+    var img = a.querySelector('img');
+    var cap = a.querySelector('figcaption');
+    var at  = i * 0.1;
+    tl.to(a, { opacity: 1, scale: 1, y: 0, rotation: 0, duration: 0.9, ease: 'back.out(1.4)' }, at);
+    if (img) tl.to(img, { filter: 'blur(0px)', duration: 0.6, ease: 'power2.out' }, at);
+    if (cap) tl.to(cap, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, at + 0.25);
+  });
+
+  /* Continuous idle float on the astronaut image (separate element from the
+     figure's entrance transform, so the two never fight). */
+  astros.forEach(function (a, i) {
+    var img = a.querySelector('img');
+    if (!img) return;
+    gsap.to(img, {
+      y: '-=18',
+      duration: 2.6 + (i % 3) * 0.6,
+      ease: 'sine.inOut',
+      repeat: -1, yoyo: true,
+      delay: 0.2 + i * 0.18
+    });
+  });
+
+  ScrollTrigger.refresh();
 })();
